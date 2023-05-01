@@ -38,6 +38,11 @@ _Refer to these first if you have questions_
 - [TypeScript for JS programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 - [React TypeScript cheat sheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup)
 
+## Material UI
+
+- [Material UI documentation](https://mui.com/material-ui/getting-started/overview/)
+- [Further tutorials](https://mui.com/material-ui/getting-started/learn/)
+
 ### Others
 
 - [CSS modules](https://css-tricks.com/css-modules-part-1-need/)
