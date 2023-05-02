@@ -1,12 +1,16 @@
 import { type ReactElement } from "react"
 
-import { Box } from "@mui/material"
+import { Grid } from "@mui/material"
 import CreatePostPanel from "../components/CreatePostPanel"
 
 export default function DashboardPage(): ReactElement {
   return (
-    <Box>
-      <CreatePostPanel />
-    </Box>
+    <Grid container direction="row">
+      <Grid xs={8}>Posts</Grid>
+
+      <Grid xs>
+        <CreatePostPanel />
+      </Grid>
+    </Grid>
   )
 }

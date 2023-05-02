@@ -45,7 +45,7 @@ export default function Header({ search }: Props): ReactElement {
   }
 
   return (
-    <AppBar position="static" color="transparent">
+    <AppBar position="static" color="transparent" sx={{ marginBottom: 1 }}>
       <Toolbar>
         <Button startIcon={<Logo />} color="inherit" size="large" href="/">
           <Typography variant="h6">StudentScroll</Typography>
@@ -68,8 +68,8 @@ export default function Header({ search }: Props): ReactElement {
           variant="standard"
           sx={{ ml: 1, input: { color: "white" } }}
           placeholder="Search"
-          onChange={(e) => {
-            setQuery(e.target.value)
+          onChange={({ target: { value } }) => {
+            setQuery(value)
           }}
           onSubmit={handleSearch}
         />
