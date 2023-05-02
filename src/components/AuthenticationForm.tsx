@@ -1,20 +1,27 @@
 import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, TextField, Typography } from "@mui/material"
+import { useId, useJwt } from "../hooks"
 
-export default function AuthenticationForm({ login, register }: Props): ReactElement {
+export default function AuthenticationForm(): ReactElement {
   const [isRegistering, setIsRegistering] = useState(false)
-  const [success, setSuccess] = useState<boolean | undefined>(undefined)
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const [, setJwt] = useJwt()
+  const [, setId] = useId()
+
   const handleSubmit = async (): Promise<void> => {
     // TODO: validate (not empty, valid email, etc.)
 
-    if (isRegistering) setSuccess(await register(name, email, password))
-    else setSuccess(await login(email, password))
+    // TODO: register and login
+    console.log(name, email, password)
+
+    setJwt("some-token")
+    setId(1)
+    window.location.href = ""
   }
 
   return (
@@ -50,7 +57,6 @@ export default function AuthenticationForm({ login, register }: Props): ReactEle
           }}
         />
 
-        {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <Button fullWidth variant="contained" onClick={handleSubmit}>
           {isRegistering ? "Sign Up" : "Sign in"}
         </Button>
@@ -66,16 +72,7 @@ export default function AuthenticationForm({ login, register }: Props): ReactEle
             {isRegistering ? "Already registered? Sign in" : "No account yet? Sign up"}
           </Typography>
         </Button>
-
-        {success !== undefined && !success && (
-          <Typography variant="body2">Invalid username or password</Typography>
-        )}
       </Stack>
     </Box>
   )
-}
-
-interface Props {
-  login: (email: string, password: string) => Promise<boolean>
-  register: (name: string, email: string, password: string) => Promise<boolean>
 }

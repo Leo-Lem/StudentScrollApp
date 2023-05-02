@@ -2,10 +2,10 @@ import { type ReactElement } from "react"
 
 import { AppBar, Box, Stack, Typography } from "@mui/material"
 
-import Logo from "./Logo"
-import AuthenticationForm from "./AuthenticationForm"
+import Logo from "../components/Logo"
+import AuthenticationForm from "../components/AuthenticationForm"
 
-export default function WelcomePage({ login, register }: Props): ReactElement {
+export default function WelcomePage(): ReactElement {
   return (
     <Box>
       <AppBar color="transparent" position="static">
@@ -19,13 +19,8 @@ export default function WelcomePage({ login, register }: Props): ReactElement {
           <Logo size="min(80vh, 60vw)" />
         </Box>
 
-        <AuthenticationForm login={login} register={register} />
+        <AuthenticationForm />
       </Stack>
     </Box>
   )
-}
-
-interface Props {
-  login: (email: string, password: string) => Promise<boolean>
-  register: (name: string, email: string, password: string) => Promise<boolean>
 }

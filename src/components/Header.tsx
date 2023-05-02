@@ -17,11 +17,21 @@ import {
 import { AccountCircle, Search } from "@mui/icons-material"
 
 import Logo from "./Logo"
+import { useId, useJwt } from "../hooks"
 
 // TODO: implement client routing instead of href
-export default function Header({ search, logout }: Props): ReactElement {
+export default function Header({ search }: Props): ReactElement {
   const [query, setQuery] = useState("")
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+  const [, setJwt] = useJwt()
+  const [, setId] = useId()
+
+  const logout = (): void => {
+    setJwt(null)
+    setId(null)
+    window.location.href = ""
+  }
 
   const handleSearch = (): void => {
     search(query)
@@ -112,5 +122,4 @@ export default function Header({ search, logout }: Props): ReactElement {
 
 interface Props {
   search: (query: string) => void
-  logout: () => void
 }
