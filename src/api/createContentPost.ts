@@ -1,19 +1,12 @@
-interface ContentPost {
-  posterId: number
-  title: string
-  tags: string[]
-  content: string
-}
+import type ContentPost from "../models/ContentPost"
+import { getJwt } from "./jwt"
 
-export default async function createContentPost(
-  jwt: string,
-  posterId: number,
-  title: string,
-  tags: string[],
-  content: string
-): Promise<boolean> {
+// TODO: add more sophisticated error handling
+export default async function createContentPost(post: ContentPost): Promise<boolean> {
   try {
-    const post: ContentPost = { posterId, title, tags, content }
+    const jwt = getJwt()
+    if (jwt == null) return false
+
     await fetch("api/v1/posts", {
       method: "POST",
       headers: {

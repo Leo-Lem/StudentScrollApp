@@ -15,7 +15,7 @@ import {
 import { LoadingButton } from "@mui/lab"
 
 import { createContentPost } from "../api"
-import { useId, useJwt } from "../hooks"
+import { useId } from "../hooks"
 
 import allTags from "../res/tags.json"
 import { CheckCircle, Send } from "@mui/icons-material"
@@ -32,7 +32,6 @@ export default function CreatePostPanel(): ReactElement {
   const [isLoading, setIsLoading] = useState(false)
   const [wasSuccess, setWasSuccess] = useState<boolean | null>(null)
 
-  const [jwt] = useJwt()
   const [posterId] = useId()
 
   const isNotValidated = (): boolean =>
@@ -52,11 +51,11 @@ export default function CreatePostPanel(): ReactElement {
 
   const createPost = async (): Promise<void> => {
     if (isNotValidated()) return
-    if (jwt === null || posterId === null) return
+    if (posterId === null) return
 
     setIsLoading(true)
     try {
-      await createContentPost(jwt, posterId, title, tags, content.trim())
+      await createContentPost({ title, tags, content: content.trim(), posterId })
       setWasSuccess(true)
       setTimeout(reset, 1000)
     } catch (e) {
