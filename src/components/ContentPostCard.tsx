@@ -11,11 +11,12 @@ export default function ContentPostCard({
   return (
     <Card>
       <Grid container direction="row" alignItems="center">
-        <Grid xs={11} container direction="column" padding={1}>
+
+        <Grid item xs={11} padding={1}>
           <Grid container direction="row" alignItems="center" gap={1}>
             <Typography variant="h4">{title}</Typography>
             {tags.map((tag) => (
-              <Card sx={{ padding: 0.5 }} key={tag} elevation={5}>
+              <Card sx={{ padding: 0.5 }} key={tag} elevation={20}>
                 {tag}
               </Card>
             ))}
@@ -23,7 +24,7 @@ export default function ContentPostCard({
           <Typography variant="body1">{content}</Typography>
         </Grid>
 
-        <Grid container direction="column" xs={1} alignItems="center">
+        <Grid item xs={1} alignItems="center">
           <School fontSize="large" />
           <Typography variant="caption">Student {posterId}</Typography>
         </Grid>

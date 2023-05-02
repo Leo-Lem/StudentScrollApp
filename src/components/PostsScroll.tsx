@@ -17,7 +17,7 @@ export default function PostsScroll(): ReactElement {
       .catch((e) => {
         console.log(e)
       })
-  })
+  }, [])
 
   return (
     <Stack spacing={1}>
