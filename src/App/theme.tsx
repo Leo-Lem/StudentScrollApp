@@ -23,5 +23,8 @@ export default createTheme({
         LinkComponent: LinkBehavior
       }
     }
+  },
+  palette: {
+    mode: "dark"
   }
 })

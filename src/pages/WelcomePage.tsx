@@ -8,7 +8,7 @@ import AuthenticationForm from "../components/AuthenticationForm"
 export default function WelcomePage(): ReactElement {
   return (
     <Box>
-      <AppBar color="transparent" position="static">
+      <AppBar position="static">
         <Typography variant="h2" noWrap textAlign="center">
           Welcome to StudentScroll!
         </Typography>

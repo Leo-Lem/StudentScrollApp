@@ -6,9 +6,9 @@ import CreatePostPanel from "../components/CreatePostPanel"
 export default function DashboardPage(): ReactElement {
   return (
     <Grid container direction="row">
-      <Grid xs={8}>Posts</Grid>
+      <Grid item xs={8}>Posts</Grid>
 
-      <Grid xs>
+      <Grid item xs>
         <CreatePostPanel />
       </Grid>
     </Grid>

@@ -19,7 +19,7 @@ export default function AuthenticationForm(): ReactElement {
     // TODO: register and login
     console.log(name, email, password)
 
-    setJwt("some-token")
+    setJwt("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMyQHh5ei5jb20iLCJleHAiOjE2ODMwOTgzMjgsImlhdCI6MTY4MzAxMTkyOH0.eiW7VsSlERkgblotsPLeHu0-rJ-1CjMzn-WSFyBQnto")
     setId(1)
     window.location.href = ""
   }

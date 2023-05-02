@@ -45,7 +45,7 @@ export default function Header({ search }: Props): ReactElement {
   }
 
   return (
-    <AppBar position="static" color="transparent" sx={{ marginBottom: 1 }}>
+    <AppBar position="static" sx={{ marginBottom: 1 }}>
       <Toolbar>
         <Button startIcon={<Logo />} color="inherit" size="large" href="/">
           <Typography variant="h6">StudentScroll</Typography>

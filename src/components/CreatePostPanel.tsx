@@ -1,7 +1,6 @@
 import { useState, type ReactElement } from "react"
 import {
   Box,
-  Button,
   Chip,
   FormControl,
   InputLabel,
@@ -13,24 +12,58 @@ import {
   TextField
 } from "@mui/material"
 
+import { LoadingButton } from "@mui/lab"
+
 import { createContentPost } from "../api"
 import { useId, useJwt } from "../hooks"
 
 import allTags from "../res/tags.json"
-import { Send } from "@mui/icons-material"
+import { CheckCircle, Send } from "@mui/icons-material"
 
 export default function CreatePostPanel(): ReactElement {
   const [title, setTitle] = useState("")
   const [tags, setTags] = useState<string[]>([])
   const [content, setContent] = useState("")
 
+  const [isMissingTitle, setIsMissingTitle] = useState<boolean | null>(null)
+  const [isMissingContent, setIsMissingContent] = useState<boolean | null>(null)
+  const [isTooShort, setIsTooShort] = useState<boolean | null>(null)
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [wasSuccess, setWasSuccess] = useState<boolean | null>(null)
+
   const [jwt] = useJwt()
   const [posterId] = useId()
 
+  const isNotValidated = (): boolean =>
+    (isMissingTitle ?? true) || (isMissingContent ?? true) || (isTooShort ?? true)
+
+  const reset = (): void => {
+    setTitle("")
+    setTags([])
+    setContent("")
+
+    setIsMissingTitle(null)
+    setIsMissingContent(null)
+    setIsTooShort(null)
+
+    setWasSuccess(null)
+  }
+
   const createPost = async (): Promise<void> => {
-    if (jwt !== null && posterId !== null)
-      await createContentPost(jwt, posterId, title, tags, content)
-    else console.log("Failed to authenticate user")
+    if (isNotValidated()) return
+    if (jwt === null || posterId === null) return
+
+    setIsLoading(true)
+    try {
+      await createContentPost(jwt, posterId, title, tags, content.trim())
+      setWasSuccess(true)
+      setTimeout(reset, 1000)
+    } catch (e) {
+      console.error(e)
+      setWasSuccess(false)
+    }
+    setIsLoading(false)
   }
 
   return (
@@ -39,9 +72,14 @@ export default function CreatePostPanel(): ReactElement {
         <TextField
           fullWidth
           placeholder="New Post"
+          value={title}
           onChange={({ target: { value } }) => {
-            setTitle(value)
+            const title = value.trim()
+            setTitle(title)
+            setIsMissingTitle(title === "")
           }}
+          error={isMissingTitle ?? false}
+          helperText={(isMissingTitle ?? false) && "Required"}
         />
 
         <FormControl fullWidth>
@@ -72,22 +110,30 @@ export default function CreatePostPanel(): ReactElement {
         <TextField
           fullWidth
           multiline
-          rows={10}
+          minRows={10}
           placeholder="What's on your mind?"
+          value={content}
           onChange={({ target: { value } }) => {
             setContent(value)
+            setIsMissingContent(value.trim() === "")
+            setIsTooShort(value.trim().length < 3)
           }}
+          error={(isMissingContent ?? false) || (isTooShort ?? false)}
+          helperText={
+            isMissingContent ?? false ? "Required" : (isTooShort ?? false) && "Please elaborate…"
+          }
         />
-
-        <Button
+        <LoadingButton
+          color={!(wasSuccess ?? true) ? "error" : "primary"}
+          loading={isLoading}
+          disabled={isNotValidated() || (wasSuccess ?? false)}
           fullWidth
-          startIcon={<Send />}
-          sx={{ height: "100%" }}
+          startIcon={(wasSuccess ?? false) ? <CheckCircle /> : <Send />}
           variant="contained"
           onClick={createPost}
         >
           Post
-        </Button>
+        </LoadingButton>
       </Stack>
     </Paper>
   )
