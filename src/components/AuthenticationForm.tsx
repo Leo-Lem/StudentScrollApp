@@ -1,8 +1,7 @@
 import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, TextField, Typography } from "@mui/material"
-import { useId } from "../hooks"
-import useJwt from "../api/jwt"
+import { useId, useJwt } from "../hooks"
 
 export default function AuthenticationForm(): ReactElement {
   const [isRegistering, setIsRegistering] = useState(false)
@@ -21,7 +20,9 @@ export default function AuthenticationForm(): ReactElement {
     console.log(name, email, password)
 
     setId(1)
-    setJwt("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMyQHh5ei5jb20iLCJleHAiOjE2ODMwOTgzMjgsImlhdCI6MTY4MzAxMTkyOH0.eiW7VsSlERkgblotsPLeHu0-rJ-1CjMzn-WSFyBQnto")
+    setJwt(
+      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMyQHh5ei5jb20iLCJleHAiOjE2ODMwOTgzMjgsImlhdCI6MTY4MzAxMTkyOH0.eiW7VsSlERkgblotsPLeHu0-rJ-1CjMzn-WSFyBQnto"
+    )
 
     window.location.href = ""
   }

@@ -17,8 +17,7 @@ import {
 import { AccountCircle, Search } from "@mui/icons-material"
 
 import Logo from "./Logo"
-import { useId } from "../hooks"
-import { setJwt } from "../api/jwt"
+import { useId, setJwt } from "../hooks"
 
 // TODO: implement client routing instead of href
 export default function Header({ search }: Props): ReactElement {

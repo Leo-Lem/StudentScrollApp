@@ -8,8 +8,20 @@ export default function mock(): void {
 
       this.get("api/v1/posts", (_, _1) => {
         return [
-          { id: 1, title: "First post", tags: ["First"], content: "This is a placeholder post", posterId: 1 },
-          { id: 2, title: "Second post", tags: ["Second"], content: "This is another placeholder post", posterId: 1 }
+          {
+            id: 1,
+            title: "First post",
+            tags: ["First"],
+            content: "This is a placeholder post",
+            posterId: 1
+          },
+          {
+            id: 2,
+            title: "Second post",
+            tags: ["Second"],
+            content: "This is another placeholder post",
+            posterId: 1
+          }
         ] as ContentPost[]
       })
     }

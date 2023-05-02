@@ -1,17 +1,22 @@
 import { useState, type ReactElement, useEffect } from "react"
-
-import type ContentPost from "../models/ContentPost"
 import { Stack } from "@mui/material"
+
 import ContentPostCard from "./ContentPostCard"
-import fetchContentPosts from "../api/fetchContentPosts"
+
+import { type ContentPost } from "../models"
+import { fetchContentPosts } from "../api"
 
 export default function PostsScroll(): ReactElement {
   const [posts, setPosts] = useState<ContentPost[]>([])
 
   useEffect(() => {
     fetchContentPosts(1)
-      .then(posts => { setPosts(posts) })
-      .catch(e => { console.log(e) })
+      .then((posts) => {
+        setPosts(posts)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   })
 
   return (

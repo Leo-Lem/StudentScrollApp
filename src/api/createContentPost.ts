@@ -1,5 +1,5 @@
 import type ContentPost from "../models/ContentPost"
-import { getJwt } from "./jwt"
+import { getJwt } from "../hooks/useJwt"
 
 // TODO: add more sophisticated error handling
 export default async function createContentPost(post: ContentPost): Promise<boolean> {

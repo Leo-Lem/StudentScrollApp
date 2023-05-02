@@ -11,14 +11,13 @@ import {
   Stack,
   TextField
 } from "@mui/material"
-
 import { LoadingButton } from "@mui/lab"
+import { CheckCircle, Send } from "@mui/icons-material"
 
 import { createContentPost } from "../api"
 import { useId } from "../hooks"
 
 import allTags from "../res/tags.json"
-import { CheckCircle, Send } from "@mui/icons-material"
 
 export default function CreatePostPanel(): ReactElement {
   const [title, setTitle] = useState("")
@@ -127,7 +126,7 @@ export default function CreatePostPanel(): ReactElement {
           loading={isLoading}
           disabled={isNotValidated() || (wasSuccess ?? false)}
           fullWidth
-          startIcon={(wasSuccess ?? false) ? <CheckCircle /> : <Send />}
+          startIcon={wasSuccess ?? false ? <CheckCircle /> : <Send />}
           variant="contained"
           onClick={createPost}
         >

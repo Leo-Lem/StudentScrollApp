@@ -1,5 +1,5 @@
 import type ContentPost from "../models/ContentPost"
-import { getJwt } from "./jwt"
+import { getJwt } from "../hooks/useJwt"
 
 export default async function fetchContentPosts(page: number): Promise<ContentPost[]> {
   const jwt = getJwt()
@@ -13,5 +13,5 @@ export default async function fetchContentPosts(page: number): Promise<ContentPo
     }
   })
 
-  return await response.json() as ContentPost[]
+  return (await response.json()) as ContentPost[]
 }
