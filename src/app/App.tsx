@@ -1,16 +1,13 @@
 import { type ReactElement } from "react"
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
 
-import { CssBaseline, ThemeProvider } from "@mui/material"
+import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 
 import theme from "./theme"
 import Header from "../components/Header"
 import WelcomePage from "../pages/WelcomePage"
 import DashboardPage from "../pages/DashboardPage"
 import useJwt from "../hooks/useJwt"
-
-// TODO: persist user id in local storage
-// TODO: persist jwt in local storage
 
 export default function App(): ReactElement {
   const [jwt] = useJwt()
@@ -23,15 +20,17 @@ export default function App(): ReactElement {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        {jwt !== null ? <Header search={search} /> : <WelcomePage />}
+      <Container disableGutters sx={{ padding: 1, height: "100vh" }}>
+        <Router>
+          {jwt !== null ? <Header search={search} /> : <WelcomePage />}
 
-        {jwt !== null && (
-          <Routes>
-            <Route path="" element={<DashboardPage />} />
-          </Routes>
-        )}
-      </Router>
+          {jwt !== null && (
+            <Routes>
+              <Route path="" element={<DashboardPage />} />
+            </Routes>
+          )}
+        </Router>
+      </Container>
     </ThemeProvider>
   )
 }

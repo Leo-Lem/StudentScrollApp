@@ -11,21 +11,20 @@ export default async function createContentPost(
   title: string,
   tags: string[],
   content: string
-): Promise<void> {
+): Promise<boolean> {
   try {
     const post: ContentPost = { posterId, title, tags, content }
-
-    const response = await fetch("api/v1/posts", {
+    await fetch("api/v1/posts", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`
+        Authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(post)
     })
 
-    console.log(response)
-  } catch (error) {
-    console.log(error)
+    return true
+  } catch (e) {
+    return false
   }
 }

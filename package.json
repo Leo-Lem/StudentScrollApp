@@ -17,21 +17,16 @@
     "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx,json}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
   },
-  "pre-commit": [
-    "format",
-    "build",
-    "test"
-  ],
   "devDependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@mui/icons-material": "^5.11.16",
+    "@mui/lab": "^5.0.0-alpha.128",
     "@mui/material": "^5.12.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.21",
     "@types/react": "^18.0.30",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
@@ -45,7 +40,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "miragejs": "^0.1.47",
-    "pre-commit": "^1.2.2",
     "prettier": "^2.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

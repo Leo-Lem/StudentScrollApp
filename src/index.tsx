@@ -1,8 +1,7 @@
 import React, { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
 
-import App from "./App"
-import mockAPI from "./api/mockAPI"
+import App from "./app"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
@@ -10,4 +9,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   </StrictMode>
 )
 
-if (process.env.NODE_ENV === "development") mockAPI()
+import { mock } from "./api/mirage" // eslint-disable-line
+if (process.env.NODE_ENV === "development")
+  mock()
