@@ -15,16 +15,26 @@ export default function AuthenticationForm(): ReactElement {
   const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null)
   const [isEmailEmpty, setIsEmailEmpty] = useState<boolean | null>(null)
 
+  const [hasSignInFailed, setHasSignInFailed] = useState(false)
 
   const handleSubmit = async (): Promise<void> => {
-    if (isRegistering) await createStudent(name, email, password)
-    else await login(email, password);
-
-    // setId(1)
-    // setJwt(
-    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMyQHh5ei5jb20iLCJleHAiOjE2ODMwOTgzMjgsImlhdCI6MTY4MzAxMTkyOH0.eiW7VsSlERkgblotsPLeHu0-rJ-1CjMzn-WSFyBQnto"
-    // )
-    window.location.href = ""
+    if (isRegistering) {
+      if (
+        (isPasswordTooShort ?? true) ||
+        (isEmailEmpty ?? true) ||
+        !(isEmailValid ?? false) ||
+        (isNameEmpty ?? true)
+      )
+        return
+      await createStudent(name, email, password)
+    } else {
+      if ((isPasswordTooShort ?? true) || (isEmailEmpty ?? true) || !(isEmailValid ?? false)) return
+      try {
+        await login(email, password)
+      } catch {
+        setHasSignInFailed(true)
+      }
+    }
   }
 
   return (
@@ -41,13 +51,12 @@ export default function AuthenticationForm(): ReactElement {
             }}
             error={isNameEmpty ?? false}
             helperText={(isNameEmpty ?? false) && "Required"}
-
           />
         </Collapse>
 
         <TextField
           fullWidth
-          label="Email Address"
+          label="Email"
           autoComplete="email"
           onChange={({ target: { value } }) => {
             setEmail(value)
@@ -55,7 +64,9 @@ export default function AuthenticationForm(): ReactElement {
             setIsEmailEmpty(value === "")
           }}
           error={!(isEmailValid ?? true) || (isEmailEmpty ?? false)}
-          helperText={(!(isEmailValid ?? true) || (isEmailEmpty ?? false)) && "Please enter a valid email"}
+          helperText={
+            (!(isEmailValid ?? true) || (isEmailEmpty ?? false)) && "Please enter a valid email"
+          }
         />
 
         <TextField
@@ -74,6 +85,10 @@ export default function AuthenticationForm(): ReactElement {
         <Button fullWidth variant="contained" onClick={handleSubmit}>
           {isRegistering ? "Sign Up" : "Sign in"}
         </Button>
+
+        <Typography variant="caption" color="error" hidden={!hasSignInFailed}>
+          Sign in failed. Please try again.
+        </Typography>
 
         <Button
           variant="text"

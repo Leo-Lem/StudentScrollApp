@@ -11,7 +11,7 @@ it("shows the signin button", () => {
 })
 
 it("shows the email address textfield", () => {
-  expect(screen.getByLabelText("Email Address")).toBeInTheDocument
+  expect(screen.getByLabelText("Email")).toBeInTheDocument
 })
 
 it("shows the password textfield", () => {
