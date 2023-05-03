@@ -7,6 +7,7 @@ import theme from "./theme"
 import Header from "../components/Header"
 import WelcomePage from "../pages/WelcomePage"
 import DashboardPage from "../pages/DashboardPage"
+import CreateProfilePage from "../pages/ProfilePage"
 
 import { useJwt } from "../hooks"
 
@@ -23,6 +24,7 @@ export default function App(): ReactElement {
           {jwt !== null && (
             <Routes>
               <Route path="" element={<DashboardPage />} />
+              <Route path="profile" element={<CreateProfilePage />} />
             </Routes>
           )}
         </Router>
