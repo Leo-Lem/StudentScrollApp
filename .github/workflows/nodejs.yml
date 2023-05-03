@@ -64,8 +64,8 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          SSH_HOST: ${{ variables.AWS_HOST }}
-          SSH_USER: ${{ variables.AWS_USER }}
+          SSH_HOST: ${{ vars.AWS_HOST }}
+          SSH_USER: ${{ vars.AWS_USER }}
           SSH_KEY: ${{ secrets.AWS_SSH_KEY }} 
       - name: List home directory
         run: ssh StudentScroll 'ls -la'
