@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
 import { type SetStateAction, type ReactElement, useState, type Dispatch, useEffect } from "react"
 
-export default function RequiredTextField({ activate, fullWidth, multiline, minRows, label, placeholder, autoComplete, setValidValue, validate, invalidMessage }: Props): ReactElement {
+export default function RequiredTextField({ activate, fullWidth, multiline, minRows, label, type, placeholder, autoComplete, setValidValue, validate, invalidMessage }: Props): ReactElement {
   const [value, setValue] = useState("")
   const [isEmpty, setIsEmpty] = useState<boolean | null>(null)
   const [isInvalid, setIsInvalid] = useState<boolean | null>(null)
@@ -35,6 +35,7 @@ export default function RequiredTextField({ activate, fullWidth, multiline, minR
       minRows={minRows}
       label={label}
       placeholder={placeholder}
+      type={type}
       autoComplete={autoComplete}
       error={isError()}
       helperText={helperText()}
@@ -57,6 +58,7 @@ interface Props {
   minRows?: number
   label?: string
   placeholder?: string
+  type?: string
   autoComplete?: string
   setValidValue: Dispatch<SetStateAction<string | null>>
   validate?: (value: string) => boolean

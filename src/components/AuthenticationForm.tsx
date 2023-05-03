@@ -70,18 +70,20 @@ export default function AuthenticationForm(): ReactElement {
         <RequiredTextField
           activate={isRequiredActive}
           label="Email"
+          type="email"
           autoComplete="email"
           setValidValue={setEmail}
-          validate={(email) => /^\S+@\S+\.\S+$/.test(email)}
+          validate={(email) => !isRegistering || /^\S+@\S+\.\S+$/.test(email)}
           invalidMessage="Invalid email"
         />
 
         <RequiredTextField
           activate={isRequiredActive}
           label="Password"
-          autoComplete="password"
+          type="password"
+          autoComplete={isRegistering ? "new-password" : "current-password"}
           setValidValue={setPassword}
-          validate={(password) => password.length > 5}
+          validate={(password) => !isRegistering || password.length > 5}
           invalidMessage="At least 6 characters"
         />
 

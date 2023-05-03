@@ -7,15 +7,13 @@ import { type ContentPost } from "../models"
 import { ContentPostAPI } from "../api"
 
 export default function PostsScroll(): ReactElement {
-  const [page, setPage] = useState(0)
   const [newestFirst, setNewestFirst] = useState(true)
   const [posts, setPosts] = useState<ContentPost[]>([])
 
   useEffect(() => {
-    ContentPostAPI.read(page, newestFirst)
+    ContentPostAPI.read(0, newestFirst)
       .then((posts) => {
         setPosts(posts)
-        setPage(page + 1)
       })
       .catch((e) => {
         console.log(e)
