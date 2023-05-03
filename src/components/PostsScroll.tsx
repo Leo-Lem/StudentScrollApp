@@ -4,13 +4,13 @@ import { Stack } from "@mui/material"
 import ContentPostCard from "./ContentPostCard"
 
 import { type ContentPost } from "../models"
-import { fetchContentPosts } from "../api"
+import { ContentPostAPI } from "../api"
 
 export default function PostsScroll(): ReactElement {
   const [posts, setPosts] = useState<ContentPost[]>([])
 
   useEffect(() => {
-    fetchContentPosts(1)
+    ContentPostAPI.read(1)
       .then((posts) => {
         setPosts(posts)
       })

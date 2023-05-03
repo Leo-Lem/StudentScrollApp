@@ -7,7 +7,8 @@ import theme from "./theme"
 import Header from "../components/Header"
 import WelcomePage from "../pages/WelcomePage"
 import DashboardPage from "../pages/DashboardPage"
-import useJwt from "../hooks/useJwt"
+
+import { useJwt } from "../hooks"
 
 export default function App(): ReactElement {
   const [jwt] = useJwt()

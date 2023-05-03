@@ -14,8 +14,7 @@ import {
 import { LoadingButton } from "@mui/lab"
 import { CheckCircle, Send } from "@mui/icons-material"
 
-import { createContentPost } from "../api"
-import { useId } from "../hooks"
+import { ContentPostAPI } from "../api"
 
 import allTags from "../res/tags.json"
 
@@ -30,8 +29,6 @@ export default function CreatePostPanel(): ReactElement {
 
   const [isLoading, setIsLoading] = useState(false)
   const [wasSuccess, setWasSuccess] = useState<boolean | null>(null)
-
-  const [posterId] = useId()
 
   const isNotValidated = (): boolean =>
     (isMissingTitle ?? true) || (isMissingContent ?? true) || (isTooShort ?? true)
@@ -50,17 +47,18 @@ export default function CreatePostPanel(): ReactElement {
 
   const createPost = async (): Promise<void> => {
     if (isNotValidated()) return
-    if (posterId === null) return
 
     setIsLoading(true)
+
     try {
-      await createContentPost({ title, tags, content: content.trim(), posterId })
+      await ContentPostAPI.create({ title, tags, content: content.trim() })
       setWasSuccess(true)
       setTimeout(reset, 1000)
     } catch (e) {
       console.error(e)
       setWasSuccess(false)
     }
+
     setIsLoading(false)
   }
 

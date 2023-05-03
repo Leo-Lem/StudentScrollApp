@@ -1,5 +1,5 @@
 import { createServer } from "miragejs"
-import type ContentPost from "../models/ContentPost"
+import type ContentPost from "../../models/ContentPost"
 
 export default function mock(): void {
   createServer({

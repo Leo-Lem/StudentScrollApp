@@ -5,9 +5,8 @@ import { School } from "@mui/icons-material"
 import { type ContentPost } from "../models"
 
 // TODO replace placeholder profile with button leading to user profile
-export default function ContentPostCard({
-  post: { title, tags, content, posterId }
-}: Props): ReactElement {
+
+export default function ContentPostCard({ post: { title, tags, content, posterId } }: Props): ReactElement {
   return (
     <Card>
       <Grid container direction="row" alignItems="center">
