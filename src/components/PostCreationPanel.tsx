@@ -8,82 +8,58 @@ import {
   OutlinedInput,
   Paper,
   Select,
-  Stack,
-  TextField
+  Stack
 } from "@mui/material"
 import { LoadingButton } from "@mui/lab"
-import { CheckCircle, Send } from "@mui/icons-material"
+import { Send } from "@mui/icons-material"
 
 import { ContentPostAPI } from "../api"
 
 import allTags from "../res/tags.json"
 import ErrorFeedback from "./simple/ErrorFeedback"
+import RequiredTextField from "./simple/RequiredTextField"
 
 export default function PostCreationPanel(): ReactElement {
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState<string | null>(null)
   const [tags, setTags] = useState<string[]>([])
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState<string | null>(null)
 
-  const [isMissingTitle, setIsMissingTitle] = useState<boolean | null>(null)
-  const [isMissingContent, setIsMissingContent] = useState<boolean | null>(null)
-  const [isContentTooShort, setIsContentTooShort] = useState<boolean | null>(null)
+  const [areRequirementsActive, setAreRequirementsActive] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
-  const [wasSuccess, setWasSuccess] = useState<boolean | null>(null)
 
-  const reset = (): void => {
-    setTitle("")
-    setTags([])
-    setContent("")
-
-    setIsMissingTitle(null)
-    setIsMissingContent(null)
-    setIsContentTooShort(null)
-
-    setWasSuccess(null)
-  }
+  const [hasFailed, setHasFailed] = useState<boolean>(false)
 
   const createPost = (): void => {
-    if (!validate()) return
+    if (title === null || content === null) {
+      setAreRequirementsActive(true)
+      return
+    }
 
     setIsLoading(true)
 
     ContentPostAPI.create({ title: title.trim(), tags, content: content.trim() })
       .then(() => {
-        setWasSuccess(true)
-        setTimeout(reset, 1000)
+        setTitle(null)
+        setTags([])
+        setContent(null)
       })
       .catch((e) => {
         console.error(e)
-        setWasSuccess(false)
+        setHasFailed(true)
       })
       .finally(() => {
         setIsLoading(false)
       })
   }
 
-  const validate = (): boolean => {
-    if (isMissingTitle === null) setIsMissingTitle(true)
-
-    if (isMissingContent === null) setIsMissingContent(true)
-    else if (isContentTooShort === null) setIsContentTooShort(true)
-
-    return !((isMissingTitle ?? true) || (isMissingContent ?? true) || (isContentTooShort ?? true))
-  }
-
   return (
     <Paper elevation={2}>
       <Stack spacing={1} padding={1}>
-        <TextField
-          fullWidth
-          placeholder="New Post"
-          value={title}
-          onChange={({ target: { value } }) => {
-            setTitle(value)
-            setIsMissingTitle(value.trim() === "")
-          }}
-          error={isMissingTitle ?? false}
-          helperText={(isMissingTitle ?? false) && "Required"}
+        <RequiredTextField
+          activate={areRequirementsActive}
+          label="New Post"
+          setValidValue={setTitle}
         />
 
         <FormControl fullWidth>
@@ -111,34 +87,24 @@ export default function PostCreationPanel(): ReactElement {
           </Select>
         </FormControl>
 
-        <TextField
-          fullWidth
+        <RequiredTextField
+          activate={areRequirementsActive}
           multiline
           minRows={10}
-          placeholder="What's on your mind?"
-          value={content}
-          onChange={({ target: { value } }) => {
-            setContent(value)
-            setIsMissingContent(value.trim() === "")
-            setIsContentTooShort(value.trim().length < 3)
-          }}
-          error={(isMissingContent ?? false) || (isContentTooShort ?? false)}
-          helperText={
-            isMissingContent ?? false
-              ? "Required"
-              : (isContentTooShort ?? false) && "Please elaborate…"
-          }
+          label="What's on your mind?"
+          setValidValue={setContent}
+          validate={content => content.trim().length > 3}
+          invalidMessage="Please elaborate…"
         />
 
-        <ErrorFeedback isError={!(wasSuccess ?? true)} message={"Something went wrong… :("} />
+        <ErrorFeedback isError={hasFailed} message={"Something went wrong… :("} />
 
         <LoadingButton
           variant="contained"
           fullWidth
-          startIcon={wasSuccess ?? false ? <CheckCircle /> : <Send />}
+          startIcon={<Send />}
           onClick={createPost}
           loading={isLoading}
-          disabled={wasSuccess ?? false}
         >
           Post
         </LoadingButton>
