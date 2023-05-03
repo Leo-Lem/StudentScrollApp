@@ -14,12 +14,8 @@ export module AuthenticationAPI {
       body: JSON.stringify(info)
     })
 
-    if (response.ok) {
-      const { token, id } = await response.json()
-      setSignedIn(token, id)
-    } else if (response.status === 409) {
-      throw Error("Email taken")
-    }
+    if (response.ok) setSignedIn(await response.json())
+    else if (response.status === 409) throw Error("Email taken")
   }
 
   export interface SignInInfo {
@@ -36,12 +32,9 @@ export module AuthenticationAPI {
       body: JSON.stringify(info)
     })
 
-    if (response.ok) {
-      const { token, id } = await response.json()
-      setSignedIn(token, id)
-    } else if (response.status === 401) {
-      throw Error("Invalid credentials")
-    }
+    if (response.ok) setSignedIn(await response.json())
+    else if (response.status === 401) throw Error("Invalid credentials")
+    else console.log(response)
   }
 
   export function signout(): void {
@@ -51,8 +44,8 @@ export module AuthenticationAPI {
   }
 }
 
-function setSignedIn(token: string, id: number): void {
-  localStorage.setItem("jwt", JSON.stringify(token))
-  localStorage.setItem("id", JSON.stringify(id))
+function setSignedIn(json: { token: string, id: number }): void {
+  localStorage.setItem("jwt", JSON.stringify(json.token))
+  localStorage.setItem("id", JSON.stringify(json.id))
   window.location.href = ""
 }

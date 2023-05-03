@@ -20,9 +20,9 @@ export module ContentPostAPI {
       body: JSON.stringify({ ...info, posterId: studentId() })
     })
 
-
-    if (response.status === 403) AuthenticationAPI.signout()
-    else window.location.href = ""
+    if (response.ok) window.location.href = ""
+    else if (response.status === 403) AuthenticationAPI.signout()
+    else console.log(response)
   }
 
   export async function read(page: number, newestFirst: boolean): Promise<ContentPost[]> {
@@ -37,11 +37,27 @@ export module ContentPostAPI {
       }
     )
 
-    if (response.status === 403) {
-      AuthenticationAPI.signout()
-      throw Error("Not authenticated. Logging out…")
-    }
+    if (response.ok) return (await response.json()) as ContentPost[]
+    else if (response.status === 403) AuthenticationAPI.signout()
+    else console.log(response)
 
-    return (await response.json()) as ContentPost[]
+    throw Error("Something went wrong…")
+  }
+
+  export async function deleteWith(postId: number): Promise<void> {
+    const response = await fetch(
+      `api/v1/posts/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: authorizationHeader(),
+          "Content-Type": "application/json"
+        }
+      }
+    )
+
+    if (response.ok) return
+    else if (response.status === 403) AuthenticationAPI.signout()
+    else console.log(response)
   }
 }
