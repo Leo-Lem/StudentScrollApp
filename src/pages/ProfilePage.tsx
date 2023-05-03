@@ -6,7 +6,7 @@ export default function ProfilePage(): ReactElement {
   const [bio, setBio] = useState("")
 
   return (
-    <Grid container direction="column"> 
+    <Grid container direction="column" > 
 <Grid xs={4}>
       <TextField
         fullWidth
