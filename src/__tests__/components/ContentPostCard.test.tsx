@@ -1,3 +1,5 @@
+import "@testing-library/jest-dom"
+
 import { render, screen } from "@testing-library/react"
 import ContentPostCard from "../../components/ContentPostCard"
 import { ContentPost } from "../../models"
@@ -9,15 +11,15 @@ const example: ContentPost = {
 beforeEach(() => render(<ContentPostCard post={example} />))
 
 it("displays title", () => {
-  expect(screen.getByText(example.title)).toBeInTheDocument
+  expect(screen.getByText(example.title)).toBeInTheDocument()
 })
 
 it("displays content", () => {
-  expect(screen.getByText(example.content)).toBeInTheDocument
+  expect(screen.getByText(example.content)).toBeInTheDocument()
 })
 
 it("displays tags", () => {
   example.tags.forEach((tag) => {
-    expect(screen.getByText(tag)).toBeInTheDocument
+    expect(screen.getByText(tag)).toBeInTheDocument()
   })
 })
