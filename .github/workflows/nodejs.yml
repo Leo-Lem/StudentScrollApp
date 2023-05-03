@@ -57,7 +57,7 @@ jobs:
           name: build-artifacts
       - name: Configure SSH
         run: |
-          echo "$PRIVATE_KEY" > github_actions_key && chmod 600 github_actions_key
+          echo "$AWS_SSH_KEY" > github_actions_key && chmod 600 github_actions_key
           ssh -o StrictHostKeyChecking=no -i github_actions_key ${AWS_USER}@${AWS_HOST} 'ls -l'
         env:
           SSH_HOST: ${{ vars.AWS_HOST }}
