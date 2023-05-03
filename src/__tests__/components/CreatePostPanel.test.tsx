@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom"
-import CreatePostPanel from "../../components/CreatePostPanel"
+import CreatePostPanel from "../../components/PostCreationPanel"
 import { render, screen } from "@testing-library/react"
 
 beforeEach(() => render(<CreatePostPanel />))

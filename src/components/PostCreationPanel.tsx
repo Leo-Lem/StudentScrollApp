@@ -18,7 +18,7 @@ import { ContentPostAPI } from "../api"
 
 import allTags from "../res/tags.json"
 
-export default function CreatePostPanel(): ReactElement {
+export default function PostCreationPanel(): ReactElement {
   const [title, setTitle] = useState("")
   const [tags, setTags] = useState<string[]>([])
   const [content, setContent] = useState("")

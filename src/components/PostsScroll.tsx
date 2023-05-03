@@ -24,18 +24,18 @@ export default function PostsScroll(): ReactElement {
 
   return (
     <Stack spacing={1}>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <ContentPostCard post={post} />
-        </div>
-      ))}
-
       <FormControlLabel
         sx={{ justifyContent: "end" }}
         checked={newestFirst}
         label={<Typography variant="button">Newest first</Typography>}
         control={<Switch onChange={() => { setNewestFirst(!newestFirst) }} />}
       />
+
+      {posts.map((post) => (
+        <div key={post.id}>
+          <ContentPostCard post={post} />
+        </div>
+      ))}
     </Stack>
   )
 }

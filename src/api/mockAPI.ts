@@ -12,22 +12,7 @@ export default function mockAPI(): void {
       student: Model,
       post: Model
     },
-    seeds(server) {
-      server.create("post", {
-        id: "1",
-        title: "First post",
-        tags: ["First"],
-        content: "This is a placeholder post",
-        posterId: 1
-      })
-      server.create("post", {
-        id: "2",
-        title: "Second post",
-        tags: ["Second"],
-        content: "This is another placeholder post",
-        posterId: 1
-      })
-    },
+    seeds(server) { createExamplePosts(server) },
     routes() {
       this.post("api/v1/posts", mockCreatingPost)
       this.get("api/v1/posts", mockFetchingPosts)
@@ -35,6 +20,17 @@ export default function mockAPI(): void {
       this.post("/api/v1/signin", mockSignIn)
     }
   })
+}
+
+const createExamplePosts = (server: any): void => {
+  for (let i = 0; i < 10; i++)
+    server.create("post", {
+      id: i.toString(),
+      title: "A post",
+      tags: [i.toString()],
+      content: "An example post, that could contain some text like this.\n And possibly even more (eventually). Whatever it's gonna be fine, it's alright…",
+      posterId: i % 2
+    })
 }
 
 const mockCreatingPost = (schema: any, request: Request): ContentPost =>
