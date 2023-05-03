@@ -1,13 +1,13 @@
 import { type ReactElement } from "react"
 import { AppBar, Box, Stack, Typography } from "@mui/material"
 
-import Logo from "../components/Logo"
+import Logo from "../components/simple/Logo"
 import AuthenticationForm from "../components/AuthenticationForm"
 
 export default function WelcomePage(): ReactElement {
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Typography variant="h2" noWrap textAlign="center">
           Welcome to StudentScroll!
         </Typography>

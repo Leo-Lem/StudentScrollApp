@@ -8,7 +8,7 @@ export default function useLocalStorage<T>(
     try {
       const raw = localStorage.getItem(key)
       if (raw !== null) return JSON.parse(raw)
-    } catch {}
+    } catch { }
 
     return defaultValue
   })
@@ -18,7 +18,7 @@ export default function useLocalStorage<T>(
       _setValue(value)
       const raw = JSON.stringify(value)
       localStorage.setItem(key, raw)
-    } catch (error) {}
+    } catch (error) { }
   }
 
   useEffect(() => {

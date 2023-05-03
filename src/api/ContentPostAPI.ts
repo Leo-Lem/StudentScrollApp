@@ -1,4 +1,5 @@
 import type ContentPost from "../models/ContentPost"
+import { AuthenticationAPI } from "./AuthenticationAPI"
 import authorizationHeader from "./lib/authorizationHeader"
 import studentId from "./lib/studentId"
 
@@ -10,7 +11,7 @@ export module ContentPostAPI {
   }
 
   export async function create(info: CreationInfo): Promise<void> {
-    await fetch("api/v1/posts", {
+    const response = await fetch("api/v1/posts", {
       method: "POST",
       headers: {
         Authorization: authorizationHeader(),
@@ -18,16 +19,28 @@ export module ContentPostAPI {
       },
       body: JSON.stringify({ ...info, posterId: studentId() })
     })
+
+
+    if (response.status === 403) AuthenticationAPI.signout()
+    else window.location.href = ""
   }
 
-  export async function read(page: number): Promise<ContentPost[]> {
-    const response = await fetch("api/v1/posts", {
-      method: "GET",
-      headers: {
-        Authorization: authorizationHeader(),
-        "Content-Type": "application/json"
+  export async function read(page: number, newestFirst: boolean): Promise<ContentPost[]> {
+    const response = await fetch(
+      `api/v1/posts?page=${page}&size=10&sort=timestamp&sortAscending=${JSON.stringify(!newestFirst)}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: authorizationHeader(),
+          "Content-Type": "application/json"
+        }
       }
-    })
+    )
+
+    if (response.status === 403) {
+      AuthenticationAPI.signout()
+      throw Error("Not authenticated. Logging out…")
+    }
 
     return (await response.json()) as ContentPost[]
   }

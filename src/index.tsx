@@ -10,5 +10,4 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 )
 
 import mockAPI from "./api/mockAPI" // eslint-disable-line
-if (process.env.NODE_ENV === "development")
-  mockAPI()
+if (process.env.NODE_ENV === "development") mockAPI()

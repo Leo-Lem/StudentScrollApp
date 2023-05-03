@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom"
 
 import { render, screen } from "@testing-library/react"
-import ContentPostCard from "../../components/ContentPostCard"
+import ContentPostCard from "../../components/simple/ContentPostCard"
 import { ContentPost } from "../../models"
 
 const example: ContentPost = {

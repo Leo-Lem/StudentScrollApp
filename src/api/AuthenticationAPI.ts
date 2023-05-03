@@ -15,19 +15,19 @@ export module AuthenticationAPI {
     })
 
     if (response.ok) {
-      const body = await response.json()
-      setSignedIn(body.token, body.id)
+      const { token, id } = await response.json()
+      setSignedIn(token, id)
     } else if (response.status === 409) {
       throw Error("Email taken")
     }
   }
 
-  export interface SigninInfo {
+  export interface SignInInfo {
     email: string
     password: string
   }
 
-  export async function signin(info: SigninInfo): Promise<void> {
+  export async function signin(info: SignInInfo): Promise<void> {
     const response = await fetch("api/v1/signin", {
       method: "POST",
       headers: {
@@ -37,10 +37,10 @@ export module AuthenticationAPI {
     })
 
     if (response.ok) {
-      const body = await response.json()
-      setSignedIn(body.token, body.id)
+      const { token, id } = await response.json()
+      setSignedIn(token, id)
     } else if (response.status === 401) {
-      throw Error("Invalid email or password")
+      throw Error("Invalid credentials")
     }
   }
 

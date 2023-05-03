@@ -13,17 +13,12 @@ import { useJwt } from "../hooks"
 export default function App(): ReactElement {
   const [jwt] = useJwt()
 
-  const search = (query: string): void => {
-    console.log(query)
-    // TODO: handle search
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container disableGutters sx={{ padding: 1, height: "100vh" }}>
         <Router>
-          {jwt !== null ? <Header search={search} /> : <WelcomePage />}
+          {jwt !== null ? <Header /> : <WelcomePage />}
 
           {jwt !== null && (
             <Routes>
