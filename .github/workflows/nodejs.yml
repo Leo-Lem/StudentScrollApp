@@ -5,6 +5,10 @@ on:
     branches: ["main", "continuous-deployment"]
   pull_request:
     branches: ["main"]
+    
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   NODE_VERSION: '19.x'
@@ -53,10 +57,8 @@ jobs:
           name: build-artifacts
       - name: Configure SSH
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-            ls -l
-          '
+          echo "$PRIVATE_KEY" > github_actions_key && chmod 600 github_actions_key
+          ssh -o StrictHostKeyChecking=no -i github_actions_key ${AWS_USER}@${AWS_HOST} 'ls -l'
         env:
           SSH_HOST: ${{ vars.AWS_HOST }}
           SSH_USER: ${{ vars.AWS_USER }}
