@@ -1,7 +1,7 @@
 import { useState, type ReactElement, useEffect } from "react"
 import { FormControlLabel, Stack, Switch, Typography } from "@mui/material"
 
-import ContentPostCard from "./simple/ContentPostCard"
+import ContentPostCard from "./ContentPostCard"
 
 import { type ContentPost } from "../models"
 import { ContentPostAPI } from "../api"
@@ -26,7 +26,13 @@ export default function PostsScroll(): ReactElement {
         sx={{ justifyContent: "end" }}
         checked={newestFirst}
         label={<Typography variant="button">Newest first</Typography>}
-        control={<Switch onChange={() => { setNewestFirst(!newestFirst) }} />}
+        control={
+          <Switch
+            onChange={() => {
+              setNewestFirst(!newestFirst)
+            }}
+          />
+        }
       />
 
       {posts.map((post) => (

@@ -27,7 +27,9 @@ export module ContentPostAPI {
 
   export async function read(page: number, newestFirst: boolean): Promise<ContentPost[]> {
     const response = await fetch(
-      `api/v1/posts?page=${page}&size=10&sort=timestamp&sortAscending=${JSON.stringify(!newestFirst)}`,
+      `api/v1/posts?page=${page}&size=10&sort=timestamp&sortAscending=${JSON.stringify(
+        !newestFirst
+      )}`,
       {
         method: "GET",
         headers: {
@@ -45,18 +47,15 @@ export module ContentPostAPI {
   }
 
   export async function deleteWith(postId: number): Promise<void> {
-    const response = await fetch(
-      `api/v1/posts/${postId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: authorizationHeader(),
-          "Content-Type": "application/json"
-        }
+    const response = await fetch(`api/v1/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: authorizationHeader(),
+        "Content-Type": "application/json"
       }
-    )
+    })
 
-    if (response.ok) return
+    if (response.ok) window.location.href = ""
     else if (response.status === 403) AuthenticationAPI.signout()
     else console.log(response)
   }

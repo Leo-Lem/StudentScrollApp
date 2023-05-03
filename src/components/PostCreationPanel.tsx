@@ -10,7 +10,6 @@ import {
   Select,
   Stack
 } from "@mui/material"
-import { LoadingButton } from "@mui/lab"
 import { Send } from "@mui/icons-material"
 
 import { ContentPostAPI } from "../api"
@@ -18,6 +17,7 @@ import { ContentPostAPI } from "../api"
 import allTags from "../res/tags.json"
 import ErrorFeedback from "./simple/ErrorFeedback"
 import RequiredTextField from "./simple/RequiredTextField"
+import AsyncButton from "./simple/AsyncButton"
 
 export default function PostCreationPanel(): ReactElement {
   const [title, setTitle] = useState<string | null>(null)
@@ -26,31 +26,27 @@ export default function PostCreationPanel(): ReactElement {
 
   const [areRequirementsActive, setAreRequirementsActive] = useState(false)
 
-  const [isLoading, setIsLoading] = useState(false)
-
   const [hasFailed, setHasFailed] = useState<boolean>(false)
 
-  const createPost = (): void => {
+  const createPost = async (): Promise<boolean> => {
     if (title === null || content === null) {
       setAreRequirementsActive(true)
-      return
+      return false
     }
 
-    setIsLoading(true)
+    try {
+      await ContentPostAPI.create({ title: title.trim(), tags, content: content.trim() })
 
-    ContentPostAPI.create({ title: title.trim(), tags, content: content.trim() })
-      .then(() => {
-        setTitle(null)
-        setTags([])
-        setContent(null)
-      })
-      .catch((e) => {
-        console.error(e)
-        setHasFailed(true)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+      setTitle(null)
+      setTags([])
+      setContent(null)
+
+      return true
+    } catch (e) {
+      console.error(e)
+      setHasFailed(true)
+      return false
+    }
   }
 
   return (
@@ -93,21 +89,18 @@ export default function PostCreationPanel(): ReactElement {
           minRows={10}
           placeholder="What's on your mind?"
           setValidValue={setContent}
-          validate={content => content.trim().length > 3}
+          validate={(content) => content.trim().length > 3}
           invalidMessage="Please elaborate…"
         />
 
         <ErrorFeedback isError={hasFailed} message={"Something went wrong… :("} />
 
-        <LoadingButton
+        <AsyncButton
           variant="contained"
           fullWidth
           startIcon={<Send />}
-          onClick={createPost}
-          loading={isLoading}
-        >
-          Post
-        </LoadingButton>
+          label="Post"
+          action={createPost} />
       </Stack>
     </Paper>
   )

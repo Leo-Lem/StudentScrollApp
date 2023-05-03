@@ -6,18 +6,21 @@ export default function mockAPI(): void {
   createServer({
     environment: "development",
     identityManagers: {
-      application: IdentityManager,
+      application: IdentityManager
     },
     models: {
       student: Model,
       post: Model
     },
-    seeds(server) { createExamplePosts(server) },
+    seeds(server) {
+      createExamplePosts(server)
+    },
     routes() {
       this.post("api/v1/posts", mockCreatingPost)
       this.get("api/v1/posts", mockFetchingPosts)
-      this.post("/api/v1/students", mockSignUp)
-      this.post("/api/v1/signin", mockSignIn)
+      this.delete("api/v1/posts/:id", mockDeletingPost)
+      this.post("api/v1/students", mockSignUp)
+      this.post("api/v1/signin", mockSignIn)
     }
   })
 }
@@ -28,7 +31,8 @@ const createExamplePosts = (server: any): void => {
       id: i.toString(),
       title: "A post",
       tags: [i.toString()],
-      content: "An example post, that could contain some text like this.\n And possibly even more (eventually). Whatever it's gonna be fine, it's alright…",
+      content:
+        "An example post, that could contain some text like this.\n And possibly even more (eventually). Whatever it's gonna be fine, it's alright…",
       posterId: i % 3
     })
 }
@@ -37,12 +41,23 @@ const mockCreatingPost = (schema: any, request: Request): ContentPost =>
   schema.posts.create(JSON.parse(request.requestBody))
 
 const mockFetchingPosts = (schema: any, request: Request): Response =>
-  new Response(200, {}, JSON.stringify(
-    (schema.posts.all().models as any[])
-      .map(model => ({ ...model.attrs, id: parseInt(model.id) }))
-      .sort((lhs: any, rhs: any) => JSON.parse(request.queryParams.sortAscending) as boolean ? lhs.id - rhs.id : rhs.id - lhs.id)
+  new Response(
+    200,
+    {},
+    JSON.stringify(
+      (schema.posts.all().models as any[])
+        .map((model) => ({ ...model.attrs, id: parseInt(model.id) }))
+        .sort((lhs: any, rhs: any) =>
+          (JSON.parse(request.queryParams.sortAscending) as boolean)
+            ? lhs.id - rhs.id
+            : rhs.id - lhs.id
+        )
+    )
+  )
 
-  ))
+const mockDeletingPost = (schema: any, request: Request): any => {
+  return schema.posts.find(request.params.id).destroy()
+}
 
 const mockSignUp = (schema: any, request: Request): any => ({
   id: 1,
@@ -51,7 +66,6 @@ const mockSignUp = (schema: any, request: Request): any => ({
   token: "xyz123",
   type: "Bearer"
 })
-
 
 const mockSignIn = (schema: any, request: Request): any => ({
   id: 1,

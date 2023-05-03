@@ -44,7 +44,7 @@ export module AuthenticationAPI {
   }
 }
 
-function setSignedIn(json: { token: string, id: number }): void {
+function setSignedIn(json: { token: string; id: number }): void {
   localStorage.setItem("jwt", JSON.stringify(json.token))
   localStorage.setItem("id", JSON.stringify(json.id))
   window.location.href = ""
