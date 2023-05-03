@@ -23,7 +23,7 @@ jobs:
         run: npm ci --legacy-peer-deps
       - name: Build project for production
         run: npm run build
-      - name: target
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
@@ -47,11 +47,26 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download a single artifact
+      - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
           name: build-artifacts
-      - name: print contents
-        shell: bash
-        run: ls -lR .
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/github-actions-key
+          chmod 600 ~/.ssh/github-actions-key
+          cat >>~/.ssh/config <<END
+          Host StudentScroll
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/github-actions-key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_HOST: ${{ variables.AWS_HOST }}
+          SSH_USER: ${{ variables.AWS_USER }}
+          SSH_KEY: ${{ secrets.AWS_SSH_KEY }} 
+      - name: List home directory
+        run: ssh StudentScroll 'ls -la'
           
