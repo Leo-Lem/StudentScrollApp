@@ -1,7 +1,7 @@
 import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, TextField, Typography } from "@mui/material"
-import { useId, useJwt } from "../hooks"
+import { createStudent, Login as login } from "../api"
 
 export default function AuthenticationForm(): ReactElement {
   const [isRegistering, setIsRegistering] = useState(false)
@@ -10,20 +10,20 @@ export default function AuthenticationForm(): ReactElement {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const [, setJwt] = useJwt()
-  const [, setId] = useId()
+  const [isPasswordTooShort, setIsPasswordTooShort] = useState<boolean | null>(null)
+  const [isNameEmpty, setIsNameEmpty] = useState<boolean | null>(null)
+  const [isEmailValid, setIsEmailValid] = useState<boolean | null>(null)
+  const [isEmailEmpty, setIsEmailEmpty] = useState<boolean | null>(null)
+
 
   const handleSubmit = async (): Promise<void> => {
-    // TODO: validate (not empty, valid email, etc.)
+    if (isRegistering) await createStudent(name, email, password)
+    else await login(email, password);
 
-    // TODO: register and login
-    console.log(name, email, password)
-
-    setId(1)
-    setJwt(
-      "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMyQHh5ei5jb20iLCJleHAiOjE2ODMwOTgzMjgsImlhdCI6MTY4MzAxMTkyOH0.eiW7VsSlERkgblotsPLeHu0-rJ-1CjMzn-WSFyBQnto"
-    )
-
+    // setId(1)
+    // setJwt(
+    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmMyQHh5ei5jb20iLCJleHAiOjE2ODMwOTgzMjgsImlhdCI6MTY4MzAxMTkyOH0.eiW7VsSlERkgblotsPLeHu0-rJ-1CjMzn-WSFyBQnto"
+    // )
     window.location.href = ""
   }
 
@@ -35,9 +35,13 @@ export default function AuthenticationForm(): ReactElement {
             fullWidth
             label="Your Name"
             autoComplete="name"
-            onChange={(e) => {
-              setName(e.target.value)
+            onChange={({ target: { value } }) => {
+              setName(value)
+              setIsNameEmpty(value === "")
             }}
+            error={isNameEmpty ?? false}
+            helperText={(isNameEmpty ?? false) && "Required"}
+
           />
         </Collapse>
 
@@ -45,9 +49,13 @@ export default function AuthenticationForm(): ReactElement {
           fullWidth
           label="Email Address"
           autoComplete="email"
-          onChange={(e) => {
-            setEmail(e.target.value)
+          onChange={({ target: { value } }) => {
+            setEmail(value)
+            setIsEmailValid(value.includes("@") && value.includes("."))
+            setIsEmailEmpty(value === "")
           }}
+          error={!(isEmailValid ?? true) || (isEmailEmpty ?? false)}
+          helperText={(!(isEmailValid ?? true) || (isEmailEmpty ?? false)) && "Please enter a valid email"}
         />
 
         <TextField
@@ -55,9 +63,12 @@ export default function AuthenticationForm(): ReactElement {
           label="Password"
           type="password"
           autoComplete="new-password"
-          onChange={(e) => {
-            setPassword(e.target.value)
+          onChange={({ target: { value } }) => {
+            setPassword(value)
+            setIsPasswordTooShort(value.length < 6)
           }}
+          error={isPasswordTooShort ?? false}
+          helperText={(isPasswordTooShort ?? false) && "Password must be at least 6 characters"}
         />
 
         <Button fullWidth variant="contained" onClick={handleSubmit}>

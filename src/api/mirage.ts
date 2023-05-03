@@ -24,6 +24,9 @@ export default function mock(): void {
           }
         ] as ContentPost[]
       })
+
+      this.post("/api/v1/students", (_, req) => req.requestBody)
+      this.post("/api/v1/signin", (_, req) => req.requestBody)
     }
   })
 }
