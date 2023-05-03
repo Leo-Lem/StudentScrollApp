@@ -53,20 +53,12 @@ jobs:
           name: build-artifacts
       - name: Configure SSH
         run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_KEY" > ~/.ssh/github-actions-key
-          chmod 600 ~/.ssh/github-actions-key
-          cat >>~/.ssh/config <<END
-          Host StudentScroll
-            HostName $SSH_HOST
-            User $SSH_USER
-            IdentityFile ~/.ssh/github-actions-key
-            StrictHostKeyChecking no
-          END
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+            ls -l
+          '
         env:
           SSH_HOST: ${{ vars.AWS_HOST }}
           SSH_USER: ${{ vars.AWS_USER }}
-          SSH_KEY: "" 
-      - name: List home directory
-        run: ssh StudentScroll 'ls -la'
+          SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
           
