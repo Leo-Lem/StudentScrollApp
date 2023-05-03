@@ -1,5 +1,4 @@
 import { type ReactElement } from "react"
-
 import { AppBar, Box, Stack, Typography } from "@mui/material"
 
 import Logo from "../components/Logo"

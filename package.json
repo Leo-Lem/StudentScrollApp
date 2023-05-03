@@ -12,9 +12,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-test": "react-scripts test",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
-    "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "lint": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
   },
   "devDependencies": {
