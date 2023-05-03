@@ -58,7 +58,7 @@ export default function PostCreationPanel(): ReactElement {
       <Stack spacing={1} padding={1}>
         <RequiredTextField
           activate={areRequirementsActive}
-          label="New Post"
+          placeholder="New Post"
           setValidValue={setTitle}
         />
 
@@ -91,7 +91,7 @@ export default function PostCreationPanel(): ReactElement {
           activate={areRequirementsActive}
           multiline
           minRows={10}
-          label="What's on your mind?"
+          placeholder="What's on your mind?"
           setValidValue={setContent}
           validate={content => content.trim().length > 3}
           invalidMessage="Please elaborate…"
