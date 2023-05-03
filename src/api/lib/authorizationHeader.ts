@@ -4,5 +4,5 @@ export default function authorizationHeader(): string {
   if (token == null)
     throw Error("Not authenticated")
   else
-    return `Bearer ${JSON.parse(token)}`
+    return `Bearer ${JSON.parse(token) as string}`
 }

@@ -19,16 +19,19 @@ export default function AuthenticationForm(): ReactElement {
   const [hasSignInFailed, setHasSignInFailed] = useState(false)
 
   const handleSubmit = async (): Promise<void> => {
-    if (!validate(isRegistering))
-      return
+    if (!validate()) return
 
-    if (isRegistering)
-      await AuthenticationAPI.signup({ name, email, password })
-    else
-      await AuthenticationAPI.signup({ name, email, password })
+    try {
+      if (isRegistering)
+        await AuthenticationAPI.signup({ name, email, password })
+      else
+        await AuthenticationAPI.signin({ email, password })
+    } catch {
+      setHasSignInFailed(true)
+    }
   }
 
-  const validate = (isRegistering: boolean): boolean => {
+  const validate = (): boolean => {
     if (isRegistering && (isNameEmpty === null))
       setIsNameEmpty(true)
 
@@ -42,12 +45,13 @@ export default function AuthenticationForm(): ReactElement {
     else if (isEmailInvalid === null)
       setIsEmailInvalid(true)
 
-    return (
-      (isPasswordEmpty ?? false)
-      || (isPasswordTooShort ?? false)
-      || (isEmailEmpty ?? false)
-      || (isEmailInvalid ?? false)
-      || (isRegistering && (isNameEmpty ?? false)))
+    return !(
+      (isRegistering && (isNameEmpty ?? true))
+      || (isPasswordEmpty ?? true)
+      || (isPasswordTooShort ?? true)
+      || (isEmailEmpty ?? true)
+      || (isEmailInvalid ?? true)
+    )
   }
 
   return (
@@ -75,8 +79,8 @@ export default function AuthenticationForm(): ReactElement {
           onChange={({ target: { value } }) => {
             const email = value.trim()
             setEmail(email)
-            setIsEmailEmpty(value === "")
-            setIsEmailInvalid(!value.match(/^\S+@\S+\.\S+$/))
+            setIsEmailEmpty(email === "")
+            setIsEmailInvalid(!/^\S+@\S+\.\S+$/.test(email))
           }}
           error={(isEmailEmpty ?? false) || (isEmailInvalid ?? false)}
           helperText={(isEmailEmpty ?? false) ? "Required" : ((isEmailInvalid ?? false) && "Invalid email")}
@@ -90,18 +94,16 @@ export default function AuthenticationForm(): ReactElement {
           onChange={({ target: { value } }) => {
             setPassword(value)
             setIsPasswordEmpty(value === "")
-            if (password.length > 6) setIsPasswordTooShort(value.length < 6)
+            setIsPasswordTooShort(value.length < 6)
           }}
-          error={isPasswordTooShort ?? false}
+          error={(isPasswordEmpty ?? false) || (isPasswordTooShort ?? false)}
           helperText={(isPasswordEmpty ?? false) ? "Required" : ((isPasswordTooShort ?? false) && "At least 6 characters")}
         />
         <Button fullWidth variant="contained" onClick={handleSubmit}>
           {isRegistering ? "Sign Up" : "Sign in"}
         </Button>
 
-        <Typography variant="caption" color="error" hidden={!hasSignInFailed}>
-          Sign in failed. Please try again.
-        </Typography>
+        <Typography variant="caption" color="error" hidden={!hasSignInFailed}>Unexpected error, please try again…</Typography>
 
         <Button
           variant="text"

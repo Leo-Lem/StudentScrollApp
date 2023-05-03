@@ -6,7 +6,7 @@ export default function mock(): void {
     routes() {
       this.post("api/v1/posts", (_, req) => req.requestBody)
 
-      this.get("api/v1/posts", (_, _1) => {
+      this.get("api/v1/posts", (_, req) => {
         return [
           {
             id: 1,
@@ -25,8 +25,9 @@ export default function mock(): void {
         ] as ContentPost[]
       })
 
-      this.post("/api/v1/students", (_, req) => req.requestBody)
-      this.post("/api/v1/signin", (_, req) => req.requestBody)
+      this.post("/api/v1/students", (_, req) => ({ id: 1, name: "name", email: "email", token: "xyz123", type: "Bearer" }))
+
+      this.post("/api/v1/signin", (_, req) => ({ id: 1, name: "name", email: "email", token: "xyz123", type: "Bearer" }))
     }
   })
 }

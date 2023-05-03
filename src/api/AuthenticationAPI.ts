@@ -49,10 +49,10 @@ export module AuthenticationAPI {
     localStorage.removeItem("id")
     window.location.href = ""
   }
+}
 
-  function setSignedIn(token: string, id: number): void {
-    localStorage.setItem("jwt", token)
-    localStorage.setItem("id", JSON.stringify(id))
-    window.location.href = ""
-  }
+function setSignedIn(token: string, id: number): void {
+  localStorage.setItem("jwt", JSON.stringify(token))
+  localStorage.setItem("id", JSON.stringify(id))
+  window.location.href = ""
 }
