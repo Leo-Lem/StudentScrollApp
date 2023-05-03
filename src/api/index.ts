@@ -1,2 +1,2 @@
-export { default as createContentPost } from "./createContentPost"
-export { default as fetchContentPosts } from "./fetchContentPosts"
+export { ContentPostAPI } from "./ContentPostAPI"
+export { AuthenticationAPI } from "./AuthenticationAPI"

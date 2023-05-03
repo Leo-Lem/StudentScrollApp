@@ -28,6 +28,7 @@
     "spaced-comment": "error",
     "quotes": ["error", "double"],
     "no-duplicate-imports": "error",
-    "@typescript-eslint/no-misused-promises": "off"
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-namespace": "off"
   }
 }

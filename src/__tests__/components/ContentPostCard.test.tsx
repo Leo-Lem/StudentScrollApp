@@ -5,7 +5,10 @@ import ContentPostCard from "../../components/ContentPostCard"
 import { ContentPost } from "../../models"
 
 const example: ContentPost = {
-  title: "example title", tags: ["example tag 1", "example tag 2"], content: "example content", posterId: 1
+  title: "example title",
+  tags: ["example tag 1", "example tag 2"],
+  content: "example content",
+  posterId: 1
 }
 
 beforeEach(() => render(<ContentPostCard post={example} />))

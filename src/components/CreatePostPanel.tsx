@@ -14,8 +14,7 @@ import {
 import { LoadingButton } from "@mui/lab"
 import { CheckCircle, Send } from "@mui/icons-material"
 
-import { createContentPost } from "../api"
-import { useId } from "../hooks"
+import { ContentPostAPI } from "../api"
 
 import allTags from "../res/tags.json"
 
@@ -26,15 +25,10 @@ export default function CreatePostPanel(): ReactElement {
 
   const [isMissingTitle, setIsMissingTitle] = useState<boolean | null>(null)
   const [isMissingContent, setIsMissingContent] = useState<boolean | null>(null)
-  const [isTooShort, setIsTooShort] = useState<boolean | null>(null)
+  const [isContentTooShort, setIsContentTooShort] = useState<boolean | null>(null)
 
   const [isLoading, setIsLoading] = useState(false)
   const [wasSuccess, setWasSuccess] = useState<boolean | null>(null)
-
-  const [posterId] = useId()
-
-  const isNotValidated = (): boolean =>
-    (isMissingTitle ?? true) || (isMissingContent ?? true) || (isTooShort ?? true)
 
   const reset = (): void => {
     setTitle("")
@@ -43,29 +37,39 @@ export default function CreatePostPanel(): ReactElement {
 
     setIsMissingTitle(null)
     setIsMissingContent(null)
-    setIsTooShort(null)
+    setIsContentTooShort(null)
 
     setWasSuccess(null)
   }
 
   const createPost = async (): Promise<void> => {
-    if (isNotValidated()) return
-    if (posterId === null) return
+    if (!validate()) return
 
     setIsLoading(true)
+
     try {
-      await createContentPost({ title, tags, content: content.trim(), posterId })
+      await ContentPostAPI.create({ title, tags, content: content.trim() })
       setWasSuccess(true)
       setTimeout(reset, 1000)
     } catch (e) {
       console.error(e)
       setWasSuccess(false)
     }
+
     setIsLoading(false)
   }
 
+  const validate = (): boolean => {
+    if (isMissingTitle === null) setIsMissingTitle(true)
+
+    if (isMissingContent === null) setIsMissingContent(true)
+    else if (isContentTooShort === null) setIsContentTooShort(true)
+
+    return !((isMissingTitle ?? true) || (isMissingContent ?? true) || (isContentTooShort ?? true))
+  }
+
   return (
-    <Paper>
+    <Paper elevation={2}>
       <Stack spacing={1} padding={1}>
         <TextField
           fullWidth
@@ -114,21 +118,23 @@ export default function CreatePostPanel(): ReactElement {
           onChange={({ target: { value } }) => {
             setContent(value)
             setIsMissingContent(value.trim() === "")
-            setIsTooShort(value.trim().length < 3)
+            setIsContentTooShort(value.trim().length < 3)
           }}
-          error={(isMissingContent ?? false) || (isTooShort ?? false)}
+          error={(isMissingContent ?? false) || (isContentTooShort ?? false)}
           helperText={
-            isMissingContent ?? false ? "Required" : (isTooShort ?? false) && "Please elaborate…"
+            isMissingContent ?? false
+              ? "Required"
+              : (isContentTooShort ?? false) && "Please elaborate…"
           }
         />
         <LoadingButton
-          color={!(wasSuccess ?? true) ? "error" : "primary"}
-          loading={isLoading}
-          disabled={isNotValidated() || (wasSuccess ?? false)}
+          variant="contained"
           fullWidth
           startIcon={wasSuccess ?? false ? <CheckCircle /> : <Send />}
-          variant="contained"
           onClick={createPost}
+          color={!(wasSuccess ?? true) ? "error" : "primary"}
+          loading={isLoading}
+          disabled={wasSuccess ?? false}
         >
           Post
         </LoadingButton>
