@@ -2,9 +2,9 @@ import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
 import { AuthenticationAPI } from "../api"
-import { LoadingButton } from "@mui/lab"
 import ErrorFeedback from "./simple/ErrorFeedback"
 import RequiredTextField from "./simple/RequiredTextField"
+import AsyncButton from "./simple/AsyncButton"
 
 export default function AuthenticationForm(): ReactElement {
   const [isRegistering, setIsRegistering] = useState(false)
@@ -15,37 +15,28 @@ export default function AuthenticationForm(): ReactElement {
 
   const [isRequiredActive, setIsRequiredActive] = useState(false)
 
-  const [isLoading, setIsLoading] = useState(false)
-
   const [areCredentialsInvalid, setAreCredentialsInvalid] = useState(false)
   const [isEmailTaken, setIsEmailTaken] = useState(false)
   const [hasFailed, setHasFailed] = useState(false)
 
-  const authenticate = (): void => {
-    setIsLoading(true)
+  const authenticate = async (): Promise<boolean> => {
+    try {
+      if (isRegistering && name !== null && email !== null && password !== null) {
+        await AuthenticationAPI.signup({ name, email, password })
+      } else if (email !== null && password !== null) {
+        await AuthenticationAPI.signin({ email, password })
+      } else {
+        setIsRequiredActive(true)
+        return false
+      }
 
-    if (isRegistering && name !== null && email !== null && password !== null) {
-      AuthenticationAPI.signup({ name, email, password })
-        .catch((e) => {
-          if (e instanceof Error && e.message === "Email taken") setIsEmailTaken(true)
-          else setHasFailed(true)
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    } else if (email !== null && password !== null) {
-      AuthenticationAPI.signin({ email, password })
-        .catch((e) => {
-          if (e instanceof Error && e.message === "Invalid credentials")
-            setAreCredentialsInvalid(true)
-          else setHasFailed(true)
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    } else {
-      setIsRequiredActive(true)
-      setIsLoading(false)
+      return true
+    } catch (e) {
+      if (e instanceof Error && e.message === "Email taken") setIsEmailTaken(true)
+      if (e instanceof Error && e.message === "Invalid credentials") setAreCredentialsInvalid(true)
+      else setHasFailed(true)
+
+      return false
     }
   }
 
@@ -87,9 +78,7 @@ export default function AuthenticationForm(): ReactElement {
           invalidMessage="At least 6 characters"
         />
 
-        <LoadingButton variant="contained" fullWidth onClick={authenticate} loading={isLoading}>
-          {isRegistering ? "Sign Up" : "Sign in"}
-        </LoadingButton>
+        <AsyncButton variant="contained" label={isRegistering ? "Sign Up" : "Sign in"} action={authenticate} />
 
         <ErrorFeedback isError={hasFailed} message={errorMessage()} />
 

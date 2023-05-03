@@ -1,7 +1,19 @@
 import { TextField } from "@mui/material"
 import { type SetStateAction, type ReactElement, useState, type Dispatch, useEffect } from "react"
 
-export default function RequiredTextField({ activate, fullWidth, multiline, minRows, label, type, placeholder, autoComplete, setValidValue, validate, invalidMessage }: Props): ReactElement {
+export default function RequiredTextField({
+  activate,
+  fullWidth,
+  multiline,
+  minRows,
+  label,
+  type,
+  placeholder,
+  autoComplete,
+  setValidValue,
+  validate,
+  invalidMessage
+}: Props): ReactElement {
   const [value, setValue] = useState("")
   const [isEmpty, setIsEmpty] = useState<boolean | null>(null)
   const [isInvalid, setIsInvalid] = useState<boolean | null>(null)
@@ -14,18 +26,17 @@ export default function RequiredTextField({ activate, fullWidth, multiline, minR
   }, [activate ?? false])
 
   useEffect(() => {
-    setValidValue((isEmpty ?? true) || (validate !== undefined && (isInvalid ?? true)) ? null : value)
+    setValidValue(
+      (isEmpty ?? true) || (validate !== undefined && (isInvalid ?? true)) ? null : value
+    )
   }, [value])
 
   const isError = (): boolean => (isEmpty ?? false) || (isInvalid ?? false)
 
   const helperText = (): string | null => {
-    if (isEmpty ?? false)
-      return "Required"
-    else if (isInvalid ?? false)
-      return invalidMessage ?? "Invalid value"
-    else
-      return null
+    if (isEmpty ?? false) return "Required"
+    else if (isInvalid ?? false) return invalidMessage ?? "Invalid value"
+    else return null
   }
 
   return (
@@ -42,8 +53,7 @@ export default function RequiredTextField({ activate, fullWidth, multiline, minR
       onChange={({ target: { value } }) => {
         setIsEmpty(value === "")
 
-        if (validate !== undefined)
-          setIsInvalid(!validate(value))
+        if (validate !== undefined) setIsInvalid(!validate(value))
 
         setValue(value)
       }}

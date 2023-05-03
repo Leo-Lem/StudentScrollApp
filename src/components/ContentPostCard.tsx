@@ -1,14 +1,29 @@
 import { type ReactElement } from "react"
 import { Card, Grid, Typography } from "@mui/material"
-import { School } from "@mui/icons-material"
+import { Delete, School } from "@mui/icons-material"
 
-import { type ContentPost } from "../../models"
+import { type ContentPost } from "../models"
+import { useId } from "../hooks"
+import { ContentPostAPI } from "../api"
+import AsyncButton from "./simple/AsyncButton"
 
 // TODO replace placeholder profile with button leading to user profile
 
 export default function ContentPostCard({
-  post: { title, tags, content, posterId }
+  post: { id, title, tags, content, posterId }
 }: Props): ReactElement {
+  const [studentId] = useId()
+
+  const deletePost = async (): Promise<boolean> => {
+    try {
+      await ContentPostAPI.deleteWith(id)
+      return true
+    } catch (e) {
+      console.log(e)
+      return false
+    }
+  }
+
   return (
     <Card>
       <Grid container direction="row" alignItems="center">
@@ -20,6 +35,14 @@ export default function ContentPostCard({
                 {tag}
               </Card>
             ))}
+            {
+              (studentId !== null && studentId === posterId) &&
+              <AsyncButton
+                variant="text"
+                label={<Delete color="error" />}
+                action={deletePost}
+              />
+            }
           </Grid>
           <Typography variant="body1">{content}</Typography>
         </Grid>
