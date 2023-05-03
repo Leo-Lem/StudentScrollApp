@@ -19,13 +19,14 @@ import { AccountCircle, Search } from "@mui/icons-material"
 import Logo from "./Logo"
 import { AuthenticationAPI } from "../api"
 
-// TODO: implement client routing instead of href
-export default function Header({ search }: Props): ReactElement {
+export default function Header(): ReactElement {
   const [query, setQuery] = useState("")
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleSearch = (): void => {
-    search(query)
+    console.log(query)
+
+    // TODO: handle search
   }
   const handleMenu = (e: MouseEvent<HTMLElement>): void => {
     setAnchorEl(e.currentTarget)
@@ -36,7 +37,7 @@ export default function Header({ search }: Props): ReactElement {
   }
 
   return (
-    <AppBar position="static" sx={{ marginBottom: 1 }}>
+    <AppBar position="sticky" sx={{ marginBottom: 1 }}>
       <Toolbar>
         <Button startIcon={<Logo />} color="inherit" size="large" href="/">
           <Typography variant="h6">StudentScroll</Typography>
@@ -109,8 +110,4 @@ export default function Header({ search }: Props): ReactElement {
       </Toolbar>
     </AppBar>
   )
-}
-
-interface Props {
-  search: (query: string) => void
 }

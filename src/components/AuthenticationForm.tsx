@@ -18,22 +18,36 @@ export default function AuthenticationForm(): ReactElement {
   const [isEmailInvalid, setIsEmailInvalid] = useState<boolean | null>(null)
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const [areCredentialsInvalid, setAreCredentialsInvalid] = useState(false)
+  const [isEmailTaken, setIsEmailTaken] = useState(false)
   const [hasFailed, setHasFailed] = useState(false)
 
-  const authenticate = async (): Promise<void> => {
+  const authenticate = (): void => {
     if (!validate()) return
 
     setIsLoading(true)
 
-    try {
-      if (isRegistering) await AuthenticationAPI.signup({ name, email, password })
-      else await AuthenticationAPI.signin({ email, password })
-    } catch {
-      // TODO: refine error handling and display more information
-      setHasFailed(true)
+    if (isRegistering) {
+      AuthenticationAPI.signup({ name, email, password })
+        .catch((e) => {
+          if (e instanceof Error && e.message === "Email taken") setIsEmailTaken(true)
+          else setHasFailed(true)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    } else {
+      AuthenticationAPI.signin({ email, password })
+        .catch((e) => {
+          if (e instanceof Error && e.message === "Invalid credentials")
+            setAreCredentialsInvalid(true)
+          else setHasFailed(true)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
     }
-
-    setIsLoading(false)
   }
 
   const validate = (): boolean => {
@@ -52,6 +66,12 @@ export default function AuthenticationForm(): ReactElement {
       (isEmailEmpty ?? true) ||
       (isEmailInvalid ?? true)
     )
+  }
+
+  const errorMessage = (): string => {
+    if (isEmailTaken) return "Email is already registered…"
+    else if (areCredentialsInvalid) return "Email or password is wrong…"
+    else return "Something went wrong… :("
   }
 
   return (
@@ -110,7 +130,7 @@ export default function AuthenticationForm(): ReactElement {
         </LoadingButton>
 
         <Typography variant="caption" color="error" hidden={!hasFailed}>
-          Something went wrong…
+          {errorMessage()}
         </Typography>
 
         <Button

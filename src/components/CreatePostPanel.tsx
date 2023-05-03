@@ -42,21 +42,23 @@ export default function CreatePostPanel(): ReactElement {
     setWasSuccess(null)
   }
 
-  const createPost = async (): Promise<void> => {
+  const createPost = (): void => {
     if (!validate()) return
 
     setIsLoading(true)
 
-    try {
-      await ContentPostAPI.create({ title: title.trim(), tags, content: content.trim() })
-      setWasSuccess(true)
-      setTimeout(reset, 1000)
-    } catch (e) {
-      console.error(e)
-      setWasSuccess(false)
-    }
-
-    setIsLoading(false)
+    ContentPostAPI.create({ title: title.trim(), tags, content: content.trim() })
+      .then(() => {
+        setWasSuccess(true)
+        setTimeout(reset, 1000)
+      })
+      .catch((e) => {
+        console.error(e)
+        setWasSuccess(false)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const validate = (): boolean => {
