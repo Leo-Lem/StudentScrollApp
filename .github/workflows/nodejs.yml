@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ["main", "continuous deployment"]
+    branches: ["main", "continuous-deployment"]
   pull_request:
     branches: ["main"]
 
@@ -44,6 +44,7 @@ jobs:
         run: npm test
         
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download a single artifact
