@@ -2,6 +2,7 @@ import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, TextField, Typography } from "@mui/material"
 import { AuthenticationAPI } from "../api"
+import { LoadingButton } from "@mui/lab"
 
 export default function AuthenticationForm(): ReactElement {
   const [isRegistering, setIsRegistering] = useState(false)
@@ -16,10 +17,13 @@ export default function AuthenticationForm(): ReactElement {
   const [isEmailEmpty, setIsEmailEmpty] = useState<boolean | null>(null)
   const [isEmailInvalid, setIsEmailInvalid] = useState<boolean | null>(null)
 
+  const [isLoading, setIsLoading] = useState(false)
   const [hasSignInFailed, setHasSignInFailed] = useState(false)
 
-  const handleSubmit = async (): Promise<void> => {
+  const authenticate = async (): Promise<void> => {
     if (!validate()) return
+
+    setIsLoading(true)
 
     try {
       if (isRegistering) await AuthenticationAPI.signup({ name, email, password })
@@ -27,6 +31,8 @@ export default function AuthenticationForm(): ReactElement {
     } catch {
       setHasSignInFailed(true)
     }
+
+    setIsLoading(false)
   }
 
   const validate = (): boolean => {
@@ -98,9 +104,9 @@ export default function AuthenticationForm(): ReactElement {
               : (isPasswordTooShort ?? false) && "At least 6 characters"
           }
         />
-        <Button fullWidth variant="contained" onClick={handleSubmit}>
+        <LoadingButton variant="contained" fullWidth onClick={authenticate} loading={isLoading}>
           {isRegistering ? "Sign Up" : "Sign in"}
-        </Button>
+        </LoadingButton>
 
         <Typography variant="caption" color="error" hidden={!hasSignInFailed}>
           Unexpected error, please try again…
