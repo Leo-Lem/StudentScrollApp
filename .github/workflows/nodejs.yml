@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main", "continuous deployment"]
   pull_request:
-    branches: ['main']
+    branches: ["main"]
 
 env:
   NODE_VERSION: '19.x'
