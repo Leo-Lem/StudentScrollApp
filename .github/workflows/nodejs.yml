@@ -26,8 +26,8 @@ jobs:
       - name: target
         uses: actions/upload-artifact@v3
         with:
-          name: target
-          path: target
+          name: build-artifacts
+          path: build/
 
   test:
     runs-on: ubuntu-latest
@@ -50,8 +50,8 @@ jobs:
       - name: Download a single artifact
         uses: actions/download-artifact@v3
         with:
-          name: target
-      - name: Print contents of target
+          name: build-artifacts
+      - name: print contents
         shell: bash
-        run: ls -lR target
+        run: ls -lR .
           
