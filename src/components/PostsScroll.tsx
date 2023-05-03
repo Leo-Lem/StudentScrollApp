@@ -1,7 +1,7 @@
 import { useState, type ReactElement, useEffect } from "react"
 import { FormControlLabel, Stack, Switch, Typography } from "@mui/material"
 
-import ContentPostCard from "./ContentPostCard"
+import ContentPostCard from "./simple/ContentPostCard"
 
 import { type ContentPost } from "../models"
 import { ContentPostAPI } from "../api"

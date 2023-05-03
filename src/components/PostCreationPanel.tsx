@@ -17,6 +17,7 @@ import { CheckCircle, Send } from "@mui/icons-material"
 import { ContentPostAPI } from "../api"
 
 import allTags from "../res/tags.json"
+import ErrorFeedback from "./simple/ErrorFeedback"
 
 export default function PostCreationPanel(): ReactElement {
   const [title, setTitle] = useState("")
@@ -128,12 +129,14 @@ export default function PostCreationPanel(): ReactElement {
               : (isContentTooShort ?? false) && "Please elaborate…"
           }
         />
+
+        <ErrorFeedback isError={!(wasSuccess ?? true)} message={"Something went wrong… :("} />
+
         <LoadingButton
           variant="contained"
           fullWidth
           startIcon={wasSuccess ?? false ? <CheckCircle /> : <Send />}
           onClick={createPost}
-          color={!(wasSuccess ?? true) ? "error" : "primary"}
           loading={isLoading}
           disabled={wasSuccess ?? false}
         >

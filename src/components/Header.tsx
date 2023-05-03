@@ -16,7 +16,7 @@ import {
 } from "@mui/material"
 import { AccountCircle, Search } from "@mui/icons-material"
 
-import Logo from "./Logo"
+import Logo from "./simple/Logo"
 import { AuthenticationAPI } from "../api"
 
 export default function Header(): ReactElement {

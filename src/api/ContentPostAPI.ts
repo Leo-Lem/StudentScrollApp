@@ -20,6 +20,7 @@ export module ContentPostAPI {
       body: JSON.stringify({ ...info, posterId: studentId() })
     })
 
+
     if (response.status === 403) AuthenticationAPI.signout()
     else window.location.href = ""
   }
@@ -36,7 +37,11 @@ export module ContentPostAPI {
       }
     )
 
-    if (response.status === 403) AuthenticationAPI.signout()
+    if (response.status === 403) {
+      AuthenticationAPI.signout()
+      throw Error("Not authenticated. Logging out…")
+    }
+
     return (await response.json()) as ContentPost[]
   }
 }

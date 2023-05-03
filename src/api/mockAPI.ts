@@ -29,7 +29,7 @@ const createExamplePosts = (server: any): void => {
       title: "A post",
       tags: [i.toString()],
       content: "An example post, that could contain some text like this.\n And possibly even more (eventually). Whatever it's gonna be fine, it's alright…",
-      posterId: i % 2
+      posterId: i % 3
     })
 }
 
@@ -44,10 +44,19 @@ const mockFetchingPosts = (schema: any, request: Request): Response =>
 
   ))
 
+const mockSignUp = (schema: any, request: Request): any => ({
+  id: 1,
+  name: "name",
+  email: "email",
+  token: "xyz123",
+  type: "Bearer"
+})
 
 
-const mockSignUp = (schema: any, request: Request): any =>
-  schema.students.create(JSON.parse(request.requestBody))
-
-const mockSignIn = (schema: any, request: Request): any =>
-  schema.students.create(JSON.parse(request.requestBody))
+const mockSignIn = (schema: any, request: Request): any => ({
+  id: 1,
+  name: "name",
+  email: "email",
+  token: "xyz123",
+  type: "Bearer"
+})

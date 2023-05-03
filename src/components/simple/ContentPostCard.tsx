@@ -2,7 +2,7 @@ import { type ReactElement } from "react"
 import { Card, Grid, Typography } from "@mui/material"
 import { School } from "@mui/icons-material"
 
-import { type ContentPost } from "../models"
+import { type ContentPost } from "../../models"
 
 // TODO replace placeholder profile with button leading to user profile
 

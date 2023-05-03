@@ -3,6 +3,7 @@ import { useState, type ReactElement } from "react"
 import { Box, Button, Collapse, Stack, TextField, Typography } from "@mui/material"
 import { AuthenticationAPI } from "../api"
 import { LoadingButton } from "@mui/lab"
+import ErrorFeedback from "./simple/ErrorFeedback"
 
 export default function AuthenticationForm(): ReactElement {
   const [isRegistering, setIsRegistering] = useState(false)
@@ -129,9 +130,7 @@ export default function AuthenticationForm(): ReactElement {
           {isRegistering ? "Sign Up" : "Sign in"}
         </LoadingButton>
 
-        <Typography variant="caption" color="error" hidden={!hasFailed}>
-          {errorMessage()}
-        </Typography>
+        <ErrorFeedback isError={hasFailed} message={errorMessage()} />
 
         <Button
           variant="text"

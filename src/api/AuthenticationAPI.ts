@@ -15,8 +15,8 @@ export module AuthenticationAPI {
     })
 
     if (response.ok) {
-      const body = await response.json()
-      setSignedIn(body.token, body.id)
+      const { token, id } = await response.json()
+      setSignedIn(token, id)
     } else if (response.status === 409) {
       throw Error("Email taken")
     }
@@ -37,8 +37,8 @@ export module AuthenticationAPI {
     })
 
     if (response.ok) {
-      const body = await response.json()
-      setSignedIn(body.token, body.id)
+      const { token, id } = await response.json()
+      setSignedIn(token, id)
     } else if (response.status === 401) {
       throw Error("Invalid credentials")
     }
