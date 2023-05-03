@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ['main']
+    branches: ["main", "continuous deployment"]
   pull_request:
     branches: ['main']
 
@@ -21,8 +21,13 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
-      - name: Build project
+      - name: Build project for production
         run: npm run build
+      - name: target
+        uses: actions/upload-artifact@v3
+        with:
+          name: target
+          path: target
 
   test:
     runs-on: ubuntu-latest
@@ -37,3 +42,15 @@ jobs:
         run: npm ci --legacy-peer-deps
       - name: Run tests
         run: npm test
+        
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: target
+      - name: Print contents of target
+        shell: bash
+        run: ls -lR target
+          
