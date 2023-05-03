@@ -22,7 +22,7 @@ export default function ProfilePage(): ReactElement {
       <Grid xs={4}>
       <TextField
         fullWidth
-        placeholder="bio"
+        placeholder="userBio"
         value={bio}
         onChange={({ target: { value } }) => {
           const title = value.trim()
