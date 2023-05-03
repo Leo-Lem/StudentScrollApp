@@ -48,7 +48,7 @@ export default function CreatePostPanel(): ReactElement {
     setIsLoading(true)
 
     try {
-      await ContentPostAPI.create({ title, tags, content: content.trim() })
+      await ContentPostAPI.create({ title: title.trim(), tags, content: content.trim() })
       setWasSuccess(true)
       setTimeout(reset, 1000)
     } catch (e) {
@@ -76,9 +76,8 @@ export default function CreatePostPanel(): ReactElement {
           placeholder="New Post"
           value={title}
           onChange={({ target: { value } }) => {
-            const title = value.trim()
-            setTitle(title)
-            setIsMissingTitle(title === "")
+            setTitle(value)
+            setIsMissingTitle(value.trim() === "")
           }}
           error={isMissingTitle ?? false}
           helperText={(isMissingTitle ?? false) && "Required"}

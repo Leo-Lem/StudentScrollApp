@@ -9,5 +9,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   </StrictMode>
 )
 
-import mock from "./api/lib/mirage" // eslint-disable-line
-mock()
+import mockAPI from "./api/mockAPI" // eslint-disable-line
+if (process.env.NODE_ENV === "development")
+  mockAPI()

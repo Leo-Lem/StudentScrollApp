@@ -18,7 +18,7 @@ export default function AuthenticationForm(): ReactElement {
   const [isEmailInvalid, setIsEmailInvalid] = useState<boolean | null>(null)
 
   const [isLoading, setIsLoading] = useState(false)
-  const [hasSignInFailed, setHasSignInFailed] = useState(false)
+  const [hasFailed, setHasFailed] = useState(false)
 
   const authenticate = async (): Promise<void> => {
     if (!validate()) return
@@ -29,7 +29,8 @@ export default function AuthenticationForm(): ReactElement {
       if (isRegistering) await AuthenticationAPI.signup({ name, email, password })
       else await AuthenticationAPI.signin({ email, password })
     } catch {
-      setHasSignInFailed(true)
+      // TODO: refine error handling and display more information
+      setHasFailed(true)
     }
 
     setIsLoading(false)
@@ -108,8 +109,8 @@ export default function AuthenticationForm(): ReactElement {
           {isRegistering ? "Sign Up" : "Sign in"}
         </LoadingButton>
 
-        <Typography variant="caption" color="error" hidden={!hasSignInFailed}>
-          Unexpected error, please try again…
+        <Typography variant="caption" color="error" hidden={!hasFailed}>
+          Something went wrong…
         </Typography>
 
         <Button

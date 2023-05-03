@@ -1,8 +1,10 @@
 import { createServer } from "miragejs"
-import type ContentPost from "../../models/ContentPost"
 
-export default function mock(): void {
+import { type ContentPost } from "../models"
+
+export default function mockAPI(): void {
   createServer({
+    environment: "development",
     routes() {
       this.post("api/v1/posts", (_, req) => req.requestBody)
 
