@@ -25,9 +25,21 @@ export default function mock(): void {
         ] as ContentPost[]
       })
 
-      this.post("/api/v1/students", (_, req) => ({ id: 1, name: "name", email: "email", token: "xyz123", type: "Bearer" }))
+      this.post("/api/v1/students", (_, req) => ({
+        id: 1,
+        name: "name",
+        email: "email",
+        token: "xyz123",
+        type: "Bearer"
+      }))
 
-      this.post("/api/v1/signin", (_, req) => ({ id: 1, name: "name", email: "email", token: "xyz123", type: "Bearer" }))
+      this.post("/api/v1/signin", (_, req) => ({
+        id: 1,
+        name: "name",
+        email: "email",
+        token: "xyz123",
+        type: "Bearer"
+      }))
     }
   })
 }

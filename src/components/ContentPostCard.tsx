@@ -6,11 +6,12 @@ import { type ContentPost } from "../models"
 
 // TODO replace placeholder profile with button leading to user profile
 
-export default function ContentPostCard({ post: { title, tags, content, posterId } }: Props): ReactElement {
+export default function ContentPostCard({
+  post: { title, tags, content, posterId }
+}: Props): ReactElement {
   return (
     <Card>
       <Grid container direction="row" alignItems="center">
-
         <Grid item xs={11} padding={1}>
           <Grid container direction="row" alignItems="center" gap={1}>
             <Typography variant="h4">{title}</Typography>
