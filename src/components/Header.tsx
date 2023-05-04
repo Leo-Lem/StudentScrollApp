@@ -1,19 +1,7 @@
 import { useState, type ReactElement, type MouseEvent } from "react"
 
-import {
-  AppBar,
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  Link,
-  Menu,
-  MenuItem,
-  Stack,
-  TextField,
-  Toolbar,
-  Typography
-} from "@mui/material"
+import { AppBar, Box, Button, Divider, IconButton, Link, List, Menu, MenuItem, Stack, TextField, Toolbar,
+  Typography, ListItem } from "@mui/material"
 import { AccountCircle, Search } from "@mui/icons-material"
 
 import Logo from "./simple/Logo"
@@ -22,12 +10,21 @@ import { AuthenticationAPI } from "../api"
 export default function Header(): ReactElement {
   const [query, setQuery] = useState("")
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [results, setResults] = useState([])
 
-  const handleSearch = (): void => {
-    console.log(query)
-
-    // TODO: handle search
+  const handleSearch = async (value: string) => {
+    if(value === "") {
+      setResults([])
+      return
+    } else {
+      const response = await fetch(`/api/v1/students/${value}`)
+      const data = await response.json()
+      setResults(data)
+      console.log(data)
+      console.log(results)
+    }
   }
+
   const handleMenu = (e: MouseEvent<HTMLElement>): void => {
     setAnchorEl(e.currentTarget)
   }
@@ -61,10 +58,21 @@ export default function Header(): ReactElement {
           sx={{ ml: 1, input: { color: "white" } }}
           placeholder="Search"
           onChange={({ target: { value } }) => {
-            setQuery(value)
+            setQuery(value);
+            handleSearch(value);
           }}
-          onSubmit={handleSearch}
+          onSubmit={(event: { preventDefault: () => void }) => {
+            event.preventDefault();
+            handleSearch(query);
+          }}
         />
+         <List>
+        {results.map((result: { id: Number; name: String }) => (
+          <ListItem>
+            <TextField value={result.name} fullWidth InputProps={{ readOnly: true }} />
+          </ListItem>
+        ))}
+      </List>
 
         <IconButton onClick={handleSearch} color="inherit">
           <Search />

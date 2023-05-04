@@ -1,7 +1,16 @@
 import { type Request, createServer, Model, IdentityManager, Response } from "miragejs"
-
 import { type ContentPost } from "../models"
 
+interface Student {
+  id: number;
+  name: string;
+}
+interface Registry {
+  student: ModelDefinition<Student>;
+}
+interface ModelDefinition<T> {
+  model: typeof Model;
+}
 export default function mockAPI(): void {
   createServer({
     environment: "development",
@@ -9,20 +18,37 @@ export default function mockAPI(): void {
       application: IdentityManager
     },
     models: {
-      student: Model,
-      post: Model
+      student: Model.extend<Partial<Student>>({}),
+      post: Model,
     },
+    namespace: "/api/v1",
     seeds(server) {
-      createExamplePosts(server)
+      createExamplePosts(server),
+        server.db.loadData({
+          students: [
+            { id: 1, name: "john" },
+            { id: 2, name: "jackson" },
+            { id: 3, name: "jimmy" },
+            { id: 4, name: "jonathon" },
+            { id: 5, name: "james" },
+            { id: 6, name: "jack" },
+            { id: 7, name: "jill" },
+            { id: 8, name: "junior" },
+          ],
+        });
     },
     routes() {
-      this.post("api/v1/posts", mockCreatingPost)
-      this.get("api/v1/posts", mockFetchingPosts)
-      this.delete("api/v1/posts/:id", mockDeletingPost)
-      this.post("api/v1/students", mockSignUp)
-      this.post("api/v1/signin", mockSignIn)
-      this.get("api/v1/students/:id/profile", mockGettingProfile)
-      this.put("api/v1/students/:id/profile", mockUpdatingProfile)
+      this.post("/posts", mockCreatingPost)
+      this.get("/posts", mockFetchingPosts)
+      this.delete("/posts/:id", mockDeletingPost)
+      this.post("/students", mockSignUp)
+      this.post("/signin", mockSignIn)
+
+      this.get("/students/:name", (schema, request) => {
+        const name = request.params.name.toLowerCase();
+        return schema.db.students.filter((student) => student.name.includes(name));
+        // return schema.db.students.length;
+      });
     }
   })
 }
