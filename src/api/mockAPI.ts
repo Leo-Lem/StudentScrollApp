@@ -20,6 +20,8 @@ export default function mockAPI(): void {
       this.delete("/posts/:id", mockDeletingPost)
       this.post("/students", mockSignUp)
       this.post("/signin", mockSignIn)
+      this.get("/students/:id/profile", mockGettingProfile)
+      this.put("/students/:id/profile", mockUpdatingProfile)
 
       this.get("/students/:id/profile", (schema, request) => ({
         name: "John Doe",
