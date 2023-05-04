@@ -32,8 +32,8 @@ export default function Header(): ReactElement {
   }
 
   const handleClose = (): void => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar position="sticky" sx={{ marginBottom: 1 }}>
@@ -101,12 +101,12 @@ export default function Header(): ReactElement {
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           keepMounted
           transformOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           open={Boolean(anchorEl)}
           onClose={handleClose}
