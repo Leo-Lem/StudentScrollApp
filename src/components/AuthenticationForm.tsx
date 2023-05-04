@@ -78,7 +78,11 @@ export default function AuthenticationForm(): ReactElement {
           invalidMessage="At least 6 characters"
         />
 
-        <AsyncButton variant="contained" label={isRegistering ? "Sign Up" : "Sign in"} action={authenticate} />
+        <AsyncButton
+          variant="contained"
+          label={isRegistering ? "Sign Up" : "Sign in"}
+          action={authenticate}
+        />
 
         <ErrorFeedback isError={hasFailed} message={errorMessage()} />
 

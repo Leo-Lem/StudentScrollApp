@@ -100,7 +100,8 @@ export default function PostCreationPanel(): ReactElement {
           fullWidth
           startIcon={<Send />}
           label="Post"
-          action={createPost} />
+          action={createPost}
+        />
       </Stack>
     </Paper>
   )

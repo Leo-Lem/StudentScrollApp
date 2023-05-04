@@ -1,4 +1,4 @@
-import { useState, type ReactElement, type MouseEvent } from "react";
+import { useState, type ReactElement } from "react"
 import {
   AppBar,
   Box,
@@ -6,43 +6,34 @@ import {
   Divider,
   IconButton,
   Link,
-  List,
   Menu,
   MenuItem,
   Stack,
   TextField,
   Toolbar,
-  Typography,
-  ListItem,
-} from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+  Typography
+} from "@mui/material"
+import { AccountCircle } from "@mui/icons-material"
 
-import Logo from "./simple/Logo";
-import { AuthenticationAPI } from "../api";
+import Logo from "./simple/Logo"
+import { AuthenticationAPI } from "../api"
+import { type Profile } from "../models"
 
 export default function Header(): ReactElement {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [results, setResults] = useState<Array<{ id: number; name: string }>>(
-    []
-  );
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  const [profile, setProfile] = useState<Profile | null>(null)
 
   const handleSearch = async (value: string): Promise<void> => {
-    if (value === "") {
-      setResults([]);
-    } else {
-      const response = await fetch(`/api/v1/students/${value}`);
-      const data = await response.json();
-      setResults(data.slice(0, 3));
-    }
-  };
+    if (value === "") return
+    if (isNaN(parseInt(value))) return
 
-  const handleMenu = (e: MouseEvent<HTMLElement>): void => {
-    setAnchorEl(e.currentTarget);
-  };
+    const response = await fetch(`/api/v1/students/${value}/profile`)
+    setProfile((await response.json()) as Profile)
+  }
 
   const handleClose = (): void => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <AppBar position="sticky" sx={{ marginBottom: 1 }}>
@@ -57,6 +48,7 @@ export default function Header(): ReactElement {
           <Button variant="outlined" color="inherit" href="chat">
             Chat
           </Button>
+
           <Button variant="outlined" color="inherit" href="nearby">
             Nearby
           </Button>
@@ -69,10 +61,10 @@ export default function Header(): ReactElement {
             sx={{ ml: 1, input: { color: "white" } }}
             placeholder="Search"
             onChange={({ target: { value } }) => {
-              handleSearch(value).catch((err) => {console.log(err)})
+              handleSearch(value).catch(console.log)
             }}
           />
-          {results.length > 0 && (
+          {profile !== null && (
             <Box
               sx={{
                 position: "absolute",
@@ -80,29 +72,10 @@ export default function Header(): ReactElement {
                 width: "auto",
                 padding: 0,
                 my: 0,
-                py: 0,
+                py: 0
               }}
             >
-              <List>
-                {results.map((result) => (
-                  <ListItem 
-                    sx={{ 
-                      display: "block",
-                      py: 0,
-                      my: 0,
-                      padding: 0,
-                      bgcolor: "darkgray",
-                    }}
-                    key={result.id}>
-                    <TextField
-                      onClick={() => {
-                        window.location.href = `/student/${result.id}`;
-                      }}
-                      value={result.name}
-                    />
-                  </ListItem>
-                ))}
-              </List>
+              <Button onClick={() => (window.location.href = "/student/1")}>{profile.name}</Button>
             </Box>
           )}
         </Box>
@@ -113,7 +86,13 @@ export default function Header(): ReactElement {
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
-        <IconButton size="large" onClick={handleMenu} color="inherit">
+        <IconButton
+          size="large"
+          onClick={({ currentTarget }) => {
+            setAnchorEl(currentTarget)
+          }}
+          color="inherit"
+        >
           <AccountCircle />
         </IconButton>
 
@@ -122,12 +101,12 @@ export default function Header(): ReactElement {
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           keepMounted
           transformOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           open={Boolean(anchorEl)}
           onClose={handleClose}

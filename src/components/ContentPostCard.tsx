@@ -35,14 +35,9 @@ export default function ContentPostCard({
                 {tag}
               </Card>
             ))}
-            {
-              (studentId !== null && studentId === posterId) &&
-              <AsyncButton
-                variant="text"
-                label={<Delete color="error" />}
-                action={deletePost}
-              />
-            }
+            {studentId !== null && studentId === posterId && (
+              <AsyncButton variant="text" label={<Delete color="error" />} action={deletePost} />
+            )}
           </Grid>
           <Typography variant="body1">{content}</Typography>
         </Grid>

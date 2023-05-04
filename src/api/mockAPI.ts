@@ -2,13 +2,13 @@ import { type Request, createServer, Model, IdentityManager, Response } from "mi
 import { type ContentPost } from "../models"
 
 interface Student {
-  id: number;
-  name: string;
+  id: number
+  name: string
 }
 interface Message {
-  author: string;
-  message: string;
-  timestamp: Date;
+  author: string
+  message: string
+  timestamp: Date
 }
 
 export default function mockAPI(): void {
@@ -45,21 +45,21 @@ export default function mockAPI(): void {
       this.post("/students", mockSignUp)
       this.post("/signin", mockSignIn)
 
-      this.get("/students/:name", (schema, request) => {
-        const name = request.params.name.toLowerCase();
-        return schema.db.students.filter((student) => student.name.includes(name));
-        // return schema.db.students.length;
-      });
+      this.get("/students/:id/profile", (schema, request) => ({
+        name: "John Doe",
+        bio: "I'm a student at the University of Waterloo.",
+        icon: "School"
+      }))
 
-      this.get("/chat/messages/get", (schema) => {
-        return schema.db.messages;
-      });
+      this.get("/chat/messages", (schema) => {
+        return schema.db.messages
+      })
 
       this.post("/chat/messages", (schema, request) => {
-        const message = JSON.parse(request.requestBody);
-        schema.db.messages.insert(message);
-        return schema.db.messages;
-      });
+        const message = JSON.parse(request.requestBody)
+        schema.db.messages.insert(message)
+        return schema.db.messages
+      })
     }
   })
 }
