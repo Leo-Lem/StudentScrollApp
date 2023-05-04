@@ -1,16 +1,6 @@
 import { type Request, createServer, Model, IdentityManager, Response } from "miragejs"
 import { type ContentPost } from "../models"
 
-interface Student {
-  id: number
-  name: string
-}
-interface Message {
-  author: string
-  message: string
-  timestamp: Date
-}
-
 export default function mockAPI(): void {
   createServer({
     environment: "development",
@@ -18,25 +8,11 @@ export default function mockAPI(): void {
       application: IdentityManager
     },
     models: {
-      student: Model.extend<Partial<Student>>({}),
-      post: Model,
-      message: Model.extend<Partial<Message>>({})
+      post: Model
     },
     namespace: "/api/v1",
     seeds(server) {
-      createExamplePosts(server),
-        server.db.loadData({
-          students: [
-            { id: 1, name: "john" },
-            { id: 2, name: "jackson" },
-            { id: 3, name: "jimmy" },
-            { id: 4, name: "jonathon" },
-            { id: 5, name: "james" },
-            { id: 6, name: "jack" },
-            { id: 7, name: "jill" },
-            { id: 8, name: "junior" },
-          ],
-        });
+      createExamplePosts(server)
     },
     routes() {
       this.post("/posts", mockCreatingPost)
