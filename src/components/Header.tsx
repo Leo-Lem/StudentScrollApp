@@ -1,37 +1,48 @@
-import { useState, type ReactElement, type MouseEvent } from "react"
+import { useState, type ReactElement, type MouseEvent } from "react";
+import {
+  AppBar,
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Link,
+  List,
+  Menu,
+  MenuItem,
+  Stack,
+  TextField,
+  Toolbar,
+  Typography,
+  ListItem,
+} from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
 
-import { AppBar, Box, Button, Divider, IconButton, Link, List, Menu, MenuItem, Stack, TextField, Toolbar,
-  Typography, ListItem } from "@mui/material"
-import { AccountCircle, Search } from "@mui/icons-material"
-
-import Logo from "./simple/Logo"
-import { AuthenticationAPI } from "../api"
+import Logo from "./simple/Logo";
+import { AuthenticationAPI } from "../api";
 
 export default function Header(): ReactElement {
-  const [query, setQuery] = useState("")
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const [results, setResults] = useState([])
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [results, setResults] = useState<Array<{ id: number; name: string }>>(
+    []
+  );
 
-  const handleSearch = async (value: string) => {
-    if(value === "") {
-      setResults([])
-      return
+  const handleSearch = async (value: string): Promise<void> => {
+    if (value === "") {
+      setResults([]);
     } else {
-      const response = await fetch(`/api/v1/students/${value}`)
-      const data = await response.json()
-      setResults(data)
-      console.log(data)
-      console.log(results)
+      const response = await fetch(`/api/v1/students/${value}`);
+      const data = await response.json();
+      setResults(data.slice(0, 3));
     }
-  }
+  };
 
   const handleMenu = (e: MouseEvent<HTMLElement>): void => {
-    setAnchorEl(e.currentTarget)
-  }
+    setAnchorEl(e.currentTarget);
+  };
 
   const handleClose = (): void => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar position="sticky" sx={{ marginBottom: 1 }}>
@@ -52,31 +63,53 @@ export default function Header(): ReactElement {
         </Stack>
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+        <Box position="relative">
+          <TextField
+            variant="standard"
+            sx={{ ml: 1, input: { color: "white" } }}
+            placeholder="Search"
+            onChange={({ target: { value } }) => {
+              handleSearch(value).catch((err) => {console.log(err)})
+            }}
+          />
+          {results.length > 0 && (
+            <Box
+              sx={{
+                position: "absolute",
+                top: "100%",
+                width: "auto",
+                padding: 0,
+                my: 0,
+                py: 0,
+              }}
+            >
+              <List>
+                {results.map((result) => (
+                  <ListItem 
+                    sx={{ 
+                      display: "block",
+                      py: 0,
+                      my: 0,
+                      padding: 0,
+                      bgcolor: "darkgray",
+                    }}
+                    key={result.id}>
+                    <TextField
+                      onClick={() => {
+                        window.location.href = `/student/${result.id}`;
+                      }}
+                      value={result.name}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
+        </Box>
 
-        <TextField
-          variant="standard"
-          sx={{ ml: 1, input: { color: "white" } }}
-          placeholder="Search"
-          onChange={({ target: { value } }) => {
-            setQuery(value);
-            handleSearch(value);
-          }}
-          onSubmit={(event: { preventDefault: () => void }) => {
-            event.preventDefault();
-            handleSearch(query);
-          }}
-        />
-         <List>
-        {results.map((result: { id: Number; name: String }) => (
-          <ListItem>
-            <TextField value={result.name} fullWidth InputProps={{ readOnly: true }} />
-          </ListItem>
-        ))}
-      </List>
-
-        <IconButton onClick={handleSearch} color="inherit">
+        {/* <IconButton onClick={handleSearch(query)} color="inherit">
           <Search />
-        </IconButton>
+        </IconButton> */}
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
@@ -89,12 +122,12 @@ export default function Header(): ReactElement {
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           keepMounted
           transformOrigin={{
             vertical: "top",
-            horizontal: "right"
+            horizontal: "right",
           }}
           open={Boolean(anchorEl)}
           onClose={handleClose}

@@ -5,12 +5,6 @@ interface Student {
   id: number;
   name: string;
 }
-interface Registry {
-  student: ModelDefinition<Student>;
-}
-interface ModelDefinition<T> {
-  model: typeof Model;
-}
 export default function mockAPI(): void {
   createServer({
     environment: "development",
