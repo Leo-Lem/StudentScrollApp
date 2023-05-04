@@ -4,10 +4,9 @@ import { Route, Routes, BrowserRouter as Router } from "react-router-dom"
 import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 
 import theme from "./theme"
+
 import Header from "../components/Header"
-import WelcomePage from "../pages/WelcomePage"
-import DashboardPage from "../pages/DashboardPage"
-import CreateProfilePage from "../pages/ProfilePage"
+import { WelcomePage, DashboardPage, ProfilePage } from "../pages"
 
 import { useJwt } from "../hooks"
 
@@ -24,7 +23,7 @@ export default function App(): ReactElement {
           {jwt !== null && (
             <Routes>
               <Route path="" element={<DashboardPage />} />
-              <Route path="profile" element={<CreateProfilePage />} />
+              <Route path="profile" element={<ProfilePage />} />
             </Routes>
           )}
         </Router>

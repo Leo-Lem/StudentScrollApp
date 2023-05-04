@@ -1,14 +1,18 @@
 import type Profile from "../models/Profile"
+import authorizationHeader from "./lib/authorizationHeader"
+import studentId from "./lib/studentId"
+import validateResponse from "./lib/validateResponse"
 
-// decalaring a module
 export module ProfileAPI {
-  const id = 1 // TODO: actually use student id
-
   export async function read(): Promise<Profile> {
-    const response = await fetch(`api/v1/students/${id}/profile`)
+    const response = await fetch(`api/v1/students/${studentId()}/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: authorizationHeader()
+      }
+    })
 
-    if (response.ok) return (await response.json()) as Profile
-    else throw Error("Unexpected response")
+    return await validateResponse(response)
   }
 
   export interface UpdateProfileRequest {
@@ -18,16 +22,15 @@ export module ProfileAPI {
   }
 
   export async function update(request: UpdateProfileRequest): Promise<Profile> {
-    const response = await fetch(`api/v1/students/${id}/profile`, {
+    const response = await fetch(`api/v1/students/${studentId()}/profile`, {
       method: "PUT",
       headers: {
-        // TODO: add authorization
+        Authorization: authorizationHeader(),
         "Content-Type": "application/json"
       },
       body: JSON.stringify(request)
     })
 
-    if (response.ok) return (await response.json()) as Profile
-    else throw Error("Unexpected response")
+    return await validateResponse(response)
   }
 }

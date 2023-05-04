@@ -1,7 +1,7 @@
 import type ContentPost from "../models/ContentPost"
-import { AuthenticationAPI } from "./AuthenticationAPI"
 import authorizationHeader from "./lib/authorizationHeader"
 import studentId from "./lib/studentId"
+import validateResponse from "./lib/validateResponse"
 
 export module ContentPostAPI {
   export interface CreationInfo {
@@ -21,8 +21,7 @@ export module ContentPostAPI {
     })
 
     if (response.ok) window.location.href = ""
-    else if (response.status === 403) AuthenticationAPI.signout()
-    else console.log(response)
+    await validateResponse(response)
   }
 
   export async function read(page: number, newestFirst: boolean): Promise<ContentPost[]> {
@@ -32,18 +31,11 @@ export module ContentPostAPI {
       )}`,
       {
         method: "GET",
-        headers: {
-          Authorization: authorizationHeader(),
-          "Content-Type": "application/json"
-        }
+        headers: { Authorization: authorizationHeader() }
       }
     )
 
-    if (response.ok) return (await response.json()) as ContentPost[]
-    else if (response.status === 403) AuthenticationAPI.signout()
-    else console.log(response)
-
-    throw Error("Something went wrong…")
+    return await validateResponse(response)
   }
 
   export async function deleteWith(postId: number): Promise<void> {
@@ -56,7 +48,6 @@ export module ContentPostAPI {
     })
 
     if (response.ok) window.location.href = ""
-    else if (response.status === 403) AuthenticationAPI.signout()
-    else console.log(response)
+    await validateResponse(response)
   }
 }

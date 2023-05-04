@@ -1,9 +1,11 @@
 import { Button, CircularProgress, Grid, Paper, TextField, Typography } from "@mui/material"
 import { type ReactElement, useEffect, useState } from "react"
-import type Profile from "../models/Profile"
-import { ProfileAPI } from "../api/ProfileAPI"
 import { Edit, KeyboardArrowLeft, KeyboardArrowRight, Save } from "@mui/icons-material"
-import AvatarImage from "./AvatarImage"
+
+import AvatarImage from "./simple/AvatarImage"
+
+import { type Profile } from "../models"
+import { ProfileAPI } from "../api"
 
 import avatars from "../res/avatars.json"
 
@@ -37,11 +39,11 @@ export default function ProfileView(): ReactElement {
     }
   }
 
-  if (profile === null) return <CircularProgress />
-  else
-    return (
-      <Paper elevation={1}>
-        <Grid container direction="column" textAlign="end" padding={1} gap={1}>
+  return (
+    <Paper elevation={1}>
+      {profile === null
+        ? <CircularProgress />
+        : <Grid container direction="column" textAlign="end" padding={1} gap={1}>
           <Button
             variant="contained"
             sx={{ aspectRatio: 1, alignSelf: "end" }}
@@ -102,7 +104,7 @@ export default function ProfileView(): ReactElement {
               {profile.bio}
             </Typography>
           )}
-        </Grid>
-      </Paper>
-    )
+        </Grid>}
+    </Paper>
+  )
 }

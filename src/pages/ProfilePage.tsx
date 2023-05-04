@@ -1,11 +1,13 @@
 import React, { type ReactElement } from "react"
 import ProfileView from "../components/ProfileView"
-import { Box } from "@mui/material"
+import { Box, Stack } from "@mui/material"
 
 export default function ProfilePage(): ReactElement {
   return (
-    <Box maxWidth={400}>
-      <ProfileView />
-    </Box>
+    <Stack direction="column">
+      <Box width={400} alignSelf="end">
+        <ProfileView />
+      </Box>
+    </Stack>
   )
 }
