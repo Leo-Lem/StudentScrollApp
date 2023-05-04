@@ -1,8 +1,8 @@
 # StudentScroll App
 
-This is the web app bringing student scroll to life!
+This is the web app bringing student scroll to life! ([studentscroll.net](https://studentscroll.net))
 
-[![CI](https://github.com/Leo-Lem/StudentScrollApp/actions/workflows/nodejs.yml/badge.svg)](https://github.com/Leo-Lem/StudentScrollApp/actions/workflows/nodejs.yml)
+[![CI/CD](https://github.com/Leo-Lem/StudentScrollApp/actions/workflows/cicd.yml/badge.svg)](https://github.com/Leo-Lem/StudentScrollApp/actions/workflows/cicd.yml)
 
 ## Scripts
 
@@ -43,9 +43,13 @@ _Refer to these first if you have questions_
 - [Material UI documentation](https://mui.com/material-ui/getting-started/overview/)
 - [Further tutorials](https://mui.com/material-ui/getting-started/learn/)
 
+### Redux
+
+- [Getting started](https://redux.js.org/introduction/getting-started)
+- [Additional Tutorials](https://redux.js.org/tutorials/index)
+
 ### Others
 
-- [CSS modules](https://css-tricks.com/css-modules-part-1-need/)
 - [Prettier](https://prettier.io)
 - [ESLint](https://eslint.org)
 - [Github Actions CI](https://docs.github.com/en/actions)

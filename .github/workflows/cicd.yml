@@ -73,5 +73,5 @@ jobs:
       - name: Deploy to server
         run: |
           ssh StudentScroll 'rm -rf /var/www/html/*'
-          scp -r /home/runner/work/StudentScrollApp/StudentScrollApp/ StudentScroll:/var/www/html/
+          scp -r /home/runner/work/StudentScrollApp/StudentScrollApp/* StudentScroll:/var/www/html/
           ssh StudentScroll 'sudo systemctl reload nginx'
