@@ -5,6 +5,12 @@ interface Student {
   id: number;
   name: string;
 }
+interface Message {
+  author: string;
+  message: string;
+  timestamp: Date;
+}
+
 export default function mockAPI(): void {
   createServer({
     environment: "development",
@@ -14,6 +20,7 @@ export default function mockAPI(): void {
     models: {
       student: Model.extend<Partial<Student>>({}),
       post: Model,
+      message: Model.extend<Partial<Message>>({})
     },
     namespace: "/api/v1",
     seeds(server) {
@@ -42,6 +49,16 @@ export default function mockAPI(): void {
         const name = request.params.name.toLowerCase();
         return schema.db.students.filter((student) => student.name.includes(name));
         // return schema.db.students.length;
+      });
+
+      this.get("/chat/messages/get", (schema) => {
+        return schema.db.messages;
+      });
+
+      this.post("/chat/messages", (schema, request) => {
+        const message = JSON.parse(request.requestBody);
+        schema.db.messages.insert(message);
+        return schema.db.messages;
       });
     }
   })

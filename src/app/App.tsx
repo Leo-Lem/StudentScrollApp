@@ -24,10 +24,11 @@ export default function App(): ReactElement {
             <Routes>
               <Route path="" element={<DashboardPage />} />
               <Route path="profile" element={<ProfilePage />} />
-            </Routes>
-          )}
-        </Router>
-      </Container>
-    </ThemeProvider>
+            </Routes >
+          )
+          }
+        </Router >
+      </Container >
+    </ThemeProvider >
   )
 }
