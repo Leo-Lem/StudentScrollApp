@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -69,11 +69,12 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          SSH_HOST: ${{ vars.AWS_HOST }}
-          SSH_USER: ${{ vars.AWS_USER }}
+          SSH_HOST: ${{ secrets.AWS_HOST }}
+          SSH_USER: ${{ secrets.AWS_USER }}
           SSH_KEY: ${{ secrets.AWS_SSH_KEY }}
       - name: Deploy to server
         run: |
           ssh StudentScroll 'rm -rf /var/www/html/*'
           scp /home/runner/work/StudentScrollApp/StudentScrollApp/ StudentScroll:/var/www/html/
+          ssh StudentScroll 'sudo systemctl reload nginx'
           
