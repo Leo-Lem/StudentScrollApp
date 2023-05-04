@@ -21,6 +21,8 @@ export default function mockAPI(): void {
       this.delete("api/v1/posts/:id", mockDeletingPost)
       this.post("api/v1/students", mockSignUp)
       this.post("api/v1/signin", mockSignIn)
+      this.get("api/v1/students/:id/profile", mockGettingProfile)
+      this.put("api/v1/students/:id/profile", mockUpdatingProfile)
     }
   })
 }
@@ -37,10 +39,10 @@ const createExamplePosts = (server: any): void => {
     })
 }
 
-const mockCreatingPost = (schema: any, request: Request): ContentPost =>
-  schema.posts.create(JSON.parse(request.requestBody))
+const mockCreatingPost = (schema: any, { requestBody }: Request): ContentPost =>
+  schema.posts.create(JSON.parse(requestBody))
 
-const mockFetchingPosts = (schema: any, request: Request): Response =>
+const mockFetchingPosts = (schema: any, { queryParams }: Request): Response =>
   new Response(
     200,
     {},
@@ -48,18 +50,18 @@ const mockFetchingPosts = (schema: any, request: Request): Response =>
       (schema.posts.all().models as any[])
         .map((model) => ({ ...model.attrs, id: parseInt(model.id) }))
         .sort((lhs: any, rhs: any) =>
-          (JSON.parse(request.queryParams.sortAscending) as boolean)
+          (JSON.parse(queryParams.sortAscending) as boolean)
             ? lhs.id - rhs.id
             : rhs.id - lhs.id
         )
     )
   )
 
-const mockDeletingPost = (schema: any, request: Request): any => {
-  return schema.posts.find(request.params.id).destroy()
+const mockDeletingPost = (schema: any, { params }: Request): any => {
+  return schema.posts.find(params.id).destroy()
 }
 
-const mockSignUp = (schema: any, request: Request): any => ({
+const mockSignUp = (): any => ({
   id: 1,
   name: "name",
   email: "email",
@@ -67,10 +69,27 @@ const mockSignUp = (schema: any, request: Request): any => ({
   type: "Bearer"
 })
 
-const mockSignIn = (schema: any, request: Request): any => ({
+const mockSignIn = (): any => ({
   id: 1,
   name: "name",
   email: "email",
   token: "xyz123",
   type: "Bearer"
 })
+
+const mockGettingProfile = (): any => ({
+  name: "Jessica",
+  bio: "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
+  icon: "School"
+})
+
+const mockUpdatingProfile = (schema: any, { requestBody }: Request): any => {
+  const json = JSON.parse(requestBody)
+  return {
+    name: json.newName ?? "Jessica",
+    bio:
+      json.newBio ??
+      "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
+    icon: json.newIcon ?? "School"
+  }
+}
