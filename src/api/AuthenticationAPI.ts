@@ -6,7 +6,7 @@ export module AuthenticationAPI {
   }
 
   export async function signup(info: SignupInfo): Promise<void> {
-    const response = await fetch("api/v1/students", {
+    const response = await fetch("/api/v1/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -24,7 +24,7 @@ export module AuthenticationAPI {
   }
 
   export async function signin(info: SignInInfo): Promise<void> {
-    const response = await fetch("api/v1/signin", {
+    const response = await fetch("/api/v1/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

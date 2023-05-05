@@ -8,9 +8,13 @@ import { type Profile } from "../models"
 import { ProfileAPI } from "../api"
 
 import avatars from "../res/avatars.json"
+import { useStudentId } from "../hooks"
 
-export default function ProfileView(): ReactElement {
+export default function ProfileView({ studentId }: Props): ReactElement {
+  const [currentStudentId] = useStudentId()
+
   const [profile, setProfile] = useState<Profile | null>(null)
+
   const [isEditing, setIsEditing] = useState(false)
 
   const [newName, setNewName] = useState("")
@@ -18,9 +22,10 @@ export default function ProfileView(): ReactElement {
   const [newAvatarIndex, setNewAvatarIndex] = useState(0)
 
   useEffect(() => {
-    ProfileAPI.read()
+    ProfileAPI.read(studentId)
       .then((profile) => {
         setProfile(profile)
+        setNewBio(profile.bio)
         setNewAvatarIndex(avatars.indexOf(profile.icon))
       })
       .catch(console.log)
@@ -28,22 +33,32 @@ export default function ProfileView(): ReactElement {
 
   const updateProfile = (): void => {
     const name = newName !== "" ? newName : undefined
-    const bio = newBio !== "" ? newBio : undefined
+    const bio = newBio !== "" && newBio !== profile?.bio ? newBio : undefined
     const icon = avatars[newAvatarIndex] !== profile?.icon ? avatars[newAvatarIndex] : undefined
 
-    if (name !== undefined || bio !== undefined || icon !== undefined) {
+    if (canEdit() && (name !== undefined || bio !== undefined || icon !== undefined)) {
       setProfile(null)
       ProfileAPI.update({ newName: name, newBio: bio, newIcon: icon })
-        .then(setProfile)
+        .then(profile => {
+          setProfile(profile)
+          setNewBio(profile.bio)
+        })
         .catch(console.log)
     }
   }
 
-  return (
-    <Paper elevation={1}>
-      {profile === null
-        ? <CircularProgress />
-        : <Grid container direction="column" textAlign="end" padding={1} gap={1}>
+  const canEdit = (): boolean => currentStudentId !== undefined && studentId === currentStudentId
+
+  if (profile === null)
+    return (
+      <Paper elevation={1}>
+        <CircularProgress />
+      </Paper>
+    )
+  else if (canEdit() && isEditing)
+    return (
+      <Paper elevation={1}>
+        <Grid container direction="column" textAlign="end" padding={1} gap={1}>
           <Button
             variant="contained"
             sx={{ aspectRatio: 1, alignSelf: "end" }}
@@ -52,59 +67,76 @@ export default function ProfileView(): ReactElement {
               setIsEditing(!isEditing)
             }}
           >
-            {isEditing ? <Save /> : <Edit />}
+            <Save />
           </Button>
 
-          {isEditing ? (
-            <Grid container direction="row" justifyContent="end" alignSelf="end">
-              <Button
-                onClick={() => {
-                  setNewAvatarIndex(
-                    (((newAvatarIndex - 1) % avatars.length) + avatars.length) % avatars.length
-                  )
-                }}
-              >
-                <KeyboardArrowLeft />
-              </Button>
-              <AvatarImage avatarId={avatars[newAvatarIndex]} />
-              <Button
-                onClick={() => {
-                  setNewAvatarIndex((newAvatarIndex + 1) % avatars.length)
-                }}
-              >
-                <KeyboardArrowRight />
-              </Button>
-            </Grid>
-          ) : (
-            <AvatarImage avatarId={profile.icon} />
-          )}
-
-          {isEditing ? (
-            <TextField
-              placeholder={profile.name}
-              onChange={({ target: { value } }) => {
-                setNewName(value)
+          <Grid container direction="row" justifyContent="end" alignSelf="end">
+            <Button
+              onClick={() => {
+                setNewAvatarIndex(
+                  (((newAvatarIndex - 1) % avatars.length) + avatars.length) % avatars.length
+                )
               }}
-            />
-          ) : (
-            <Typography variant="h3">{profile.name}</Typography>
-          )}
-
-          {isEditing ? (
-            <TextField
-              multiline
-              minRows={4}
-              placeholder={profile.bio}
-              onChange={({ target: { value } }) => {
-                setNewBio(value)
+            >
+              <KeyboardArrowLeft />
+            </Button>
+            <AvatarImage avatarId={avatars[newAvatarIndex]} />
+            <Button
+              onClick={() => {
+                setNewAvatarIndex((newAvatarIndex + 1) % avatars.length)
               }}
-            />
-          ) : (
-            <Typography variant="body1" maxWidth={300} alignSelf="end">
-              {profile.bio}
-            </Typography>
-          )}
-        </Grid>}
-    </Paper>
-  )
+            >
+              <KeyboardArrowRight />
+            </Button>
+          </Grid>
+
+          <TextField
+            placeholder={profile.name}
+            onChange={({ target: { value } }) => {
+              setNewName(value)
+            }}
+          />
+
+          <TextField
+            multiline
+            minRows={4}
+            value={newBio}
+            onChange={({ target: { value } }) => {
+              setNewBio(value)
+            }}
+          />
+        </Grid>
+      </Paper >
+    )
+  else
+    return (
+      <Paper elevation={1}>
+        <Grid container direction="column" textAlign="end" padding={1} gap={1}>
+          {canEdit() && !isEditing &&
+            <Button
+              variant="contained"
+              sx={{ aspectRatio: 1, alignSelf: "end" }}
+              onClick={() => {
+                if (isEditing) updateProfile()
+                setIsEditing(!isEditing)
+              }}
+            >
+              <Edit />
+            </Button>
+          }
+
+          <AvatarImage avatarId={profile.icon} />
+
+          <Typography variant="h3">{profile.name}</Typography>
+
+          <Typography variant="body1" maxWidth={300} alignSelf="end">
+            {profile.bio}
+          </Typography>
+        </Grid>
+      </Paper>
+    )
+}
+
+interface Props {
+  studentId: number
 }

@@ -4,8 +4,8 @@ import studentId from "./lib/studentId"
 import validateResponse from "./lib/validateResponse"
 
 export module ProfileAPI {
-  export async function read(): Promise<Profile> {
-    const response = await fetch(`api/v1/students/${studentId()}/profile`, {
+  export async function read(id?: number): Promise<Profile> {
+    const response = await fetch(`/api/v1/students/${id ?? studentId()}/profile`, {
       method: "GET",
       headers: {
         Authorization: authorizationHeader()
@@ -22,7 +22,7 @@ export module ProfileAPI {
   }
 
   export async function update(request: UpdateProfileRequest): Promise<Profile> {
-    const response = await fetch(`api/v1/students/${studentId()}/profile`, {
+    const response = await fetch(`/api/v1/students/${studentId()}/profile`, {
       method: "PUT",
       headers: {
         Authorization: authorizationHeader(),

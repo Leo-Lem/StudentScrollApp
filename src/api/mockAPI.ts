@@ -1,5 +1,4 @@
 import { type Request, createServer, Model, IdentityManager, Response } from "miragejs"
-
 import { type ContentPost } from "../models"
 
 export default function mockAPI(): void {
@@ -9,20 +8,32 @@ export default function mockAPI(): void {
       application: IdentityManager
     },
     models: {
-      student: Model,
       post: Model
     },
+    namespace: "/api/v1/",
     seeds(server) {
       createExamplePosts(server)
     },
     routes() {
-      this.post("api/v1/posts", mockCreatingPost)
-      this.get("api/v1/posts", mockFetchingPosts)
-      this.delete("api/v1/posts/:id", mockDeletingPost)
-      this.post("api/v1/students", mockSignUp)
-      this.post("api/v1/signin", mockSignIn)
-      this.get("api/v1/students/:id/profile", mockGettingProfile)
-      this.put("api/v1/students/:id/profile", mockUpdatingProfile)
+      this.post("posts", mockCreatingPost)
+      this.get("posts", mockFetchingPosts)
+      this.delete("posts/:id", mockDeletingPost)
+
+      this.get("students/:id/profile", mockGettingProfile)
+      this.put("students/:id/profile", mockUpdatingProfile)
+
+      this.post("students", mockSignUp)
+      this.post("signin", mockSignIn)
+
+      this.get("chat/messages", (schema) => {
+        return schema.db.messages
+      })
+
+      this.post("chat/messages", (schema, request) => {
+        const message = JSON.parse(request.requestBody)
+        schema.db.messages.insert(message)
+        return schema.db.messages
+      })
     }
   })
 }
@@ -61,7 +72,7 @@ const mockDeletingPost = (schema: any, { params }: Request): any => {
   return schema.posts.find(params.id).destroy()
 }
 
-const mockSignUp = (): any => ({
+const mockSignUp = (schema: any, req: Request): any => ({
   id: 1,
   name: "name",
   email: "email",
@@ -69,7 +80,7 @@ const mockSignUp = (): any => ({
   type: "Bearer"
 })
 
-const mockSignIn = (): any => ({
+const mockSignIn = (schema: any, req: Request): any => ({
   id: 1,
   name: "name",
   email: "email",
@@ -77,7 +88,7 @@ const mockSignIn = (): any => ({
   type: "Bearer"
 })
 
-const mockGettingProfile = (): any => ({
+const mockGettingProfile = (schema: any, req: Request): any => ({
   name: "Jessica",
   bio: "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
   icon: "School"

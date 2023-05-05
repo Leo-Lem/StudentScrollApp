@@ -11,7 +11,7 @@ export module ContentPostAPI {
   }
 
   export async function create(info: CreationInfo): Promise<void> {
-    const response = await fetch("api/v1/posts", {
+    const response = await fetch("/api/v1/posts", {
       method: "POST",
       headers: {
         Authorization: authorizationHeader(),
@@ -26,7 +26,7 @@ export module ContentPostAPI {
 
   export async function read(page: number, newestFirst: boolean): Promise<ContentPost[]> {
     const response = await fetch(
-      `api/v1/posts?page=${page}&size=10&sort=timestamp&sortAscending=${JSON.stringify(
+      `/api/v1/posts?page=${page}&size=10&sort=timestamp&sortAscending=${JSON.stringify(
         !newestFirst
       )}`,
       {
@@ -39,7 +39,7 @@ export module ContentPostAPI {
   }
 
   export async function deleteWith(postId: number): Promise<void> {
-    const response = await fetch(`api/v1/posts/${postId}`, {
+    const response = await fetch(`/api/v1/posts/${postId}`, {
       method: "DELETE",
       headers: {
         Authorization: authorizationHeader(),
