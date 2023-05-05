@@ -23,7 +23,7 @@ export default function SearchBar(): ReactElement {
 
   const goToProfile = (): void => {
     if (studentId !== null && profile !== null)
-      window.location.href = `profile/${studentId}`
+      window.location.href = `/profile/${studentId}`
   }
 
   return (
