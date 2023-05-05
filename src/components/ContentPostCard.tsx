@@ -3,7 +3,7 @@ import { Card, Grid, Typography } from "@mui/material"
 import { Delete, School } from "@mui/icons-material"
 
 import { type ContentPost } from "../models"
-import { useId } from "../hooks"
+import { useStudentId } from "../hooks"
 import { ContentPostAPI } from "../api"
 import AsyncButton from "./simple/AsyncButton"
 
@@ -12,7 +12,7 @@ import AsyncButton from "./simple/AsyncButton"
 export default function ContentPostCard({
   post: { id, title, tags, content, posterId }
 }: Props): ReactElement {
-  const [studentId] = useId()
+  const [studentId] = useStudentId()
 
   const deletePost = async (): Promise<boolean> => {
     try {

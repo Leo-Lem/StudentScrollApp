@@ -10,30 +10,26 @@ export default function mockAPI(): void {
     models: {
       post: Model
     },
-    namespace: "/api/v1",
+    namespace: "/api/v1/",
     seeds(server) {
       createExamplePosts(server)
     },
     routes() {
-      this.post("/posts", mockCreatingPost)
-      this.get("/posts", mockFetchingPosts)
-      this.delete("/posts/:id", mockDeletingPost)
-      this.post("/students", mockSignUp)
-      this.post("/signin", mockSignIn)
-      this.get("/students/:id/profile", mockGettingProfile)
-      this.put("/students/:id/profile", mockUpdatingProfile)
+      this.post("posts", mockCreatingPost)
+      this.get("posts", mockFetchingPosts)
+      this.delete("posts/:id", mockDeletingPost)
 
-      this.get("/students/:id/profile", (schema, request) => ({
-        name: "John Doe",
-        bio: "I'm a student at the University of Waterloo.",
-        icon: "School"
-      }))
+      this.get("students/:id/profile", mockGettingProfile)
+      this.put("students/:id/profile", mockUpdatingProfile)
 
-      this.get("/chat/messages", (schema) => {
+      this.post("students", mockSignUp)
+      this.post("signin", mockSignIn)
+
+      this.get("chat/messages", (schema) => {
         return schema.db.messages
       })
 
-      this.post("/chat/messages", (schema, request) => {
+      this.post("chat/messages", (schema, request) => {
         const message = JSON.parse(request.requestBody)
         schema.db.messages.insert(message)
         return schema.db.messages
@@ -76,7 +72,7 @@ const mockDeletingPost = (schema: any, { params }: Request): any => {
   return schema.posts.find(params.id).destroy()
 }
 
-const mockSignUp = (): any => ({
+const mockSignUp = (schema: any, req: Request): any => ({
   id: 1,
   name: "name",
   email: "email",
@@ -84,7 +80,7 @@ const mockSignUp = (): any => ({
   type: "Bearer"
 })
 
-const mockSignIn = (): any => ({
+const mockSignIn = (schema: any, req: Request): any => ({
   id: 1,
   name: "name",
   email: "email",
@@ -92,7 +88,7 @@ const mockSignIn = (): any => ({
   type: "Bearer"
 })
 
-const mockGettingProfile = (): any => ({
+const mockGettingProfile = (schema: any, req: Request): any => ({
   name: "Jessica",
   bio: "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
   icon: "School"
