@@ -51,7 +51,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
 
   if (profile === null)
     return (
-      <Paper elevation={1}>
+      <Paper elevation={1} sx={{ display: "flex", justifyContent: "center" }}>
         <CircularProgress />
       </Paper>
     )

@@ -1,8 +1,8 @@
-import { Button, Collapse, IconButton, Stack, TextField } from "@mui/material";
+import { Button, Collapse, Stack, TextField } from "@mui/material";
 import { type ReactElement, useState } from "react";
 import { type Profile } from "../models";
 import { ProfileAPI } from "../api";
-import { KeyboardArrowRight, Search } from "@mui/icons-material";
+import { KeyboardArrowRight } from "@mui/icons-material";
 
 export default function SearchBar(): ReactElement {
   const [studentId, setStudentId] = useState<number | null>(null)
@@ -17,7 +17,10 @@ export default function SearchBar(): ReactElement {
       setStudentId(studentId)
       ProfileAPI.read(studentId)
         .then(setProfile)
-        .catch(console.log)
+        .catch(e => {
+          console.log(e)
+          setProfile(null)
+        })
     }
   }
 
@@ -38,20 +41,12 @@ export default function SearchBar(): ReactElement {
       />
 
       <Collapse in={profile !== null} orientation="horizontal">
-        {
-          profile !== null &&
-          <Button
-            variant="contained"
-            onClick={goToProfile}
-            endIcon={<KeyboardArrowRight />}
-          >{profile.name}</Button>
-        }
+        <Button
+          variant="contained"
+          onClick={goToProfile}
+          endIcon={<KeyboardArrowRight />}
+        >{profile?.name ?? ""}</Button>
       </Collapse>
-
-
-      <IconButton onClick={goToProfile} color="inherit">
-        <Search />
-      </IconButton>
     </Stack>
   )
 }

@@ -19,8 +19,8 @@ export default function mockAPI(): void {
       this.get("posts", mockFetchingPosts)
       this.delete("posts/:id", mockDeletingPost)
 
-      this.get("students/:id/profile", mockGettingProfile)
-      this.put("students/:id/profile", mockUpdatingProfile)
+      this.get("students/:studentId/profile", mockGettingProfile)
+      this.put("students/:studentId/profile", mockUpdatingProfile)
 
       this.post("students", mockSignUp)
       this.post("signin", mockSignIn)
@@ -88,11 +88,16 @@ const mockSignIn = (schema: any, req: Request): any => ({
   type: "Bearer"
 })
 
-const mockGettingProfile = (schema: any, req: Request): any => ({
-  name: "Jessica",
-  bio: "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
-  icon: "School"
-})
+const mockGettingProfile = (schema: any, req: Request): Response => {
+  if (req.params.studentId === "1")
+    return new Response(200, {}, {
+      name: "Jessica",
+      bio: "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
+      icon: "School"
+    })
+  else
+    return new Response(404)
+}
 
 const mockUpdatingProfile = (schema: any, { requestBody }: Request): any => {
   const json = JSON.parse(requestBody)
