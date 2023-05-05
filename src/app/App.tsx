@@ -5,8 +5,7 @@ import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 
 import theme from "./theme"
 
-import Header from "../components/Header"
-import { WelcomePage, DashboardPage, ProfilePage } from "../pages"
+import { Header, WelcomePage, DashboardPage, ProfilePage } from "../pages"
 
 import { useJwt } from "../hooks"
 

@@ -8,16 +8,15 @@ import {
   Link,
   Menu,
   MenuItem,
-  Stack,
   Toolbar,
   Typography
 } from "@mui/material"
 import { AccountCircle } from "@mui/icons-material"
 
-import Logo from "./simple/Logo"
+import Logo from "../components/simple/Logo"
 import { AuthenticationAPI } from "../api"
 import { useStudentId } from "../hooks"
-import SearchBar from "./SearchBar"
+import SearchBar from "../components/SearchBar"
 
 export default function Header(): ReactElement {
   const [studentId] = useStudentId()
@@ -35,16 +34,6 @@ export default function Header(): ReactElement {
         </Button>
 
         <Box flexGrow={1} />
-
-        <Stack direction="row" spacing={1} marginX={1}>
-          <Button variant="outlined" color="inherit" href="chat">
-            Chat
-          </Button>
-
-          <Button variant="outlined" color="inherit" href="nearby">
-            Nearby
-          </Button>
-        </Stack>
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
@@ -83,9 +72,6 @@ export default function Header(): ReactElement {
             </MenuItem>
           }
 
-          <MenuItem component={Link} href="settings" onClick={handleClose}>
-            Settings
-          </MenuItem>
           <MenuItem
             onClick={() => {
               AuthenticationAPI.signout()
