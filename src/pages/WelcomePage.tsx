@@ -1,8 +1,8 @@
 import { type ReactElement } from "react"
 import { AppBar, Box, Stack, Typography } from "@mui/material"
 
-import Logo from "../components/simple/Logo"
-import AuthenticationForm from "../features/authentication/AuthenticationForm"
+import Logo from "../components/Logo"
+import AuthenticationForm from "../features/authentication/components/AuthenticationForm"
 
 export default function WelcomePage(): ReactElement {
   return (

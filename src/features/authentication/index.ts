@@ -1,15 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+
 import AuthenticationError from "./types/AuthenticationError"
 import AuthenticationStatus from "./types/AuthenticationStatus"
 
 export interface AuthenticationState {
   status: AuthenticationStatus
-  token: string | null
-  studentId: number | null
-  error: AuthenticationError | null
+  token?: string
+  studentId?: number
+  error?: AuthenticationError
 }
 
-const initialState: AuthenticationState = { status: AuthenticationStatus.unauthenticated, token: null, studentId: null, error: null }
+const token = localStorage.getItem("token")
+const studentId = localStorage.getItem("studentId")
+
+const initialState: AuthenticationState = {
+  status: token !== null && studentId !== null ? AuthenticationStatus.authenticated : AuthenticationStatus.unauthenticated,
+  token: token !== null ? token : undefined,
+  studentId: studentId !== null ? parseInt(studentId) : undefined
+}
 
 const authentication = createSlice({
   name: "auth",
@@ -17,8 +25,10 @@ const authentication = createSlice({
   reducers: {
     signOut: (state) => {
       state.status = AuthenticationStatus.unauthenticated
-      state.token = null
-      state.studentId = null
+      state.token = undefined
+      localStorage.removeItem("token")
+      state.studentId = undefined
+      localStorage.removeItem("studentId")
     }
   },
   extraReducers: (builder) => {
@@ -29,7 +39,9 @@ const authentication = createSlice({
           state.status = AuthenticationStatus.failed
         } else {
           state.token = action.payload.token
+          localStorage.setItem("token", state.token)
           state.studentId = action.payload.studentId
+          localStorage.setItem("studentId", state.studentId.toString())
           state.status = AuthenticationStatus.authenticated
         }
       })
@@ -39,7 +51,9 @@ const authentication = createSlice({
           state.status = AuthenticationStatus.failed
         } else {
           state.token = action.payload.token
+          localStorage.setItem("token", state.token)
           state.studentId = action.payload.studentId
+          localStorage.setItem("studentId", state.studentId.toString())
           state.status = AuthenticationStatus.authenticated
         }
       })
@@ -48,7 +62,7 @@ const authentication = createSlice({
 
 export const signIn = createAsyncThunk(
   "auth/signIn",
-  async (info: { email: string, password: string }) => {
+  async (info: { email: string; password: string }) => {
     const response = await fetch("/api/v1/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -56,7 +70,7 @@ export const signIn = createAsyncThunk(
     })
 
     if (response.ok) {
-      const json: { id: number, token: string } = await response.json()
+      const json: { id: number; token: string } = await response.json()
       return { studentId: json.id, token: json.token }
     }
 
@@ -71,7 +85,7 @@ export const signIn = createAsyncThunk(
 
 export const signUp = createAsyncThunk(
   "auth/signUp",
-  async (info: { name: string, email: string, password: string }) => {
+  async (info: { name: string; email: string; password: string }) => {
     const response = await fetch("/api/v1/students", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -79,7 +93,7 @@ export const signUp = createAsyncThunk(
     })
 
     if (response.ok) {
-      const json: { id: number, token: string } = await response.json()
+      const json: { id: number; token: string } = await response.json()
       return { studentId: json.id, token: json.token }
     }
 
@@ -89,7 +103,8 @@ export const signUp = createAsyncThunk(
       default:
         return { error: AuthenticationError.unknown }
     }
-  })
+  }
+)
 
 export const { signOut } = authentication.actions
 

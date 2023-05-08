@@ -1,5 +1,5 @@
 import { type Request, createServer, Model, IdentityManager, Response } from "miragejs"
-import { type ContentPost } from "../models"
+import type ContentPost from "../features/posts/types/ContentPost"
 
 export default function mockAPI(): void {
   createServer({
@@ -50,8 +50,18 @@ const createExamplePosts = (server: any): void => {
     })
 }
 
-const mockCreatingPost = (schema: any, { requestBody }: Request): ContentPost =>
-  schema.posts.create(JSON.parse(requestBody))
+const mockCreatingPost = (schema: any, { requestBody }: Request): Response => {
+  const json = JSON.parse(requestBody)
+  const newPost: ContentPost = {
+    id: schema.posts.all().length,
+    title: json.title,
+    tags: json.tags,
+    content: json.content,
+    posterId: json.posterId
+  }
+  schema.posts.create(newPost)
+  return new Response(200, {}, JSON.stringify(newPost))
+}
 
 const mockFetchingPosts = (schema: any, { queryParams }: Request): Response =>
   new Response(

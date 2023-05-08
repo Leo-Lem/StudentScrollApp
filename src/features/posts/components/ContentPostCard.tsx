@@ -2,10 +2,10 @@ import { type ReactElement } from "react"
 import { Card, Grid, Typography } from "@mui/material"
 import { Delete, School } from "@mui/icons-material"
 
-import { type ContentPost } from "../models"
-import { ContentPostAPI } from "../api"
-import AsyncButton from "./simple/AsyncButton"
-import { useAppSelector } from "../app"
+import AsyncButton from "../../../components/AsyncButton"
+import { useAppDispatch, useAppSelector } from "../../../app"
+import { deletePost } from ".."
+import type ContentPost from "../types/ContentPost"
 
 // TODO replace placeholder profile with button leading to user profile
 
@@ -14,14 +14,12 @@ export default function ContentPostCard({
 }: Props): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
 
-  const deletePost = async (): Promise<boolean> => {
-    try {
-      await ContentPostAPI.deleteWith(id)
-      return true
-    } catch (e) {
-      console.log(e)
-      return false
-    }
+  const dispatch = useAppDispatch()
+
+  const deleteThis = async (): Promise<boolean> => {
+    await dispatch(deletePost(id))
+
+    return true
   }
 
   return (
@@ -36,7 +34,7 @@ export default function ContentPostCard({
               </Card>
             ))}
             {studentId !== null && studentId === posterId && (
-              <AsyncButton variant="text" label={<Delete color="error" />} action={deletePost} />
+              <AsyncButton variant="text" label={<Delete color="error" />} action={deleteThis} />
             )}
           </Grid>
           <Typography variant="body1">{content}</Typography>

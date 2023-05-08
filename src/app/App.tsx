@@ -5,6 +5,7 @@ import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 import theme from "./theme"
 import { Header, WelcomePage, DashboardPage, ProfilePage } from "../pages"
 import { useAppSelector } from "./store"
+import Footer from "../pages/Footer"
 
 export default function App(): ReactElement {
   const authStatus = useAppSelector((state) => state.authentication.status)
@@ -12,7 +13,7 @@ export default function App(): ReactElement {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container disableGutters sx={{ padding: 1, height: "100vh" }}>
+      <Container disableGutters sx={{ padding: 1 }}>
         {authStatus === "authenticated" ? <Header /> : <WelcomePage />}
 
         {authStatus === "authenticated" && (
@@ -22,6 +23,8 @@ export default function App(): ReactElement {
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         )}
+
+        <Footer />
       </Container>
     </ThemeProvider>
   )

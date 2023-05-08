@@ -1,14 +1,14 @@
 import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
-import ErrorFeedback from "../../components/simple/ErrorFeedback"
-import RequiredTextField from "../../components/simple/RequiredTextField"
-import AsyncButton from "../../components/simple/AsyncButton"
+import ErrorFeedback from "../../../components/ErrorFeedback"
+import RequiredTextField from "../../../components/RequiredTextField"
+import AsyncButton from "../../../components/AsyncButton"
 
-import { useAppDispatch, useAppSelector } from "../../app"
+import { useAppDispatch, useAppSelector } from "../../../app"
 
-import { signIn, signUp } from "./authentication"
-import AuthenticationStatus from "./types/AuthenticationStatus"
+import { signIn, signUp } from ".."
+import AuthenticationStatus from "../types/AuthenticationStatus"
 
 export default function AuthenticationForm(): ReactElement {
   const status = useAppSelector((state) => state.authentication.status)
@@ -21,6 +21,7 @@ export default function AuthenticationForm(): ReactElement {
   const [email, setEmail] = useState<string | null>(null)
   const [password, setPassword] = useState<string | null>(null)
   const [isFeedbackActive, setIsFeedbackActive] = useState(false)
+  const [reset, setReset] = useState(false)
 
   const authenticate = async (): Promise<boolean> => {
     if (isRegistering && name !== null && email !== null && password !== null) {
@@ -32,6 +33,7 @@ export default function AuthenticationForm(): ReactElement {
       return false
     }
 
+    setReset(!reset)
     return status !== AuthenticationStatus.failed
   }
 
@@ -40,29 +42,32 @@ export default function AuthenticationForm(): ReactElement {
       <Stack spacing={2} marginTop={3}>
         <Collapse in={isRegistering}>
           <RequiredTextField
-            activate={isFeedbackActive}
             label="Your Name"
             autoComplete="name"
             setValidValue={setName}
+            reset={reset}
+            showsFeedback={isFeedbackActive}
           />
         </Collapse>
 
         <RequiredTextField
-          activate={isFeedbackActive}
           label="Email"
           type="email"
           autoComplete="email"
           setValidValue={setEmail}
+          reset={reset}
+          showsFeedback={isFeedbackActive}
           validate={(email) => !isRegistering || /^\S+@\S+\.\S+$/.test(email)}
           invalidMessage="Invalid email"
         />
 
         <RequiredTextField
-          activate={isFeedbackActive}
           label="Password"
           type="password"
           autoComplete={isRegistering ? "new-password" : "current-password"}
           setValidValue={setPassword}
+          reset={reset}
+          showsFeedback={isFeedbackActive}
           validate={(password) => !isRegistering || password.length > 5}
           invalidMessage="At least 6 characters"
         />

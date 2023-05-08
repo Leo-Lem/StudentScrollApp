@@ -12,50 +12,43 @@ import {
 } from "@mui/material"
 import { Send } from "@mui/icons-material"
 
-import { ContentPostAPI } from "../api"
-
-import allTags from "../res/tags.json"
-import ErrorFeedback from "./simple/ErrorFeedback"
-import RequiredTextField from "./simple/RequiredTextField"
-import AsyncButton from "./simple/AsyncButton"
+import allTags from "../../../res/tags.json"
+import RequiredTextField from "../../../components/RequiredTextField"
+import AsyncButton from "../../../components/AsyncButton"
+import { useAppDispatch } from "../../../app"
+import { createPost } from ".."
 
 export default function PostCreationPanel(): ReactElement {
+  const dispatch = useAppDispatch()
+
+  const [reset, setReset] = useState(false)
   const [title, setTitle] = useState<string | null>(null)
   const [tags, setTags] = useState<string[]>([])
   const [content, setContent] = useState<string | null>(null)
 
   const [areRequirementsActive, setAreRequirementsActive] = useState(false)
 
-  const [hasFailed, setHasFailed] = useState<boolean>(false)
-
-  const createPost = async (): Promise<boolean> => {
+  const create = async (): Promise<boolean> => {
     if (title === null || content === null) {
       setAreRequirementsActive(true)
       return false
     }
 
-    try {
-      await ContentPostAPI.create({ title: title.trim(), tags, content: content.trim() })
+    await dispatch(createPost({ title: title.trim(), tags, content: content.trim() }))
 
-      setTitle(null)
-      setTags([])
-      setContent(null)
+    setReset(!reset)
 
-      return true
-    } catch (e) {
-      console.error(e)
-      setHasFailed(true)
-      return false
-    }
+    return true
   }
 
   return (
     <Paper elevation={2}>
       <Stack spacing={1} padding={1}>
         <RequiredTextField
-          activate={areRequirementsActive}
           placeholder="New Post"
           setValidValue={setTitle}
+          reset={reset}
+          showsFeedback={areRequirementsActive}
         />
 
         <FormControl fullWidth>
@@ -84,23 +77,22 @@ export default function PostCreationPanel(): ReactElement {
         </FormControl>
 
         <RequiredTextField
-          activate={areRequirementsActive}
           multiline
           minRows={10}
           placeholder="What's on your mind?"
           setValidValue={setContent}
+          reset={reset}
+          showsFeedback={areRequirementsActive}
           validate={(content) => content.trim().length > 3}
           invalidMessage="Please elaborate…"
         />
-
-        <ErrorFeedback isError={hasFailed} message={"Something went wrong… :("} />
 
         <AsyncButton
           variant="contained"
           fullWidth
           startIcon={<Send />}
           label="Post"
-          action={createPost}
+          action={create}
         />
       </Stack>
     </Paper>

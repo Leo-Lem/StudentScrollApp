@@ -13,11 +13,11 @@ import {
 } from "@mui/material"
 import { AccountCircle } from "@mui/icons-material"
 
-import Logo from "../components/simple/Logo"
-import SearchBar from "../components/SearchBar"
+import Logo from "../components/Logo"
+import SearchBar from "../features/profile/SearchBar"
 
 import { useAppDispatch, useAppSelector } from "../app"
-import { signOut } from "../features/authentication/authentication"
+import { signOut } from "../features/authentication"
 
 export default function Header(): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
@@ -70,7 +70,7 @@ export default function Header(): ReactElement {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {studentId !== null && (
+          {studentId !== undefined && (
             <MenuItem component={Link} href={`profile/${studentId}`} onClick={handleClose}>
               Profile
             </MenuItem>

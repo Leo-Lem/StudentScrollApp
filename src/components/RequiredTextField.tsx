@@ -1,35 +1,28 @@
 import { TextField } from "@mui/material"
+import { type TextFieldProps } from "@mui/material/TextField"
 import { type SetStateAction, type ReactElement, useState, type Dispatch, useEffect } from "react"
 
-export default function RequiredTextField({
-  activate,
-  fullWidth,
-  multiline,
-  minRows,
-  label,
-  type,
-  placeholder,
-  autoComplete,
-  setValidValue,
-  validate,
-  invalidMessage
-}: Props): ReactElement {
+export default function RequiredTextField({ setValidValue, reset, showsFeedback, validate, invalidMessage, ...textFieldProps }: Props): ReactElement {
   const [value, setValue] = useState("")
   const [isEmpty, setIsEmpty] = useState<boolean | null>(null)
   const [isInvalid, setIsInvalid] = useState<boolean | null>(null)
 
   useEffect(() => {
-    if (activate ?? false) {
+    if (showsFeedback ?? false) {
       setIsEmpty(value === "")
       if (validate !== undefined) setIsInvalid(!validate(value))
     }
-  }, [activate ?? false])
+  }, [showsFeedback ?? false])
 
   useEffect(() => {
     setValidValue(
       (isEmpty ?? true) || (validate !== undefined && (isInvalid ?? true)) ? null : value
     )
   }, [value])
+
+  useEffect(() => {
+    setValue("")
+  }, [reset])
 
   const isError = (): boolean => (isEmpty ?? false) || (isInvalid ?? false)
 
@@ -41,36 +34,23 @@ export default function RequiredTextField({
 
   return (
     <TextField
-      fullWidth={fullWidth ?? true}
-      multiline={multiline}
-      minRows={minRows}
-      label={label}
-      placeholder={placeholder}
-      type={type}
-      autoComplete={autoComplete}
+      {...textFieldProps}
       error={isError()}
       helperText={helperText()}
+      value={value}
       onChange={({ target: { value } }) => {
         setIsEmpty(value === "")
-
         if (validate !== undefined) setIsInvalid(!validate(value))
-
         setValue(value)
       }}
     />
   )
 }
 
-interface Props {
-  activate?: boolean
-  fullWidth?: boolean
-  multiline?: boolean
-  minRows?: number
-  label?: string
-  placeholder?: string
-  type?: string
-  autoComplete?: string
+type Props = TextFieldProps & {
   setValidValue: Dispatch<SetStateAction<string | null>>
+  reset?: boolean
+  showsFeedback?: boolean
   validate?: (value: string) => boolean
   invalidMessage?: string
 }
