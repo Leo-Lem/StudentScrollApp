@@ -1,6 +1,6 @@
 {
   "name": "studentscrollapp",
-  "version": "1.0",
+  "version": "2.0",
   "author": "Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann",
   "license": "MIT",
   "repository": {
@@ -66,5 +66,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "react-redux": "^8.0.5"
   }
 }
