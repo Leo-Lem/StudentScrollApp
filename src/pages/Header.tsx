@@ -14,12 +14,16 @@ import {
 import { AccountCircle } from "@mui/icons-material"
 
 import Logo from "../components/simple/Logo"
-import { AuthenticationAPI } from "../api"
 import SearchBar from "../components/SearchBar"
-import { useAppSelector } from "../app"
+
+import { useAppDispatch, useAppSelector } from "../app"
+import { signOut } from "../features/authentication/authentication"
 
 export default function Header(): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
+
+  const dispatch = useAppDispatch()
+
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handleClose = (): void => {
@@ -74,7 +78,7 @@ export default function Header(): ReactElement {
 
           <MenuItem
             onClick={() => {
-              AuthenticationAPI.signout()
+              dispatch(signOut())
               handleClose()
             }}
           >

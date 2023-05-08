@@ -17,11 +17,9 @@ export default function AuthenticationForm(): ReactElement {
   const dispatch = useAppDispatch()
 
   const [isRegistering, setIsRegistering] = useState(false)
-
   const [name, setName] = useState<string | null>(null)
   const [email, setEmail] = useState<string | null>(null)
   const [password, setPassword] = useState<string | null>(null)
-
   const [isFeedbackActive, setIsFeedbackActive] = useState(false)
 
   const authenticate = async (): Promise<boolean> => {
@@ -31,9 +29,10 @@ export default function AuthenticationForm(): ReactElement {
       await dispatch(signIn({ email, password }))
     } else {
       setIsFeedbackActive(true)
+      return false
     }
 
-    return status === AuthenticationStatus.authenticated
+    return status !== AuthenticationStatus.failed
   }
 
   return (
