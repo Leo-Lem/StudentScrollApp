@@ -3,16 +3,16 @@ import { Card, Grid, Typography } from "@mui/material"
 import { Delete, School } from "@mui/icons-material"
 
 import { type ContentPost } from "../models"
-import { useStudentId } from "../hooks"
 import { ContentPostAPI } from "../api"
 import AsyncButton from "./simple/AsyncButton"
+import { useAppSelector } from "../app"
 
 // TODO replace placeholder profile with button leading to user profile
 
 export default function ContentPostCard({
   post: { id, title, tags, content, posterId }
 }: Props): ReactElement {
-  const [studentId] = useStudentId()
+  const studentId = useAppSelector((state) => state.authentication.studentId)
 
   const deletePost = async (): Promise<boolean> => {
     try {

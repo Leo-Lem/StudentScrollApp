@@ -1,4 +1,4 @@
-import { AuthenticationAPI } from "../AuthenticationAPI"
+import { AuthenticationAPI } from "../../features/authentication/AuthenticationAPI"
 
 export default async function validateResponse<T>(response: Response): Promise<T> {
   if (response.ok) return (await response.json()) as T

@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
-import AuthenticationForm from "../components/AuthenticationForm"
+import AuthenticationForm from "../features/authentication/AuthenticationForm"
 
 beforeEach(() => {
   render(<AuthenticationForm />)

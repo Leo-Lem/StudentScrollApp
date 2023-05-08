@@ -1,49 +1,39 @@
 import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
-import { AuthenticationAPI } from "../api"
-import ErrorFeedback from "./simple/ErrorFeedback"
-import RequiredTextField from "./simple/RequiredTextField"
-import AsyncButton from "./simple/AsyncButton"
+import ErrorFeedback from "../../components/simple/ErrorFeedback"
+import RequiredTextField from "../../components/simple/RequiredTextField"
+import AsyncButton from "../../components/simple/AsyncButton"
+
+import { useAppDispatch, useAppSelector } from "../../app"
+
+import { signIn, signUp } from "./authentication"
+import AuthenticationStatus from "./types/AuthenticationStatus"
 
 export default function AuthenticationForm(): ReactElement {
+  const status = useAppSelector((state) => state.authentication.status)
+  const error = useAppSelector((state) => state.authentication.error)
+
+  const dispatch = useAppDispatch()
+
   const [isRegistering, setIsRegistering] = useState(false)
 
   const [name, setName] = useState<string | null>(null)
   const [email, setEmail] = useState<string | null>(null)
   const [password, setPassword] = useState<string | null>(null)
 
-  const [isRequiredActive, setIsRequiredActive] = useState(false)
-
-  const [areCredentialsInvalid, setAreCredentialsInvalid] = useState(false)
-  const [isEmailTaken, setIsEmailTaken] = useState(false)
-  const [hasFailed, setHasFailed] = useState(false)
+  const [isFeedbackActive, setIsFeedbackActive] = useState(false)
 
   const authenticate = async (): Promise<boolean> => {
-    try {
-      if (isRegistering && name !== null && email !== null && password !== null) {
-        await AuthenticationAPI.signup({ name, email, password })
-      } else if (email !== null && password !== null) {
-        await AuthenticationAPI.signin({ email, password })
-      } else {
-        setIsRequiredActive(true)
-        return false
-      }
-
-      return true
-    } catch (e) {
-      if (e instanceof Error && e.message === "Email taken") setIsEmailTaken(true)
-      if (e instanceof Error && e.message === "Invalid credentials") setAreCredentialsInvalid(true)
-      else setHasFailed(true)
-
-      return false
+    if (isRegistering && name !== null && email !== null && password !== null) {
+      await dispatch(signUp({ name, email, password }))
+    } else if (email !== null && password !== null) {
+      await dispatch(signIn({ email, password }))
+    } else {
+      setIsFeedbackActive(true)
     }
-  }
 
-  const errorMessage = (): string => {
-    if (isEmailTaken) return "Email is already registered…"
-    else if (areCredentialsInvalid) return "Email or password is wrong…"
-    else return "Something went wrong… :("
+    return status === AuthenticationStatus.authenticated
   }
 
   return (
@@ -51,7 +41,7 @@ export default function AuthenticationForm(): ReactElement {
       <Stack spacing={2} marginTop={3}>
         <Collapse in={isRegistering}>
           <RequiredTextField
-            activate={isRequiredActive}
+            activate={isFeedbackActive}
             label="Your Name"
             autoComplete="name"
             setValidValue={setName}
@@ -59,7 +49,7 @@ export default function AuthenticationForm(): ReactElement {
         </Collapse>
 
         <RequiredTextField
-          activate={isRequiredActive}
+          activate={isFeedbackActive}
           label="Email"
           type="email"
           autoComplete="email"
@@ -69,7 +59,7 @@ export default function AuthenticationForm(): ReactElement {
         />
 
         <RequiredTextField
-          activate={isRequiredActive}
+          activate={isFeedbackActive}
           label="Password"
           type="password"
           autoComplete={isRegistering ? "new-password" : "current-password"}
@@ -84,7 +74,7 @@ export default function AuthenticationForm(): ReactElement {
           action={authenticate}
         />
 
-        <ErrorFeedback isError={hasFailed} message={errorMessage()} />
+        <ErrorFeedback isError={status === AuthenticationStatus.failed} message={error ?? ""} />
 
         <Button
           variant="text"

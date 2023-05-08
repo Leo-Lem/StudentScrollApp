@@ -15,15 +15,15 @@ import { AccountCircle } from "@mui/icons-material"
 
 import Logo from "../components/simple/Logo"
 import { AuthenticationAPI } from "../api"
-import { useStudentId } from "../hooks"
 import SearchBar from "../components/SearchBar"
+import { useAppSelector } from "../app"
 
 export default function Header(): ReactElement {
-  const [studentId] = useStudentId()
+  const studentId = useAppSelector((state) => state.authentication.studentId)
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handleClose = (): void => {
-    setAnchorEl(null);
+    setAnchorEl(null)
   }
 
   return (
@@ -56,21 +56,21 @@ export default function Header(): ReactElement {
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           keepMounted
           transformOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {studentId !== null &&
+          {studentId !== null && (
             <MenuItem component={Link} href={`profile/${studentId}`} onClick={handleClose}>
               Profile
             </MenuItem>
-          }
+          )}
 
           <MenuItem
             onClick={() => {

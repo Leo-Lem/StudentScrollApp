@@ -8,10 +8,10 @@ import { type Profile } from "../models"
 import { ProfileAPI } from "../api"
 
 import avatars from "../res/avatars.json"
-import { useStudentId } from "../hooks"
+import { useAppSelector } from "../app"
 
 export default function ProfileView({ studentId }: Props): ReactElement {
-  const [currentStudentId] = useStudentId()
+  const currentStudentId = useAppSelector((state) => state.authentication.studentId)
 
   const [profile, setProfile] = useState<Profile | null>(null)
 
@@ -39,7 +39,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
     if (canEdit() && (name !== undefined || bio !== undefined || icon !== undefined)) {
       setProfile(null)
       ProfileAPI.update({ newName: name, newBio: bio, newIcon: icon })
-        .then(profile => {
+        .then((profile) => {
           setProfile(profile)
           setNewBio(profile.bio)
         })
@@ -106,13 +106,13 @@ export default function ProfileView({ studentId }: Props): ReactElement {
             }}
           />
         </Grid>
-      </Paper >
+      </Paper>
     )
   else
     return (
       <Paper elevation={1}>
         <Grid container direction="column" textAlign="end" padding={1} gap={1}>
-          {canEdit() && !isEditing &&
+          {canEdit() && !isEditing && (
             <Button
               variant="contained"
               sx={{ aspectRatio: 1, alignSelf: "end" }}
@@ -123,7 +123,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
             >
               <Edit />
             </Button>
-          }
+          )}
 
           <AvatarImage avatarId={profile.icon} />
 

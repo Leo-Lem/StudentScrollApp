@@ -1,11 +1,16 @@
 export module AuthenticationAPI {
-  export interface SignupInfo {
+  export interface AuthenticationResponse {
+    studentId: number
+    token: string
+  }
+
+  export interface SignupRequest {
     name: string
     email: string
     password: string
   }
 
-  export async function signup(info: SignupInfo): Promise<void> {
+  export async function signup(info: SignupRequest): Promise<AuthenticationResponse> {
     const response = await fetch("/api/v1/students", {
       method: "POST",
       headers: {
@@ -14,8 +19,9 @@ export module AuthenticationAPI {
       body: JSON.stringify(info)
     })
 
-    if (response.ok) setSignedIn(await response.json())
+    if (response.ok) return setSignedIn(await response.json())
     else if (response.status === 409) throw Error("Email taken")
+    else throw Error("Unexpected response")
   }
 
   export interface SignInInfo {
@@ -23,18 +29,16 @@ export module AuthenticationAPI {
     password: string
   }
 
-  export async function signin(info: SignInInfo): Promise<void> {
+  export async function signin(info: SignInInfo): Promise<AuthenticationResponse> {
     const response = await fetch("/api/v1/signin", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(info)
     })
 
-    if (response.ok) setSignedIn(await response.json())
+    if (response.ok) return setSignedIn(await response.json())
     else if (response.status === 401) throw Error("Invalid credentials")
-    else console.log(response)
+    else throw Error("Unexpected response")
   }
 
   export function signout(): void {
@@ -42,10 +46,9 @@ export module AuthenticationAPI {
     localStorage.removeItem("id")
     window.location.href = ""
   }
-}
 
-function setSignedIn(json: { token: string; id: number }): void {
-  localStorage.setItem("jwt", JSON.stringify(json.token))
-  localStorage.setItem("id", JSON.stringify(json.id))
-  window.location.href = ""
+  const setSignedIn = (json: { token: string; id: number }): AuthenticationResponse => ({
+    token: json.token,
+    studentId: json.id
+  })
 }

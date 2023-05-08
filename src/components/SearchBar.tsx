@@ -1,8 +1,8 @@
-import { Button, Collapse, Stack, TextField } from "@mui/material";
-import { type ReactElement, useState } from "react";
-import { type Profile } from "../models";
-import { ProfileAPI } from "../api";
-import { KeyboardArrowRight } from "@mui/icons-material";
+import { Button, Collapse, Stack, TextField } from "@mui/material"
+import { type ReactElement, useState } from "react"
+import { type Profile } from "../models"
+import { ProfileAPI } from "../api"
+import { KeyboardArrowRight } from "@mui/icons-material"
 
 export default function SearchBar(): ReactElement {
   const [studentId, setStudentId] = useState<number | null>(null)
@@ -17,7 +17,7 @@ export default function SearchBar(): ReactElement {
       setStudentId(studentId)
       ProfileAPI.read(studentId)
         .then(setProfile)
-        .catch(e => {
+        .catch((e) => {
           console.log(e)
           setProfile(null)
         })
@@ -25,8 +25,7 @@ export default function SearchBar(): ReactElement {
   }
 
   const goToProfile = (): void => {
-    if (studentId !== null && profile !== null)
-      window.location.href = `/profile/${studentId}`
+    if (studentId !== null && profile !== null) window.location.href = `/profile/${studentId}`
   }
 
   return (
@@ -41,11 +40,9 @@ export default function SearchBar(): ReactElement {
       />
 
       <Collapse in={profile !== null} orientation="horizontal">
-        <Button
-          variant="contained"
-          onClick={goToProfile}
-          endIcon={<KeyboardArrowRight />}
-        >{profile?.name ?? ""}</Button>
+        <Button variant="contained" onClick={goToProfile} endIcon={<KeyboardArrowRight />}>
+          {profile?.name ?? ""}
+        </Button>
       </Collapse>
     </Stack>
   )

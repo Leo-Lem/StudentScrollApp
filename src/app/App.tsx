@@ -1,31 +1,28 @@
 import { type ReactElement } from "react"
 import { Route, Routes } from "react-router-dom"
-
 import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 
 import theme from "./theme"
-
 import { Header, WelcomePage, DashboardPage, ProfilePage } from "../pages"
-
-import { useJwt } from "../hooks"
+import { useAppSelector } from "./store"
 
 export default function App(): ReactElement {
-  const [jwt] = useJwt()
+  const authStatus = useAppSelector((state) => state.authentication.status)
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container disableGutters sx={{ padding: 1, height: "100vh" }}>
-        {jwt !== null ? <Header /> : <WelcomePage />}
+        {authStatus === "authenticated" ? <Header /> : <WelcomePage />}
 
-        {jwt !== null && (
+        {authStatus === "authenticated" && (
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/profile/:studentId" element={<ProfilePage />} />
             <Route path="/profile" element={<ProfilePage />} />
-          </Routes >
+          </Routes>
         )}
-      </Container >
-    </ThemeProvider >
+      </Container>
+    </ThemeProvider>
   )
 }

@@ -61,9 +61,7 @@ const mockFetchingPosts = (schema: any, { queryParams }: Request): Response =>
       (schema.posts.all().models as any[])
         .map((model) => ({ ...model.attrs, id: parseInt(model.id) }))
         .sort((lhs: any, rhs: any) =>
-          (JSON.parse(queryParams.sortAscending) as boolean)
-            ? lhs.id - rhs.id
-            : rhs.id - lhs.id
+          (JSON.parse(queryParams.sortAscending) as boolean) ? lhs.id - rhs.id : rhs.id - lhs.id
         )
     )
   )
@@ -90,13 +88,16 @@ const mockSignIn = (schema: any, req: Request): any => ({
 
 const mockGettingProfile = (schema: any, req: Request): Response => {
   if (req.params.studentId === "1")
-    return new Response(200, {}, {
-      name: "Jessica",
-      bio: "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
-      icon: "School"
-    })
-  else
-    return new Response(404)
+    return new Response(
+      200,
+      {},
+      {
+        name: "Jessica",
+        bio: "Life is a mixture of emotions. There are times when things are gloomy and we are sad, while there are times when good things happen and our heart gets uplifted with positive vibes. But, always remember that we shouldn’t let our sad times derail our positive energy and keep us down.",
+        icon: "School"
+      }
+    )
+  else return new Response(404)
 }
 
 const mockUpdatingProfile = (schema: any, { requestBody }: Request): any => {
