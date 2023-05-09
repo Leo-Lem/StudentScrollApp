@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
 import { signIn, signUp } from "./api"
 import { AuthenticationStatus, AuthenticationError } from "./types"
@@ -29,9 +29,10 @@ const authentication = createSlice({
     signOut: (state) => {
       state.status = AuthenticationStatus.unauthenticated
       state.token = undefined
-      localStorage.removeItem("token")
       state.studentId = undefined
-      localStorage.removeItem("studentId")
+
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("studentId")
     }
   },
   extraReducers: (builder) => {
@@ -42,9 +43,11 @@ const authentication = createSlice({
           state.status = AuthenticationStatus.failed
         } else {
           state.token = action.payload.token
-          localStorage.setItem("token", state.token)
           state.studentId = action.payload.studentId
-          localStorage.setItem("studentId", state.studentId.toString())
+
+          sessionStorage.setItem("token", state.token)
+          sessionStorage.setItem("studentId", state.studentId.toString())
+
           state.status = AuthenticationStatus.authenticated
         }
       })
@@ -54,9 +57,11 @@ const authentication = createSlice({
           state.status = AuthenticationStatus.failed
         } else {
           state.token = action.payload.token
-          localStorage.setItem("token", state.token)
           state.studentId = action.payload.studentId
-          localStorage.setItem("studentId", state.studentId.toString())
+
+          sessionStorage.setItem("token", state.token)
+          sessionStorage.setItem("studentId", state.studentId.toString())
+
           state.status = AuthenticationStatus.authenticated
         }
       })

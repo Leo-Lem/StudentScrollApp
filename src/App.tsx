@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 
 import { dark } from "./themes"
-import { store, useAppSelector } from "./redux"
+import { useAppSelector } from "./redux"
 import { Header, Footer, WelcomePage, DashboardPage, ProfilePage } from "./pages"
 
 export default function App(): ReactElement {

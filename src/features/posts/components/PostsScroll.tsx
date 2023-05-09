@@ -11,7 +11,7 @@ import {
 
 import ContentPostCard from "./ContentPostCard"
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import { readPosts, toggleNewestFirst } from ".."
+import { readPosts, resetPosts, toggleNewestFirst } from ".."
 
 export default function PostsScroll(): ReactElement {
   const posts = useAppSelector((state) => state.posts.posts)
@@ -20,6 +20,7 @@ export default function PostsScroll(): ReactElement {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    dispatch(resetPosts())
     void dispatch(readPosts(0))
   }, [newestFirst])
 
@@ -42,7 +43,7 @@ export default function PostsScroll(): ReactElement {
         <CircularProgress />
       ) : (
         posts.map((post) => (
-          <Slide direction="down" key={post.id} in mountOnEnter unmountOnExit>
+          <Slide direction="down" in mountOnEnter unmountOnExit key={post.id}>
             <Box width="100%">
               <ContentPostCard post={post} />
             </Box>

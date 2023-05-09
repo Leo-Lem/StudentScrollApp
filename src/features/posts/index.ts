@@ -14,6 +14,9 @@ const posts = createSlice({
   name: "posts",
   initialState,
   reducers: {
+    resetPosts: (state) => {
+      state.posts = undefined
+    },
     toggleNewestFirst: (state) => {
       state.newestFirst = !state.newestFirst
     }
@@ -22,7 +25,9 @@ const posts = createSlice({
     builder
       .addCase(createPost.fulfilled, (state, action) => {
         if (state.posts === undefined) state.posts = []
-        state.posts.push(action.payload)
+
+        if (state.newestFirst) state.posts.unshift(action.payload)
+        else state.posts.push(action.payload)
       })
       .addCase(readPosts.fulfilled, (state, action) => {
         state.posts = action.payload
@@ -35,6 +40,6 @@ const posts = createSlice({
 })
 
 export { createPost, readPosts, deletePost }
-export const { toggleNewestFirst } = posts.actions
+export const { resetPosts, toggleNewestFirst } = posts.actions
 
 export default posts.reducer
