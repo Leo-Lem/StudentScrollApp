@@ -8,22 +8,27 @@ import {
   Link,
   Menu,
   MenuItem,
+  Stack,
   Toolbar,
   Typography
 } from "@mui/material"
 import { AccountCircle } from "@mui/icons-material"
 
-import Logo from "../components/simple/Logo"
-import { AuthenticationAPI } from "../api"
-import { useStudentId } from "../hooks"
-import SearchBar from "../components/SearchBar"
+import Logo from "../features/shared/components/Logo"
+import SearchBar from "../features/profiles/components/SearchBar"
+
+import { useAppDispatch, useAppSelector } from "../redux"
+import { signOut } from "../features/authentication"
 
 export default function Header(): ReactElement {
-  const [studentId] = useStudentId()
+  const studentId = useAppSelector((state) => state.authentication.studentId)
+
+  const dispatch = useAppDispatch()
+
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handleClose = (): void => {
-    setAnchorEl(null);
+    setAnchorEl(null)
   }
 
   return (
@@ -34,6 +39,11 @@ export default function Header(): ReactElement {
         </Button>
 
         <Box flexGrow={1} />
+
+        <Stack direction="row" spacing={3} alignItems="center" paddingX={1}>
+          <Button variant="contained" component={Link} href="">Posts</Button>
+          <Button variant="contained" component={Link} href="chats">Chats</Button>
+        </Stack>
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
@@ -56,25 +66,25 @@ export default function Header(): ReactElement {
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           keepMounted
           transformOrigin={{
             vertical: "top",
-            horizontal: "right",
+            horizontal: "right"
           }}
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {studentId !== null &&
+          {studentId !== undefined && (
             <MenuItem component={Link} href={`profile/${studentId}`} onClick={handleClose}>
               Profile
             </MenuItem>
-          }
+          )}
 
           <MenuItem
             onClick={() => {
-              AuthenticationAPI.signout()
+              dispatch(signOut())
               handleClose()
             }}
           >
