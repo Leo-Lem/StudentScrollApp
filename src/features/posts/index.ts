@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import type ContentPost from "./types/ContentPost"
+import { type ContentPost } from "./types"
 import { createPost, readPosts, deletePost } from "./api"
 
 export interface PostsState {

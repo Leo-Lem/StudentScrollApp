@@ -1,4 +1,4 @@
-import { Server } from "miragejs";
+import { Response, Server } from "miragejs";
 
 export const exampleStudents = [
   { id: "1", name: "Raoul Duke", email: "raoul@duke.legend" },
@@ -7,27 +7,23 @@ export const exampleStudents = [
 ]
 
 export default function mockAuthentication(server: Server) {
-  server.post("signin", (schema, request) => {
-    const { email } = JSON.parse(request.requestBody)
+  server.post("signin", (schema: any, { requestBody }) => {
+    const { email } = JSON.parse(requestBody)
 
-    return {
-      id: 1,
-      name: "Raoul Duke",
-      email: email,
-      token: "xyz123",
-      type: "Bearer"
-    }
+    const student = schema.students.findBy({ email: email })
+
+    if (student !== null) return { ...student.attrs, id: parseInt(student.id), token: "xyz123", type: "Bearer" }
+    else return new Response(401, {})
   })
 
-  server.post("students", (schema, request) => {
-    const { name, email } = JSON.parse(request.requestBody)
+  server.post("students", (schema: any, { requestBody }) => {
+    const { name, email } = JSON.parse(requestBody)
 
-    return {
-      id: 1,
-      name: name,
-      email: email,
-      token: "xyz123",
-      type: "Bearer"
-    }
+    const student = schema.students.findBy({ email: email })
+
+    if (student === null) {
+      const newStudent = schema.students.create({ name: name, email: email })
+      return { ...newStudent.attr, id: parseInt(newStudent.id), token: "xyz123", type: "Bearer" }
+    } else return new Response(409, {})
   })
 }

@@ -10,8 +10,8 @@ export interface AuthenticationState {
   error?: AuthenticationError
 }
 
-const token = localStorage.getItem("token")
-const studentId = localStorage.getItem("studentId")
+const token = sessionStorage.getItem("token")
+const studentId = sessionStorage.getItem("studentId")
 
 const initialState: AuthenticationState = {
   status:

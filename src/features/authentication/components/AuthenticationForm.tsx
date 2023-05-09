@@ -34,7 +34,7 @@ export default function AuthenticationForm(): ReactElement {
     }
 
     setReset(!reset)
-    return status !== AuthenticationStatus.failed
+    return status === AuthenticationStatus.authenticated
   }
 
   return (

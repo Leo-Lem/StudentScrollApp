@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit"
 
 import authentication from "../features/authentication"
 import posts from "../features/posts"
+import profiles from "../features/profiles"
 
 const store = configureStore({
   reducer: {
     authentication,
-    posts
+    posts,
+    profiles
   }
 })
 

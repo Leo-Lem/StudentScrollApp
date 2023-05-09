@@ -8,13 +8,14 @@ import {
   Link,
   Menu,
   MenuItem,
+  Stack,
   Toolbar,
   Typography
 } from "@mui/material"
 import { AccountCircle } from "@mui/icons-material"
 
 import Logo from "../features/shared/components/Logo"
-import SearchBar from "../features/profile/components/SearchBar"
+import SearchBar from "../features/profiles/components/SearchBar"
 
 import { useAppDispatch, useAppSelector } from "../redux"
 import { signOut } from "../features/authentication"
@@ -38,6 +39,11 @@ export default function Header(): ReactElement {
         </Button>
 
         <Box flexGrow={1} />
+
+        <Stack direction="row" spacing={3} alignItems="center" paddingX={1}>
+          <Button variant="contained" component={Link} href="">Posts</Button>
+          <Button variant="contained" component={Link} href="chats">Chats</Button>
+        </Stack>
 
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 

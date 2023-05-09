@@ -4,47 +4,42 @@ import { Edit, KeyboardArrowLeft, KeyboardArrowRight, Save } from "@mui/icons-ma
 
 import AvatarImage from "../../shared/components/AvatarImage"
 
-import type Profile from "../types/Profile"
-import { ProfileAPI } from "../ProfileAPI"
-
-import { useAppSelector } from "../../../redux"
-
-import avatars from "../../../res/avatars.json"
+import { useAppDispatch, useAppSelector } from "../../../redux"
+import { icons } from "../../../res"
+import readProfile from "../api/readProfile"
+import updateProfile from "../api/updateProfile"
 
 export default function ProfileView({ studentId }: Props): ReactElement {
+  const profile = useAppSelector((state) => state.profiles[studentId] ?? null)
   const currentStudentId = useAppSelector((state) => state.authentication.studentId)
 
-  const [profile, setProfile] = useState<Profile | null>(null)
+  const dispatch = useAppDispatch()
 
   const [isEditing, setIsEditing] = useState(false)
 
   const [newName, setNewName] = useState("")
   const [newBio, setNewBio] = useState("")
-  const [newAvatarIndex, setNewAvatarIndex] = useState(0)
+  const [newIconIndex, setNewIconIndex] = useState(0)
 
   useEffect(() => {
-    ProfileAPI.read(studentId)
-      .then((profile) => {
-        setProfile(profile)
-        setNewBio(profile.bio)
-        setNewAvatarIndex(avatars.indexOf(profile.icon))
-      })
-      .catch(console.log)
-  }, [])
+    if (profile !== null) {
+      setNewName(profile.name)
+      setNewBio(profile.bio)
+      setNewIconIndex(icons.indexOf(profile.icon))
+    }
+  }, [profile])
 
-  const updateProfile = (): void => {
+  useEffect(() => {
+    dispatch(readProfile(studentId))
+  }, [studentId])
+
+  const update = (): void => {
     const name = newName !== "" ? newName : undefined
     const bio = newBio !== "" && newBio !== profile?.bio ? newBio : undefined
-    const icon = avatars[newAvatarIndex] !== profile?.icon ? avatars[newAvatarIndex] : undefined
+    const icon = icons[newIconIndex] !== profile?.icon ? icons[newIconIndex] : undefined
 
     if (canEdit() && (name !== undefined || bio !== undefined || icon !== undefined)) {
-      setProfile(null)
-      ProfileAPI.update({ newName: name, newBio: bio, newIcon: icon })
-        .then((profile) => {
-          setProfile(profile)
-          setNewBio(profile.bio)
-        })
-        .catch(console.log)
+      void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))
     }
   }
 
@@ -64,7 +59,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
             variant="contained"
             sx={{ aspectRatio: 1, alignSelf: "end" }}
             onClick={() => {
-              if (isEditing) updateProfile()
+              if (isEditing) update()
               setIsEditing(!isEditing)
             }}
           >
@@ -74,17 +69,17 @@ export default function ProfileView({ studentId }: Props): ReactElement {
           <Grid container direction="row" justifyContent="end" alignSelf="end">
             <Button
               onClick={() => {
-                setNewAvatarIndex(
-                  (((newAvatarIndex - 1) % avatars.length) + avatars.length) % avatars.length
+                setNewIconIndex(
+                  (((newIconIndex - 1) % icons.length) + icons.length) % icons.length
                 )
               }}
             >
               <KeyboardArrowLeft />
             </Button>
-            <AvatarImage avatarId={avatars[newAvatarIndex]} />
+            <AvatarImage avatarId={icons[newIconIndex]} />
             <Button
               onClick={() => {
-                setNewAvatarIndex((newAvatarIndex + 1) % avatars.length)
+                setNewIconIndex((newIconIndex + 1) % icons.length)
               }}
             >
               <KeyboardArrowRight />
@@ -118,7 +113,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
               variant="contained"
               sx={{ aspectRatio: 1, alignSelf: "end" }}
               onClick={() => {
-                if (isEditing) updateProfile()
+                if (isEditing) update()
                 setIsEditing(!isEditing)
               }}
             >

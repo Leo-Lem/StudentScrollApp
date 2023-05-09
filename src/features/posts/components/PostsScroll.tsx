@@ -39,17 +39,14 @@ export default function PostsScroll(): ReactElement {
         }
       />
 
-      {posts === undefined ? (
-        <CircularProgress />
-      ) : (
-        posts.map((post) => (
-          <Slide direction="down" in mountOnEnter unmountOnExit key={post.id}>
-            <Box width="100%">
-              <ContentPostCard post={post} />
-            </Box>
-          </Slide>
-        ))
-      )}
+      {posts?.map((post) => (
+        <Slide in direction="down" mountOnEnter key={post.id}>
+          <Box width="100%" >
+            <ContentPostCard post={post} />
+          </Box>
+        </Slide>
+      )) ?? <CircularProgress />}
+
     </Stack>
   )
 }

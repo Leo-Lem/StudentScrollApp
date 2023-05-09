@@ -1,5 +1,5 @@
 import React, { type ReactElement } from "react"
-import ProfileView from "../features/profile/components/ProfileView"
+import ProfileView from "../features/profiles/components/ProfileView"
 import { Box, Stack } from "@mui/material"
 import { Navigate, useParams } from "react-router-dom"
 
