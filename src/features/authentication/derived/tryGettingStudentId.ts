@@ -1,5 +1,5 @@
 import { signOut } from ".."
-import { type RootState } from "../../../app/store"
+import { type RootState } from "../../../redux"
 
 export default function tryGettingStudentId(thunkAPI: any): number | undefined {
   const state = thunkAPI.getState() as RootState

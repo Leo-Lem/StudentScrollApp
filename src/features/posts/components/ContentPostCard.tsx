@@ -2,8 +2,8 @@ import { type ReactElement } from "react"
 import { Card, Grid, Typography } from "@mui/material"
 import { Delete, School } from "@mui/icons-material"
 
-import AsyncButton from "../../../components/AsyncButton"
-import { useAppDispatch, useAppSelector } from "../../../app"
+import AsyncButton from "../../shared/components/AsyncButton"
+import { useAppDispatch, useAppSelector } from "../../../redux"
 import { deletePost } from ".."
 import type ContentPost from "../types/ContentPost"
 

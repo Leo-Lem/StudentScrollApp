@@ -1,6 +1,6 @@
-import { Cancel, CheckCircle } from "@mui/icons-material"
-import { LoadingButton } from "@mui/lab"
 import { type ReactNode, useState, type ReactElement } from "react"
+import { Cancel, CheckCircle } from "@mui/icons-material"
+import { Button, CircularProgress } from "@mui/material"
 
 export default function AsyncButton({
   fullWidth,
@@ -30,16 +30,16 @@ export default function AsyncButton({
   }
 
   return (
-    <LoadingButton
+    <Button
+      disabled={isLoading}
       fullWidth={fullWidth}
-      loading={isLoading}
       variant={variant}
       startIcon={isSuccess === null && startIcon}
       color={isSuccess === null ? "primary" : isSuccess ? "success" : "error"}
       onClick={handleLoading}
     >
-      {content()}
-    </LoadingButton>
+      {isLoading ? <CircularProgress /> : content()}
+    </Button>
   )
 }
 

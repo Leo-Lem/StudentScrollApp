@@ -1,7 +1,7 @@
 import { Button, Collapse, Stack, TextField } from "@mui/material"
 import { type ReactElement, useState } from "react"
-import { type Profile } from "../../models"
-import { ProfileAPI } from "../../api"
+import type Profile from "../types/Profile"
+import { ProfileAPI } from "../ProfileAPI"
 import { KeyboardArrowRight } from "@mui/icons-material"
 
 export default function SearchBar(): ReactElement {

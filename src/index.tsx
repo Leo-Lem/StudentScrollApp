@@ -1,21 +1,18 @@
 import React, { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
-import { BrowserRouter } from "react-router-dom"
+
+import App from "./App"
 import { Provider } from "react-redux"
+import { store } from "./redux"
 
-import store from "./app/store"
-
-import App from "./app"
+if (process.env.NODE_ENV === "development")
+  import("./mocks").then(({ createMockedAPI }) => createMockedAPI())
 
 createRoot(document.getElementById("root") as HTMLElement).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-  </StrictMode>
-)
 
-import mockAPI from "./api/mockAPI" // eslint-disable-line
-if (process.env.NODE_ENV === "development") mockAPI()
+  <Provider store={store}>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </Provider>
+)

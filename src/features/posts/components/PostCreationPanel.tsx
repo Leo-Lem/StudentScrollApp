@@ -13,9 +13,9 @@ import {
 import { Send } from "@mui/icons-material"
 
 import allTags from "../../../res/tags.json"
-import RequiredTextField from "../../../components/RequiredTextField"
-import AsyncButton from "../../../components/AsyncButton"
-import { useAppDispatch } from "../../../app"
+import RequiredTextField from "../../shared/components/RequiredTextField"
+import AsyncButton from "../../shared/components/AsyncButton"
+import { useAppDispatch } from "../../../redux"
 import { createPost } from ".."
 
 export default function PostCreationPanel(): ReactElement {

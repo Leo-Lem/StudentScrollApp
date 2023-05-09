@@ -1,5 +1,5 @@
-import { Chip, Divider, Stack, Typography } from "@mui/material";
-import { type ReactElement } from "react";
+import { Chip, Divider, Stack, Typography } from "@mui/material"
+import { type ReactElement } from "react"
 
 export default function Footer(): ReactElement {
   return (

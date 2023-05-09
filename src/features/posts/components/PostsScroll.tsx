@@ -1,8 +1,16 @@
 import { type ReactElement, useEffect } from "react"
-import { Box, CircularProgress, FormControlLabel, Slide, Stack, Switch, Typography } from "@mui/material"
+import {
+  Box,
+  CircularProgress,
+  FormControlLabel,
+  Slide,
+  Stack,
+  Switch,
+  Typography
+} from "@mui/material"
 
 import ContentPostCard from "./ContentPostCard"
-import { useAppDispatch, useAppSelector } from "../../../app"
+import { useAppDispatch, useAppSelector } from "../../../redux"
 import { readPosts, toggleNewestFirst } from ".."
 
 export default function PostsScroll(): ReactElement {
@@ -30,15 +38,17 @@ export default function PostsScroll(): ReactElement {
         }
       />
 
-      {posts === undefined
-        ? <CircularProgress />
-        : posts.map((post) => (
+      {posts === undefined ? (
+        <CircularProgress />
+      ) : (
+        posts.map((post) => (
           <Slide direction="down" key={post.id} in mountOnEnter unmountOnExit>
             <Box width="100%">
               <ContentPostCard post={post} />
             </Box>
           </Slide>
-        ))}
+        ))
+      )}
     </Stack>
   )
 }

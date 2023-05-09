@@ -2,13 +2,14 @@ import { Button, CircularProgress, Grid, Paper, TextField, Typography } from "@m
 import { type ReactElement, useEffect, useState } from "react"
 import { Edit, KeyboardArrowLeft, KeyboardArrowRight, Save } from "@mui/icons-material"
 
-import AvatarImage from "../../components/AvatarImage"
+import AvatarImage from "../../shared/components/AvatarImage"
 
-import { type Profile } from "../../models"
-import { ProfileAPI } from "../../api"
+import type Profile from "../types/Profile"
+import { ProfileAPI } from "../ProfileAPI"
 
-import avatars from "../../res/avatars.json"
-import { useAppSelector } from "../../app"
+import { useAppSelector } from "../../../redux"
+
+import avatars from "../../../res/avatars.json"
 
 export default function ProfileView({ studentId }: Props): ReactElement {
   const currentStudentId = useAppSelector((state) => state.authentication.studentId)

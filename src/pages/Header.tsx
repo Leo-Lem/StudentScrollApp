@@ -13,10 +13,10 @@ import {
 } from "@mui/material"
 import { AccountCircle } from "@mui/icons-material"
 
-import Logo from "../components/Logo"
-import SearchBar from "../features/profile/SearchBar"
+import Logo from "../features/shared/components/Logo"
+import SearchBar from "../features/profile/components/SearchBar"
 
-import { useAppDispatch, useAppSelector } from "../app"
+import { useAppDispatch, useAppSelector } from "../redux"
 import { signOut } from "../features/authentication"
 
 export default function Header(): ReactElement {

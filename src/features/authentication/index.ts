@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import AuthenticationError from "./types/AuthenticationError"
-import AuthenticationStatus from "./types/AuthenticationStatus"
+import { signIn, signUp } from "./api"
+import { AuthenticationStatus, AuthenticationError } from "./types"
 
 export interface AuthenticationState {
   status: AuthenticationStatus
@@ -14,7 +14,10 @@ const token = localStorage.getItem("token")
 const studentId = localStorage.getItem("studentId")
 
 const initialState: AuthenticationState = {
-  status: token !== null && studentId !== null ? AuthenticationStatus.authenticated : AuthenticationStatus.unauthenticated,
+  status:
+    token !== null && studentId !== null
+      ? AuthenticationStatus.authenticated
+      : AuthenticationStatus.unauthenticated,
   token: token !== null ? token : undefined,
   studentId: studentId !== null ? parseInt(studentId) : undefined
 }
@@ -60,52 +63,7 @@ const authentication = createSlice({
   }
 })
 
-export const signIn = createAsyncThunk(
-  "auth/signIn",
-  async (info: { email: string; password: string }) => {
-    const response = await fetch("/api/v1/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info)
-    })
-
-    if (response.ok) {
-      const json: { id: number; token: string } = await response.json()
-      return { studentId: json.id, token: json.token }
-    }
-
-    switch (response.status) {
-      case 401:
-        return { error: AuthenticationError.invalidCredentials }
-      default:
-        return { error: AuthenticationError.unknown }
-    }
-  }
-)
-
-export const signUp = createAsyncThunk(
-  "auth/signUp",
-  async (info: { name: string; email: string; password: string }) => {
-    const response = await fetch("/api/v1/students", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info)
-    })
-
-    if (response.ok) {
-      const json: { id: number; token: string } = await response.json()
-      return { studentId: json.id, token: json.token }
-    }
-
-    switch (response.status) {
-      case 401:
-        return { error: AuthenticationError.emailInUse }
-      default:
-        return { error: AuthenticationError.unknown }
-    }
-  }
-)
-
+export { signIn, signUp }
 export const { signOut } = authentication.actions
 
 export default authentication.reducer

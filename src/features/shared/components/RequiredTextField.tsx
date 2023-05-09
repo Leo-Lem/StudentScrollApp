@@ -2,7 +2,14 @@ import { TextField } from "@mui/material"
 import { type TextFieldProps } from "@mui/material/TextField"
 import { type SetStateAction, type ReactElement, useState, type Dispatch, useEffect } from "react"
 
-export default function RequiredTextField({ setValidValue, reset, showsFeedback, validate, invalidMessage, ...textFieldProps }: Props): ReactElement {
+export default function RequiredTextField({
+  setValidValue,
+  reset,
+  showsFeedback,
+  validate,
+  invalidMessage,
+  ...textFieldProps
+}: Props): ReactElement {
   const [value, setValue] = useState("")
   const [isEmpty, setIsEmpty] = useState<boolean | null>(null)
   const [isInvalid, setIsInvalid] = useState<boolean | null>(null)

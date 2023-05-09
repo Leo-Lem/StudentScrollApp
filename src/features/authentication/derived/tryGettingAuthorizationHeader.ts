@@ -1,5 +1,5 @@
 import { signOut } from ".."
-import { type RootState } from "../../../app/store"
+import { type RootState } from "../../../redux"
 
 export default function tryGettingAuthorizationHeader(thunkAPI: any): string {
   const state = thunkAPI.getState() as RootState

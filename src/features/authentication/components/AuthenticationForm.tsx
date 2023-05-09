@@ -1,11 +1,11 @@
 import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
-import ErrorFeedback from "../../../components/ErrorFeedback"
-import RequiredTextField from "../../../components/RequiredTextField"
-import AsyncButton from "../../../components/AsyncButton"
+import ErrorFeedback from "../../shared/components/ErrorFeedback"
+import RequiredTextField from "../../shared/components/RequiredTextField"
+import AsyncButton from "../../shared/components/AsyncButton"
 
-import { useAppDispatch, useAppSelector } from "../../../app"
+import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { signIn, signUp } from ".."
 import AuthenticationStatus from "../types/AuthenticationStatus"
