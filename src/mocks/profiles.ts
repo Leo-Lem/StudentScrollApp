@@ -13,14 +13,9 @@ export default function mockProfiles(server: Server) {
 
   server.put("students/:studentId/profile", async (schema: any, { url, requestBody }) => {
     const profile = schema.profiles.findBy({ studentsId: parseInt(url.split("/")[4]) })
-
-    // TODO: integrate properly with mirage
     const { newName, newBio, newIcon } = JSON.parse(requestBody);
 
-    return {
-      name: newName ?? "Raoul Duke",
-      bio: newBio ?? "A man who procrastinates in his choosing will inevitably have his choice made for him by circumstance.",
-      icon: newIcon ?? "School"
-    }
+    profile.update({ name: newName ?? profile.name, bio: newBio ?? profile.bio, icon: newIcon ?? profile.icon })
+    return JSON.stringify(profile.attrs)
   })
 }

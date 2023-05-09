@@ -76,7 +76,9 @@ export default function ProfileView({ studentId }: Props): ReactElement {
             >
               <KeyboardArrowLeft />
             </Button>
-            <AvatarImage avatarId={icons[newIconIndex]} />
+
+            <AvatarImage sx={{ fontSize: "15vw", alignSelf: "end" }} avatarId={icons[newIconIndex]} />
+
             <Button
               onClick={() => {
                 setNewIconIndex((newIconIndex + 1) % icons.length)
@@ -121,7 +123,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
             </Button>
           )}
 
-          <AvatarImage avatarId={profile.icon} />
+          <AvatarImage sx={{ fontSize: "20vw", alignSelf: "end" }} avatarId={profile.icon} />
 
           <Typography variant="h3">{profile.name}</Typography>
 

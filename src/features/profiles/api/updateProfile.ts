@@ -14,7 +14,8 @@ export default createAsyncThunk(
       headers: {
         Authorization: tryGettingAuthorizationHeader(thunkAPI),
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify(info)
     })
 
     if (response.ok && id !== undefined) return { id, profile: (await response.json()) as Profile }
