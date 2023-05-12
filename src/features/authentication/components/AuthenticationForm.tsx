@@ -33,6 +33,8 @@ export default function AuthenticationForm(): ReactElement {
       $password.get === undefined ||
       $password.get === "invalid"
     ) {
+      console.log("Invalid" + $name.get + $email.get + $password.get)
+
       setIsFeedbackActive(true)
       return false
     } else if (isRegistering) {
@@ -40,10 +42,6 @@ export default function AuthenticationForm(): ReactElement {
     } else {
       await dispatch(signIn({ email: $email.get, password: $password.get }))
     }
-
-    $name.set(undefined)
-    $email.set(undefined)
-    $password.set(undefined)
 
     return status === AuthenticationStatus.authenticated
   }

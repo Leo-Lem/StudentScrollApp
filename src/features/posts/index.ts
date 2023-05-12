@@ -6,9 +6,11 @@ import { createPost, readPosts, deletePost } from "./api"
 export interface PostsState {
   posts?: ContentPost[]
   newestFirst: boolean
+  pageSize: number
+  nextPage: number | undefined
 }
 
-const initialState: PostsState = { newestFirst: true }
+const initialState: PostsState = { newestFirst: true, pageSize: 10, nextPage: 0 }
 
 const posts = createSlice({
   name: "posts",
@@ -16,9 +18,11 @@ const posts = createSlice({
   reducers: {
     resetPosts: (state) => {
       state.posts = undefined
+      state.nextPage = 0
     },
     toggleNewestFirst: (state) => {
       state.newestFirst = !state.newestFirst
+      state.nextPage = 0
     }
   },
   extraReducers: (builder) => {
@@ -30,7 +34,10 @@ const posts = createSlice({
         else state.posts.push(action.payload)
       })
       .addCase(readPosts.fulfilled, (state, action) => {
-        state.posts = action.payload
+        if (state.posts === undefined) state.posts = []
+        state.posts.push(...action.payload.posts)
+        state.posts = state.posts.filter((post, i, posts) => posts.findIndex(post2 => (post2.id === post.id)) === i)
+        state.nextPage = action.payload.nextPage
       })
       .addCase(deletePost.fulfilled, (state, action) => {
         if (state.posts !== undefined)
