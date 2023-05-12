@@ -1,30 +1,18 @@
 import { useState, type ReactElement } from "react"
-import {
-  Box,
-  Chip,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Paper,
-  Select,
-  Stack
-} from "@mui/material"
+import { Paper, Stack } from "@mui/material"
 import { Send } from "@mui/icons-material"
 
-import { tags as allTags } from "../../../res"
-import { AsyncButton, RequiredTextField } from "../../../components"
+import { AsyncButton, RequiredTextField, SelectTags } from "../../../components"
 import { useAppDispatch } from "../../../redux"
 
 import { createPost } from ".."
 import useBinding from "../../../hooks/useBinding"
 
-export default function PostCreationPanel(): ReactElement {
+export default function CreatePostMenu({ dismiss }: Props): ReactElement {
   const dispatch = useAppDispatch()
 
-  const [reset, setReset] = useState(false)
   const $title = useBinding<string | "invalid" | undefined>(undefined)
-  const [tags, setTags] = useState<string[]>([])
+  const $tags = useBinding<string[]>([])
   const $content = useBinding<string | "invalid" | undefined>(undefined)
 
   const [areRequirementsActive, setAreRequirementsActive] = useState(false)
@@ -40,9 +28,15 @@ export default function PostCreationPanel(): ReactElement {
       return false
     }
 
-    await dispatch(createPost({ title: $title.get.trim(), tags, content: $content.get.trim() }))
+    await dispatch(createPost({ title: $title.get.trim(), tags: $tags.get, content: $content.get.trim() }))
 
-    setReset(!reset)
+    setAreRequirementsActive(false)
+    $title.set(undefined)
+    $tags.set([])
+    $content.set(undefined)
+
+    if (dismiss !== undefined)
+      dismiss()
 
     return true
   }
@@ -56,30 +50,7 @@ export default function PostCreationPanel(): ReactElement {
           placeholder="New Post"
         />
 
-        <FormControl fullWidth>
-          <InputLabel>Tags</InputLabel>
-          <Select
-            multiple
-            value={tags}
-            onChange={({ target: { value } }) => {
-              setTags(typeof value === "string" ? value.split(",") : value)
-            }}
-            input={<OutlinedInput label="Tags" />}
-            renderValue={(selected) => (
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, overflowX: "auto" }}>
-                {selected.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
-          >
-            {allTags.map((tag) => (
-              <MenuItem key={tag} value={tag}>
-                {tag}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <SelectTags $tags={$tags} />
 
         <RequiredTextField
           $value={$content}
@@ -87,7 +58,7 @@ export default function PostCreationPanel(): ReactElement {
           validate={(content) => content.trim().length > 3}
           invalidMessage="Please elaborate…"
           multiline
-          minRows={3}
+          minRows={4}
           placeholder="What's on your mind?"
         />
 
@@ -97,4 +68,8 @@ export default function PostCreationPanel(): ReactElement {
       </Stack>
     </Paper>
   )
+}
+
+interface Props {
+  dismiss?: () => void
 }

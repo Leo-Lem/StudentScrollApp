@@ -14,7 +14,23 @@ export default function RequiredTextField({
   const [isEmpty, setIsEmpty] = useState<boolean | undefined>(undefined)
   const [isInvalid, setIsInvalid] = useState<boolean | undefined>(undefined)
 
+  const [isResetting, setIsResetting] = useState(false)
+
   useEffect(() => {
+    if ($value.get === undefined) {
+      setIsResetting(true)
+      setValue("")
+      setIsEmpty(undefined)
+      setIsInvalid(undefined)
+    }
+  }, [$value.get === undefined])
+
+  useEffect(() => {
+    if (isResetting) {
+      setIsResetting(false)
+      return
+    }
+
     if (value === "") {
       setIsEmpty(true)
       setIsInvalid(false)

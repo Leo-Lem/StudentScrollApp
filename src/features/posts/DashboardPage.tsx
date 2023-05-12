@@ -1,8 +1,10 @@
 import { type ReactElement } from "react"
+import { Box, Grid } from "@mui/material"
 
-import { Grid } from "@mui/material"
-import CreatePostPanel from "./components/PostCreationPanel"
+import CreatePostPanel from "./components/CreatePostMenu"
 import PostsScroll from "./components/PostsScroll"
+import DismissableCreatePostMenu from "./components/DismissableCreatePostMenu"
+
 import useIsCompact from "../../hooks/useIsCompact"
 
 export default function DashboardPage(): ReactElement {
@@ -10,7 +12,10 @@ export default function DashboardPage(): ReactElement {
 
   if (isCompact)
     return (
-      <PostsScroll />
+      <Box>
+        <PostsScroll />
+        <DismissableCreatePostMenu />
+      </Box>
     )
   else
     return (
