@@ -40,7 +40,7 @@ export default function EditProfileDetails({ profile, stopEditing }: Props): Rea
         <Save />
       </Button>
 
-      <Grid container direction="row" justifyContent="end">
+      <Grid container direction="row" justifyContent="end" wrap="nowrap">
         <Button
           onClick={() => {
             setNewIconIndex((((newIconIndex - 1) % icons.length) + icons.length) % icons.length)
@@ -51,7 +51,7 @@ export default function EditProfileDetails({ profile, stopEditing }: Props): Rea
 
         <ProfileIcon
           fontSize="large"
-          sx={{ fontSize: "max(20vw, 30vh)", aspectRatio: 1 }}
+          sx={{ fontSize: "max(15vw, 15vh)", aspectRatio: 1 }}
           iconId={icons[newIconIndex]}
         />
 

@@ -43,7 +43,7 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
 
       <ProfileIcon
         fontSize="large"
-        sx={{ fontSize: "max(20vw, 30vh)", aspectRatio: 1 }}
+        sx={{ fontSize: "max(15vw, 15vh)", aspectRatio: 1 }}
         iconId={profile.icon}
       />
 
