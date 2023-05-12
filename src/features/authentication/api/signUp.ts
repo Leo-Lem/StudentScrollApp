@@ -1,6 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { AuthenticationError } from "../types";
+import { AuthenticationError } from "../types"
 
 export default createAsyncThunk(
   "auth/signUp",

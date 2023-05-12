@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
-import { Binding } from "../../shared/useBinding";
-import RequiredTextField from "../../shared/components/RequiredTextField";
+import { ReactElement } from "react"
+import { Binding } from "../../shared/useBinding"
+import RequiredTextField from "../../shared/components/RequiredTextField"
 
 export default function NameTextField({ $name, showsFeedback }: Props): ReactElement {
   return (

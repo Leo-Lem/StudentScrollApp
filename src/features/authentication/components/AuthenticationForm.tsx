@@ -27,12 +27,12 @@ export default function AuthenticationForm(): ReactElement {
 
   const authenticate = async (): Promise<boolean> => {
     if (
-      isRegistering && $name.get === undefined
-      || isRegistering && $name.get === "invalid"
-      || $email.get === undefined
-      || $email.get === "invalid"
-      || $password.get === undefined
-      || $password.get === "invalid"
+      (isRegistering && $name.get === undefined) ||
+      (isRegistering && $name.get === "invalid") ||
+      $email.get === undefined ||
+      $email.get === "invalid" ||
+      $password.get === undefined ||
+      $password.get === "invalid"
     ) {
       setIsFeedbackActive(true)
       return false
@@ -58,7 +58,11 @@ export default function AuthenticationForm(): ReactElement {
 
         <EmailTextField $email={$email} validate={isRegistering} showsFeedback={isFeedbackActive} />
 
-        <PasswordTextField $password={$password} isRegistering={isRegistering} showsFeedback={isFeedbackActive} />
+        <PasswordTextField
+          $password={$password}
+          isRegistering={isRegistering}
+          showsFeedback={isFeedbackActive}
+        />
 
         <AsyncButton action={authenticate} variant="contained">
           {isRegistering ? "Sign Up" : "Sign in"}

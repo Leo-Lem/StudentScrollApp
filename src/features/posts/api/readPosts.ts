@@ -4,7 +4,6 @@ import { tryGettingAuthorizationHeader } from "../../../redux"
 import ContentPost from "../types/ContentPost"
 import { RootState } from "../../../redux"
 
-
 export default createAsyncThunk(
   "posts/readPosts",
   async (page: number, thunkAPI): Promise<ContentPost[]> => {

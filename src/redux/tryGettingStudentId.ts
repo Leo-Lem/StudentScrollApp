@@ -1,4 +1,3 @@
-
 import { type RootState } from "./store"
 import { signOut } from "../features/authentication"
 

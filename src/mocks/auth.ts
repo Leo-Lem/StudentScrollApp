@@ -1,4 +1,4 @@
-import { Response, Server } from "miragejs";
+import { Response, Server } from "miragejs"
 
 export const exampleStudents = [
   { id: "1", name: "Raoul Duke", email: "raoul@duke.legend" },
@@ -12,7 +12,8 @@ export default function mockAuthentication(server: Server) {
 
     const student = schema.students.findBy({ email: email })
 
-    if (student !== null) return { ...student.attrs, id: parseInt(student.id), token: "xyz123", type: "Bearer" }
+    if (student !== null)
+      return { ...student.attrs, id: parseInt(student.id), token: "xyz123", type: "Bearer" }
     else return new Response(401, {})
   })
 

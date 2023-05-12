@@ -8,7 +8,16 @@ export default function Footer(): ReactElement {
         <Chip label="About" />
       </Divider>
 
-      <Typography variant="h6" fontStyle="italic" fontSize="0.8em" textAlign="center" textOverflow="ellipsis" overflow="scroll" noWrap padding={1}>
+      <Typography
+        variant="h6"
+        fontStyle="italic"
+        fontSize="0.8em"
+        textAlign="center"
+        textOverflow="ellipsis"
+        overflow="scroll"
+        noWrap
+        padding={1}
+      >
         Developed by Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann
       </Typography>
     </Stack>

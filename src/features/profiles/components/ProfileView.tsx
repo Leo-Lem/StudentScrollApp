@@ -69,15 +69,16 @@ export default function ProfileView({ studentId }: Props): ReactElement {
           <Grid container direction="row" justifyContent="end" alignSelf="end">
             <Button
               onClick={() => {
-                setNewIconIndex(
-                  (((newIconIndex - 1) % icons.length) + icons.length) % icons.length
-                )
+                setNewIconIndex((((newIconIndex - 1) % icons.length) + icons.length) % icons.length)
               }}
             >
               <KeyboardArrowLeft />
             </Button>
 
-            <AvatarImage sx={{ fontSize: "15vw", alignSelf: "end" }} avatarId={icons[newIconIndex]} />
+            <AvatarImage
+              sx={{ fontSize: "15vw", alignSelf: "end" }}
+              avatarId={icons[newIconIndex]}
+            />
 
             <Button
               onClick={() => {

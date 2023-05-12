@@ -1,11 +1,14 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../redux"
-import { Profile } from "../types";
+import { Profile } from "../types"
 
 export default createAsyncThunk(
   "profile/updateProfile",
-  async (info: { newName?: string, newBio?: string, newIcon?: string }, thunkAPI): Promise<{ id: number, profile: Profile }> => {
+  async (
+    info: { newName?: string; newBio?: string; newIcon?: string },
+    thunkAPI
+  ): Promise<{ id: number; profile: Profile }> => {
     const id = tryGettingStudentId(thunkAPI)
 
     const response = await fetch(`/api/v1/students/${id}/profile`, {

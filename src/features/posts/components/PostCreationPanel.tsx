@@ -31,10 +31,10 @@ export default function PostCreationPanel(): ReactElement {
 
   const create = async (): Promise<boolean> => {
     if (
-      $title.get === undefined
-      || $title.get === "invalid"
-      || $content.get === undefined
-      || $content.get === "invalid"
+      $title.get === undefined ||
+      $title.get === "invalid" ||
+      $content.get === undefined ||
+      $content.get === "invalid"
     ) {
       setAreRequirementsActive(true)
       return false
@@ -91,12 +91,7 @@ export default function PostCreationPanel(): ReactElement {
           placeholder="What's on your mind?"
         />
 
-        <AsyncButton
-          action={create}
-          variant="contained"
-          fullWidth
-          startIcon={<Send />}
-        >
+        <AsyncButton action={create} variant="contained" fullWidth startIcon={<Send />}>
           Post
         </AsyncButton>
       </Stack>

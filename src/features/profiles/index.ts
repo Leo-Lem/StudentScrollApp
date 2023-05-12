@@ -4,7 +4,9 @@ import { Profile } from "./types"
 import readProfile from "./api/readProfile"
 import updateProfile from "./api/updateProfile"
 
-export interface ProfileState { [id: number]: Profile }
+export interface ProfileState {
+  [id: number]: Profile
+}
 
 const initialState: ProfileState = {}
 

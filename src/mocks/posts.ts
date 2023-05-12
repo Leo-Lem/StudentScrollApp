@@ -1,9 +1,21 @@
 import { Server } from "miragejs"
 
 export const examplePosts = [
-  { id: "1", title: "First Post", tags: ["First", "A new beginning!"], content: "This is the first post", posterId: "1" },
-  { id: "2", title: "Second Post", tags: ["Second"], content: "This is the second post", posterId: "2" },
-  { id: "3", title: "Third Post", tags: [], content: "This is the third post", posterId: "3" },
+  {
+    id: "1",
+    title: "First Post",
+    tags: ["First", "A new beginning!"],
+    content: "This is the first post",
+    posterId: "1"
+  },
+  {
+    id: "2",
+    title: "Second Post",
+    tags: ["Second"],
+    content: "This is the second post",
+    posterId: "2"
+  },
+  { id: "3", title: "Third Post", tags: [], content: "This is the third post", posterId: "3" }
 ]
 
 export default function mockPosts(server: Server) {
@@ -17,9 +29,7 @@ export default function mockPosts(server: Server) {
       (schema.posts.all().models as any[])
         .map((model) => ({ ...model.attrs, id: parseInt(model.id) }))
         .sort((lhs: any, rhs: any) =>
-          (JSON.parse(queryParams.sortAscending) as boolean)
-            ? lhs.id - rhs.id
-            : rhs.id - lhs.id
+          (JSON.parse(queryParams.sortAscending) as boolean) ? lhs.id - rhs.id : rhs.id - lhs.id
         )
     )
   })
