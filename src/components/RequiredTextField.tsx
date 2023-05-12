@@ -14,37 +14,13 @@ export default function RequiredTextField({
   const [isEmpty, setIsEmpty] = useState<boolean | undefined>(undefined)
   const [isInvalid, setIsInvalid] = useState<boolean | undefined>(undefined)
 
-  const [isResetting, setIsResetting] = useState(false)
-
   useEffect(() => {
     if ($value.get === undefined) {
-      setIsResetting(true)
       setValue("")
       setIsEmpty(undefined)
       setIsInvalid(undefined)
     }
   }, [$value.get === undefined])
-
-  useEffect(() => {
-    if (isResetting) {
-      setIsResetting(false)
-      return
-    }
-
-    if (value === "") {
-      setIsEmpty(true)
-      setIsInvalid(false)
-      $value.set("invalid")
-    } else if (validate !== undefined && !validate(value)) {
-      setIsEmpty(false)
-      setIsInvalid(true)
-      $value.set("invalid")
-    } else {
-      setIsEmpty(false)
-      setIsInvalid(false)
-      $value.set(value)
-    }
-  }, [value])
 
   useEffect(() => {
     if (showsFeedback ?? false) {
@@ -69,6 +45,20 @@ export default function RequiredTextField({
       value={value}
       onChange={({ target: { value } }) => {
         setValue(value)
+
+        if (value === "") {
+          setIsEmpty(true)
+          setIsInvalid(false)
+          $value.set("invalid")
+        } else if (validate !== undefined && !validate(value)) {
+          setIsEmpty(false)
+          setIsInvalid(true)
+          $value.set("invalid")
+        } else {
+          setIsEmpty(false)
+          setIsInvalid(false)
+          $value.set(value)
+        }
       }}
     />
   )

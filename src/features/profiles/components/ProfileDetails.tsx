@@ -24,9 +24,11 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
   const canEdit = (): boolean => currentStudentId !== undefined && studentId === currentStudentId
 
   const loading = <CircularProgress sx={{ alignSelf: "center" }} />
+
   const editing = (profile: Profile) => (
     <EditProfileDetails profile={profile} stopEditing={() => setIsEditing(false)} />
   )
+
   const details = (profile: Profile) => (
     <Fragment>
       {canEdit() && (
@@ -47,7 +49,7 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
         iconId={profile.icon}
       />
 
-      <Grid xs>
+      <Grid item xs>
         <Typography noWrap overflow="scroll" textOverflow="ellipsis" variant="h3">
           {profile.name}
         </Typography>

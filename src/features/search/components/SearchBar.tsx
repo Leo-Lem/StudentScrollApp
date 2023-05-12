@@ -1,9 +1,9 @@
 import { Autocomplete, TextField } from "@mui/material"
 import { useState, type ReactElement, useEffect, ReactNode } from "react"
-import { useAppDispatch, useAppSelector } from "../../../../redux"
+import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { readProfile } from "../.."
-import LinkMenuItem from "../../../../components/LinkMenuItem"
+import { readProfile } from "../../profiles"
+import LinkMenuItem from "../../../components/LinkMenuItem"
 
 export default function SearchBar(): ReactElement {
   const dispatch = useAppDispatch()
@@ -34,11 +34,20 @@ export default function SearchBar(): ReactElement {
     }
   }
 
+  const getOptionLabel = (option: string | SearchResult): string => {
+    if (typeof option === "string") return option
+
+    switch (option.id) {
+      case "profileById": return option.value.name
+      default: return ""
+    }
+  }
+
   const renderOption = (option: SearchResult): ReactNode => {
     switch (option.id) {
       case "profileById":
         return (
-          <LinkMenuItem href={`/profile/${profileByIdQuery}`} dismiss={clear}>
+          <LinkMenuItem href={`/profile/${profileByIdQuery}`} dismiss={clear} key={profileByIdQuery}>
             {option.value.name}
           </LinkMenuItem>
         )
@@ -57,6 +66,7 @@ export default function SearchBar(): ReactElement {
       inputValue={searchQuery}
       options={options()}
       groupBy={groupBy}
+      getOptionLabel={getOptionLabel}
       renderInput={(props) => <TextField {...props} variant="standard" placeholder="Search" />}
       renderOption={(props, option) => renderOption(option)}
       onInputChange={(_, value) => {

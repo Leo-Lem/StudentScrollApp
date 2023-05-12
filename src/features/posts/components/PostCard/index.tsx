@@ -62,69 +62,12 @@ export default function PostCard({
           {isCompact ? compact : regular}
         </Grid>
 
-        <Grid xs={3} sm={1}>
+        <Grid item xs={3} sm={1}>
           <ProfileLink studentId={posterId} />
         </Grid>
       </Grid>
     </Card>
   )
-
-  if (isCompact)
-    return (
-      <Grid container direction="row" padding={1}>
-        <Grid item xs={9} sm={11} gap={1}>
-          <DeletePostButton postId={id} posterId={posterId} />
-
-          <Grid>
-            <Typography noWrap variant="h4">
-              {title}
-            </Typography>
-          </Grid>
-
-          <TagsList tags={tags} />
-
-          <Grid item xs={12}>
-            <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">
-              {content}
-            </Typography>
-          </Grid>
-        </Grid>
-
-        <Grid xs={3} sm={1}>
-          <ProfileLink studentId={posterId} />
-        </Grid>
-      </Grid>
-    )
-  else
-    return (
-      <Card>
-        <Grid container direction="row" padding={1}>
-          <Grid item xs={9} sm={11} gap={1}>
-            <Grid container direction="row" wrap="nowrap" gap={1}>
-              <DeletePostButton postId={id} posterId={posterId} />
-
-              <Grid>
-                <Typography noWrap variant="h4">
-                  {title}
-                </Typography>
-              </Grid>
-
-              <TagsList tags={tags} />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">
-                {content}
-              </Typography>
-            </Grid>
-          </Grid>
-
-          <Grid xs={3} sm={1}>
-            <ProfileLink studentId={posterId} />
-          </Grid>
-        </Grid>
-      </Card>
-    )
 }
 
 interface Props {
