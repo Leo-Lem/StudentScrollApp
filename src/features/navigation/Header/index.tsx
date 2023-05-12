@@ -2,7 +2,7 @@ import { type ReactElement } from "react"
 import { AppBar, Box, Button, Divider, Stack, Toolbar } from "@mui/material"
 
 import { Logo } from "../../../components"
-import SearchBar from "../../search/components/SearchBar"
+import SearchBar from "../../profiles/search/components/SearchBar"
 import AccountMenu from "./AccountMenu"
 import HeaderNavigationButtons from "./NavigationButtons"
 import NavigationMenu from "./NavigationMenu"

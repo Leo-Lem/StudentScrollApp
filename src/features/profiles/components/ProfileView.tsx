@@ -77,7 +77,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
 
             <ProfileIcon
               sx={{ fontSize: "15vw", alignSelf: "end" }}
-              avatarId={icons[newIconIndex]}
+              iconId={icons[newIconIndex]}
             />
 
             <Button
@@ -124,7 +124,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
             </Button>
           )}
 
-          <ProfileIcon sx={{ fontSize: "20vw", alignSelf: "end" }} avatarId={profile.icon} />
+          <ProfileIcon sx={{ fontSize: "20vw", alignSelf: "end" }} iconId={profile.icon} />
 
           <Typography variant="h3">{profile.name}</Typography>
 

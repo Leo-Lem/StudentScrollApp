@@ -9,7 +9,7 @@ import {
   Typography
 } from "@mui/material"
 
-import ContentPostCard from "./ContentPostCard"
+import ContentPostCard from "./PostCard"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 import { readPosts, resetPosts, toggleNewestFirst } from ".."
 

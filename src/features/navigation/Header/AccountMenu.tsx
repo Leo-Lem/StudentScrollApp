@@ -8,8 +8,6 @@ import LinkMenuItem from "../../../components/LinkMenuItem"
 import { useAppSelector } from "../../../redux"
 
 export default function AccountMenu(): ReactElement {
-  const studentId = useAppSelector((state) => state.authentication.studentId)
-
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const dismiss = (): void => {
@@ -29,11 +27,9 @@ export default function AccountMenu(): ReactElement {
       </IconButton>
 
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={dismiss}>
-        {studentId !== undefined && (
-          <LinkMenuItem startIcon={<AccountBox />} href={`/profile/${studentId}`} dismiss={dismiss}>
-            Profile
-          </LinkMenuItem>
-        )}
+        <LinkMenuItem startIcon={<AccountBox />} href="/profile" dismiss={dismiss}>
+          Profile
+        </LinkMenuItem>
 
         <SignOutMenuItem dismiss={dismiss} />
       </Menu>

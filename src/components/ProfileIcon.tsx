@@ -11,8 +11,8 @@ import { type ReactElement } from "react"
 
 // TODO: add more icons
 
-export default function ProfileIcon({ sx, avatarId }: Props): ReactElement {
-  switch (avatarId) {
+export default function ProfileIcon({ sx, iconId }: Props): ReactElement {
+  switch (iconId) {
     case "AccessibilityNew":
       return <AccessibilityNew sx={sx} />
     case "Blind":
@@ -30,5 +30,5 @@ export default function ProfileIcon({ sx, avatarId }: Props): ReactElement {
 
 interface Props {
   sx?: SxProps
-  avatarId: string
+  iconId: string
 }

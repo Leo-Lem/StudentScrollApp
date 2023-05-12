@@ -10,13 +10,13 @@ export const exampleProfiles = [
   {
     name: "Hunter S. Thompson",
     bio: "I hate to advocate drugs, alcohol, violence, or insanity to anyone, but they've always worked for me.",
-    icon: "School",
+    icon: "Blind",
     studentsId: "2"
   },
   {
     name: "Dr. Gonzo",
     bio: "There he goes. One of God's own prototypes. A high-powered mutant of some kind never even considered for mass production. Too weird to live, and too rare to die.",
-    icon: "School",
+    icon: "Diversity2",
     studentsId: "3"
   }
 ]
