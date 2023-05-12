@@ -4,7 +4,13 @@ import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 
 import { dark } from "./themes"
 import { useAppSelector } from "./redux"
-import { Header, Footer, WelcomePage, DashboardPage, ProfilePage } from "./pages"
+
+import DashboardPage from "./features/posts/DashboardPage"
+import ProfilePage from "./features/profiles/ProfilePage"
+import Header from "./features/navigation/Header"
+import WelcomePage from "./features/authentication/WelcomePage"
+import Footer from "./features/navigation/Footer"
+import WelcomeHeader from "./features/navigation/WelcomeHeader"
 
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
@@ -14,14 +20,15 @@ export default function App(): ReactElement {
       <ThemeProvider theme={dark}>
         <CssBaseline />
         <Container disableGutters sx={{ padding: 1 }}>
-          {isAuthenticated ? <Header /> : <WelcomePage />}
+          {isAuthenticated ? <Header /> : <WelcomeHeader />}
 
-          {isAuthenticated && (
+          {isAuthenticated ? (
             <Routes>
               <Route path="/" element={<DashboardPage />} />
               <Route path="/profile/:studentId" element={<ProfilePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
             </Routes>
+          ) : (
+            <WelcomePage />
           )}
 
           <Footer />

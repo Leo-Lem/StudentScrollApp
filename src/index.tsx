@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === "development")
   import("./mocks").then(({ createMockedAPI }) => createMockedAPI())
 
 createRoot(document.getElementById("root") as HTMLElement).render(
-
   <Provider store={store}>
     <StrictMode>
       <App />

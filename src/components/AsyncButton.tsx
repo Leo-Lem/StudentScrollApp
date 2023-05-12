@@ -1,14 +1,8 @@
 import { type ReactNode, useState, type ReactElement } from "react"
 import { Cancel, CheckCircle } from "@mui/icons-material"
-import { Button, CircularProgress } from "@mui/material"
+import { Button, ButtonProps, CircularProgress } from "@mui/material"
 
-export default function AsyncButton({
-  fullWidth,
-  variant,
-  startIcon,
-  label,
-  action
-}: Props): ReactElement {
+export default function AsyncButton({ children, action, ...buttonProps }: Props): ReactElement {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
 
@@ -25,16 +19,15 @@ export default function AsyncButton({
   }
 
   const content = (): ReactNode => {
-    if (isSuccess === null) return label
+    if (isSuccess === null) return children
     else return isSuccess ? <CheckCircle /> : <Cancel />
   }
 
   return (
     <Button
+      {...buttonProps}
       disabled={isLoading}
-      fullWidth={fullWidth}
-      variant={variant}
-      startIcon={isSuccess === null && startIcon}
+      startIcon={isSuccess === null && buttonProps.startIcon}
       color={isSuccess === null ? "primary" : isSuccess ? "success" : "error"}
       onClick={handleLoading}
     >
@@ -43,10 +36,6 @@ export default function AsyncButton({
   )
 }
 
-interface Props {
-  fullWidth?: boolean
-  variant?: "contained" | "outlined" | "text"
-  startIcon?: ReactNode
-  label: ReactNode
+type Props = ButtonProps & {
   action: () => Promise<boolean>
 }

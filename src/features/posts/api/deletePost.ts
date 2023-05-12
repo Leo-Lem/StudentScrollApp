@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import tryGettingAuthorizationHeader from "../../authentication/derived/tryGettingAuthorizationHeader"
+import { tryGettingAuthorizationHeader } from "../../../redux"
 
 export default createAsyncThunk(
   "posts/deletePost",

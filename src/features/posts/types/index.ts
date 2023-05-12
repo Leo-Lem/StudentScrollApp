@@ -1,1 +1,1 @@
-export { type default as ContentPost } from "./ContentPost";
+export { type default as ContentPost } from "./ContentPost"

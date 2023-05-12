@@ -9,7 +9,7 @@ import {
   Typography
 } from "@mui/material"
 
-import ContentPostCard from "./ContentPostCard"
+import ContentPostCard from "./PostCard"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 import { readPosts, resetPosts, toggleNewestFirst } from ".."
 
@@ -41,12 +41,11 @@ export default function PostsScroll(): ReactElement {
 
       {posts?.map((post) => (
         <Slide in direction="down" mountOnEnter key={post.id}>
-          <Box width="100%" >
+          <Box width="100%">
             <ContentPostCard post={post} />
           </Box>
         </Slide>
       )) ?? <CircularProgress />}
-
     </Stack>
   )
 }
