@@ -1,37 +1,43 @@
 import { TextField } from "@mui/material"
 import { type TextFieldProps } from "@mui/material/TextField"
-import { type SetStateAction, type ReactElement, useState, type Dispatch, useEffect } from "react"
+import { type ReactElement, useState, useEffect } from "react"
+import { Binding } from "../useBinding"
 
 export default function RequiredTextField({
-  setValidValue,
-  reset,
+  $value,
   showsFeedback,
   validate,
   invalidMessage,
   ...textFieldProps
 }: Props): ReactElement {
-  const [value, setValue] = useState("")
-  const [isEmpty, setIsEmpty] = useState<boolean | null>(null)
-  const [isInvalid, setIsInvalid] = useState<boolean | null>(null)
+  const [value, setValue] = useState($value.get === "invalid" ? "" : $value.get ?? "")
+  const [isEmpty, setIsEmpty] = useState<boolean | undefined>(undefined)
+  const [isInvalid, setIsInvalid] = useState<boolean | undefined>(undefined)
 
   useEffect(() => {
-    if (showsFeedback ?? false) {
-      setIsEmpty(value === "")
-      if (validate !== undefined) setIsInvalid(!validate(value))
+    if (value === "") {
+      setIsEmpty(true)
+      setIsInvalid(false)
+      $value.set("invalid")
+    } else if (validate !== undefined && !validate(value)) {
+      setIsEmpty(false)
+      setIsInvalid(true)
+      $value.set("invalid")
+    } else {
+      setIsEmpty(false)
+      setIsInvalid(false)
+      $value.set(value)
     }
-  }, [showsFeedback ?? false])
-
-  useEffect(() => {
-    setValidValue(
-      (isEmpty ?? true) || (validate !== undefined && (isInvalid ?? true)) ? null : value
-    )
   }, [value])
 
   useEffect(() => {
-    setValue("")
-  }, [reset])
-
-  const isError = (): boolean => (isEmpty ?? false) || (isInvalid ?? false)
+    if (showsFeedback ?? false) {
+      setValue($value.get === "invalid" ? "" : $value.get ?? "")
+    } else {
+      setIsEmpty(undefined)
+      setIsInvalid(undefined)
+    }
+  }, [showsFeedback ?? false])
 
   const helperText = (): string | null => {
     if (isEmpty ?? false) return "Required"
@@ -42,12 +48,10 @@ export default function RequiredTextField({
   return (
     <TextField
       {...textFieldProps}
-      error={isError()}
+      error={(isEmpty ?? false) || (isInvalid ?? false)}
       helperText={helperText()}
       value={value}
       onChange={({ target: { value } }) => {
-        setIsEmpty(value === "")
-        if (validate !== undefined) setIsInvalid(!validate(value))
         setValue(value)
       }}
     />
@@ -55,8 +59,7 @@ export default function RequiredTextField({
 }
 
 type Props = TextFieldProps & {
-  setValidValue: Dispatch<SetStateAction<string | null>>
-  reset?: boolean
+  $value: Binding<string | "invalid" | undefined>
   showsFeedback?: boolean
   validate?: (value: string) => boolean
   invalidMessage?: string

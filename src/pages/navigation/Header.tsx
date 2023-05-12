@@ -14,11 +14,11 @@ import {
 } from "@mui/material"
 import { AccountCircle } from "@mui/icons-material"
 
-import Logo from "../features/shared/components/Logo"
-import SearchBar from "../features/profiles/components/SearchBar"
+import Logo from "../../features/shared/components/Logo"
+import SearchBar from "../../features/profiles/components/SearchBar"
 
-import { useAppDispatch, useAppSelector } from "../redux"
-import { signOut } from "../features/authentication"
+import { useAppDispatch, useAppSelector } from "../../redux"
+import { signOut } from "../../features/authentication"
 
 export default function Header(): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
@@ -34,7 +34,7 @@ export default function Header(): ReactElement {
   return (
     <AppBar position="sticky" sx={{ marginBottom: 1 }}>
       <Toolbar>
-        <Button startIcon={<Logo />} color="inherit" size="large" href="/">
+        <Button startIcon={<Logo compact />} color="inherit" size="large" href="/">
           <Typography variant="h6">StudentScroll</Typography>
         </Button>
 

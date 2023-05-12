@@ -17,24 +17,30 @@ import RequiredTextField from "../../shared/components/RequiredTextField"
 import AsyncButton from "../../shared/components/AsyncButton"
 import { useAppDispatch } from "../../../redux"
 import { createPost } from ".."
+import useBinding from "../../shared/useBinding"
 
 export default function PostCreationPanel(): ReactElement {
   const dispatch = useAppDispatch()
 
   const [reset, setReset] = useState(false)
-  const [title, setTitle] = useState<string | null>(null)
+  const $title = useBinding<string | "invalid" | undefined>(undefined)
   const [tags, setTags] = useState<string[]>([])
-  const [content, setContent] = useState<string | null>(null)
+  const $content = useBinding<string | "invalid" | undefined>(undefined)
 
   const [areRequirementsActive, setAreRequirementsActive] = useState(false)
 
   const create = async (): Promise<boolean> => {
-    if (title === null || content === null) {
+    if (
+      $title.get === undefined
+      || $title.get === "invalid"
+      || $content.get === undefined
+      || $content.get === "invalid"
+    ) {
       setAreRequirementsActive(true)
       return false
     }
 
-    await dispatch(createPost({ title: title.trim(), tags, content: content.trim() }))
+    await dispatch(createPost({ title: $title.get.trim(), tags, content: $content.get.trim() }))
 
     setReset(!reset)
 
@@ -45,10 +51,9 @@ export default function PostCreationPanel(): ReactElement {
     <Paper elevation={2}>
       <Stack spacing={1} padding={1}>
         <RequiredTextField
-          placeholder="New Post"
-          setValidValue={setTitle}
-          reset={reset}
+          $value={$title}
           showsFeedback={areRequirementsActive}
+          placeholder="New Post"
         />
 
         <FormControl fullWidth>
@@ -77,23 +82,23 @@ export default function PostCreationPanel(): ReactElement {
         </FormControl>
 
         <RequiredTextField
-          multiline
-          minRows={10}
-          placeholder="What's on your mind?"
-          setValidValue={setContent}
-          reset={reset}
+          $value={$content}
           showsFeedback={areRequirementsActive}
           validate={(content) => content.trim().length > 3}
           invalidMessage="Please elaborate…"
+          multiline
+          minRows={3}
+          placeholder="What's on your mind?"
         />
 
         <AsyncButton
+          action={create}
           variant="contained"
           fullWidth
           startIcon={<Send />}
-          label="Post"
-          action={create}
-        />
+        >
+          Post
+        </AsyncButton>
       </Stack>
     </Paper>
   )

@@ -2,10 +2,13 @@ import { useState, type ReactElement } from "react"
 
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
 import ErrorFeedback from "../../shared/components/ErrorFeedback"
-import RequiredTextField from "../../shared/components/RequiredTextField"
 import AsyncButton from "../../shared/components/AsyncButton"
+import NameTextField from "./NameTextField"
+import EmailTextField from "./EmailTextField"
+import PasswordTextField from "./PasswordTextField"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
+import useBinding from "../../shared/useBinding"
 
 import { signIn, signUp } from ".."
 import AuthenticationStatus from "../types/AuthenticationStatus"
@@ -17,23 +20,32 @@ export default function AuthenticationForm(): ReactElement {
   const dispatch = useAppDispatch()
 
   const [isRegistering, setIsRegistering] = useState(false)
-  const [name, setName] = useState<string | null>(null)
-  const [email, setEmail] = useState<string | null>(null)
-  const [password, setPassword] = useState<string | null>(null)
+  const $name = useBinding<string | "invalid" | undefined>(undefined)
+  const $email = useBinding<string | "invalid" | undefined>(undefined)
+  const $password = useBinding<string | "invalid" | undefined>(undefined)
   const [isFeedbackActive, setIsFeedbackActive] = useState(false)
-  const [reset, setReset] = useState(false)
 
   const authenticate = async (): Promise<boolean> => {
-    if (isRegistering && name !== null && email !== null && password !== null) {
-      await dispatch(signUp({ name, email, password }))
-    } else if (email !== null && password !== null) {
-      await dispatch(signIn({ email, password }))
-    } else {
+    if (
+      isRegistering && $name.get === undefined
+      || isRegistering && $name.get === "invalid"
+      || $email.get === undefined
+      || $email.get === "invalid"
+      || $password.get === undefined
+      || $password.get === "invalid"
+    ) {
       setIsFeedbackActive(true)
       return false
+    } else if (isRegistering) {
+      await dispatch(signUp({ name: $name.get ?? "", email: $email.get, password: $password.get }))
+    } else {
+      await dispatch(signIn({ email: $email.get, password: $password.get }))
     }
 
-    setReset(!reset)
+    $name.set(undefined)
+    $email.set(undefined)
+    $password.set(undefined)
+
     return status === AuthenticationStatus.authenticated
   }
 
@@ -41,42 +53,16 @@ export default function AuthenticationForm(): ReactElement {
     <Box display="flex" flexDirection="column" alignItems="center">
       <Stack spacing={2} marginTop={3}>
         <Collapse in={isRegistering}>
-          <RequiredTextField
-            label="Your Name"
-            autoComplete="name"
-            setValidValue={setName}
-            reset={reset}
-            showsFeedback={isFeedbackActive}
-          />
+          <NameTextField $name={$name} showsFeedback={isFeedbackActive} />
         </Collapse>
 
-        <RequiredTextField
-          label="Email"
-          type="email"
-          autoComplete="email"
-          setValidValue={setEmail}
-          reset={reset}
-          showsFeedback={isFeedbackActive}
-          validate={(email) => !isRegistering || /^\S+@\S+\.\S+$/.test(email)}
-          invalidMessage="Invalid email"
-        />
+        <EmailTextField $email={$email} validate={isRegistering} showsFeedback={isFeedbackActive} />
 
-        <RequiredTextField
-          label="Password"
-          type="password"
-          autoComplete={isRegistering ? "new-password" : "current-password"}
-          setValidValue={setPassword}
-          reset={reset}
-          showsFeedback={isFeedbackActive}
-          validate={(password) => !isRegistering || password.length > 5}
-          invalidMessage="At least 6 characters"
-        />
+        <PasswordTextField $password={$password} isRegistering={isRegistering} showsFeedback={isFeedbackActive} />
 
-        <AsyncButton
-          variant="contained"
-          label={isRegistering ? "Sign Up" : "Sign in"}
-          action={authenticate}
-        />
+        <AsyncButton action={authenticate} variant="contained">
+          {isRegistering ? "Sign Up" : "Sign in"}
+        </AsyncButton>
 
         <ErrorFeedback isError={status === AuthenticationStatus.failed} message={error ?? ""} />
 
@@ -87,7 +73,7 @@ export default function AuthenticationForm(): ReactElement {
             setIsRegistering(!isRegistering)
           }}
         >
-          <Typography variant="caption">
+          <Typography variant="caption" overflow="clip">
             {isRegistering ? "Already registered? Sign in" : "No account yet? Sign up"}
           </Typography>
         </Button>
