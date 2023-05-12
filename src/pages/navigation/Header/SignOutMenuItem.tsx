@@ -1,4 +1,4 @@
-import { ButtonProps, MenuItem } from "@mui/material"
+import { MenuItem } from "@mui/material"
 import { signOut } from "../../../features/authentication"
 import { useAppDispatch } from "../../../redux"
 import { ReactElement } from "react"

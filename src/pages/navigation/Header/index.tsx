@@ -19,7 +19,7 @@ export default function Header(): ReactElement {
       <AppBar position="sticky" sx={{ marginBottom: 1 }}>
         <Toolbar sx={{ justifyContent: "space-between", gap: 1 }}>
           <Button color="inherit" size="large" href="/">
-            <Logo compact size="min(2vw, 1.5vh)" />
+            <Logo compact size="max(1.5vw, 1.5vh)" />
           </Button>
 
           <Stack direction="row" justifyContent="end" alignItems="center" gap={1} flexGrow={1}>
@@ -34,7 +34,7 @@ export default function Header(): ReactElement {
       <AppBar position="sticky" sx={{ marginBottom: 1 }}>
         <Toolbar>
           <Button color="inherit" size="large" href="/">
-            <Logo size="min(2vw, 1.5vh)" />
+            <Logo size="max(1vw, 1vh)" />
           </Button>
 
           <Box flexGrow={1} />
@@ -43,7 +43,7 @@ export default function Header(): ReactElement {
 
           {divider}
 
-          <Box width="30%">
+          <Box width="20%" marginX={1}>
             <SearchBar />
           </Box>
 

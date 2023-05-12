@@ -62,6 +62,7 @@ export default function AuthenticationForm(): ReactElement {
           $password={$password}
           isRegistering={isRegistering}
           showsFeedback={isFeedbackActive}
+          onSubmit={authenticate}
         />
 
         <AsyncButton action={authenticate} variant="contained">

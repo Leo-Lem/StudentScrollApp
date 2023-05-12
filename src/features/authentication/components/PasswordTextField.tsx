@@ -5,7 +5,8 @@ import RequiredTextField from "../../shared/components/RequiredTextField"
 export default function PasswordTextField({
   $password,
   isRegistering,
-  showsFeedback
+  showsFeedback,
+  onSubmit
 }: Props): ReactElement {
   return (
     <RequiredTextField
@@ -16,6 +17,10 @@ export default function PasswordTextField({
       label="Password"
       type="password"
       autoComplete={isRegistering ? "new-password" : "current-password"}
+      onKeyDown={({ key }) => {
+        if (key === "Enter")
+          onSubmit()
+      }}
     />
   )
 }
@@ -24,4 +29,5 @@ interface Props {
   $password: Binding<string | "invalid" | undefined>
   isRegistering: boolean
   showsFeedback: boolean
+  onSubmit: () => void
 }

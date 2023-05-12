@@ -1,6 +1,6 @@
 import { Box, IconButton, Menu } from "@mui/material"
 import { ReactElement, useState } from "react"
-import { AccountCircle } from "@mui/icons-material"
+import { AccountBox, AccountCircle } from "@mui/icons-material"
 
 import SignOutMenuItem from "./SignOutMenuItem"
 import LinkMenuItem from "../../../features/shared/components/LinkMenuItem"
@@ -30,7 +30,11 @@ export default function AccountMenu(): ReactElement {
 
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={dismiss}>
         {studentId !== undefined && (
-          <LinkMenuItem href={`/profiles/${studentId}`} dismiss={dismiss}>
+          <LinkMenuItem
+            startIcon={<AccountBox />}
+            href={`/profile/${studentId}`}
+            dismiss={dismiss}
+          >
             Profile
           </LinkMenuItem>
         )}

@@ -1,5 +1,5 @@
 import { type ReactElement } from "react"
-import { Box, Stack, useMediaQuery } from "@mui/material"
+import { Box, Stack } from "@mui/material"
 
 import AuthenticationForm from "../features/authentication/components/AuthenticationForm"
 import WelcomeHeader from "./navigation/WelcomeHeader"
@@ -17,7 +17,7 @@ export default function WelcomePage(): ReactElement {
         <AuthenticationForm />
       ) : (
         <Stack direction="row" justifyContent="space-between" alignItems="center" flexGrow={1}>
-          <Logo iconOnly size="min(12vw, 12vh)" />
+          <Logo iconOnly size="max(8vw, 8vh)" />
           <AuthenticationForm />
           <Box />
         </Stack>
