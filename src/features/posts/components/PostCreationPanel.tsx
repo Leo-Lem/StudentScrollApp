@@ -12,12 +12,12 @@ import {
 } from "@mui/material"
 import { Send } from "@mui/icons-material"
 
-import allTags from "../../../res/tags.json"
-import RequiredTextField from "../../shared/components/RequiredTextField"
-import AsyncButton from "../../shared/components/AsyncButton"
+import { tags as allTags } from "../../../res"
+import { AsyncButton, RequiredTextField } from "../../../components"
 import { useAppDispatch } from "../../../redux"
+
 import { createPost } from ".."
-import useBinding from "../../shared/useBinding"
+import useBinding from "../../../hooks/useBinding"
 
 export default function PostCreationPanel(): ReactElement {
   const dispatch = useAppDispatch()

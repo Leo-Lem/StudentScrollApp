@@ -2,7 +2,7 @@ import { Button, CircularProgress, Grid, Paper, TextField, Typography } from "@m
 import { type ReactElement, useEffect, useState } from "react"
 import { Edit, KeyboardArrowLeft, KeyboardArrowRight, Save } from "@mui/icons-material"
 
-import AvatarImage from "../../shared/components/AvatarImage"
+import { ProfileIcon } from "../../../components"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 import { icons } from "../../../res"
@@ -75,7 +75,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
               <KeyboardArrowLeft />
             </Button>
 
-            <AvatarImage
+            <ProfileIcon
               sx={{ fontSize: "15vw", alignSelf: "end" }}
               avatarId={icons[newIconIndex]}
             />
@@ -124,7 +124,7 @@ export default function ProfileView({ studentId }: Props): ReactElement {
             </Button>
           )}
 
-          <AvatarImage sx={{ fontSize: "20vw", alignSelf: "end" }} avatarId={profile.icon} />
+          <ProfileIcon sx={{ fontSize: "20vw", alignSelf: "end" }} avatarId={profile.icon} />
 
           <Typography variant="h3">{profile.name}</Typography>
 

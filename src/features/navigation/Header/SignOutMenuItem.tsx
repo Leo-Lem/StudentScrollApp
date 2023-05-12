@@ -1,5 +1,5 @@
 import { MenuItem } from "@mui/material"
-import { signOut } from "../../../features/authentication"
+import { signOut } from "../../authentication"
 import { useAppDispatch } from "../../../redux"
 import { ReactElement } from "react"
 import { Logout } from "@mui/icons-material"

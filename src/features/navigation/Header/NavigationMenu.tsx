@@ -1,13 +1,13 @@
-import { Box, IconButton, Menu } from "@mui/material"
-import { ReactElement, useState } from "react"
-import { AccountBox, AccountCircle } from "@mui/icons-material"
+import { Divider, IconButton, Menu } from "@mui/material"
+import { Fragment, ReactElement, useState } from "react"
+import { AccountBox, Chat, DynamicFeed, Menu as MenuIcon } from "@mui/icons-material"
 
 import SignOutMenuItem from "./SignOutMenuItem"
-import LinkMenuItem from "../../../features/shared/components/LinkMenuItem"
+import LinkMenuItem from "../../../components/LinkMenuItem"
 
 import { useAppSelector } from "../../../redux"
 
-export default function AccountMenu(): ReactElement {
+export default function NavigationMenu(): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
@@ -17,7 +17,7 @@ export default function AccountMenu(): ReactElement {
   }
 
   return (
-    <Box>
+    <Fragment>
       <IconButton
         size="large"
         onClick={({ currentTarget }) => {
@@ -25,22 +25,27 @@ export default function AccountMenu(): ReactElement {
         }}
         color="inherit"
       >
-        <AccountCircle />
+        <MenuIcon />
       </IconButton>
 
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={dismiss}>
+        <LinkMenuItem href="" startIcon={<DynamicFeed />} dismiss={dismiss}>
+          Posts
+        </LinkMenuItem>
+        <LinkMenuItem href="chats" startIcon={<Chat />} dismiss={dismiss}>
+          Chats
+        </LinkMenuItem>
+
+        <Divider />
+
         {studentId !== undefined && (
-          <LinkMenuItem
-            startIcon={<AccountBox />}
-            href={`/profile/${studentId}`}
-            dismiss={dismiss}
-          >
+          <LinkMenuItem href={`/profile/${studentId}`} startIcon={<AccountBox />} dismiss={dismiss}>
             Profile
           </LinkMenuItem>
         )}
 
         <SignOutMenuItem dismiss={dismiss} />
       </Menu>
-    </Box>
+    </Fragment>
   )
 }

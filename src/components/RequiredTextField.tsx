@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
 import { type TextFieldProps } from "@mui/material/TextField"
 import { type ReactElement, useState, useEffect } from "react"
-import { Binding } from "../useBinding"
+import { Binding } from "../hooks/useBinding"
 
 export default function RequiredTextField({
   $value,

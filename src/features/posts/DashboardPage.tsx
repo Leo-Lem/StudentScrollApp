@@ -1,8 +1,8 @@
 import { type ReactElement } from "react"
 
 import { Grid } from "@mui/material"
-import CreatePostPanel from "../features/posts/components/PostCreationPanel"
-import PostsScroll from "../features/posts/components/PostsScroll"
+import CreatePostPanel from "./components/PostCreationPanel"
+import PostsScroll from "./components/PostsScroll"
 
 export default function DashboardPage(): ReactElement {
   return (

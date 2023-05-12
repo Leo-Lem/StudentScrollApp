@@ -9,7 +9,9 @@ import {
 import { type SxProps } from "@mui/material"
 import { type ReactElement } from "react"
 
-export default function AvatarImage({ sx, avatarId }: Props): ReactElement {
+// TODO: add more icons
+
+export default function ProfileIcon({ sx, avatarId }: Props): ReactElement {
   switch (avatarId) {
     case "AccessibilityNew":
       return <AccessibilityNew sx={sx} />

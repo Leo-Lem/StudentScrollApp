@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
-import { Binding } from "../../shared/useBinding"
-import RequiredTextField from "../../shared/components/RequiredTextField"
+import { Binding } from "../../../hooks/useBinding"
+import { RequiredTextField } from "../../../components"
 
 export default function PasswordTextField({
   $password,
@@ -18,8 +18,7 @@ export default function PasswordTextField({
       type="password"
       autoComplete={isRegistering ? "new-password" : "current-password"}
       onKeyDown={({ key }) => {
-        if (key === "Enter")
-          onSubmit()
+        if (key === "Enter") onSubmit()
       }}
     />
   )

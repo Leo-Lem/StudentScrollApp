@@ -1,8 +1,8 @@
 import { AppBar, Box, Button, Stack, Typography } from "@mui/material"
 import { ReactElement } from "react"
 
-import Logo from "../../features/shared/components/Logo"
-import useIsCompact from "../../features/shared/useIsCompact"
+import { Logo } from "../../components"
+import useIsCompact from "../../hooks/useIsCompact"
 
 export default function WelcomeHeader(): ReactElement {
   const isCompact = useIsCompact()
