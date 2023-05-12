@@ -53,7 +53,7 @@ export default function EditProfileDetails({ profile, stopEditing }: Props): Rea
           <ProfileIcon
             fontSize="large"
             sx={{ fontSize: "max(20vw, 30vh)", aspectRatio: 1, alignSelf: "end" }}
-            iconId={profile.icon}
+            iconId={icons[newIconIndex]}
           />
 
           <Button

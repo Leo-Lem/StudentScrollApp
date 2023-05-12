@@ -4,6 +4,7 @@ import { Edit } from "@mui/icons-material"
 
 import { ProfileIcon } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
+
 import readProfile from "../api/readProfile"
 import EditProfileDetails from "./EditProfileDetails"
 import { Profile } from "../types"
