@@ -12,12 +12,11 @@ export default function ProfilePage(): ReactElement {
 
   const id = parseInt(studentId)
 
-  if (isCompact)
-    return <ProfileView studentId={id} />
+  if (isCompact) return <ProfileView studentId={id} />
   else
     return (
       <Stack direction="column">
-        <Box width="35vw" alignSelf="end">
+        <Box width="30vw" alignSelf="end">
           <ProfileView studentId={id} />
         </Box>
       </Stack>

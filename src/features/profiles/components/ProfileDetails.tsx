@@ -32,7 +32,7 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
       {canEdit() && (
         <Button
           variant="contained"
-          sx={{ aspectRatio: 1, alignSelf: "end" }}
+          sx={{ aspectRatio: 1 }}
           onClick={() => {
             setIsEditing(true)
           }}
@@ -43,21 +43,23 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
 
       <ProfileIcon
         fontSize="large"
-        sx={{ fontSize: "max(20vw, 30vh)", aspectRatio: 1, alignSelf: "end" }}
+        sx={{ fontSize: "max(20vw, 30vh)", aspectRatio: 1 }}
         iconId={profile.icon}
       />
 
-      <Typography variant="h3">{profile.name}</Typography>
+      <Grid xs>
+        <Typography noWrap overflow="scroll" textOverflow="ellipsis" variant="h3">
+          {profile.name}
+        </Typography>
+      </Grid>
 
-      <Typography variant="body1" maxWidth={300} alignSelf="end">
-        {profile.bio}
-      </Typography>
+      <Typography variant="body1">{profile.bio}</Typography>
     </Fragment>
   )
 
   return (
-    <Paper elevation={1} sx={{ display: "flex", justifyContent: "center" }}>
-      <Grid container direction="column" textAlign="end" padding={1} gap={1}>
+    <Paper elevation={2} sx={{ display: "flex", justifyContent: "center" }}>
+      <Grid container direction="column" padding={1} gap={1} alignItems="end">
         {profile === undefined ? loading : isEditing ? editing(profile) : details(profile)}
       </Grid>
     </Paper>
