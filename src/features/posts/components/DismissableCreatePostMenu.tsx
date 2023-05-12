@@ -1,7 +1,7 @@
-import { Send } from "@mui/icons-material";
-import { Box, Card, Slide, ToggleButton } from "@mui/material";
-import { Fragment, ReactElement, useState } from "react";
-import CreatePostMenu from "./CreatePostMenu";
+import { Send } from "@mui/icons-material"
+import { Box, Card, Slide, ToggleButton } from "@mui/material"
+import { Fragment, ReactElement, useState } from "react"
+import CreatePostMenu from "./CreatePostMenu"
 
 export default function DismissableCreatePostMenu(): ReactElement {
   const [isPosting, setIsPosting] = useState(false)

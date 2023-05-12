@@ -26,7 +26,6 @@ export default function App(): ReactElement {
             <Routes>
               <Route path="/" element={<DashboardPage />} />
               <Route path="/profile/:studentId" element={<ProfilePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
             </Routes>
           ) : (
             <WelcomePage />

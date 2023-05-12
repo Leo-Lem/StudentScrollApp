@@ -18,13 +18,17 @@ export default function PostCard({
       <DeletePostButton postId={id} posterId={posterId} />
 
       <Grid>
-        <Typography noWrap variant="h4">{title}</Typography>
+        <Typography noWrap variant="h4">
+          {title}
+        </Typography>
       </Grid>
 
       <TagsList tags={tags} />
 
       <Grid item xs={12}>
-        <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">{content}</Typography>
+        <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">
+          {content}
+        </Typography>
       </Grid>
     </Fragment>
   )
@@ -35,14 +39,18 @@ export default function PostCard({
         <DeletePostButton postId={id} posterId={posterId} />
 
         <Grid>
-          <Typography noWrap variant="h4">{title}</Typography>
+          <Typography noWrap variant="h4">
+            {title}
+          </Typography>
         </Grid>
 
         <TagsList tags={tags} />
       </Grid>
 
       <Grid item xs={12}>
-        <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">{content}</Typography>
+        <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">
+          {content}
+        </Typography>
       </Grid>
     </Fragment>
   )
@@ -57,8 +65,8 @@ export default function PostCard({
         <Grid xs={3} sm={1}>
           <ProfileLink studentId={posterId} />
         </Grid>
-      </Grid >
-    </Card >
+      </Grid>
+    </Card>
   )
 
   if (isCompact)
@@ -68,20 +76,24 @@ export default function PostCard({
           <DeletePostButton postId={id} posterId={posterId} />
 
           <Grid>
-            <Typography noWrap variant="h4">{title}</Typography>
+            <Typography noWrap variant="h4">
+              {title}
+            </Typography>
           </Grid>
 
           <TagsList tags={tags} />
 
           <Grid item xs={12}>
-            <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">{content}</Typography>
+            <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">
+              {content}
+            </Typography>
           </Grid>
         </Grid>
 
         <Grid xs={3} sm={1}>
           <ProfileLink studentId={posterId} />
         </Grid>
-      </Grid >
+      </Grid>
     )
   else
     return (
@@ -92,14 +104,18 @@ export default function PostCard({
               <DeletePostButton postId={id} posterId={posterId} />
 
               <Grid>
-                <Typography noWrap variant="h4">{title}</Typography>
+                <Typography noWrap variant="h4">
+                  {title}
+                </Typography>
               </Grid>
 
               <TagsList tags={tags} />
             </Grid>
 
             <Grid item xs={12}>
-              <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">{content}</Typography>
+              <Typography width="100%" textOverflow="ellipsis" overflow="hidden" variant="body1">
+                {content}
+              </Typography>
             </Grid>
           </Grid>
 
@@ -107,7 +123,7 @@ export default function PostCard({
             <ProfileLink studentId={posterId} />
           </Grid>
         </Grid>
-      </Card >
+      </Card>
     )
 }
 

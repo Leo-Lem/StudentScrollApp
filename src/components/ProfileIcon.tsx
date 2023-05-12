@@ -6,29 +6,28 @@ import {
   Diversity2,
   School
 } from "@mui/icons-material"
-import { type SxProps } from "@mui/material"
+import { SvgIconProps } from "@mui/material"
 import { type ReactElement } from "react"
 
 // TODO: add more icons
 
-export default function ProfileIcon({ sx, iconId }: Props): ReactElement {
+export default function ProfileIcon({ iconId, ...props }: Props): ReactElement {
   switch (iconId) {
     case "AccessibilityNew":
-      return <AccessibilityNew sx={sx} />
+      return <AccessibilityNew {...props} />
     case "Blind":
-      return <Blind sx={sx} />
+      return <Blind {...props} />
     case "ConnectWithoutContact":
-      return <ConnectWithoutContact sx={sx} />
+      return <ConnectWithoutContact {...props} />
     case "ConnectingAirports":
-      return <ConnectingAirports sx={sx} />
+      return <ConnectingAirports {...props} />
     case "Diversity2":
-      return <Diversity2 sx={sx} />
+      return <Diversity2 {...props} />
     default:
-      return <School sx={sx} />
+      return <School {...props} />
   }
 }
 
-interface Props {
-  sx?: SxProps
+type Props = SvgIconProps & {
   iconId: string
 }

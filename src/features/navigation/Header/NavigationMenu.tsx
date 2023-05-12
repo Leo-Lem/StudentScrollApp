@@ -10,10 +10,10 @@ import { useAppSelector } from "../../../redux"
 export default function NavigationMenu(): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
 
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null)
 
   const dismiss = (): void => {
-    setAnchorEl(null)
+    setAnchor(null)
   }
 
   return (
@@ -21,14 +21,14 @@ export default function NavigationMenu(): ReactElement {
       <IconButton
         size="large"
         onClick={({ currentTarget }) => {
-          setAnchorEl(currentTarget)
+          setAnchor(currentTarget)
         }}
         color="inherit"
       >
         <MenuIcon />
       </IconButton>
 
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={dismiss}>
+      <Menu anchorEl={anchor} keepMounted open={Boolean(anchor)} onClose={dismiss}>
         <LinkMenuItem href="" startIcon={<DynamicFeed />} dismiss={dismiss}>
           Posts
         </LinkMenuItem>

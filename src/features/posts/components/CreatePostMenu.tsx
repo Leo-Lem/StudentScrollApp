@@ -28,15 +28,16 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
       return false
     }
 
-    await dispatch(createPost({ title: $title.get.trim(), tags: $tags.get, content: $content.get.trim() }))
+    await dispatch(
+      createPost({ title: $title.get.trim(), tags: $tags.get, content: $content.get.trim() })
+    )
 
     setAreRequirementsActive(false)
     $title.set(undefined)
     $tags.set([])
     $content.set(undefined)
 
-    if (dismiss !== undefined)
-      dismiss()
+    if (dismiss !== undefined) dismiss()
 
     return true
   }

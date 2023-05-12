@@ -8,10 +8,12 @@ import LinkMenuItem from "../../../components/LinkMenuItem"
 import { useAppSelector } from "../../../redux"
 
 export default function AccountMenu(): ReactElement {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+  const studentId = useAppSelector((state) => state.authentication.studentId)
+
+  const [anchor, setAnchor] = useState<HTMLElement | null>(null)
 
   const dismiss = (): void => {
-    setAnchorEl(null)
+    setAnchor(null)
   }
 
   return (
@@ -19,15 +21,15 @@ export default function AccountMenu(): ReactElement {
       <IconButton
         size="large"
         onClick={({ currentTarget }) => {
-          setAnchorEl(currentTarget)
+          setAnchor(currentTarget)
         }}
         color="inherit"
       >
         <AccountCircle />
       </IconButton>
 
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={dismiss}>
-        <LinkMenuItem startIcon={<AccountBox />} href="/profile" dismiss={dismiss}>
+      <Menu anchorEl={anchor} keepMounted open={Boolean(anchor)} onClose={dismiss}>
+        <LinkMenuItem startIcon={<AccountBox />} href={`/profile/${studentId}`} dismiss={dismiss}>
           Profile
         </LinkMenuItem>
 
