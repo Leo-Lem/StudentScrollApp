@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../redux"
-import { Profile } from "../types"
+import Profile from "../types/Profile"
 
 export default createAsyncThunk(
   "profile/readProfile",

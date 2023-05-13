@@ -1,10 +1,10 @@
 import { type ReactElement, useEffect } from "react"
 import { Box, CircularProgress, Slide, Stack } from "@mui/material"
 
-import ContentPostCard from "./PostCard"
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import { readPosts, resetPosts } from ".."
 
+import { readPosts, resetPosts } from "../postsReducer"
+import ContentPostCard from "./PostCard"
 import NewestFirstSwitch from "./NewestFirstSwitch"
 
 // TODO: figure out how to not send a billion requests for each scroll

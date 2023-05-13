@@ -3,10 +3,10 @@ import { Button, Grid, TextField } from "@mui/material"
 import { Fragment, ReactElement, useEffect, useState } from "react"
 
 import { ProfileIcon } from "../../../components"
-import { Profile } from "../types"
 import { useAppDispatch } from "../../../redux"
-import { updateProfile } from "../api"
 import { icons } from "../../../res"
+import Profile from "../types/Profile"
+import { updateProfile } from "../profileReducer"
 
 export default function EditProfileDetails({ profile, stopEditing }: Props): ReactElement {
   const dispatch = useAppDispatch()

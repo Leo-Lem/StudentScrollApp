@@ -1,10 +1,10 @@
 import { Fragment, type ReactElement } from "react"
 import { Card, Grid, Typography } from "@mui/material"
 
+import useIsCompact from "../../../../hooks/useIsCompact"
 import ProfileLink from "../../../profiles/components/ProfileLink"
 
-import { type ContentPost } from "../../types"
-import useIsCompact from "../../../../hooks/useIsCompact"
+import type ContentPost from "../../types/ContentPost"
 import DeletePostButton from "./DeletePostButton"
 import TagsList from "./TagsList"
 

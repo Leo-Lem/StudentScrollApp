@@ -5,7 +5,7 @@ import { Send } from "@mui/icons-material"
 import { AsyncButton, RequiredTextField, SelectTags } from "../../../components"
 import { useAppDispatch } from "../../../redux"
 
-import { createPost } from ".."
+import { createPost } from "../postsReducer"
 import useBinding from "../../../hooks/useBinding"
 
 export default function CreatePostMenu({ dismiss }: Props): ReactElement {

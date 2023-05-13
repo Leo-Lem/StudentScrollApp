@@ -9,7 +9,7 @@ import NameTextField from "./NameTextField"
 import EmailTextField from "./EmailTextField"
 import PasswordTextField from "./PasswordTextField"
 
-import { signIn, signUp } from ".."
+import { signIn, signUp } from "../authenticationReducer"
 import AuthenticationStatus from "../types/AuthenticationStatus"
 
 export default function AuthenticationForm(): ReactElement {

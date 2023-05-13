@@ -5,9 +5,9 @@ import { Edit } from "@mui/icons-material"
 import { ProfileIcon } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import readProfile from "../api/readProfile"
 import EditProfileDetails from "./EditProfileDetails"
-import { Profile } from "../types"
+import { readProfile } from "../profileReducer"
+import Profile from "../types/Profile"
 
 export default function ProfileDetails({ studentId }: Props): ReactElement {
   const profile = useAppSelector((state) => state.profiles[studentId])

@@ -1,8 +1,10 @@
 import { Fragment, ReactElement } from "react"
-import { useAppDispatch, useAppSelector } from "../../../../redux"
-import { deletePost } from "../../api"
-import { AsyncButton } from "../../../../components"
 import { Delete } from "@mui/icons-material"
+
+import { useAppDispatch, useAppSelector } from "../../../../redux"
+import { AsyncButton } from "../../../../components"
+
+import { deletePost } from "../../postsReducer"
 
 export default function DeletePostButton({ postId, posterId }: Props): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)

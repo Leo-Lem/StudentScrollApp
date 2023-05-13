@@ -3,8 +3,9 @@ import { ReactElement, useEffect } from "react"
 
 import { ProfileIcon } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import { readProfile } from "../api"
-import { Profile } from "../types"
+
+import Profile from "../types/Profile"
+import { readProfile } from "../profileReducer"
 
 export default function ProfileLink({ studentId }: Props): ReactElement {
   const profile = useAppSelector((state) => state.profiles[studentId])
