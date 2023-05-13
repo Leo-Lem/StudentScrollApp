@@ -36,7 +36,9 @@ const posts = createSlice({
       .addCase(readPosts.fulfilled, (state, action) => {
         if (state.posts === undefined) state.posts = []
         state.posts.push(...action.payload.posts)
-        state.posts = state.posts.filter((post, i, posts) => posts.findIndex(post2 => (post2.id === post.id)) === i)
+        state.posts = state.posts.filter(
+          (post, i, posts) => posts.findIndex((post2) => post2.id === post.id) === i
+        )
         state.nextPage = action.payload.nextPage
       })
       .addCase(deletePost.fulfilled, (state, action) => {

@@ -30,9 +30,7 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
     </Button>
   )
 
-  return (
-    <Card elevation={3}>{profile === undefined ? <LoadingSpinner /> : content(profile)}</Card>
-  )
+  return <Card elevation={3}>{profile === undefined ? <LoadingSpinner /> : content(profile)}</Card>
 }
 
 interface Props {

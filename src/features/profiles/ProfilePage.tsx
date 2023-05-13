@@ -38,20 +38,19 @@ export default function ProfilePage(): ReactElement {
             {canEdit() && (
               <Card
                 elevation={20}
-                sx={isCompact
-                  ? { position: "fixed", margin: 1, bottom: 0, right: 0 }
-                  : { aspectRatio: 1, alignSelf: "end" }}>
+                sx={
+                  isCompact
+                    ? { position: "fixed", margin: 1, bottom: 0, right: 0 }
+                    : { aspectRatio: 1, alignSelf: "end" }
+                }
+              >
                 <BindingToggle $isSelected={$isEditing} sx={{ aspectRatio: 1 }}>
                   {$isEditing.get ? <Save /> : <Edit />}
                 </BindingToggle>
               </Card>
-            )
-            }
+            )}
 
-            {$isEditing.get
-              ? <EditProfileDetails />
-              : <ProfileDetails studentId={id} />
-            }
+            {$isEditing.get ? <EditProfileDetails /> : <ProfileDetails studentId={id} />}
           </Grid>
         </PrimaryCard>
       </Grid>

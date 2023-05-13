@@ -26,15 +26,21 @@ export default function PostsScroll(): ReactElement {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 && nextPage !== undefined) {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 &&
+        nextPage !== undefined
+      ) {
         setIsLoading(true)
-        dispatch(readPosts())
-          .then(() => { setIsLoading(false) })
+        dispatch(readPosts()).then(() => {
+          setIsLoading(false)
+        })
       }
     }
 
     window.addEventListener("scroll", handleScroll)
-    return () => { window.removeEventListener("scroll", handleScroll) }
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   return (
@@ -47,8 +53,7 @@ export default function PostsScroll(): ReactElement {
             <ContentPostCard post={post} />
           </Box>
         </Slide>
-      ))
-        ?? <LoadingSpinner />}
+      )) ?? <LoadingSpinner />}
 
       {isLoading && <LoadingSpinner />}
     </Stack>

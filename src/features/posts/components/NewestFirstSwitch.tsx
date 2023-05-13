@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
-import { FormControlLabel, Switch, Typography } from "@mui/material";
+import { ReactElement } from "react"
+import { FormControlLabel, Switch, Typography } from "@mui/material"
 
-import { useAppDispatch, useAppSelector } from "../../../redux";
+import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { toggleNewestFirst } from "../postsReducer";
+import { toggleNewestFirst } from "../postsReducer"
 
 export default function NewestFirstSwitch(): ReactElement {
   const newestFirst = useAppSelector((state) => state.posts.newestFirst)

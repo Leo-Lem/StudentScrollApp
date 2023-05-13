@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
+import { ReactElement } from "react"
 
-import { Binding } from "../../../hooks/useBinding";
-import { themes } from "../../../res";
-import { Stack, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import ThemeIcon from "./ThemeIcon";
+import { Binding } from "../../../hooks/useBinding"
+import { themes } from "../../../res"
+import { Stack, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import ThemeIcon from "./ThemeIcon"
 
 export default function ThemeSelect({ theme: selection }: Props): ReactElement {
   return (
@@ -11,8 +11,7 @@ export default function ThemeSelect({ theme: selection }: Props): ReactElement {
       value={selection.get}
       exclusive
       onChange={(_, newSelection) => {
-        if (newSelection !== null)
-          selection.set(newSelection)
+        if (newSelection !== null) selection.set(newSelection)
       }}
     >
       {themes.map((theme) => (
@@ -28,5 +27,5 @@ export default function ThemeSelect({ theme: selection }: Props): ReactElement {
 }
 
 interface Props {
-  theme: Binding<string>;
+  theme: Binding<string>
 }

@@ -1,12 +1,12 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react"
 
-import { Binding } from "../../hooks/useBinding";
+import { Binding } from "../../hooks/useBinding"
 
 import { icons } from "../../res"
-import { Button, Grid } from "@mui/material";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
-import { ProfileIcon } from "..";
-import useIsCompact from "../../hooks/useIsCompact";
+import { Button, Grid } from "@mui/material"
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
+import { ProfileIcon } from ".."
+import useIsCompact from "../../hooks/useIsCompact"
 
 export default function IconSelect({ $icon }: Props): ReactElement {
   const [iconIndex, setIconIndex] = useState(icons.indexOf($icon.get))
@@ -37,7 +37,7 @@ export default function IconSelect({ $icon }: Props): ReactElement {
         iconId={icons[iconIndex]}
       />
 
-      <Button onClick={selectNext} >
+      <Button onClick={selectNext}>
         <KeyboardArrowRight />
       </Button>
     </Grid>

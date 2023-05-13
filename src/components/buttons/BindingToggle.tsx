@@ -1,6 +1,6 @@
-import { ToggleButton, ToggleButtonProps } from "@mui/material";
-import { ReactElement } from "react";
-import { Binding } from "../../hooks/useBinding";
+import { ToggleButton, ToggleButtonProps } from "@mui/material"
+import { ReactElement } from "react"
+import { Binding } from "../../hooks/useBinding"
 
 export default function BindingToggle({ $isSelected, ...props }: Props): ReactElement {
   return (

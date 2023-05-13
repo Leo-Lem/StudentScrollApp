@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement } from "react"
 
 export default function LocaleSelect(): ReactElement {
-  return <></>
+  return <>Select Language</>
 }

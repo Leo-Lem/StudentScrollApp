@@ -6,7 +6,7 @@ import Settings from "../types/Settings"
 export default createAsyncThunk(
   "settings/update",
   async (
-    info: { newTheme?: string, newLocale?: string, newIsLocated?: boolean },
+    info: { newTheme?: string; newLocale?: string; newIsLocated?: boolean },
     thunkAPI
   ): Promise<Settings> => {
     const id = tryGettingStudentId(thunkAPI)

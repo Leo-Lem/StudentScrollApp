@@ -5,7 +5,7 @@ import linkSettings from "./settings/linkSettings"
 export default createTheme(
   {
     palette: {
-      mode: "dark"
+      mode: "light"
     }
   },
   linkSettings

@@ -18,8 +18,7 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
     dispatch(readProfile(studentId))
   }, [studentId])
 
-  if (profile === undefined)
-    return <LoadingSpinner />
+  if (profile === undefined) return <LoadingSpinner />
   else
     return (
       <Fragment>
@@ -35,7 +34,9 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
           </Typography>
         </Grid>
 
-        <Typography variant="body1" textAlign={isCompact ? "center" : "end"}>{profile.bio}</Typography>
+        <Typography variant="body1" textAlign={isCompact ? "center" : "end"}>
+          {profile.bio}
+        </Typography>
       </Fragment>
     )
 }

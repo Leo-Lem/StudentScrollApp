@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
-import { Binding } from "../../hooks/useBinding";
-import { TextField, TextFieldProps } from "@mui/material";
+import { ReactElement } from "react"
+import { Binding } from "../../hooks/useBinding"
+import { TextField, TextFieldProps } from "@mui/material"
 
 export default function BindingTextField({ $value, ...props }: Props): ReactElement {
   return (

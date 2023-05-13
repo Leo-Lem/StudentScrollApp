@@ -38,8 +38,10 @@ export default function SearchBar(): ReactElement {
     if (typeof option === "string") return option
 
     switch (option.id) {
-      case "profileById": return option.value.name
-      default: return ""
+      case "profileById":
+        return option.value.name
+      default:
+        return ""
     }
   }
 
@@ -47,7 +49,11 @@ export default function SearchBar(): ReactElement {
     switch (option.id) {
       case "profileById":
         return (
-          <LinkMenuItem href={`/profile/${profileByIdQuery}`} dismiss={clear} key={profileByIdQuery}>
+          <LinkMenuItem
+            href={`/profile/${profileByIdQuery}`}
+            dismiss={clear}
+            key={profileByIdQuery}
+          >
             {option.value.name}
           </LinkMenuItem>
         )

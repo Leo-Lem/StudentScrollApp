@@ -41,7 +41,11 @@ export default function NavigationMenu(): ReactElement {
 
         {studentId !== undefined && (
           <Fragment>
-            <LinkMenuItem href={`/profile/${studentId}`} startIcon={<AccountBox />} dismiss={dismiss}>
+            <LinkMenuItem
+              href={`/profile/${studentId}`}
+              startIcon={<AccountBox />}
+              dismiss={dismiss}
+            >
               Profile
             </LinkMenuItem>
             <LinkMenuItem href="settings" startIcon={<Settings />} dismiss={dismiss}>

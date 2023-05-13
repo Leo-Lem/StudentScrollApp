@@ -23,13 +23,12 @@ export default function EditProfileDetails(): ReactElement {
   const $newIcon = useBinding(profile.icon)
 
   useEffect(() => {
-    dispatch(readProfile(studentId))
-      .then(() => {
-        if (profile !== null) {
-          $newBio.set(profile.bio)
-          $newIcon.set(profile.icon)
-        }
-      })
+    dispatch(readProfile(studentId)).then(() => {
+      if (profile !== null) {
+        $newBio.set(profile.bio)
+        $newIcon.set(profile.icon)
+      }
+    })
 
     return () => {
       const name = $newName.get !== "" ? $newName.get : undefined
@@ -41,8 +40,7 @@ export default function EditProfileDetails(): ReactElement {
     }
   }, [])
 
-  if (profile === undefined)
-    return <LoadingSpinner />
+  if (profile === undefined) return <LoadingSpinner />
   else
     return (
       <Fragment>

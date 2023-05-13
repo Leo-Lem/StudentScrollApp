@@ -1,10 +1,9 @@
 import { type ReactElement } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Container, CssBaseline, ThemeProvider } from "@mui/material"
+import { Container, CssBaseline } from "@mui/material"
 
 import { useAppSelector } from "./redux"
-
-import { dark } from "./themes"
+import { AppThemeProvider } from "./themes"
 
 import { Header, Footer, WelcomeHeader } from "./features/navigation"
 import { DashboardPage } from "./features/posts"
@@ -20,7 +19,7 @@ export default function App(): ReactElement {
 
   return (
     <BrowserRouter>
-      <ThemeProvider theme={dark}>
+      <AppThemeProvider>
         <CssBaseline />
         <Container disableGutters sx={{ padding: 1 }}>
           {isAuthenticated ? <Header /> : <WelcomeHeader />}
@@ -38,7 +37,7 @@ export default function App(): ReactElement {
 
           <Footer />
         </Container>
-      </ThemeProvider>
+      </AppThemeProvider>
     </BrowserRouter>
   )
 }

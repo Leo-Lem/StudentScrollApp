@@ -1,5 +1,5 @@
-import { Box, Chip } from "@mui/material";
-import { ReactElement, ReactNode } from "react";
+import { Box, Chip } from "@mui/material"
+import { ReactElement, ReactNode } from "react"
 
 export default function addPageChip(title: string, page: ReactNode): ReactElement {
   return (

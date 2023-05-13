@@ -1,9 +1,9 @@
-import { Server } from "miragejs";
+import { Server } from "miragejs"
 
 export const exampleSettings = {
-  "theme": "dark",
-  "locale": "en",
-  "isLocated": true
+  theme: "dark",
+  locale: "en",
+  isLocated: true
 }
 
 export default function mockSettings(server: Server) {
