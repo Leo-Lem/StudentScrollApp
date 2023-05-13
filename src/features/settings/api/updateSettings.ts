@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../redux"
-import Profile from "../types/Profile"
+import Settings from "../types/Settings"
 
 export default createAsyncThunk(
-  "profile/updateProfile",
+  "settings/update",
   async (
-    info: { newName?: string; newBio?: string; newIcon?: string },
+    info: { newTheme?: string, newLocale?: string, newIsLocated?: boolean },
     thunkAPI
-  ): Promise<{ id: number; profile: Profile }> => {
+  ): Promise<Settings> => {
     const id = tryGettingStudentId(thunkAPI)
 
     const response = await fetch(`/api/v1/students/${id}/profile`, {
@@ -20,7 +20,7 @@ export default createAsyncThunk(
       body: JSON.stringify(info)
     })
 
-    if (response.ok && id !== undefined) return { id, profile: (await response.json()) as Profile }
-    else throw new Error("Failed to update profile: " + response.statusText)
+    if (response.ok && id !== undefined) return (await response.json()) as Settings
+    else throw new Error("Failed to update settings: " + response.statusText)
   }
 )
