@@ -3,7 +3,7 @@ import { ReactElement, useState } from "react"
 import { AccountBox, AccountCircle, Settings } from "@mui/icons-material"
 
 import SignOutMenuItem from "./SignOutMenuItem"
-import LinkMenuItem from "../../../components/LinkMenuItem"
+import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 
 import { useAppSelector } from "../../../redux"
 

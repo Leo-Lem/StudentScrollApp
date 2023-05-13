@@ -2,7 +2,7 @@ import { useState, type ReactElement } from "react"
 import { Paper, Stack } from "@mui/material"
 import { Send } from "@mui/icons-material"
 
-import { AsyncButton, RequiredTextField, SelectTags } from "../../../components"
+import { AsyncButton, RequiredTextField, TagsSelect } from "../../../components"
 import { useAppDispatch } from "../../../redux"
 
 import { createPost } from "../postsReducer"
@@ -51,7 +51,7 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
           placeholder="New Post"
         />
 
-        <SelectTags $tags={$tags} />
+        <TagsSelect $tags={$tags} />
 
         <RequiredTextField
           $value={$content}

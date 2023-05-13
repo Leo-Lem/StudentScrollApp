@@ -2,8 +2,6 @@ import * as Icons from "@mui/icons-material"
 import { SvgIconProps } from "@mui/material"
 import { type ReactElement } from "react"
 
-// TODO: add more icons
-
 export default function ProfileIcon({ iconId, ...props }: Props): ReactElement {
   switch (iconId) {
     case "AccessibilityNew":

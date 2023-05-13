@@ -3,7 +3,7 @@ import { useState, type ReactElement, useEffect, ReactNode } from "react"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { readProfile } from "../../profiles"
-import LinkMenuItem from "../../../components/LinkMenuItem"
+import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 
 export default function SearchBar(): ReactElement {
   const dispatch = useAppDispatch()

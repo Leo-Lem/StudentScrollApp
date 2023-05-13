@@ -5,7 +5,7 @@ import useBinding from "../../hooks/useBinding";
 import { useAppDispatch, useAppSelector } from "../../redux";
 
 import ThemeSelect from "./components/ThemeSelect";
-import LoadingPage from "../../components/LoadingPage";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import { readSettings } from "./settingsReducer";
 import ChipDivider from "../../components/ChipDivider";
 
@@ -26,7 +26,7 @@ export default function SettingsPage(): ReactElement {
   }, [])
 
   if (settings === undefined)
-    return <LoadingPage />
+    return <LoadingSpinner />
   else
     return (
       <Stack direction="column">

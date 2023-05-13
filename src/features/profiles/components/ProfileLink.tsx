@@ -1,7 +1,7 @@
-import { Button, Card, CircularProgress, Link, Typography } from "@mui/material"
+import { Button, Card, Link, Typography } from "@mui/material"
 import { ReactElement, useEffect } from "react"
 
-import { ProfileIcon } from "../../../components"
+import { LoadingSpinner, ProfileIcon } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import Profile from "../types/Profile"
@@ -21,7 +21,7 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
       color="inherit"
       component={Link}
       href={`/profile/${studentId}`}
-      sx={{ display: "flex", flexDirection: "column", gap: 1, aspectRatio: 1 }}
+      sx={{ display: "flex", flexDirection: "column" }}
     >
       <ProfileIcon iconId={profile.icon} sx={{ width: "100%", height: "100%" }} />
       <Typography maxWidth="100%" noWrap textOverflow="ellipsis" fontSize={10}>
@@ -31,7 +31,7 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
   )
 
   return (
-    <Card elevation={3}>{profile === undefined ? <CircularProgress /> : content(profile)}</Card>
+    <Card elevation={3}>{profile === undefined ? <LoadingSpinner /> : content(profile)}</Card>
   )
 }
 

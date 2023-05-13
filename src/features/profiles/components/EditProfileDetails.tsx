@@ -1,91 +1,54 @@
-import { KeyboardArrowLeft, KeyboardArrowRight, Save } from "@mui/icons-material"
-import { Button, Grid, TextField } from "@mui/material"
-import { Fragment, ReactElement, useEffect, useState } from "react"
+import { Fragment, ReactElement, useEffect } from "react"
 
-import { ProfileIcon } from "../../../components"
-import { useAppDispatch } from "../../../redux"
-import { icons } from "../../../res"
-import Profile from "../types/Profile"
-import { updateProfile } from "../profileReducer"
+import { useAppDispatch, useAppSelector } from "../../../redux"
+import useBinding from "../../../hooks/useBinding"
 
-export default function EditProfileDetails({ profile, stopEditing }: Props): ReactElement {
+import { BindingTextField } from "../../../components"
+import IconSelect from "../../../components/pickers/IconSelect"
+
+import { readProfile, updateProfile } from "../profileReducer"
+import LoadingSpinner from "../../../components/LoadingSpinner"
+
+export default function EditProfileDetails(): ReactElement {
+  const studentId = useAppSelector((state) => state.authentication.studentId)
+  if (studentId === undefined) return <LoadingSpinner />
+
+  const profile = useAppSelector((state) => state.profiles[studentId])
+  if (profile === undefined) return <LoadingSpinner />
+
   const dispatch = useAppDispatch()
 
-  const [newName, setNewName] = useState("")
-  const [newBio, setNewBio] = useState("")
-  const [newIconIndex, setNewIconIndex] = useState(0)
+  const $newName = useBinding("")
+  const $newBio = useBinding(profile.bio)
+  const $newIcon = useBinding(profile.icon)
 
   useEffect(() => {
-    if (profile !== null) {
-      setNewName(profile.name)
-      setNewBio(profile.bio)
-      setNewIconIndex(icons.indexOf(profile.icon))
+    dispatch(readProfile(studentId))
+      .then(() => {
+        if (profile !== null) {
+          $newBio.set(profile.bio)
+          $newIcon.set(profile.icon)
+        }
+      })
+
+    return () => {
+      const name = $newName.get !== "" ? $newName.get : undefined
+      const bio = $newBio.get !== "" && $newBio.get !== profile?.bio ? $newBio.get : undefined
+      const icon = $newIcon.get !== profile?.icon ? $newIcon.get : undefined
+
+      if (name !== undefined || bio !== undefined || icon !== undefined)
+        void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))
     }
-  }, [profile])
+  }, [])
 
-  const update = (): void => {
-    const name = newName !== "" ? newName : undefined
-    const bio = newBio !== "" && newBio !== profile?.bio ? newBio : undefined
-    const icon = icons[newIconIndex] !== profile?.icon ? icons[newIconIndex] : undefined
-
-    if (name !== undefined || bio !== undefined || icon !== undefined)
-      void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))
-
-    stopEditing()
-  }
-
-  return (
-    <Fragment>
-      <Button variant="contained" sx={{ aspectRatio: 1 }} onClick={update}>
-        <Save />
-      </Button>
-
-      <Grid container direction="row" justifyContent="end" wrap="nowrap">
-        <Button
-          onClick={() => {
-            setNewIconIndex((((newIconIndex - 1) % icons.length) + icons.length) % icons.length)
-          }}
-        >
-          <KeyboardArrowLeft />
-        </Button>
-
-        <ProfileIcon
-          fontSize="large"
-          sx={{ fontSize: "max(15vw, 15vh)", aspectRatio: 1 }}
-          iconId={icons[newIconIndex]}
-        />
-
-        <Button
-          onClick={() => {
-            setNewIconIndex((newIconIndex + 1) % icons.length)
-          }}
-        >
-          <KeyboardArrowRight />
-        </Button>
-      </Grid>
-
-      <TextField
-        fullWidth
-        placeholder={profile.name}
-        onChange={({ target: { value } }) => {
-          setNewName(value)
-        }}
-      />
-
-      <TextField
-        multiline
-        fullWidth
-        minRows={4}
-        value={newBio}
-        onChange={({ target: { value } }) => {
-          setNewBio(value)
-        }}
-      />
-    </Fragment>
-  )
-}
-
-interface Props {
-  profile: Profile
-  stopEditing: () => void
+  if (profile === undefined)
+    return <LoadingSpinner />
+  else
+    return (
+      <Fragment>
+        <IconSelect $icon={$newIcon} />
+        <BindingTextField $value={$newName} placeholder={profile.name} fullWidth />
+        <BindingTextField $value={$newBio} multiline minRows={4} fullWidth />
+      </Fragment>
+    )
 }

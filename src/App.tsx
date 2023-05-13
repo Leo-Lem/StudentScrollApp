@@ -13,6 +13,8 @@ import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
 import addPageChip from "./features/navigation/PageChip"
 
+// TODO: fix up the smallest regular layout
+
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
 

@@ -16,7 +16,7 @@ export default function Footer(): ReactElement {
         overflow="scroll"
         noWrap
       >
-        Developed by Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann
+        Created by Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann
       </Typography>
     </Stack>
   )

@@ -1,8 +1,10 @@
 import { type ReactElement } from "react"
-import ProfileView from "./components/ProfileDetails"
-import { Box, Stack } from "@mui/material"
+import { Card, Grid } from "@mui/material"
 import { Navigate, useParams } from "react-router-dom"
+
 import useIsCompact from "../../hooks/useIsCompact"
+
+import ProfileView from "./components/ProfileView"
 
 export default function ProfilePage(): ReactElement {
   const { studentId } = useParams()
@@ -12,13 +14,19 @@ export default function ProfilePage(): ReactElement {
 
   const id = parseInt(studentId)
 
-  if (isCompact) return <ProfileView studentId={id} />
-  else
-    return (
-      <Stack direction="column">
-        <Box width="30vw" alignSelf="end">
+  return (
+    <Grid container columns={12} spacing={1} direction={isCompact ? "column" : "row-reverse"}>
+      <Grid item xs={12} md={4}>
+        <Card elevation={2}>
           <ProfileView studentId={id} />
-        </Box>
-      </Stack>
-    )
+        </Card>
+      </Grid>
+
+      <Grid item xs={12} md={8}>
+        <Card>
+          <h1>Posts</h1>
+        </Card>
+      </Grid>
+    </Grid>
+  )
 }
