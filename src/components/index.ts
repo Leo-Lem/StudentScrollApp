@@ -1,6 +1,7 @@
 export { default as AsyncButton } from "./buttons/AsyncButton"
 export { default as BindingToggle } from "./buttons/BindingToggle"
 export { default as LinkMenuItem } from "./buttons/LinkMenuItem"
+export { default as PrimaryAction } from "./buttons/PrimaryAction"
 
 export { default as BindingTextField } from "./textfield/BindingTextField"
 export { default as RequiredTextField } from "./textfield/RequiredTextField"

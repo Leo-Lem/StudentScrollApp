@@ -10,6 +10,7 @@ import { BindingToggle, PrimaryCard, SecondaryCard } from "../../components"
 import EditProfileDetails from "./components/EditProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
 import { useAppSelector } from "../../redux"
+import PrimaryAction from "../../components/buttons/PrimaryAction"
 
 export default function ProfilePage(): ReactElement {
   const isCompact = useIsCompact()
@@ -35,20 +36,13 @@ export default function ProfilePage(): ReactElement {
             justifyContent={isCompact ? "center" : "end"}
             alignItems={isCompact ? "center" : "end"}
           >
-            {canEdit() && (
-              <Card
-                elevation={20}
-                sx={
-                  isCompact
-                    ? { position: "fixed", margin: 1, bottom: 0, right: 0 }
-                    : { aspectRatio: 1, alignSelf: "end" }
-                }
-              >
+            {canEdit() &&
+              <PrimaryAction fixed={isCompact}>
                 <BindingToggle $isSelected={$isEditing} sx={{ aspectRatio: 1 }}>
                   {$isEditing.get ? <Save /> : <Edit />}
                 </BindingToggle>
-              </Card>
-            )}
+              </PrimaryAction>
+            }
 
             {$isEditing.get ? <EditProfileDetails /> : <ProfileDetails studentId={id} />}
           </Grid>
