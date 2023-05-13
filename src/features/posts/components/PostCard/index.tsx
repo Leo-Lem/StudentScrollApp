@@ -1,5 +1,5 @@
 import { Fragment, type ReactElement } from "react"
-import { Card, Grid, Typography } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 
 import useIsCompact from "../../../../hooks/useIsCompact"
 import ProfileLink from "../../../profiles/components/ProfileLink"
@@ -7,6 +7,7 @@ import ProfileLink from "../../../profiles/components/ProfileLink"
 import type ContentPost from "../../types/ContentPost"
 import DeletePostButton from "./DeletePostButton"
 import TagsList from "./TagsList"
+import { SecondaryCard } from "../../../../components"
 
 export default function PostCard({
   post: { id, title, tags, content, posterId }
@@ -56,8 +57,8 @@ export default function PostCard({
   )
 
   return (
-    <Card>
-      <Grid container direction="row" padding={1}>
+    <SecondaryCard>
+      <Grid container direction="row">
         <Grid item xs={9} md={11} gap={1}>
           {isCompact ? compact : regular}
         </Grid>
@@ -66,7 +67,7 @@ export default function PostCard({
           <ProfileLink studentId={posterId} />
         </Grid>
       </Grid>
-    </Card>
+    </SecondaryCard>
   )
 }
 

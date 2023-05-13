@@ -1,12 +1,12 @@
 import { useState, type ReactElement } from "react"
-import { Paper, Stack } from "@mui/material"
+import { Stack } from "@mui/material"
 import { Send } from "@mui/icons-material"
 
-import { AsyncButton, RequiredTextField, TagsSelect } from "../../../components"
+import { AsyncButton, RequiredTextField, TagsSelect, PrimaryCard } from "../../../components"
 import { useAppDispatch } from "../../../redux"
+import useBinding from "../../../hooks/useBinding"
 
 import { createPost } from "../postsReducer"
-import useBinding from "../../../hooks/useBinding"
 
 export default function CreatePostMenu({ dismiss }: Props): ReactElement {
   const dispatch = useAppDispatch()
@@ -43,8 +43,8 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
   }
 
   return (
-    <Paper elevation={2}>
-      <Stack spacing={1} padding={1}>
+    <PrimaryCard>
+      <Stack spacing={1}>
         <RequiredTextField
           $value={$title}
           showsFeedback={areRequirementsActive}
@@ -67,7 +67,7 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
           Post
         </AsyncButton>
       </Stack>
-    </Paper>
+    </PrimaryCard>
   )
 }
 

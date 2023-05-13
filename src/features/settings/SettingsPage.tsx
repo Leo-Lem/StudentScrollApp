@@ -1,13 +1,12 @@
-import { Stack } from "@mui/material";
 import { ReactElement, useEffect } from "react";
+import { Stack } from "@mui/material";
 
 import useBinding from "../../hooks/useBinding";
 import { useAppDispatch, useAppSelector } from "../../redux";
+import { ChipDivider, LoadingSpinner, PrimaryCard } from "../../components";
 
-import ThemeSelect from "./components/ThemeSelect";
-import LoadingSpinner from "../../components/LoadingSpinner";
 import { readSettings } from "./settingsReducer";
-import ChipDivider from "../../components/ChipDivider";
+import ThemeSelect from "./components/ThemeSelect";
 
 export default function SettingsPage(): ReactElement {
   const settings = useAppSelector((state) => state.settings.settings)
@@ -29,10 +28,12 @@ export default function SettingsPage(): ReactElement {
     return <LoadingSpinner />
   else
     return (
-      <Stack direction="column">
-        <ChipDivider label="Theme" />
+      <PrimaryCard>
+        <Stack direction="column">
+          <ChipDivider label="Theme" />
 
-        <ThemeSelect theme={theme} />
-      </Stack >
+          <ThemeSelect theme={theme} />
+        </Stack >
+      </PrimaryCard>
     )
 }
