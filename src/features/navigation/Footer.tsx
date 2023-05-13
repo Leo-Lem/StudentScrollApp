@@ -5,7 +5,7 @@ import ChipDivider from "../../components/ChipDivider"
 export default function Footer(): ReactElement {
   return (
     <Stack direction="column" spacing={1}>
-      <ChipDivider label="About" />
+      <ChipDivider label="About" sx={{ marginTop: 5 }} />
 
       <Typography
         variant="h6"

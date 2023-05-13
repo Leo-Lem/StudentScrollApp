@@ -1,16 +1,15 @@
 import { ReactElement, useEffect } from "react"
-import { Button, Divider, Grid, Stack } from "@mui/material"
-import { Save } from "@mui/icons-material"
+import { Grid } from "@mui/material"
 
 import useBinding from "../../hooks/useBinding"
 import { useAppDispatch, useAppSelector } from "../../redux"
-import { ChipDivider, LoadingSpinner, PrimaryAction } from "../../components"
-import useIsCompact from "../../hooks/useIsCompact"
+import { LoadingSpinner } from "../../components"
 
 import { readSettings, updateSettings } from "./settingsReducer"
 import ThemeSelect from "./components/ThemeSelect"
 import LocaleSelect from "./components/LocaleSelect"
 import IsLocatedSwitch from "./components/IsLocatedSwitch"
+import useIsCompact from "../../hooks/useIsCompact"
 
 export default function SettingsPage(): ReactElement {
   const settings = useAppSelector((state) => state.settings.settings)
@@ -18,7 +17,18 @@ export default function SettingsPage(): ReactElement {
 
   const isCompact = useIsCompact()
 
-  const $theme = useBinding("system")
+  const $theme = useBinding(settings?.theme ?? "system")
+  const $locale = useBinding(settings?.locale ?? "en")
+  const $isLocated = useBinding(settings?.isLocated ?? false)
+
+  const update = () => {
+    const newTheme = $theme.get !== settings?.theme ? $theme.get : undefined
+    const newLocale = $locale.get !== settings?.locale ? $locale.get : undefined
+    const newIsLocated = $isLocated.get !== settings?.isLocated ? $isLocated.get : undefined
+
+    if (newTheme !== undefined)
+      void dispatch(updateSettings({ newTheme, newLocale, newIsLocated }))
+  }
 
   useEffect(() => {
     dispatch(readSettings())
@@ -27,38 +37,21 @@ export default function SettingsPage(): ReactElement {
   useEffect(() => {
     if (settings !== undefined) {
       $theme.set(settings.theme)
+      $locale.set(settings.locale)
+      $isLocated.set(settings.isLocated)
     }
   }, [settings])
 
-  const update = () => {
-    const newTheme = $theme.get !== settings?.theme ? $theme.get : undefined
-
-    if (newTheme !== undefined)
-      void dispatch(updateSettings({ newTheme }))
-  }
+  useEffect(update, [$theme.get, $locale.get, $isLocated.get])
 
   if (settings === undefined)
     return <LoadingSpinner />
   else
     return (
-      <Grid container direction="column" gap={1}>
-        <ChipDivider label="Theme" />
+      <Grid container direction="column" gap={3}>
         <ThemeSelect $theme={$theme} />
-        <ChipDivider label="Language" />
-        <LocaleSelect />
-
-        <Divider />
-
-        <Stack direction="row">
-          <ChipDivider label="Use location?" />
-          <IsLocatedSwitch />
-        </Stack>
-
-        <PrimaryAction fixed={isCompact} sx={{ alignSelf: "end" }}>
-          <Button color="inherit" variant="text" size="large" onClick={update}>
-            <Save />
-          </Button>
-        </PrimaryAction>
+        <LocaleSelect $locale={$locale} />
+        <IsLocatedSwitch $isLocated={$isLocated} />
       </Grid>
     )
 }

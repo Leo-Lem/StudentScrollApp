@@ -1,14 +1,14 @@
-import { Chip, Divider } from "@mui/material"
+import { Chip, Divider, DividerProps } from "@mui/material"
 import { ReactElement } from "react"
 
-export default function ChipDivider({ label }: Props): ReactElement {
+export default function ChipDivider({ label, ...props }: Props): ReactElement {
   return (
-    <Divider variant="fullWidth" sx={{ marginTop: 2, marginBottom: 1 }}>
+    <Divider variant="fullWidth" {...props}>
       <Chip label={label} />
     </Divider>
   )
 }
 
-interface Props {
+type Props = DividerProps & {
   label: string
 }
