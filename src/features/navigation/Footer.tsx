@@ -1,12 +1,11 @@
-import { Chip, Divider, Stack, Typography } from "@mui/material"
+import { Stack, Typography } from "@mui/material"
 import { type ReactElement } from "react"
+import ChipDivider from "../../components/ChipDivider"
 
 export default function Footer(): ReactElement {
   return (
-    <Stack direction="column" spacing={2} paddingY={2}>
-      <Divider variant="fullWidth">
-        <Chip label="About" />
-      </Divider>
+    <Stack direction="column" spacing={1}>
+      <ChipDivider label="About" />
 
       <Typography
         variant="h6"
@@ -16,7 +15,6 @@ export default function Footer(): ReactElement {
         textOverflow="ellipsis"
         overflow="scroll"
         noWrap
-        padding={1}
       >
         Developed by Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann
       </Typography>

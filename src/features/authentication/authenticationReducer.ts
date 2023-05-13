@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import signIn from "./redux/signIn"
-import signUp from "./redux/signUp"
+import signIn from "./api/signIn"
+import signUp from "./api/signUp"
 import AuthenticationError from "./types/AuthenticationError"
 import AuthenticationStatus from "./types/AuthenticationStatus"
 

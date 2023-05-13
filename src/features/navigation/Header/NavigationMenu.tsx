@@ -1,6 +1,6 @@
 import { Divider, IconButton, Menu } from "@mui/material"
 import { Fragment, ReactElement, useState } from "react"
-import { AccountBox, Chat, DynamicFeed, Menu as MenuIcon } from "@mui/icons-material"
+import { AccountBox, Chat, DynamicFeed, Menu as MenuIcon, Settings } from "@mui/icons-material"
 
 import SignOutMenuItem from "./SignOutMenuItem"
 import LinkMenuItem from "../../../components/LinkMenuItem"
@@ -32,6 +32,7 @@ export default function NavigationMenu(): ReactElement {
         <LinkMenuItem href="" startIcon={<DynamicFeed />} dismiss={dismiss}>
           Posts
         </LinkMenuItem>
+
         <LinkMenuItem href="chats" startIcon={<Chat />} dismiss={dismiss}>
           Chats
         </LinkMenuItem>
@@ -39,9 +40,14 @@ export default function NavigationMenu(): ReactElement {
         <Divider />
 
         {studentId !== undefined && (
-          <LinkMenuItem href={`/profile/${studentId}`} startIcon={<AccountBox />} dismiss={dismiss}>
-            Profile
-          </LinkMenuItem>
+          <Fragment>
+            <LinkMenuItem href={`/profile/${studentId}`} startIcon={<AccountBox />} dismiss={dismiss}>
+              Profile
+            </LinkMenuItem>
+            <LinkMenuItem href="settings" startIcon={<Settings />} dismiss={dismiss}>
+              Settings
+            </LinkMenuItem>
+          </Fragment>
         )}
 
         <SignOutMenuItem dismiss={dismiss} />

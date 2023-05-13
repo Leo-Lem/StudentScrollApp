@@ -1,16 +1,17 @@
-import React, { type ReactElement } from "react"
+import { type ReactElement } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline, ThemeProvider } from "@mui/material"
 
-import { dark } from "./themes"
 import { useAppSelector } from "./redux"
 
-import DashboardPage from "./features/posts/DashboardPage"
-import ProfilePage from "./features/profiles/ProfilePage"
-import Header from "./features/navigation/Header"
-import WelcomePage from "./features/authentication/WelcomePage"
-import Footer from "./features/navigation/Footer"
-import WelcomeHeader from "./features/navigation/WelcomeHeader"
+import { dark } from "./themes"
+
+import { Header, Footer, WelcomeHeader } from "./features/navigation"
+import { DashboardPage } from "./features/posts"
+import { ProfilePage } from "./features/profiles"
+import { WelcomePage } from "./features/authentication"
+import { SettingsPage } from "./features/settings"
+import addPageChip from "./features/navigation/PageChip"
 
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
@@ -24,8 +25,10 @@ export default function App(): ReactElement {
 
           {isAuthenticated ? (
             <Routes>
-              <Route path="/" element={<DashboardPage />} />
-              <Route path="/profile/:studentId" element={<ProfilePage />} />
+              <Route path="/" element={addPageChip("Posts", <DashboardPage />)} />
+              <Route path="/profile/:studentId" element={addPageChip("Profile", <ProfilePage />)} />
+              <Route path="/settings" element={addPageChip("Settings", <SettingsPage />)} />
+              <Route path="/chats" element={addPageChip("Chats", <h1>Chats</h1>)} />
             </Routes>
           ) : (
             <WelcomePage />

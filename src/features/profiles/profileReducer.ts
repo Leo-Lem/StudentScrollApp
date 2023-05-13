@@ -8,7 +8,7 @@ export interface ProfileState {
   [id: number]: Profile
 }
 
-export default createSlice({
+const profiles = createSlice({
   name: "profiles",
   initialState: {} as ProfileState,
   reducers: {},
@@ -23,6 +23,7 @@ export default createSlice({
         else state[action.payload.id] = action.payload.profile
       })
   }
-}).reducer
+})
 
+export default profiles.reducer
 export { readProfile, updateProfile }
