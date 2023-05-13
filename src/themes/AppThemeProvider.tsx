@@ -6,6 +6,7 @@ import { useAppSelector } from "../redux"
 
 import dark from "./dark"
 import light from "./light"
+import colorful from "./colorful"
 
 export default function AppThemeProvider({ children }: Props): ReactElement {
   const theme = useAppSelector((state) => state.settings.settings?.theme)
@@ -23,7 +24,7 @@ export default function AppThemeProvider({ children }: Props): ReactElement {
     case "light":
       return <ThemeProvider theme={light}>{children}</ThemeProvider>
     case "colorful":
-      return <ThemeProvider theme={dark}>{children}</ThemeProvider>
+      return <ThemeProvider theme={colorful}>{children}</ThemeProvider>
     default:
       return <ThemeProvider theme={prefersDarkMode ? dark : light}>{children}</ThemeProvider>
   }

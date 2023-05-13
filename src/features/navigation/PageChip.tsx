@@ -12,7 +12,7 @@ export default function addPageChip(title: string, page: ReactNode): ReactElemen
 
 export function PageChip({ title }: Props): ReactElement {
   return (
-    <Chip label={title} color="info" sx={{ position: "fixed", margin: 1, bottom: 0, left: 0 }} />
+    <Chip label={title} color="success" sx={{ position: "fixed", margin: 1, bottom: 0, left: 0 }} />
   )
 }
 

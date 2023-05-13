@@ -1,6 +1,6 @@
 import { type ReactElement } from "react"
 import { Navigate, useParams } from "react-router-dom"
-import { Card, Grid } from "@mui/material"
+import { Grid } from "@mui/material"
 import { Edit, Save } from "@mui/icons-material"
 
 import useIsCompact from "../../hooks/useIsCompact"

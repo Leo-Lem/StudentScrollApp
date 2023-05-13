@@ -11,7 +11,7 @@ export default createAsyncThunk(
   ): Promise<Settings> => {
     const id = tryGettingStudentId(thunkAPI)
 
-    const response = await fetch(`/api/v1/students/${id}/profile`, {
+    const response = await fetch(`/api/v1/students/${id}/settings`, {
       method: "PUT",
       headers: {
         Authorization: tryGettingAuthorizationHeader(thunkAPI),

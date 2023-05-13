@@ -1,8 +1,8 @@
-import { type ReactElement } from "react"
+import { useEffect, type ReactElement } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline } from "@mui/material"
 
-import { useAppSelector } from "./redux"
+import { useAppDispatch, useAppSelector } from "./redux"
 import { AppThemeProvider } from "./themes"
 
 import { Header, Footer, WelcomeHeader } from "./features/navigation"
@@ -11,11 +11,18 @@ import { ProfilePage } from "./features/profiles"
 import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
 import addPageChip from "./features/navigation/PageChip"
+import { readSettings } from "./features/settings/settingsReducer"
 
 // TODO: fix up the smallest regular layout
 
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(readSettings())
+  }, [])
 
   return (
     <BrowserRouter>

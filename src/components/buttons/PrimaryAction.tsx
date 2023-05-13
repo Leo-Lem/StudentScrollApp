@@ -1,18 +1,20 @@
-import { Card } from "@mui/material";
+import { Card, SxProps } from "@mui/material";
 import { ReactElement, ReactNode } from "react";
 
-export default function PrimaryAction({ fixed, children }: Props): ReactElement {
+export default function PrimaryAction({ fixed, children, sx }: Props): ReactElement {
   return (
-    <Card elevation={5} sx={fixed
-      ? { position: "fixed", margin: 1, bottom: 0, right: 0 }
-      : {}
+    <Card elevation={5} sx={
+      fixed
+        ? { ...sx, position: "fixed", margin: 1, bottom: 0, right: 0 }
+        : sx
     }>
       {children}
-    </Card>
+    </Card >
   )
 }
 
 type Props = {
   fixed: boolean
   children: ReactNode
+  sx?: SxProps
 }
