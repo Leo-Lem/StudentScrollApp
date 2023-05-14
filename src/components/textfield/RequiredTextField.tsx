@@ -68,5 +68,5 @@ type Props = TextFieldProps & {
   $value: Binding<string | "invalid" | undefined>
   showsFeedback?: boolean
   validate?: (value: string) => boolean
-  invalidMessage?: string
+  invalidMessage?: string | null
 }

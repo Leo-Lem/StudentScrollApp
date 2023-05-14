@@ -6,6 +6,7 @@ import en from "./en.json"
 i18n
   .use(initReactI18next)
   .init({
+    lng: "en",
     resources: {
       en: en
     }
