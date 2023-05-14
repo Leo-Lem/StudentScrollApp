@@ -3,8 +3,6 @@ import { createTheme } from "@mui/material"
 import linkSettings from "./settings/linkSettings"
 import * as Color from "@mui/material/colors"
 
-// TODO: implement colorful theme
-
 export default createTheme(
   {
     palette: {

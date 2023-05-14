@@ -3,19 +3,16 @@ import { Grid } from "@mui/material"
 
 import useBinding from "../../hooks/useBinding"
 import { useAppDispatch, useAppSelector } from "../../redux"
-import { LoadingSpinner } from "../../components"
+import { LoadingSpinner, PrimaryCard } from "../../components"
 
 import { readSettings, updateSettings } from "./settingsReducer"
 import ThemeSelect from "./components/ThemeSelect"
 import LocaleSelect from "./components/LocaleSelect"
 import IsLocatedSwitch from "./components/IsLocatedSwitch"
-import useIsCompact from "../../hooks/useIsCompact"
 
 export default function SettingsPage(): ReactElement {
   const settings = useAppSelector((state) => state.settings.settings)
   const dispatch = useAppDispatch()
-
-  const isCompact = useIsCompact()
 
   const $theme = useBinding(settings?.theme ?? "system")
   const $locale = useBinding(settings?.locale ?? "en")
@@ -44,14 +41,18 @@ export default function SettingsPage(): ReactElement {
 
   useEffect(update, [$theme.get, $locale.get, $isLocated.get])
 
-  if (settings === undefined)
-    return <LoadingSpinner />
-  else
-    return (
-      <Grid container direction="column" gap={3}>
-        <ThemeSelect $theme={$theme} />
-        <LocaleSelect $locale={$locale} />
-        <IsLocatedSwitch $isLocated={$isLocated} />
-      </Grid>
-    )
+  return (
+    <PrimaryCard>
+      {settings === undefined
+        ? <LoadingSpinner />
+        : (
+          <Grid container direction="column" gap={3}>
+            <ThemeSelect $theme={$theme} />
+            <LocaleSelect $locale={$locale} />
+            <IsLocatedSwitch $isLocated={$isLocated} />
+          </Grid>
+        )
+      }
+    </PrimaryCard>
+  )
 }
