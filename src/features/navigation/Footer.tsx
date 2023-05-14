@@ -1,15 +1,17 @@
-import { Stack, Typography } from "@mui/material"
+import { Chip, Divider, Stack, Typography } from "@mui/material"
 import { type ReactElement } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Label, ChipDivider } from "../../components"
+import { Label } from "../../components"
 
 export default function Footer(): ReactElement {
   const [t] = useTranslation()
 
   return (
     <Stack direction="column" spacing={1}>
-      <ChipDivider label={<Label type="about" fontSize="small" />} sx={{ marginTop: 5 }} />
+      <Divider sx={{ marginTop: 5 }}>
+        <Chip label={<Label type="about" fontSize="small" />} />
+      </Divider>
 
       <Typography
         variant="h6"

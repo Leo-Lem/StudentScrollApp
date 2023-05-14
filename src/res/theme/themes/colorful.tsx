@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material"
 import linkSettings from "../settings/linkSettings"
 import * as Color from "@mui/material/colors"
 import cardSettings from "../settings/cardSettings"
+import appBarSettings from "../settings/appBarSettings"
 
 export default createTheme(
   {
@@ -30,5 +31,6 @@ export default createTheme(
     }
   },
   linkSettings,
-  cardSettings
+  cardSettings,
+  appBarSettings
 )
