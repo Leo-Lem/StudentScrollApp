@@ -4,16 +4,7 @@ export const examplePosts = [
   {
     id: "1",
     title: "First Post",
-    tags: [
-      "First",
-      "A new beginning!",
-      "Lots of tags",
-      "tags",
-      "tags",
-      "tags",
-      "tagggggsssssssss",
-      "tags"
-    ],
+    tags: ["First", "A new beginning!", "Lots of tags", "tags", "tagggggsssssssss"],
     content: "This is the first post",
     posterId: "1"
   },

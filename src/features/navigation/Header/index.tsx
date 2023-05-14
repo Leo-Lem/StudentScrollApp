@@ -16,7 +16,7 @@ export default function Header(): ReactElement {
 
   if (isCompact)
     return (
-      <AppBar position="sticky" sx={{ marginBottom: 1 }}>
+      <AppBar position="sticky">
         <Toolbar sx={{ justifyContent: "space-between", gap: 1 }}>
           <Button color="inherit" size="large" href="/">
             <Logo compact size="max(1.5vw, 1.5vh)" />
@@ -31,7 +31,7 @@ export default function Header(): ReactElement {
     )
   else
     return (
-      <AppBar position="sticky" sx={{ marginBottom: 1 }}>
+      <AppBar position="sticky">
         <Toolbar>
           <Button color="inherit" size="large" href="/">
             <Logo size="max(1vw, 1vh)" />

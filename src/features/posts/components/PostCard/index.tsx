@@ -1,5 +1,5 @@
 import { Fragment, type ReactElement } from "react"
-import { Grid, Typography } from "@mui/material"
+import { Grid, Typography, Card } from "@mui/material"
 
 import useIsCompact from "../../../../hooks/useIsCompact"
 import ProfileLink from "../../../profiles/components/ProfileLink"
@@ -7,7 +7,6 @@ import ProfileLink from "../../../profiles/components/ProfileLink"
 import type ContentPost from "../../types/ContentPost"
 import DeletePostButton from "./DeletePostButton"
 import TagsList from "./TagsList"
-import { SecondaryCard } from "../../../../components"
 
 export default function PostCard({
   post: { id, title, tags, content, posterId }
@@ -16,8 +15,6 @@ export default function PostCard({
 
   const compact = (
     <Fragment>
-      <DeletePostButton postId={id} posterId={posterId} />
-
       <Grid>
         <Typography noWrap variant="h4">
           {title}
@@ -31,19 +28,21 @@ export default function PostCard({
           {content}
         </Typography>
       </Grid>
+
+      <DeletePostButton postId={id} posterId={posterId} />
     </Fragment>
   )
 
   const regular = (
     <Fragment>
       <Grid container direction="row" wrap="nowrap" gap={1}>
-        <DeletePostButton postId={id} posterId={posterId} />
-
         <Grid>
           <Typography noWrap variant="h4">
             {title}
           </Typography>
         </Grid>
+
+        <DeletePostButton postId={id} posterId={posterId} />
 
         <TagsList tags={tags} />
       </Grid>
@@ -57,7 +56,7 @@ export default function PostCard({
   )
 
   return (
-    <SecondaryCard>
+    <Card elevation={2}>
       <Grid container direction="row">
         <Grid item xs={9} md={11} gap={1}>
           {isCompact ? compact : regular}
@@ -67,7 +66,7 @@ export default function PostCard({
           <ProfileLink studentId={posterId} />
         </Grid>
       </Grid>
-    </SecondaryCard>
+    </Card>
   )
 }
 

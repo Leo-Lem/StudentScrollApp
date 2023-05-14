@@ -4,7 +4,9 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
 
 import { Binding } from "../../hooks/useBinding"
 import useIsCompact from "../../hooks/useIsCompact"
-import { Icon, IconType, icons } from "../../res/icons"
+import { Icon, IconType, icons as iconsWithDefault } from "../../res/icons"
+
+const icons = iconsWithDefault.filter((icon) => icon !== "default")
 
 export default function IconSelect({ $icon }: Props): ReactElement {
   const isCompact = useIsCompact()
@@ -29,7 +31,7 @@ export default function IconSelect({ $icon }: Props): ReactElement {
         <KeyboardArrowLeft />
       </Button>
 
-      {createElement(Icon[icons[iconIndex]], {
+      {createElement(Icon[icons[iconIndex]] ?? Icon.default, {
         fontSize: "large",
         sx: { fontSize: isCompact ? "max(30vw, 30vh)" : "max(15vw, 15vh)", aspectRatio: 1 }
       })}

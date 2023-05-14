@@ -24,9 +24,16 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
       href={`/profile/${studentId}`}
       sx={{ display: "flex", flexDirection: "column" }}
     >
-      {createElement(Icon[profile.icon], { sx: { width: "100%", height: "100%" } })}
+      {createElement(Icon[profile.icon] ?? Icon.default, { sx: { width: "100%", height: "100%" } })}
 
-      <Typography maxWidth="100%" noWrap textOverflow="ellipsis" fontSize={10}>
+      <Typography
+        variant="caption"
+        textTransform="capitalize"
+        maxWidth="100%"
+        noWrap
+        textOverflow="ellipsis"
+        fontSize={10}
+      >
         {profile.name}
       </Typography>
     </Button>

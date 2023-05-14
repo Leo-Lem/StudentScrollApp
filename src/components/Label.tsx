@@ -7,16 +7,19 @@ import { LabelIcon, LabelType } from "../res/labels"
 export default function Label({ type, display, ...props }: Props & SvgIconProps): ReactElement {
   const [t] = useTranslation()
 
+  const icon = createElement(LabelIcon[type] ?? <></>, props)
+  const translation = t(`LABEL_${type.toUpperCase()}`)
+
   switch (display) {
     case "iconOnly":
-      return createElement(LabelIcon[type], props)
+      return icon
     case "labelOnly":
-      return <Fragment>{t(type.toUpperCase())}</Fragment>
+      return <Fragment>{translation}</Fragment>
     default:
       return (
         <Stack direction="row" gap={1} alignItems="center">
-          {createElement(LabelIcon[type], props)}
-          {t(type.toUpperCase())}
+          {icon}
+          {translation}
         </Stack>
       )
   }

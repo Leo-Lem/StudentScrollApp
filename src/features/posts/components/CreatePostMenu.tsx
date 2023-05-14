@@ -2,7 +2,7 @@ import { useState, type ReactElement } from "react"
 import { Stack } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
-import { AsyncButton, RequiredTextField, TagsSelect, PrimaryCard, Label } from "../../../components"
+import { AsyncButton, RequiredTextField, TagsSelect, Label } from "../../../components"
 import { useAppDispatch } from "../../../redux"
 import useBinding from "../../../hooks/useBinding"
 
@@ -44,31 +44,29 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
   }
 
   return (
-    <PrimaryCard>
-      <Stack spacing={1}>
-        <RequiredTextField
-          $value={$title}
-          showsFeedback={areRequirementsActive}
-          placeholder={t("POST_TITLE") ?? ""}
-        />
+    <Stack spacing={1}>
+      <RequiredTextField
+        $value={$title}
+        showsFeedback={areRequirementsActive}
+        placeholder={t("POST_TITLE") ?? ""}
+      />
 
-        <TagsSelect $tags={$tags} />
+      <TagsSelect $tags={$tags} />
 
-        <RequiredTextField
-          $value={$content}
-          showsFeedback={areRequirementsActive}
-          validate={(content) => content.trim().length > 3}
-          invalidMessage={t("POST_CONTENT_TOO_SHORT")}
-          multiline
-          minRows={4}
-          placeholder={t("POST_CONTENT") ?? ""}
-        />
+      <RequiredTextField
+        $value={$content}
+        showsFeedback={areRequirementsActive}
+        validate={(content) => content.trim().length > 3}
+        invalidMessage={t("POST_CONTENT_TOO_SHORT")}
+        multiline
+        minRows={4}
+        placeholder={t("POST_CONTENT") ?? ""}
+      />
 
-        <AsyncButton action={create} variant="contained" fullWidth>
-          <Label type="post" />
-        </AsyncButton>
-      </Stack>
-    </PrimaryCard>
+      <AsyncButton action={create} variant="contained" fullWidth>
+        <Label type="post" />
+      </AsyncButton>
+    </Stack>
   )
 }
 

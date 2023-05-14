@@ -7,7 +7,7 @@ export default function IsLocatedSwitch({ $isLocated }: Props): ReactElement {
   const [t] = useTranslation()
 
   return (
-    <Card variant="outlined" sx={{ padding: 1 }}>
+    <Card variant="outlined">
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography variant="button">{t("SETTINGS_IS_LOCATED")}</Typography>
 

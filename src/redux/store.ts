@@ -4,13 +4,15 @@ import authentication from "../features/authentication/authenticationReducer"
 import { postsReducer } from "../features/posts"
 import { profileReducer } from "../features/profiles"
 import { settingsReducer } from "../features/settings"
+import { followingReducer } from "../features/following"
 
 const store = configureStore({
   reducer: {
     authentication,
     posts: postsReducer,
     profiles: profileReducer,
-    settings: settingsReducer
+    settings: settingsReducer,
+    following: followingReducer
   }
 })
 

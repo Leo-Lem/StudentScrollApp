@@ -1,8 +1,7 @@
 import { ReactElement, createElement } from "react"
-import { useTranslation } from "react-i18next"
-
-import { Binding } from "../../../hooks/useBinding"
 import {
+  Chip,
+  Divider,
   FormControl,
   FormLabel,
   Stack,
@@ -10,7 +9,9 @@ import {
   ToggleButtonGroup,
   Typography
 } from "@mui/material"
-import { ChipDivider } from "../../../components"
+import { useTranslation } from "react-i18next"
+
+import { Binding } from "../../../hooks/useBinding"
 import { Theme, ThemeIcon, themes } from "../../../res/theme"
 
 export default function ThemeSelect({ $theme }: Props): ReactElement {
@@ -19,7 +20,9 @@ export default function ThemeSelect({ $theme }: Props): ReactElement {
   return (
     <FormControl>
       <FormLabel>
-        <ChipDivider variant="middle" sx={{ marginBottom: 1 }} label="Theme" />
+        <Divider variant="middle" sx={{ marginBottom: 1 }}>
+          <Chip label="Theme" />
+        </Divider>
       </FormLabel>
 
       <ToggleButtonGroup
@@ -32,7 +35,7 @@ export default function ThemeSelect({ $theme }: Props): ReactElement {
         {themes.map((theme) => (
           <ToggleButton key={theme} value={theme} sx={{ flex: 1 }}>
             <Stack direction="column" alignItems="center">
-              {createElement(ThemeIcon[theme])}
+              {createElement(ThemeIcon[theme] ?? <></>)}
               <Typography variant="button">{t(`THEME_${theme.toUpperCase()}`)}</Typography>
             </Stack>
           </ToggleButton>

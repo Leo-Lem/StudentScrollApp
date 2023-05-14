@@ -1,6 +1,8 @@
 import { createTheme } from "@mui/material"
 
 import linkSettings from "../settings/linkSettings"
+import cardSettings from "../settings/cardSettings"
+import appBarSettings from "../settings/appBarSettings"
 
 export default createTheme(
   {
@@ -8,5 +10,7 @@ export default createTheme(
       mode: "light"
     }
   },
-  linkSettings
+  linkSettings,
+  cardSettings,
+  appBarSettings
 )
