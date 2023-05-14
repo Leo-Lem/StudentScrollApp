@@ -1,17 +1,13 @@
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, createElement, useEffect, useState } from "react"
 
 import { Binding } from "../../hooks/useBinding"
 
-import { icons } from "../../res"
 import { Button, Grid } from "@mui/material"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
-import { ProfileIcon } from ".."
-import useIsCompact from "../../hooks/useIsCompact"
+import { Icon, icons } from "../../res/icons"
 
 export default function IconSelect({ $icon }: Props): ReactElement {
   const [iconIndex, setIconIndex] = useState(icons.indexOf($icon.get))
-
-  const isCompact = useIsCompact()
 
   useEffect(() => {
     $icon.set(icons[iconIndex])
@@ -31,11 +27,7 @@ export default function IconSelect({ $icon }: Props): ReactElement {
         <KeyboardArrowLeft />
       </Button>
 
-      <ProfileIcon
-        fontSize="large"
-        sx={{ fontSize: isCompact ? "max(30vw, 30vh)" : "max(15vw, 15vh)", aspectRatio: 1 }}
-        iconId={icons[iconIndex]}
-      />
+      {createElement(Icon[icons[iconIndex]], { sx: { fontSize: "max(30vw, 30vh)", aspectRatio: 1 } })}
 
       <Button onClick={selectNext}>
         <KeyboardArrowRight />

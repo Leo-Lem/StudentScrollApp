@@ -4,19 +4,19 @@ export const exampleProfiles = [
   {
     name: "Raoul Duke",
     bio: "A man who procrastinates in his choosing will inevitably have his choice made for him by circumstance.",
-    icon: "School",
+    icon: "default",
     studentsId: "1"
   },
   {
     name: "Hunter S. Thompson",
     bio: "I hate to advocate drugs, alcohol, violence, or insanity to anyone, but they've always worked for me.",
-    icon: "Blind",
+    icon: "default",
     studentsId: "2"
   },
   {
     name: "Dr. Gonzo",
     bio: "There he goes. One of God's own prototypes. A high-powered mutant of some kind never even considered for mass production. Too weird to live, and too rare to die.",
-    icon: "Diversity2",
+    icon: "default",
     studentsId: "3"
   }
 ]

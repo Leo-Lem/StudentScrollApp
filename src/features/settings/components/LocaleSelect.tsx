@@ -1,26 +1,25 @@
 import { FormControl, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material"
 import { ReactElement } from "react"
-import { locales } from "../../../res"
 import { Binding } from "../../../hooks/useBinding"
-import LocaleLabel from "./LocaleLabel"
+import { useTranslation } from "react-i18next"
+import { Locale, locales } from "../../../res/locale"
 
 export default function LocaleSelect({ $locale }: Props): ReactElement {
+  const [t] = useTranslation()
+
   return (
     <FormControl>
-      <InputLabel>Language</InputLabel>
+      <InputLabel>{t("SETTINGS_LOCALE")}</InputLabel>
       <Select
         value={$locale.get}
         onChange={({ target: { value } }) => {
-          $locale.set(value)
+          if (value !== null) $locale.set(value as Locale)
         }}
-        input={<OutlinedInput label="Tags" />}
-        renderValue={(locale) => (
-          <LocaleLabel code={locale as string} />
-        )}
+        renderValue={(locale) => t(`LOCALE_${locale.toUpperCase()}`)}
       >
         {locales.map((locale) => (
           <MenuItem key={locale} value={locale}>
-            <LocaleLabel code={locale as string} />
+            {t(`LOCALE_${locale.toUpperCase()}`)}
           </MenuItem>
         ))}
       </Select>
@@ -29,5 +28,5 @@ export default function LocaleSelect({ $locale }: Props): ReactElement {
 }
 
 interface Props {
-  $locale: Binding<string>
+  $locale: Binding<Locale>
 }

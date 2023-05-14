@@ -1,20 +1,16 @@
-import { ReactElement, ReactNode, useEffect } from "react"
+import { ReactElement, ReactNode } from "react"
 import { ThemeProvider } from "@emotion/react"
 import { useMediaQuery } from "@mui/material"
 
-import { useAppSelector } from "../redux"
+import { useAppSelector } from "../../redux"
 
-import dark from "./dark"
-import light from "./light"
-import colorful from "./colorful"
+import dark from "./themes/dark"
+import light from "./themes/light"
+import colorful from "./themes/colorful"
 
 export default function AppThemeProvider({ children }: Props): ReactElement {
   const theme = useAppSelector((state) => state.settings.settings?.theme)
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
-
-  useEffect(() => {
-    console.log(theme)
-  }, [theme])
 
   switch (theme) {
     case undefined:

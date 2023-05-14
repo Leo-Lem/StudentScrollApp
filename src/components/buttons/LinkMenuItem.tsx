@@ -1,7 +1,7 @@
 import { ButtonProps, Link, MenuItem } from "@mui/material"
-import { ReactNode, type ReactElement } from "react"
+import { type ReactElement } from "react"
 
-export default function LinkMenuItem({ href, children, startIcon, dismiss }: Props): ReactElement {
+export default function LinkMenuItem({ href, children, startIcon, dismiss }: Props & ButtonProps): ReactElement {
   return (
     <MenuItem href={href} component={Link} onClick={dismiss} sx={{ gap: 1 }}>
       {startIcon}
@@ -10,8 +10,6 @@ export default function LinkMenuItem({ href, children, startIcon, dismiss }: Pro
   )
 }
 
-type Props = ButtonProps & {
-  href: string
-  children: ReactNode
+interface Props {
   dismiss?: () => void
 }

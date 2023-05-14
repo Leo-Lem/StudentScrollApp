@@ -9,13 +9,15 @@ import { readSettings, updateSettings } from "./settingsReducer"
 import ThemeSelect from "./components/ThemeSelect"
 import LocaleSelect from "./components/LocaleSelect"
 import IsLocatedSwitch from "./components/IsLocatedSwitch"
+import { Theme } from "../../res/theme"
+import { Locale } from "../../res/locale"
 
 export default function SettingsPage(): ReactElement {
   const settings = useAppSelector((state) => state.settings.settings)
   const dispatch = useAppDispatch()
 
-  const $theme = useBinding(settings?.theme ?? "system")
-  const $locale = useBinding(settings?.locale ?? "en")
+  const $theme = useBinding<Theme>(settings?.theme ?? "system")
+  const $locale = useBinding<Locale>(settings?.locale ?? "en")
   const $isLocated = useBinding(settings?.isLocated ?? false)
 
   const update = () => {
@@ -23,7 +25,7 @@ export default function SettingsPage(): ReactElement {
     const newLocale = $locale.get !== settings?.locale ? $locale.get : undefined
     const newIsLocated = $isLocated.get !== settings?.isLocated ? $isLocated.get : undefined
 
-    if (newTheme !== undefined)
+    if (newTheme !== undefined || newLocale !== undefined || newIsLocated !== undefined)
       void dispatch(updateSettings({ newTheme, newLocale, newIsLocated }))
   }
 

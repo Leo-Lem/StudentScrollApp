@@ -1,11 +1,15 @@
 import { Autocomplete, TextField } from "@mui/material"
 import { useState, type ReactElement, useEffect, ReactNode } from "react"
+import { useTranslation } from "react-i18next"
+
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { readProfile } from "../../profiles"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 
 export default function SearchBar(): ReactElement {
+  const [t] = useTranslation()
+
   const dispatch = useAppDispatch()
 
   const [searchQuery, setSearchQuery] = useState("")
@@ -28,9 +32,9 @@ export default function SearchBar(): ReactElement {
   const groupBy = (option: SearchResult) => {
     switch (option.id) {
       case "profileById":
-        return "Profiles"
+        return t("SEARCH_PROFILES")
       default:
-        return "Other"
+        return t("SEARCH_OTHER")
     }
   }
 
@@ -73,7 +77,7 @@ export default function SearchBar(): ReactElement {
       options={options()}
       groupBy={groupBy}
       getOptionLabel={getOptionLabel}
-      renderInput={(props) => <TextField {...props} variant="standard" placeholder="Search" />}
+      renderInput={(props) => <TextField {...props} variant="standard" placeholder={t("SEARCH") ?? ""} />}
       renderOption={(props, option) => renderOption(option)}
       onInputChange={(_, value) => {
         setSearchQuery(value)

@@ -1,7 +1,7 @@
 import { Chip, Divider, DividerProps } from "@mui/material"
-import { ReactElement } from "react"
+import { ReactElement, ReactNode } from "react"
 
-export default function ChipDivider({ label, ...props }: Props): ReactElement {
+export default function ChipDivider({ label, ...props }: Props & DividerProps): ReactElement {
   return (
     <Divider variant="fullWidth" {...props}>
       <Chip label={label} />
@@ -9,6 +9,6 @@ export default function ChipDivider({ label, ...props }: Props): ReactElement {
   )
 }
 
-type Props = DividerProps & {
-  label: string
+interface Props {
+  label: ReactNode
 }

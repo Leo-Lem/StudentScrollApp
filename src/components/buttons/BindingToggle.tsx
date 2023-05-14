@@ -2,7 +2,7 @@ import { ToggleButton, ToggleButtonProps } from "@mui/material"
 import { ReactElement } from "react"
 import { Binding } from "../../hooks/useBinding"
 
-export default function BindingToggle({ $isSelected, ...props }: BindingToggleProps): ReactElement {
+export default function BindingToggle({ $isSelected, ...props }: Props & Omit<ToggleButtonProps, "value">): ReactElement {
   return (
     <ToggleButton
       {...props}
@@ -13,6 +13,6 @@ export default function BindingToggle({ $isSelected, ...props }: BindingTogglePr
   )
 }
 
-export type BindingToggleProps = Omit<ToggleButtonProps, "value"> & {
+interface Props {
   $isSelected: Binding<boolean>
 }

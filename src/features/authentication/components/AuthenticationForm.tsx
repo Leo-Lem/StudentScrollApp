@@ -1,7 +1,7 @@
 import { useState, type ReactElement } from "react"
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
 
-import { ErrorFeedback, AsyncButton } from "../../../components"
+import { ErrorFeedback, AsyncButton, Label } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 import useBinding from "../../../hooks/useBinding"
 
@@ -66,7 +66,7 @@ export default function AuthenticationForm(): ReactElement {
         />
 
         <AsyncButton action={authenticate} variant="contained">
-          {isRegistering ? t("SIGNUP") : t("SIGNIN")}
+          <Label type={isRegistering ? "signup" : "signin"} />
         </AsyncButton>
 
         <ErrorFeedback isError={status === AuthenticationStatus.failed} message={error ?? ""} />

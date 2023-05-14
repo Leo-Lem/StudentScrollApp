@@ -1,12 +1,11 @@
 import { type ReactElement } from "react"
 import { Box, Grid, Slide } from "@mui/material"
-import { Send } from "@mui/icons-material"
 
 import CreatePostMenu from "./components/CreatePostMenu"
 import PostsScroll from "./components/PostsScroll"
 
 import useIsCompact from "../../hooks/useIsCompact"
-import { BindingToggle, PrimaryAction } from "../../components"
+import { BindingToggle, PrimaryAction, Label } from "../../components"
 import useBinding from "../../hooks/useBinding"
 
 export default function DashboardPage(): ReactElement {
@@ -18,7 +17,7 @@ export default function DashboardPage(): ReactElement {
     <Grid item>
       <PrimaryAction fixed={true}>
         <BindingToggle $isSelected={$isPosting} sx={{ aspectRatio: 1 }}>
-          <Send />
+          <Label type="post" display="iconOnly" />
         </BindingToggle>
       </PrimaryAction>
 

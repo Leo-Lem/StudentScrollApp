@@ -9,6 +9,8 @@ import IconSelect from "../../../components/pickers/IconSelect"
 import { readProfile, updateProfile } from "../profileReducer"
 import LoadingSpinner from "../../../components/LoadingSpinner"
 
+// TODO: fix update not working
+
 export default function EditProfileDetails(): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
   if (studentId === undefined) return <LoadingSpinner />

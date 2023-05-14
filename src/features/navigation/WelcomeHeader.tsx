@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next"
 export default function WelcomeHeader(): ReactElement {
   const isCompact = useIsCompact()
 
-  const [t,] = useTranslation()
+  const [t] = useTranslation()
 
   return (
     <AppBar position="sticky">

@@ -1,12 +1,12 @@
 import { Grid, Typography } from "@mui/material"
-import { type ReactElement, useEffect, Fragment } from "react"
+import { type ReactElement, useEffect, Fragment, createElement } from "react"
 
-import { ProfileIcon } from "../../../components"
+import { LoadingSpinner } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { readProfile } from "../profileReducer"
 import useIsCompact from "../../../hooks/useIsCompact"
-import LoadingSpinner from "../../../components/LoadingSpinner"
+import { Icon } from "../../../res/icons"
 
 export default function ProfileDetails({ studentId }: Props): ReactElement {
   const profile = useAppSelector((state) => state.profiles[studentId])
@@ -22,11 +22,10 @@ export default function ProfileDetails({ studentId }: Props): ReactElement {
   else
     return (
       <Fragment>
-        <ProfileIcon
-          fontSize="large"
-          sx={{ fontSize: isCompact ? "max(30vw, 30vh)" : "max(15vw, 15vh)", aspectRatio: 1 }}
-          iconId={profile.icon}
-        />
+        {createElement(Icon[profile.icon], {
+          fontSize: "large",
+          sx: { fontSize: isCompact ? "max(30vw, 30vh)" : "max(15vw, 15vh)", aspectRatio: 1 }
+        })}
 
         <Grid item xs>
           <Typography noWrap overflow="scroll" textOverflow="ellipsis" variant="h3">

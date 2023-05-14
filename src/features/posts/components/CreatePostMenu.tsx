@@ -1,14 +1,15 @@
 import { useState, type ReactElement } from "react"
 import { Stack } from "@mui/material"
-import { Send } from "@mui/icons-material"
+import { useTranslation } from "react-i18next"
 
-import { AsyncButton, RequiredTextField, TagsSelect, PrimaryCard } from "../../../components"
+import { AsyncButton, RequiredTextField, TagsSelect, PrimaryCard, Label } from "../../../components"
 import { useAppDispatch } from "../../../redux"
 import useBinding from "../../../hooks/useBinding"
 
 import { createPost } from "../postsReducer"
 
 export default function CreatePostMenu({ dismiss }: Props): ReactElement {
+  const [t] = useTranslation()
   const dispatch = useAppDispatch()
 
   const $title = useBinding<string | "invalid" | undefined>(undefined)
@@ -48,7 +49,7 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
         <RequiredTextField
           $value={$title}
           showsFeedback={areRequirementsActive}
-          placeholder="New Post"
+          placeholder={t("POST_TITLE") ?? ""}
         />
 
         <TagsSelect $tags={$tags} />
@@ -57,14 +58,14 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
           $value={$content}
           showsFeedback={areRequirementsActive}
           validate={(content) => content.trim().length > 3}
-          invalidMessage="Please elaborate…"
+          invalidMessage={t("POST_CONTENT_TOO_SHORT")}
           multiline
           minRows={4}
-          placeholder="What's on your mind?"
+          placeholder={t("POST_CONTENT") ?? ""}
         />
 
-        <AsyncButton action={create} variant="contained" fullWidth startIcon={<Send />}>
-          Post
+        <AsyncButton action={create} variant="contained" fullWidth>
+          <Label type="post" />
         </AsyncButton>
       </Stack>
     </PrimaryCard>

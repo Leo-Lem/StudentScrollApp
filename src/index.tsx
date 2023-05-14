@@ -5,14 +5,14 @@ import App from "./App"
 import { Provider } from "react-redux"
 import { store } from "./redux"
 
-import "./locale"
+import "./res/locale"
 
 createRoot(document.getElementById("root") as HTMLElement).render(
-  <Provider store={store}>
-    <StrictMode>
+  <StrictMode>
+    <Provider store={store}>
       <App />
-    </StrictMode>
-  </Provider>
+    </Provider>
+  </StrictMode>
 )
 
 if (process.env.NODE_ENV === "development") import("./mocks")
