@@ -15,5 +15,7 @@ export default {
   save: Icon.Save,
   edit: Icon.Edit,
   about: Icon.Info,
-  search: Icon.Search
+  search: Icon.Search,
+  follow: Icon.PersonAdd,
+  unfollow: Icon.PersonRemove,
 } as { [key in LabelType]: ComponentType<any> }
