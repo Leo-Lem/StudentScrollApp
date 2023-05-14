@@ -29,6 +29,4 @@ const profiles = createSlice({
 
 export default profiles.reducer
 export { readProfile, updateProfile }
-export { default as follow } from "./api/follow"
-export { default as unfollow } from "./api/unfollow"
 export const { resetProfile } = profiles.actions

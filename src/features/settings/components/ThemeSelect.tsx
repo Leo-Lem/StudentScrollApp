@@ -32,7 +32,7 @@ export default function ThemeSelect({ $theme }: Props): ReactElement {
         {themes.map((theme) => (
           <ToggleButton key={theme} value={theme} sx={{ flex: 1 }}>
             <Stack direction="column" alignItems="center">
-              {createElement(ThemeIcon[theme])}
+              {createElement(ThemeIcon[theme] ?? <></>)}
               <Typography variant="button">{t(`THEME_${theme.toUpperCase()}`)}</Typography>
             </Stack>
           </ToggleButton>

@@ -31,7 +31,7 @@ export default function IconSelect({ $icon }: Props): ReactElement {
         <KeyboardArrowLeft />
       </Button>
 
-      {createElement(Icon[icons[iconIndex]], {
+      {createElement(Icon[icons[iconIndex]] ?? Icon.default, {
         fontSize: "large",
         sx: { fontSize: isCompact ? "max(30vw, 30vh)" : "max(15vw, 15vh)", aspectRatio: 1 }
       })}

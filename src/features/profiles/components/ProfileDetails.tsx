@@ -16,8 +16,11 @@ import { Icon, IconType } from "../../../res/icons"
 import useBinding from "../../../hooks/useBinding"
 import { Edit, Save } from "@mui/icons-material"
 import Profile from "../types/Profile"
+import FollowButton from "../../following/components/FollowButton"
 
-export default function ProfileDetails({ studentId, canEdit }: Props): ReactElement {
+// TODO: profile stretches out beyond on small layout
+
+export default function ProfileDetails({ studentId, isSelf }: Props): ReactElement {
   const isCompact = useIsCompact()
 
   const profile = useAppSelector((state) => state.profiles[studentId])
@@ -29,6 +32,15 @@ export default function ProfileDetails({ studentId, canEdit }: Props): ReactElem
   const $newBio = useBinding("")
   const $newIcon = useBinding<IconType>("default")
 
+  const update = () => {
+    const name = $newName.get !== "" && $newName.get !== profile?.name ? $newName.get : undefined
+    const bio = $newBio.get !== "" && $newBio.get !== profile?.bio ? $newBio.get : undefined
+    const icon = $newIcon.get !== "default" && $newIcon.get !== profile?.icon ? $newIcon.get : undefined
+
+    if (name !== undefined || bio !== undefined || icon !== undefined)
+      void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))
+  }
+
   useEffect(() => {
     dispatch(readProfile(studentId)).then(() => {
       if (profile !== null) {
@@ -39,24 +51,19 @@ export default function ProfileDetails({ studentId, canEdit }: Props): ReactElem
   }, [studentId])
 
   useEffect(() => {
-    if (profile === null || $isEditing.get) return
-
-    const name = $newName.get !== "" && $newName.get !== profile?.name ? $newName.get : undefined
-    const bio = $newBio.get !== "" && $newBio.get !== profile?.bio ? $newBio.get : undefined
-    const icon = $newIcon.get !== "default" && $newIcon.get !== profile?.icon ? $newIcon.get : undefined
-
-    if (name !== undefined || bio !== undefined || icon !== undefined)
-      void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))
+    if (profile !== null && !$isEditing.get) update()
   }, [$isEditing.get])
 
   const details = (profile: Profile) => (
     <Fragment>
-      {createElement(Icon[profile.icon], {
+      {createElement(Icon[profile.icon] ?? Icon.default, {
         fontSize: "large",
         sx: { fontSize: isCompact ? "max(30vw, 30vh)" : "max(15vw, 15vh)", aspectRatio: 1 }
       })}
 
-      <Grid item xs>
+      <Grid item xs display="flex" flexDirection="row" gap={1}>
+        {!isSelf && <FollowButton followId={studentId} />}
+
         <Typography noWrap overflow="scroll" textOverflow="ellipsis" variant="h3">
           {profile.name}
         </Typography>
@@ -80,7 +87,7 @@ export default function ProfileDetails({ studentId, canEdit }: Props): ReactElem
   else
     return (
       <Fragment>
-        {canEdit && (
+        {isSelf && (
           <PrimaryAction fixed={isCompact}>
             <BindingToggle $isSelected={$isEditing} sx={{ aspectRatio: 1 }}>
               {$isEditing.get ? <Save /> : <Edit />}
@@ -95,5 +102,5 @@ export default function ProfileDetails({ studentId, canEdit }: Props): ReactElem
 
 interface Props {
   studentId: number
-  canEdit: boolean
+  isSelf: boolean
 }

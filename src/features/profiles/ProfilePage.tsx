@@ -30,7 +30,7 @@ export default function ProfilePage(): ReactElement {
           >
             <ProfileDetails
               studentId={id}
-              canEdit={currentStudentId !== undefined && id === currentStudentId}
+              isSelf={currentStudentId !== undefined && id === currentStudentId}
             />
           </Grid>
         </PrimaryCard>
