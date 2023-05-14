@@ -1,12 +1,12 @@
 import { type ReactElement } from "react"
 import { Navigate, useParams } from "react-router-dom"
-import { Grid } from "@mui/material"
+import { Grid, Stack, Card } from "@mui/material"
 
 import useIsCompact from "../../hooks/useIsCompact"
-import { PrimaryCard, SecondaryCard } from "../../components"
 
 import ProfileDetails from "./components/ProfileDetails"
 import { useAppSelector } from "../../redux"
+import { FollowersList, FollowsList } from "../following"
 
 export default function ProfilePage(): ReactElement {
   const isCompact = useIsCompact()
@@ -17,30 +17,67 @@ export default function ProfilePage(): ReactElement {
 
   const id = parseInt(studentId)
 
-  return (
-    <Grid container columns={12} spacing={1} direction={isCompact ? "column" : "row-reverse"}>
-      <Grid item xs={12} md={4}>
-        <PrimaryCard>
-          <Grid
-            container
-            direction="column"
-            gap={1}
-            justifyContent={isCompact ? "center" : "end"}
-            alignItems={isCompact ? "center" : "end"}
-          >
-            <ProfileDetails
-              studentId={id}
-              isSelf={currentStudentId !== undefined && id === currentStudentId}
-            />
-          </Grid>
-        </PrimaryCard>
+  const details = (
+    <Card elevation={3}>
+      <Stack direction="column" spacing={1} alignItems={isCompact ? "center" : "end"}>
+        <ProfileDetails
+          studentId={id}
+          isSelf={currentStudentId !== undefined && id === currentStudentId}
+        />
+      </Stack>
+    </Card>
+  )
+
+  const followsList = (
+    <Card elevation={2}>
+      <FollowsList studentId={id} />
+    </Card>
+  )
+
+  const followersList = (
+    <Card elevation={2}>
+      <FollowersList studentId={id} />
+    </Card>
+  )
+
+  const posts = (
+    <Card elevation={2}>
+      <h1>Posts</h1>
+    </Card>
+  )
+
+  const compact = (
+    <Stack direction="column" spacing={1}>
+      {details}
+      {followsList}
+      {followersList}
+      {posts}
+    </Stack>
+  )
+
+  const regular = (
+    <Grid container direction="row" spacing={1}>
+      <Grid item md={8}>
+        {posts}
       </Grid>
 
-      <Grid item xs={12} md={8}>
-        <SecondaryCard>
-          <h1>Posts</h1>
-        </SecondaryCard>
+      <Grid item md={4}>
+        <Grid container spacing={1}>
+          <Grid item md>
+            {details}
+          </Grid>
+
+          <Grid item md>
+            {followsList}
+          </Grid>
+
+          <Grid item md>
+            {followersList}
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   )
+
+  return isCompact ? compact : regular
 }

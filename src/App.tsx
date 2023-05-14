@@ -46,7 +46,7 @@ export default function App(): ReactElement {
       <AppThemeProvider>
         <AppLocaleProvider>
           <CssBaseline />
-          <Container disableGutters sx={{ padding: 1 }}>
+          <Container disableGutters>
             {isAuthenticated ? authenticated : notAuthenticated}
             <Footer />
           </Container>

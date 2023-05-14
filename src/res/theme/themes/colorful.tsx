@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material"
 
 import linkSettings from "../settings/linkSettings"
 import * as Color from "@mui/material/colors"
+import cardSettings from "../settings/cardSettings"
 
 export default createTheme(
   {
@@ -28,5 +29,6 @@ export default createTheme(
       divider: Color.common.white
     }
   },
-  linkSettings
+  linkSettings,
+  cardSettings
 )

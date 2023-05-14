@@ -3,7 +3,7 @@ import { Chip, Grid } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import { LoadingSpinner, SecondaryCard } from "../../../components"
+import { LoadingSpinner } from "../../../components"
 import { ProfileLink } from "../../profiles"
 
 import { readFollowers } from "../followingReducer"
@@ -27,23 +27,21 @@ export default function FollowersList({ studentId }: Props): ReactElement {
     return <LoadingSpinner />
   else
     return (
-      <SecondaryCard>
-        <Grid container direction="column" gap={1}>
-          <Grid container justifyContent="space-between">
-            <Chip label={t("FOLLOWERS")} />
+      <Grid container direction="column" gap={1}>
+        <Grid container justifyContent="space-between">
+          <Chip label={t("FOLLOWERS")} />
 
-            <Chip label={followerIds.length} />
-          </Grid>
-
-          <Grid container direction="row" gap={1} wrap="nowrap" overflow="scroll">
-            {followerIds.map((followerId) => (
-              <Grid item xs={4} md={2} key={followerId} >
-                <ProfileLink studentId={followerId} />
-              </Grid>
-            ))}
-          </Grid>
+          <Chip label={followerIds.length} />
         </Grid>
-      </SecondaryCard>
+
+        <Grid container direction="row" gap={1} wrap="nowrap" overflow="scroll">
+          {followerIds.map((followerId) => (
+            <Grid item xs={2} key={followerId} >
+              <ProfileLink studentId={followerId} />
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
     )
 }
 

@@ -1,9 +1,9 @@
 import { ReactElement, useEffect } from "react"
-import { Grid } from "@mui/material"
+import { Grid, Card } from "@mui/material"
 
 import useBinding from "../../hooks/useBinding"
 import { useAppDispatch, useAppSelector } from "../../redux"
-import { LoadingSpinner, PrimaryCard } from "../../components"
+import { LoadingSpinner } from "../../components"
 
 import { readSettings, updateSettings } from "./settingsReducer"
 import ThemeSelect from "./components/ThemeSelect"
@@ -43,7 +43,7 @@ export default function SettingsPage(): ReactElement {
   useEffect(update, [$theme.get, $locale.get, $isLocated.get])
 
   return (
-    <PrimaryCard>
+    <Card elevation={3}>
       {settings === undefined ? (
         <LoadingSpinner />
       ) : (
@@ -53,6 +53,6 @@ export default function SettingsPage(): ReactElement {
           {/* <IsLocatedSwitch $isLocated={$isLocated} /> */}
         </Grid>
       )}
-    </PrimaryCard>
+    </Card>
   )
 }
