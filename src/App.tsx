@@ -13,7 +13,6 @@ import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
 import { readSettings } from "./features/settings/settingsReducer"
 
-
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
 
@@ -53,6 +52,6 @@ export default function App(): ReactElement {
           </Container>
         </AppLocaleProvider>
       </AppThemeProvider>
-    </BrowserRouter >
+    </BrowserRouter>
   )
 }

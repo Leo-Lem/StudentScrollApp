@@ -8,7 +8,6 @@ import { LoadingSpinner, PrimaryCard } from "../../components"
 import { readSettings, updateSettings } from "./settingsReducer"
 import ThemeSelect from "./components/ThemeSelect"
 import LocaleSelect from "./components/LocaleSelect"
-import IsLocatedSwitch from "./components/IsLocatedSwitch"
 import { Theme } from "../../res/theme"
 import { Locale } from "../../res/locale"
 
@@ -17,7 +16,7 @@ export default function SettingsPage(): ReactElement {
   const dispatch = useAppDispatch()
 
   const $theme = useBinding<Theme>(settings?.theme ?? "system")
-  const $locale = useBinding<Locale>(settings?.locale ?? "en")
+  const $locale = useBinding<Locale>(settings?.locale ?? "system")
   const $isLocated = useBinding(settings?.isLocated ?? false)
 
   const update = () => {
@@ -45,16 +44,15 @@ export default function SettingsPage(): ReactElement {
 
   return (
     <PrimaryCard>
-      {settings === undefined
-        ? <LoadingSpinner />
-        : (
-          <Grid container direction="column" gap={3}>
-            <ThemeSelect $theme={$theme} />
-            <LocaleSelect $locale={$locale} />
-            <IsLocatedSwitch $isLocated={$isLocated} />
-          </Grid>
-        )
-      }
+      {settings === undefined ? (
+        <LoadingSpinner />
+      ) : (
+        <Grid container direction="column" gap={3}>
+          <ThemeSelect $theme={$theme} />
+          <LocaleSelect $locale={$locale} />
+          {/* <IsLocatedSwitch $isLocated={$isLocated} /> */}
+        </Grid>
+      )}
     </PrimaryCard>
   )
 }

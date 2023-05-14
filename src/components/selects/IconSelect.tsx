@@ -27,7 +27,9 @@ export default function IconSelect({ $icon }: Props): ReactElement {
         <KeyboardArrowLeft />
       </Button>
 
-      {createElement(Icon[icons[iconIndex]], { sx: { fontSize: "max(30vw, 30vh)", aspectRatio: 1 } })}
+      {createElement(Icon[icons[iconIndex]], {
+        sx: { fontSize: "max(30vw, 30vh)", aspectRatio: 1 }
+      })}
 
       <Button onClick={selectNext}>
         <KeyboardArrowRight />

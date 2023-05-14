@@ -2,7 +2,14 @@ import { ReactElement, createElement } from "react"
 import { useTranslation } from "react-i18next"
 
 import { Binding } from "../../../hooks/useBinding"
-import { FormControl, FormLabel, Stack, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
+import {
+  FormControl,
+  FormLabel,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography
+} from "@mui/material"
 import { ChipDivider } from "../../../components"
 import { Theme, ThemeIcon, themes } from "../../../res/theme"
 

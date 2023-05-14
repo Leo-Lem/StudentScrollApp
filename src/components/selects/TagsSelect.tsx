@@ -1,4 +1,4 @@
-import { Box, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material"
+import { Box, Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { ReactElement } from "react"
 
 import { tags } from "../../res/tags"
@@ -14,7 +14,6 @@ export default function TagsSelect({ $tags: $selection }: Props): ReactElement {
         onChange={({ target: { value } }) => {
           $selection.set(typeof value === "string" ? value.split(",") : value)
         }}
-        input={<OutlinedInput label="Tags" />}
         renderValue={(selected) => (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, overflowX: "auto" }}>
             {selected.map((value) => (

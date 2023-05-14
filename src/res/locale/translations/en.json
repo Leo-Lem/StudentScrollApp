@@ -30,15 +30,16 @@
     "POST_CONTENT_TOO_SHORT": "Please elaborate…",
     "POST_TAGS": "Tags",
     "SETTINGS_THEME": "Theme",
-    "SETTINGS_LOCALE": "Language",
-    "SETTINGS_IS_LOCATED": "Use your location",
     "THEME_DARK": "Dark",
     "THEME_LIGHT": "Light",
     "THEME_SYSTEM": "System",
     "THEME_COLORFUL": "Colorful",
+    "SETTINGS_LOCALE": "Language",
     "LOCALE_EN": "English",
     "LOCALE_DE": "German",
     "LOCALE_ES": "Spanish",
-    "LOCALE_ZH": "Chinese"
+    "LOCALE_ZH": "Chinese",
+    "LOCALE_SYSTEM": "System",
+    "SETTINGS_IS_LOCATED": "Use your location"
   }
 }

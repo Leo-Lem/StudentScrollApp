@@ -2,7 +2,10 @@ import { ReactElement } from "react"
 import { Binding } from "../../hooks/useBinding"
 import { TextField, TextFieldProps } from "@mui/material"
 
-export default function BindingTextField({ $value, ...props }: Props & TextFieldProps): ReactElement {
+export default function BindingTextField({
+  $value,
+  ...props
+}: Props & TextFieldProps): ReactElement {
   return (
     <TextField
       {...props}

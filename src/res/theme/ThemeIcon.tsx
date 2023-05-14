@@ -7,5 +7,5 @@ export default {
   light: Icon.LightMode,
   dark: Icon.DarkMode,
   colorful: Icon.Palette,
-  system: Icon.Settings,
+  system: Icon.Settings
 } as { [key in Theme]: ComponentType<any> }

@@ -77,7 +77,9 @@ export default function SearchBar(): ReactElement {
       options={options()}
       groupBy={groupBy}
       getOptionLabel={getOptionLabel}
-      renderInput={(props) => <TextField {...props} variant="standard" placeholder={t("SEARCH") ?? ""} />}
+      renderInput={(props) => (
+        <TextField {...props} variant="standard" placeholder={t("SEARCH") ?? ""} />
+      )}
       renderOption={(props, option) => renderOption(option)}
       onInputChange={(_, value) => {
         setSearchQuery(value)

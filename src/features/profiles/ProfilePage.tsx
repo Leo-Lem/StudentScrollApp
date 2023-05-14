@@ -36,13 +36,13 @@ export default function ProfilePage(): ReactElement {
             justifyContent={isCompact ? "center" : "end"}
             alignItems={isCompact ? "center" : "end"}
           >
-            {canEdit() &&
+            {canEdit() && (
               <PrimaryAction fixed={isCompact}>
                 <BindingToggle $isSelected={$isEditing} sx={{ aspectRatio: 1 }}>
                   {$isEditing.get ? <Save /> : <Edit />}
                 </BindingToggle>
               </PrimaryAction>
-            }
+            )}
 
             {$isEditing.get ? <EditProfileDetails /> : <ProfileDetails studentId={id} />}
           </Grid>

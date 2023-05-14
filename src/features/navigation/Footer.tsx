@@ -20,7 +20,9 @@ export default function Footer(): ReactElement {
         overflow="scroll"
         noWrap
       >
-        {t("CREATED_BY", { names: "Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann" })}
+        {t("CREATED_BY", {
+          names: "Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann"
+        })}
       </Typography>
     </Stack>
   )

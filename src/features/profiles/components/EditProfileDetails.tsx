@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import useBinding from "../../../hooks/useBinding"
 
 import { BindingTextField } from "../../../components"
-import IconSelect from "../../../components/pickers/IconSelect"
+import IconSelect from "../../../components/selects/IconSelect"
 
 import { readProfile, updateProfile } from "../profileReducer"
 import LoadingSpinner from "../../../components/LoadingSpinner"

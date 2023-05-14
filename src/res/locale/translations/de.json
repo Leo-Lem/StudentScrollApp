@@ -30,15 +30,16 @@
     "POST_CONTENT_TOO_SHORT": "Etwas ausführlicher, bitte...",
     "POST_TAGS": "Tags",
     "SETTINGS_THEME": "Aussehen",
-    "SETTINGS_LOCALE": "Sprache",
-    "SETTINGS_IS_LOCATED": "Standortzugriff erlauben",
     "THEME_DARK": "Dunkel",
     "THEME_LIGHT": "Hell",
     "THEME_SYSTEM": "System",
     "THEME_COLORFUL": "Farbenfroh",
+    "SETTINGS_LOCALE": "Sprache",
     "LOCALE_EN": "Englisch",
     "LOCALE_DE": "Deutsch",
     "LOCALE_ES": "Spanisch",
-    "LOCALE_ZH": "Chinesisch"
+    "LOCALE_ZH": "Chinesisch",
+    "LOCALE_SYSTEM": "System",
+    "SETTINGS_IS_LOCATED": "Standortzugriff erlauben"
   }
 }

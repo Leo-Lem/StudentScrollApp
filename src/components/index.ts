@@ -6,8 +6,8 @@ export { default as PrimaryAction } from "./buttons/PrimaryAction"
 export { default as BindingTextField } from "./textfield/BindingTextField"
 export { default as RequiredTextField } from "./textfield/RequiredTextField"
 
-export { default as TagsSelect } from "./pickers/TagsSelect"
-export { default as IconSelect } from "./pickers/IconSelect"
+export { default as TagsSelect } from "./selects/TagsSelect"
+export { default as IconSelect } from "./selects/IconSelect"
 
 export { default as PrimaryCard } from "./cards/PrimaryCard"
 export { default as SecondaryCard } from "./cards/SecondaryCard"

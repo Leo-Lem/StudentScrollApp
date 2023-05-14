@@ -1,8 +1,8 @@
 import { Server } from "miragejs"
 
 export const exampleSettings = {
-  theme: "dark",
-  locale: "en",
+  theme: "system",
+  locale: "system",
   isLocated: true
 }
 

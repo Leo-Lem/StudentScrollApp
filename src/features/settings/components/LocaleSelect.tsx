@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material"
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { ReactElement } from "react"
 import { Binding } from "../../../hooks/useBinding"
 import { useTranslation } from "react-i18next"
@@ -10,6 +10,7 @@ export default function LocaleSelect({ $locale }: Props): ReactElement {
   return (
     <FormControl>
       <InputLabel>{t("SETTINGS_LOCALE")}</InputLabel>
+
       <Select
         value={$locale.get}
         onChange={({ target: { value } }) => {

@@ -1,5 +1,5 @@
-import labels from './labels.json'
+import labels from "./labels.json"
 
-export { default as LabelIcon } from './LabelIcon'
-export type LabelType = typeof labels[number]
+export { default as LabelIcon } from "./LabelIcon"
+export type LabelType = (typeof labels)[number]
 export { labels }
