@@ -27,7 +27,7 @@ export default function ProfileDetails({ studentId, canEdit }: Props): ReactElem
 
   const $newName = useBinding("")
   const $newBio = useBinding("")
-  const $newIcon = useBinding<IconType>("default") // TODO: make this undefined at first, so it does not reset
+  const $newIcon = useBinding<IconType>("default")
 
   useEffect(() => {
     dispatch(readProfile(studentId)).then(() => {
@@ -39,11 +39,11 @@ export default function ProfileDetails({ studentId, canEdit }: Props): ReactElem
   }, [studentId])
 
   useEffect(() => {
-    if ($isEditing.get) return
+    if (profile === null || $isEditing.get) return
 
-    const name = $newName.get !== "" ? $newName.get : undefined
+    const name = $newName.get !== "" && $newName.get !== profile?.name ? $newName.get : undefined
     const bio = $newBio.get !== "" && $newBio.get !== profile?.bio ? $newBio.get : undefined
-    const icon = $newIcon.get !== profile?.icon ? $newIcon.get : undefined
+    const icon = $newIcon.get !== "default" && $newIcon.get !== profile?.icon ? $newIcon.get : undefined
 
     if (name !== undefined || bio !== undefined || icon !== undefined)
       void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))
