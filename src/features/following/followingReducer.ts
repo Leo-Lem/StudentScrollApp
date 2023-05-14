@@ -3,13 +3,9 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import follow from "./api/follow"
 import unfollow from "./api/unfollow"
 import readFollowers from "./api/readFollowers"
-import readFollowersOf from "./api/readFollowersOf"
 import readFollows from "./api/readFollows"
-import readFollowsOf from "./api/readFollowsOf"
 
 export interface FollowingState {
-  follows?: number[]
-  followers?: number[]
   [studentId: number]: {
     follows?: number[]
     followers?: number[]
@@ -23,33 +19,35 @@ const following = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(follow.fulfilled, (state, action: PayloadAction<{ studentId: number, followId: number }>) => {
-        if (state.follows === undefined) state.follows = []
-        if (state.followers === undefined) state.followers = []
+        const studentId = action.payload.studentId
+        const followId = action.payload.followId
 
-        state.follows.push(action.payload.followId)
+        if (state[studentId] === undefined) state[studentId] = {}
+        state[studentId].follows = [...(state[studentId]?.follows ?? []), followId]
       })
       .addCase(unfollow.fulfilled, (state, action: PayloadAction<{ studentId: number, followId: number }>) => {
-        if (state.follows === undefined) state.follows = []
-        if (state.followers === undefined) state.followers = []
+        const studentId = action.payload.studentId
+        const followId = action.payload.followId
 
-        state.follows = state.follows.filter((followId) => followId !== action.payload.followId)
+        if (state[studentId] === undefined) state[studentId] = {}
+        state[studentId].follows = state[studentId]?.follows?.filter((id) => id !== followId) ?? []
       })
-      .addCase(readFollowers.fulfilled, (state, action: PayloadAction<number[]>) => {
-        state.followers = action.payload
+      .addCase(readFollowers.fulfilled, (state, action: PayloadAction<{ studentId: number, followers: number[] }>) => {
+        const studentId = action.payload.studentId
+        const followers = action.payload.followers
+
+        if (state[studentId] === undefined) state[studentId] = {}
+        state[studentId].followers = followers
       })
-      .addCase(readFollows.fulfilled, (state, action: PayloadAction<number[]>) => {
-        state.follows = action.payload
-      })
-      .addCase(readFollowersOf.fulfilled, (state, action: PayloadAction<{ studentId: number, followers: number[] }>) => {
-        if (state[action.payload.studentId] === undefined) state[action.payload.studentId] = {}
-        state[action.payload.studentId].follows = action.payload.followers
-      })
-      .addCase(readFollowsOf.fulfilled, (state, action: PayloadAction<{ studentId: number, follows: number[] }>) => {
-        if (state[action.payload.studentId] === undefined) state[action.payload.studentId] = {}
-        state[action.payload.studentId].follows = action.payload.follows
+      .addCase(readFollows.fulfilled, (state, action: PayloadAction<{ studentId: number, follows: number[] }>) => {
+        const studentId = action.payload.studentId
+        const follows = action.payload.follows
+
+        if (state[studentId] === undefined) state[studentId] = {}
+        state[studentId].follows = follows
       })
   }
 })
 
 export default following.reducer
-export { follow, unfollow, readFollowers, readFollows, readFollowersOf, readFollowsOf }
+export { follow, unfollow, readFollowers, readFollows }

@@ -1,18 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../redux"
+import { tryGettingAuthorizationHeader } from "../../../redux"
 
 export default createAsyncThunk(
   "profile/readFollows",
-  async (thunkAPI): Promise<number[]> => {
-    const studentId = tryGettingStudentId(thunkAPI)
-
+  async (studentId: number, thunkAPI): Promise<{ studentId: number, follows: number[] }> => {
     const response = await fetch(`/api/v1/students/${studentId}/follows`, {
       method: "GET",
       headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
     })
 
-    if (response.ok) return await response.json() as number[]
+    if (response.ok) return { studentId, follows: await response.json() as number[] }
     else throw new Error("Failed to read follows: " + response.statusText)
   }
 )

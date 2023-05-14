@@ -7,7 +7,11 @@ import { follow, readFollows, unfollow } from "../../following/followingReducer"
 export default function FollowButton({ followId }: Props): ReactElement {
   const dispatch = useAppDispatch()
 
-  const isFollowing = useAppSelector((state) => state.following.follows?.includes(followId) ?? false)
+  const studentId = useAppSelector((state) => state.authentication.studentId)
+
+  if (studentId === undefined) throw new Error("Not authenticated")
+
+  const isFollowing = useAppSelector((state) => state.following[studentId].follows?.includes(followId) ?? false)
 
   const handleFollow = async (): Promise<boolean> => {
     await dispatch(follow(followId))
@@ -20,7 +24,7 @@ export default function FollowButton({ followId }: Props): ReactElement {
   }
 
   useEffect(() => {
-    void dispatch(readFollows())
+    void dispatch(readFollows(studentId))
   }, [])
 
   return (

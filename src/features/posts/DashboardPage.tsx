@@ -7,6 +7,8 @@ import PostsScroll from "./components/PostsScroll"
 import useIsCompact from "../../hooks/useIsCompact"
 import { BindingToggle, PrimaryAction, Label } from "../../components"
 import useBinding from "../../hooks/useBinding"
+import FollowersList from "../following/components/FollowersList"
+import FollowsList from "../following/components/FollowsList"
 
 export default function DashboardPage(): ReactElement {
   const isCompact = useIsCompact()
@@ -29,8 +31,10 @@ export default function DashboardPage(): ReactElement {
     </Grid>
   )
 
-  const regularPostMenu = (
-    <Grid item md position="sticky" bottom={10} alignSelf="end">
+  const regular = (
+    <Grid item md={4} position="sticky" bottom={10} alignSelf="end" display="flex" direction="column" gap={1}>
+      <FollowsList />
+      <FollowersList />
       <CreatePostMenu />
     </Grid>
   )
@@ -41,7 +45,7 @@ export default function DashboardPage(): ReactElement {
         <PostsScroll />
       </Grid>
 
-      {isCompact ? compactPostMenu : regularPostMenu}
+      {isCompact ? compactPostMenu : regular}
     </Grid>
   )
 }

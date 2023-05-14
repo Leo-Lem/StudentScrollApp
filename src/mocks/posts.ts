@@ -9,10 +9,7 @@ export const examplePosts = [
       "A new beginning!",
       "Lots of tags",
       "tags",
-      "tags",
-      "tags",
-      "tagggggsssssssss",
-      "tags"
+      "tagggggsssssssss"
     ],
     content: "This is the first post",
     posterId: "1"

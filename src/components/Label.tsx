@@ -8,17 +8,18 @@ export default function Label({ type, display, ...props }: Props & SvgIconProps)
   const [t] = useTranslation()
 
   const icon = createElement(LabelIcon[type] ?? <></>, props)
+  const translation = t(`LABEL_${type.toUpperCase()}`)
 
   switch (display) {
     case "iconOnly":
       return icon
     case "labelOnly":
-      return <Fragment>{t(type.toUpperCase())}</Fragment>
+      return <Fragment>{translation}</Fragment>
     default:
       return (
         <Stack direction="row" gap={1} alignItems="center">
           {icon}
-          {t(type.toUpperCase())}
+          {translation}
         </Stack>
       )
   }
