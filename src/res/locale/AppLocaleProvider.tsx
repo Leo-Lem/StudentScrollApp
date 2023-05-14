@@ -8,7 +8,8 @@ export default function AppLocaleProvider({ children }: Props): ReactElement {
   const locale = useAppSelector((state) => state.settings.settings?.locale)
 
   useEffect(() => {
-    if (locale === undefined || locale === "system") i18n.changeLanguage(navigator.language.split("-")[0])
+    if (locale === undefined || locale === "system")
+      i18n.changeLanguage(navigator.language.split("-")[0])
     else i18n.changeLanguage(locale)
   }, [locale])
 

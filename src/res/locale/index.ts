@@ -9,6 +9,7 @@ import de from "./translations/de.json"
 import es from "./translations/es.json"
 
 i18n.use(initReactI18next).init({
+  lng: "en",
   resources: {
     en: en,
     zh: zh,

@@ -30,5 +30,6 @@ rules:
   spaced-comment: error
   quotes: [error, "double"]
   no-duplicate-imports: error
+  no-warning-comments: warn
   "@typescript-eslint/no-namespace": off
   "@typescript-eslint/no-explicit-any": off
