@@ -1,8 +1,9 @@
 import { MenuItem } from "@mui/material"
-import { signOut } from "../../authentication"
-import { useAppDispatch } from "../../../redux"
 import { ReactElement } from "react"
-import { Logout } from "@mui/icons-material"
+
+import { signOut } from "../../authentication/authenticationReducer"
+import { useAppDispatch } from "../../../redux"
+import { Label } from "../../../components"
 
 export default function SignOutMenuItem({ dismiss }: Props): ReactElement {
   const dispatch = useAppDispatch()
@@ -15,8 +16,7 @@ export default function SignOutMenuItem({ dismiss }: Props): ReactElement {
       }}
       sx={{ gap: 1 }}
     >
-      <Logout />
-      Logout
+      <Label type="signout" />
     </MenuItem>
   )
 }

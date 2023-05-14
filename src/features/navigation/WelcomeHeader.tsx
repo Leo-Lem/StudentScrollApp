@@ -3,9 +3,12 @@ import { ReactElement } from "react"
 
 import { Logo } from "../../components"
 import useIsCompact from "../../hooks/useIsCompact"
+import { useTranslation } from "react-i18next"
 
 export default function WelcomeHeader(): ReactElement {
   const isCompact = useIsCompact()
+
+  const [t] = useTranslation()
 
   return (
     <AppBar position="sticky">
@@ -16,14 +19,14 @@ export default function WelcomeHeader(): ReactElement {
           </Button>
 
           <Typography variant="h1" fontSize="max(7vw, 7vh)" noWrap textAlign="center">
-            Welcome!
+            {t("WELCOME_SHORT")}
           </Typography>
 
           <Box />
         </Stack>
       ) : (
         <Typography variant="h1" fontSize="max(8vw, 8vh)" noWrap textAlign="center">
-          Welcome to StudentScroll!
+          {t("WELCOME")}
         </Typography>
       )}
     </AppBar>

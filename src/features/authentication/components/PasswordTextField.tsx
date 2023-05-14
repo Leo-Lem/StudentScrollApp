@@ -1,6 +1,7 @@
 import { ReactElement } from "react"
 import { Binding } from "../../../hooks/useBinding"
 import { RequiredTextField } from "../../../components"
+import { useTranslation } from "react-i18next"
 
 export default function PasswordTextField({
   $password,
@@ -8,13 +9,15 @@ export default function PasswordTextField({
   showsFeedback,
   onSubmit
 }: Props): ReactElement {
+  const [t] = useTranslation()
+
   return (
     <RequiredTextField
       $value={$password}
       showsFeedback={showsFeedback}
       validate={(password) => !isRegistering || password.length > 5}
-      invalidMessage="At least 6 characters"
-      label="Password"
+      invalidMessage={t("TOO_SHORT_PASSWORD")}
+      label={t("PASSWORD")}
       type="password"
       autoComplete={isRegistering ? "new-password" : "current-password"}
       onKeyDown={({ key }) => {

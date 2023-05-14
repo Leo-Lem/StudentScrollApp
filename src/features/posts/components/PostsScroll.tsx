@@ -1,11 +1,12 @@
-import { type ReactElement, useEffect } from "react"
-import { Box, CircularProgress, Slide, Stack } from "@mui/material"
+import { type ReactElement, useEffect, useState } from "react"
+import { Box, Slide, Stack } from "@mui/material"
 
-import ContentPostCard from "./PostCard"
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import { readPosts, resetPosts } from ".."
 
+import { readPosts, resetPosts } from "../postsReducer"
+import ContentPostCard from "./PostCard"
 import NewestFirstSwitch from "./NewestFirstSwitch"
+import LoadingSpinner from "../../../components/LoadingSpinner"
 
 // TODO: figure out how to not send a billion requests for each scroll
 
@@ -16,6 +17,8 @@ export default function PostsScroll(): ReactElement {
 
   const dispatch = useAppDispatch()
 
+  const [isLoading, setIsLoading] = useState(false)
+
   useEffect(() => {
     dispatch(resetPosts())
     void dispatch(readPosts())
@@ -23,13 +26,21 @@ export default function PostsScroll(): ReactElement {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 && nextPage !== undefined) {
-        dispatch(readPosts())
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 &&
+        nextPage !== undefined
+      ) {
+        setIsLoading(true)
+        dispatch(readPosts()).then(() => {
+          setIsLoading(false)
+        })
       }
     }
 
     window.addEventListener("scroll", handleScroll)
-    return () => { window.removeEventListener("scroll", handleScroll) }
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   return (
@@ -42,8 +53,9 @@ export default function PostsScroll(): ReactElement {
             <ContentPostCard post={post} />
           </Box>
         </Slide>
-      ))
-        ?? <CircularProgress />}
+      )) ?? <LoadingSpinner />}
+
+      {isLoading && <LoadingSpinner />}
     </Stack>
   )
 }

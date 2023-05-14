@@ -1,39 +1,57 @@
-import React, { type ReactElement } from "react"
+import { useEffect, type ReactElement, Fragment } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Container, CssBaseline, ThemeProvider } from "@mui/material"
+import { Container, CssBaseline } from "@mui/material"
 
-import { dark } from "./themes"
-import { useAppSelector } from "./redux"
+import { useAppDispatch, useAppSelector } from "./redux"
+import { AppThemeProvider } from "./res/theme"
+import { AppLocaleProvider } from "./res/locale"
 
-import DashboardPage from "./features/posts/DashboardPage"
-import ProfilePage from "./features/profiles/ProfilePage"
-import Header from "./features/navigation/Header"
-import WelcomePage from "./features/authentication/WelcomePage"
-import Footer from "./features/navigation/Footer"
-import WelcomeHeader from "./features/navigation/WelcomeHeader"
+import { Header, Footer, WelcomeHeader, addPageChip } from "./features/navigation"
+import { DashboardPage } from "./features/posts"
+import { ProfilePage } from "./features/profiles"
+import { WelcomePage } from "./features/authentication"
+import { SettingsPage } from "./features/settings"
+import { readSettings } from "./features/settings/settingsReducer"
 
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
 
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    void dispatch(readSettings())
+  }, [])
+
+  const authenticated = (
+    <Fragment>
+      <Header />
+      <Routes>
+        <Route path="/" element={addPageChip("posts", <DashboardPage />)} />
+        <Route path="/profile/:studentId" element={addPageChip("profile", <ProfilePage />)} />
+        <Route path="/settings" element={addPageChip("settings", <SettingsPage />)} />
+        <Route path="/chats" element={addPageChip("chats", <h1>Chats</h1>)} />
+      </Routes>
+    </Fragment>
+  )
+
+  const notAuthenticated = (
+    <Fragment>
+      <WelcomeHeader />
+      <WelcomePage />
+    </Fragment>
+  )
+
   return (
     <BrowserRouter>
-      <ThemeProvider theme={dark}>
-        <CssBaseline />
-        <Container disableGutters sx={{ padding: 1 }}>
-          {isAuthenticated ? <Header /> : <WelcomeHeader />}
-
-          {isAuthenticated ? (
-            <Routes>
-              <Route path="/" element={<DashboardPage />} />
-              <Route path="/profile/:studentId" element={<ProfilePage />} />
-            </Routes>
-          ) : (
-            <WelcomePage />
-          )}
-
-          <Footer />
-        </Container>
-      </ThemeProvider>
+      <AppThemeProvider>
+        <AppLocaleProvider>
+          <CssBaseline />
+          <Container disableGutters sx={{ padding: 1 }}>
+            {isAuthenticated ? authenticated : notAuthenticated}
+            <Footer />
+          </Container>
+        </AppLocaleProvider>
+      </AppThemeProvider>
     </BrowserRouter>
   )
 }

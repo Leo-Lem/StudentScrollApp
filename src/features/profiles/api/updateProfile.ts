@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../redux"
-import { Profile } from "../types"
+import Profile from "../types/Profile"
 
 export default createAsyncThunk(
   "profile/updateProfile",
@@ -21,6 +21,6 @@ export default createAsyncThunk(
     })
 
     if (response.ok && id !== undefined) return { id, profile: (await response.json()) as Profile }
-    else throw new Error("Failed to read posts: " + response.statusText)
+    else throw new Error("Failed to update profile: " + response.statusText)
   }
 )

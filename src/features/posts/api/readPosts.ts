@@ -5,7 +5,7 @@ import ContentPost from "../types/ContentPost"
 
 export default createAsyncThunk(
   "posts/readPosts",
-  async (_, thunkAPI): Promise<{ posts: ContentPost[], nextPage?: number }> => {
+  async (_, thunkAPI): Promise<{ posts: ContentPost[]; nextPage?: number }> => {
     const state = thunkAPI.getState() as RootState
 
     const page = state.posts.nextPage

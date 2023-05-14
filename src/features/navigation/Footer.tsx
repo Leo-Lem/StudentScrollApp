@@ -1,12 +1,15 @@
-import { Chip, Divider, Stack, Typography } from "@mui/material"
+import { Stack, Typography } from "@mui/material"
 import { type ReactElement } from "react"
+import { useTranslation } from "react-i18next"
+
+import { Label, ChipDivider } from "../../components"
 
 export default function Footer(): ReactElement {
+  const [t] = useTranslation()
+
   return (
-    <Stack direction="column" spacing={2} paddingY={2}>
-      <Divider variant="fullWidth">
-        <Chip label="About" />
-      </Divider>
+    <Stack direction="column" spacing={1}>
+      <ChipDivider label={<Label type="about" fontSize="small" />} sx={{ marginTop: 5 }} />
 
       <Typography
         variant="h6"
@@ -16,9 +19,10 @@ export default function Footer(): ReactElement {
         textOverflow="ellipsis"
         overflow="scroll"
         noWrap
-        padding={1}
       >
-        Developed by Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann
+        {t("CREATED_BY", {
+          names: "Eve Tyler, Jessica Wong, Glenn Neil, Chaoyang Wang, Leopold Lemmermann"
+        })}
       </Typography>
     </Stack>
   )

@@ -1,14 +1,15 @@
 import { useState, type ReactElement } from "react"
-import { Paper, Stack } from "@mui/material"
-import { Send } from "@mui/icons-material"
+import { Stack } from "@mui/material"
+import { useTranslation } from "react-i18next"
 
-import { AsyncButton, RequiredTextField, SelectTags } from "../../../components"
+import { AsyncButton, RequiredTextField, TagsSelect, PrimaryCard, Label } from "../../../components"
 import { useAppDispatch } from "../../../redux"
-
-import { createPost } from ".."
 import useBinding from "../../../hooks/useBinding"
 
+import { createPost } from "../postsReducer"
+
 export default function CreatePostMenu({ dismiss }: Props): ReactElement {
+  const [t] = useTranslation()
   const dispatch = useAppDispatch()
 
   const $title = useBinding<string | "invalid" | undefined>(undefined)
@@ -43,31 +44,31 @@ export default function CreatePostMenu({ dismiss }: Props): ReactElement {
   }
 
   return (
-    <Paper elevation={2}>
-      <Stack spacing={1} padding={1}>
+    <PrimaryCard>
+      <Stack spacing={1}>
         <RequiredTextField
           $value={$title}
           showsFeedback={areRequirementsActive}
-          placeholder="New Post"
+          placeholder={t("POST_TITLE") ?? ""}
         />
 
-        <SelectTags $tags={$tags} />
+        <TagsSelect $tags={$tags} />
 
         <RequiredTextField
           $value={$content}
           showsFeedback={areRequirementsActive}
           validate={(content) => content.trim().length > 3}
-          invalidMessage="Please elaborate…"
+          invalidMessage={t("POST_CONTENT_TOO_SHORT")}
           multiline
           minRows={4}
-          placeholder="What's on your mind?"
+          placeholder={t("POST_CONTENT") ?? ""}
         />
 
-        <AsyncButton action={create} variant="contained" fullWidth startIcon={<Send />}>
-          Post
+        <AsyncButton action={create} variant="contained" fullWidth>
+          <Label type="post" />
         </AsyncButton>
       </Stack>
-    </Paper>
+    </PrimaryCard>
   )
 }
 

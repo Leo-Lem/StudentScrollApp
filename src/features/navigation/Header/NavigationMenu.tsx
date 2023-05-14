@@ -1,11 +1,12 @@
 import { Divider, IconButton, Menu } from "@mui/material"
 import { Fragment, ReactElement, useState } from "react"
-import { AccountBox, Chat, DynamicFeed, Menu as MenuIcon } from "@mui/icons-material"
+import { Menu as MenuIcon } from "@mui/icons-material"
 
 import SignOutMenuItem from "./SignOutMenuItem"
-import LinkMenuItem from "../../../components/LinkMenuItem"
+import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 
 import { useAppSelector } from "../../../redux"
+import { Label } from "../../../components"
 
 export default function NavigationMenu(): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)
@@ -29,19 +30,26 @@ export default function NavigationMenu(): ReactElement {
       </IconButton>
 
       <Menu anchorEl={anchor} keepMounted open={Boolean(anchor)} onClose={dismiss}>
-        <LinkMenuItem href="" startIcon={<DynamicFeed />} dismiss={dismiss}>
-          Posts
+        <LinkMenuItem href="" dismiss={dismiss}>
+          <Label type="posts" />
         </LinkMenuItem>
-        <LinkMenuItem href="chats" startIcon={<Chat />} dismiss={dismiss}>
-          Chats
+
+        <LinkMenuItem href="chats" dismiss={dismiss}>
+          <Label type="chats" />
         </LinkMenuItem>
 
         <Divider />
 
         {studentId !== undefined && (
-          <LinkMenuItem href={`/profile/${studentId}`} startIcon={<AccountBox />} dismiss={dismiss}>
-            Profile
-          </LinkMenuItem>
+          <Fragment>
+            <LinkMenuItem href={`/profile/${studentId}`} dismiss={dismiss}>
+              <Label type="profile" />
+            </LinkMenuItem>
+
+            <LinkMenuItem href="settings" dismiss={dismiss}>
+              <Label type="settings" />
+            </LinkMenuItem>
+          </Fragment>
         )}
 
         <SignOutMenuItem dismiss={dismiss} />

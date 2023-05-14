@@ -1,7 +1,7 @@
 import { useState, type ReactElement } from "react"
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
 
-import { ErrorFeedback, AsyncButton } from "../../../components"
+import { ErrorFeedback, AsyncButton, Label } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 import useBinding from "../../../hooks/useBinding"
 
@@ -9,8 +9,9 @@ import NameTextField from "./NameTextField"
 import EmailTextField from "./EmailTextField"
 import PasswordTextField from "./PasswordTextField"
 
-import { signIn, signUp } from ".."
+import { signIn, signUp } from "../authenticationReducer"
 import AuthenticationStatus from "../types/AuthenticationStatus"
+import { useTranslation } from "react-i18next"
 
 export default function AuthenticationForm(): ReactElement {
   const status = useAppSelector((state) => state.authentication.status)
@@ -23,6 +24,8 @@ export default function AuthenticationForm(): ReactElement {
   const $email = useBinding<string | "invalid" | undefined>(undefined)
   const $password = useBinding<string | "invalid" | undefined>(undefined)
   const [isFeedbackActive, setIsFeedbackActive] = useState(false)
+
+  const [t] = useTranslation()
 
   const authenticate = async (): Promise<boolean> => {
     if (
@@ -63,7 +66,7 @@ export default function AuthenticationForm(): ReactElement {
         />
 
         <AsyncButton action={authenticate} variant="contained">
-          {isRegistering ? "Sign Up" : "Sign in"}
+          <Label type={isRegistering ? "signup" : "signin"} />
         </AsyncButton>
 
         <ErrorFeedback isError={status === AuthenticationStatus.failed} message={error ?? ""} />
@@ -76,7 +79,7 @@ export default function AuthenticationForm(): ReactElement {
           }}
         >
           <Typography variant="caption" overflow="clip">
-            {isRegistering ? "Already registered? Sign in" : "No account yet? Sign up"}
+            {isRegistering ? t("SWITCH_TO_SIGNIN") : t("SWITCH_TO_SIGNUP")}
           </Typography>
         </Button>
       </Stack>
