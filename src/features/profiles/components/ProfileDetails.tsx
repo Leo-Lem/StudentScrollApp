@@ -27,7 +27,7 @@ export default function ProfileDetails({ studentId, canEdit }: Props): ReactElem
 
   const $newName = useBinding("")
   const $newBio = useBinding("")
-  const $newIcon = useBinding<IconType>("default")
+  const $newIcon = useBinding<IconType>("default") // TODO: make this undefined at first, so it does not reset
 
   useEffect(() => {
     dispatch(readProfile(studentId)).then(() => {
