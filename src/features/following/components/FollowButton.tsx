@@ -1,8 +1,8 @@
-import { ReactElement, useEffect } from "react";
-import { AsyncButton, Label } from "../../../components";
-import { useAppDispatch, useAppSelector } from "../../../redux";
+import { ReactElement, useEffect } from "react"
+import { AsyncButton, Label } from "../../../components"
+import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { follow, readFollows, unfollow } from "../../following/followingReducer";
+import { follow, readFollows, unfollow } from "../../following/followingReducer"
 
 export default function FollowButton({ followId }: Props): ReactElement {
   const dispatch = useAppDispatch()
@@ -11,7 +11,9 @@ export default function FollowButton({ followId }: Props): ReactElement {
 
   if (studentId === undefined) throw new Error("Not authenticated")
 
-  const isFollowing = useAppSelector((state) => state.following[studentId].follows?.includes(followId) ?? false)
+  const isFollowing = useAppSelector(
+    (state) => state.following[studentId].follows?.includes(followId) ?? false
+  )
 
   const handleFollow = async (): Promise<boolean> => {
     await dispatch(follow(followId))

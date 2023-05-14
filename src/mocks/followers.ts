@@ -1,4 +1,4 @@
-import { Server } from "miragejs";
+import { Server } from "miragejs"
 
 interface Follow {
   studentId: number

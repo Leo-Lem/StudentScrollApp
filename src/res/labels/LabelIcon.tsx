@@ -17,5 +17,5 @@ export default {
   about: Icon.Info,
   search: Icon.Search,
   follow: Icon.PersonAdd,
-  unfollow: Icon.PersonRemove,
+  unfollow: Icon.PersonRemove
 } as { [key in LabelType]: ComponentType<any> }

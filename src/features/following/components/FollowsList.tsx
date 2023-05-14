@@ -19,12 +19,10 @@ export default function FollowsList({ studentId }: Props): ReactElement {
   const followIds = useAppSelector((state) => state.following[id]?.follows)
 
   useEffect(() => {
-    if (followIds === undefined)
-      void dispatch(readFollows(id))
+    if (followIds === undefined) void dispatch(readFollows(id))
   }, [studentId])
 
-  if (followIds === undefined)
-    return <LoadingSpinner />
+  if (followIds === undefined) return <LoadingSpinner />
   else
     return (
       <Grid container direction="column" gap={1}>
@@ -36,7 +34,7 @@ export default function FollowsList({ studentId }: Props): ReactElement {
 
         <Grid container direction="row" gap={1} wrap="nowrap" overflow="scroll">
           {followIds.map((followId) => (
-            <Grid xs={2} key={followId} >
+            <Grid xs={2} key={followId}>
               <ProfileLink studentId={followId} />
             </Grid>
           ))}

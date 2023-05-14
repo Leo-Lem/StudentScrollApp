@@ -35,7 +35,8 @@ export default function ProfileDetails({ studentId, isSelf }: Props): ReactEleme
   const update = () => {
     const name = $newName.get !== "" && $newName.get !== profile?.name ? $newName.get : undefined
     const bio = $newBio.get !== "" && $newBio.get !== profile?.bio ? $newBio.get : undefined
-    const icon = $newIcon.get !== "default" && $newIcon.get !== profile?.icon ? $newIcon.get : undefined
+    const icon =
+      $newIcon.get !== "default" && $newIcon.get !== profile?.icon ? $newIcon.get : undefined
 
     if (name !== undefined || bio !== undefined || icon !== undefined)
       void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))

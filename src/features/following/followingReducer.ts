@@ -18,34 +18,47 @@ const following = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(follow.fulfilled, (state, action: PayloadAction<{ studentId: number, followId: number }>) => {
-        const studentId = action.payload.studentId
-        const followId = action.payload.followId
+      .addCase(
+        follow.fulfilled,
+        (state, action: PayloadAction<{ studentId: number; followId: number }>) => {
+          const studentId = action.payload.studentId
+          const followId = action.payload.followId
 
-        if (state[studentId] === undefined) state[studentId] = {}
-        state[studentId].follows = [...(state[studentId]?.follows ?? []), followId]
-      })
-      .addCase(unfollow.fulfilled, (state, action: PayloadAction<{ studentId: number, followId: number }>) => {
-        const studentId = action.payload.studentId
-        const followId = action.payload.followId
+          if (state[studentId] === undefined) state[studentId] = {}
+          state[studentId].follows = [...(state[studentId]?.follows ?? []), followId]
+        }
+      )
+      .addCase(
+        unfollow.fulfilled,
+        (state, action: PayloadAction<{ studentId: number; followId: number }>) => {
+          const studentId = action.payload.studentId
+          const followId = action.payload.followId
 
-        if (state[studentId] === undefined) state[studentId] = {}
-        state[studentId].follows = state[studentId]?.follows?.filter((id) => id !== followId) ?? []
-      })
-      .addCase(readFollowers.fulfilled, (state, action: PayloadAction<{ studentId: number, followers: number[] }>) => {
-        const studentId = action.payload.studentId
-        const followers = action.payload.followers
+          if (state[studentId] === undefined) state[studentId] = {}
+          state[studentId].follows =
+            state[studentId]?.follows?.filter((id) => id !== followId) ?? []
+        }
+      )
+      .addCase(
+        readFollowers.fulfilled,
+        (state, action: PayloadAction<{ studentId: number; followers: number[] }>) => {
+          const studentId = action.payload.studentId
+          const followers = action.payload.followers
 
-        if (state[studentId] === undefined) state[studentId] = {}
-        state[studentId].followers = followers
-      })
-      .addCase(readFollows.fulfilled, (state, action: PayloadAction<{ studentId: number, follows: number[] }>) => {
-        const studentId = action.payload.studentId
-        const follows = action.payload.follows
+          if (state[studentId] === undefined) state[studentId] = {}
+          state[studentId].followers = followers
+        }
+      )
+      .addCase(
+        readFollows.fulfilled,
+        (state, action: PayloadAction<{ studentId: number; follows: number[] }>) => {
+          const studentId = action.payload.studentId
+          const follows = action.payload.follows
 
-        if (state[studentId] === undefined) state[studentId] = {}
-        state[studentId].follows = follows
-      })
+          if (state[studentId] === undefined) state[studentId] = {}
+          state[studentId].follows = follows
+        }
+      )
   }
 })
 
