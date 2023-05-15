@@ -16,7 +16,7 @@ export default function PasswordTextField({
       $value={$password}
       showsFeedback={showsFeedback}
       validate={(password) => !isRegistering || password.length > 5}
-      invalidMessage={t("TOO_SHORT_PASSWORD")}
+      invalidMessage={t("PASSWORD_TOO_SHORT")}
       label={t("PASSWORD")}
       type="password"
       autoComplete={isRegistering ? "new-password" : "current-password"}

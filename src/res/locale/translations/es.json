@@ -7,6 +7,8 @@
     "PASSWORD": "Contraseña",
     "SWITCH_TO_SIGNUP": "¿No tienes una cuenta? Regístrate",
     "SWITCH_TO_SIGNIN": "¿Ya tienes una cuenta? Inicia sesión",
+    "EMAIL_INVALID": "Email inválido",
+    "PASSWORD_TOO_SHORT": "La contraseña debe tener al menos 6 caracteres",
     "CREATED_BY": "Creado por {{names}}",
     "LABEL_SIGNIN": "Ingresar",
     "LABEL_SIGNUP": "Regístrate",

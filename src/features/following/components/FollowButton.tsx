@@ -13,7 +13,7 @@ export default function FollowButton({ followId }: Props): ReactElement {
   if (studentId === undefined) throw new Error("Not authenticated")
 
   const isFollowing = useAppSelector(
-    (state) => state.following[studentId].follows?.includes(followId) ?? false
+    (state) => state.following[studentId]?.follows?.includes(followId) ?? false
   )
 
   const handleFollow = async (): Promise<boolean> => {

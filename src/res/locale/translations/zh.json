@@ -7,6 +7,8 @@
     "PASSWORD": "密码",
     "SWITCH_TO_SIGNUP": "没有账户？注册吧",
     "SWITCH_TO_SIGNIN": "已经有一个账户？请登录",
+    "EMAIL_INVALID": "请输入有效的电子邮件地址",
+    "PASSWORD_TOO_SHORT": "密码必须至少包含6个字符",
     "CREATED_BY": "由{{names}}创建",
     "LABEL_SIGNIN": "请登录",
     "LABEL_SIGNUP": "注册",

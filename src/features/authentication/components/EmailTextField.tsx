@@ -12,7 +12,7 @@ export default function EmailTextField({ $email, validate, showsFeedback }: Prop
       $value={$email}
       showsFeedback={showsFeedback}
       validate={(email) => !validate || /^\S+@\S+\.\S+$/.test(email)}
-      invalidMessage={t("INVALID_EMAIL")}
+      invalidMessage={t("EMAIL_INVALID")}
       label={t("EMAIL")}
       type="email"
       autoComplete="email"

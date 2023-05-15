@@ -37,7 +37,7 @@ export default function EditableProfileDetails({ studentId, isSelf }: Props): Re
 
   useEffect(() => {
     dispatch(readProfile(studentId)).then(() => {
-      if (profile !== null) {
+      if (profile !== undefined) {
         $newBio.set(profile.bio)
         $newIcon.set(profile.icon)
       }
@@ -45,7 +45,7 @@ export default function EditableProfileDetails({ studentId, isSelf }: Props): Re
   }, [studentId])
 
   useEffect(() => {
-    if (profile !== null && !$isEditing.get) update()
+    if (profile !== undefined && !$isEditing.get) update()
   }, [$isEditing.get])
 
   if (profile === undefined) return <LoadingSpinner />
