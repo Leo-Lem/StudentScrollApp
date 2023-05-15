@@ -22,8 +22,7 @@ export default function FollowsList({ studentId }: Props): ReactElement {
   }, [studentId])
 
   if (followIds === undefined) return <LoadingSpinner />
-  else
-    return <ProfilesList studentIds={followIds} label={t("FOLLOWS")} />
+  else return <ProfilesList studentIds={followIds} label={t("FOLLOWS")} />
 }
 
 interface Props {

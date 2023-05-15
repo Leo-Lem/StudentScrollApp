@@ -24,7 +24,14 @@ export default function ProfileIconSelect({ $icon }: Props): ReactElement {
   }
 
   return (
-    <Grid container direction="row" alignItems="center" justifyContent="inherit" wrap="nowrap" gap={1}>
+    <Grid
+      container
+      direction="row"
+      alignItems="center"
+      justifyContent="inherit"
+      wrap="nowrap"
+      gap={1}
+    >
       <Grid item xs={2}>
         <Button onClick={selectPrevious} sx={{ aspectRatio: 1, borderRadius: "100%" }}>
           <KeyboardArrowLeft />

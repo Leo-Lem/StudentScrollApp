@@ -48,31 +48,32 @@ export default function EditableProfileDetails({ studentId, isSelf }: Props): Re
     if (profile !== null && !$isEditing.get) update()
   }, [$isEditing.get])
 
-  if (profile === undefined)
-    return <LoadingSpinner />
+  if (profile === undefined) return <LoadingSpinner />
   else
     return (
       <Box width="100%" position="relative">
         {isSelf && (
-          <PrimaryAction fixed={isCompact} sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, zIndex: 10 }}>
+          <PrimaryAction
+            fixed={isCompact}
+            sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, zIndex: 10 }}
+          >
             <BindingToggle $isSelected={$isEditing} sx={{ aspectRatio: 1 }}>
               {$isEditing.get ? <Save /> : <Edit />}
             </BindingToggle>
           </PrimaryAction>
         )}
 
-        {$isEditing.get
-          ? (
-            <Stack direction="column" gap={1} justifyContent={isCompact ? "center" : "end"}>
-              <ProfileIconSelect $icon={$newIcon} />
+        {$isEditing.get ? (
+          <Stack direction="column" gap={1} justifyContent={isCompact ? "center" : "end"}>
+            <ProfileIconSelect $icon={$newIcon} />
 
-              <BindingTextField $value={$newName} placeholder={profile.name} fullWidth />
+            <BindingTextField $value={$newName} placeholder={profile.name} fullWidth />
 
-              <BindingTextField $value={$newBio} multiline minRows={4} fullWidth />
-            </Stack>
-          )
-          : <ProfileDetails studentId={studentId} profile={profile} showFollowButton={!isSelf} />
-        }
+            <BindingTextField $value={$newBio} multiline minRows={4} fullWidth />
+          </Stack>
+        ) : (
+          <ProfileDetails studentId={studentId} profile={profile} showFollowButton={!isSelf} />
+        )}
       </Box>
     )
 }

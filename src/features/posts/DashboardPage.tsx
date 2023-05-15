@@ -53,17 +53,17 @@ export default function DashboardPage(): ReactElement {
   )
 
   const regular = (
-    <Grid
-      item
-      md={4}
-      position="sticky"
-      bottom={10}
-      alignSelf="end"
-    >
+    <Grid item md={4} position="sticky" bottom={10} alignSelf="end">
       <Stack direction="column" spacing={1}>
-        <Grid item xs>{followsList}</Grid>
-        <Grid item xs>{followersList}</Grid>
-        <Grid item xs>{createPostMenu}</Grid>
+        <Grid item xs>
+          {followsList}
+        </Grid>
+        <Grid item xs>
+          {followersList}
+        </Grid>
+        <Grid item xs>
+          {createPostMenu}
+        </Grid>
       </Stack>
     </Grid>
   )

@@ -21,10 +21,8 @@ export default function FollowersList({ studentId }: Props): ReactElement {
     if (followerIds === undefined) void dispatch(readFollowers(id))
   }, [studentId])
 
-  if (followerIds === undefined)
-    return <LoadingSpinner />
-  else
-    return (<ProfilesList studentIds={followerIds} label={t("FOLLOWERS")} />)
+  if (followerIds === undefined) return <LoadingSpinner />
+  else return <ProfilesList studentIds={followerIds} label={t("FOLLOWERS")} />
 }
 
 interface Props {

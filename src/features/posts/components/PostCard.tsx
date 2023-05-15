@@ -16,7 +16,7 @@ export default function PostCard({
   return (
     <Card elevation={2}>
       <Grid container direction="row" alignItems="center" spacing={1}>
-        <Grid item xs={9} sm={10} md={10} gap={1} >
+        <Grid item xs={9} sm={10} md={10} gap={1}>
           <Stack direction="column" spacing={1}>
             <Stack direction="row" alignItems="center" spacing={1}>
               <DeletePostButton postId={id} posterId={posterId} />
@@ -34,9 +34,7 @@ export default function PostCard({
 
             <Divider />
 
-            <Typography variant="body1">
-              {content}
-            </Typography>
+            <Typography variant="body1">{content}</Typography>
           </Stack>
         </Grid>
 

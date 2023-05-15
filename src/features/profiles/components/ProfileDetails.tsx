@@ -1,15 +1,18 @@
 import { ReactElement } from "react"
-import { Box, Grid, Typography } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 
 import useIsCompact from "../../../hooks/useIsCompact"
 import { FollowButton } from "../../following"
 
 import ProfileIcon from "./ProfileIcon"
 import Profile from "../types/Profile"
-import ProfileBadge from "./ProfileBadge"
 import { PrimaryAction } from "../../../components"
 
-export default function ProfileDetails({ studentId, profile, showFollowButton }: Props): ReactElement {
+export default function ProfileDetails({
+  studentId,
+  profile,
+  showFollowButton
+}: Props): ReactElement {
   const isCompact = useIsCompact()
 
   return (
@@ -23,7 +26,10 @@ export default function ProfileDetails({ studentId, profile, showFollowButton }:
     >
       <Grid item>
         {showFollowButton && (
-          <PrimaryAction fixed={isCompact} sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, margin: 1 }}>
+          <PrimaryAction
+            fixed={isCompact}
+            sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, margin: 1 }}
+          >
             <FollowButton followId={studentId} />
           </PrimaryAction>
         )}
@@ -40,9 +46,7 @@ export default function ProfileDetails({ studentId, profile, showFollowButton }:
       </Grid>
 
       <Grid item xs={12}>
-        <Typography variant="body1">
-          {profile.bio}
-        </Typography>
+        <Typography variant="body1">{profile.bio}</Typography>
       </Grid>
     </Grid>
   )
