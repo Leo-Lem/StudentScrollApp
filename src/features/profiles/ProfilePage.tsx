@@ -4,7 +4,7 @@ import { Grid, Stack, Card } from "@mui/material"
 
 import useIsCompact from "../../hooks/useIsCompact"
 
-import ProfileDetails from "./components/ProfileDetails"
+import ProfileDetails from "./components/EditableProfileDetails"
 import { useAppSelector } from "../../redux"
 import { FollowersList, FollowsList } from "../following"
 
@@ -63,15 +63,15 @@ export default function ProfilePage(): ReactElement {
 
       <Grid item md={4}>
         <Grid container spacing={1}>
-          <Grid item md>
+          <Grid item md={12}>
             {details}
           </Grid>
 
-          <Grid item md>
+          <Grid item md={12}>
             {followsList}
           </Grid>
 
-          <Grid item md>
+          <Grid item md={12}>
             {followersList}
           </Grid>
         </Grid>

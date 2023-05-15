@@ -1,16 +1,14 @@
-import { ReactElement, createElement, useEffect, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { Button, Grid } from "@mui/material"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
 
 import { Binding } from "../../hooks/useBinding"
-import useIsCompact from "../../hooks/useIsCompact"
-import { Icon, IconType, icons as iconsWithDefault } from "../../res/icons"
+import { IconType, icons as iconsWithDefault } from "../../res/icons"
+import ProfileIcon from "../../features/profiles/components/ProfileIcon"
 
 const icons = iconsWithDefault.filter((icon) => icon !== "default")
 
 export default function IconSelect({ $icon }: Props): ReactElement {
-  const isCompact = useIsCompact()
-
   const [iconIndex, setIconIndex] = useState(icons.indexOf($icon.get))
 
   useEffect(() => {
@@ -26,19 +24,22 @@ export default function IconSelect({ $icon }: Props): ReactElement {
   }
 
   return (
-    <Grid container direction="row" justifyContent="inherit" wrap="nowrap">
-      <Button onClick={selectPrevious}>
-        <KeyboardArrowLeft />
-      </Button>
+    <Grid container direction="row" alignItems="center" justifyContent="inherit" wrap="nowrap" gap={1}>
+      <Grid item xs={2}>
+        <Button onClick={selectPrevious} sx={{ aspectRatio: 1, borderRadius: "100%" }}>
+          <KeyboardArrowLeft />
+        </Button>
+      </Grid>
 
-      {createElement(Icon[icons[iconIndex]] ?? Icon.default, {
-        fontSize: "large",
-        sx: { fontSize: isCompact ? "max(30vw, 30vh)" : "max(15vw, 15vh)", aspectRatio: 1 }
-      })}
+      <Grid item xs={6}>
+        <ProfileIcon icon={icons[iconIndex]} />
+      </Grid>
 
-      <Button onClick={selectNext}>
-        <KeyboardArrowRight />
-      </Button>
+      <Grid item xs={2}>
+        <Button onClick={selectNext} sx={{ aspectRatio: 1, borderRadius: "100%" }}>
+          <KeyboardArrowRight />
+        </Button>
+      </Grid>
     </Grid>
   )
 }

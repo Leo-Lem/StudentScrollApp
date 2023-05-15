@@ -1,4 +1,4 @@
-import { Card, CardProps } from "@mui/material"
+import { CardProps, Paper } from "@mui/material"
 import { ReactElement } from "react"
 
 export default function PrimaryAction({
@@ -8,13 +8,13 @@ export default function PrimaryAction({
   ...props
 }: Props & CardProps): ReactElement {
   return (
-    <Card
+    <Paper
       elevation={5}
-      sx={fixed ? { ...sx, position: "fixed", margin: 1, bottom: 0, right: 0 } : sx}
+      sx={(fixed ? { ...sx, position: "fixed", margin: 1, bottom: 0, right: 0, zIndex: 10 } : sx)}
       {...props}
     >
       {children}
-    </Card>
+    </Paper>
   )
 }
 

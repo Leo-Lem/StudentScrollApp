@@ -59,13 +59,12 @@ export default function DashboardPage(): ReactElement {
       position="sticky"
       bottom={10}
       alignSelf="end"
-      display="flex"
-      direction="column"
-      gap={1}
+      container
+      spacing={1}
     >
-      {followsList}
-      {followersList}
-      {createPostMenu}
+      <Grid item xs>{followsList}</Grid>
+      <Grid item xs>{followersList}</Grid>
+      <Grid item xs>{createPostMenu}</Grid>
     </Grid>
   )
 

@@ -58,11 +58,11 @@ export default function PostCard({
   return (
     <Card elevation={2}>
       <Grid container direction="row">
-        <Grid item xs={9} md={11} gap={1}>
+        <Grid item xs={9} sm={10} md={10} gap={1}>
           {isCompact ? compact : regular}
         </Grid>
 
-        <Grid item xs={3} md={1}>
+        <Grid item xs={3} sm={2} md={2}>
           <ProfileLink studentId={posterId} />
         </Grid>
       </Grid>

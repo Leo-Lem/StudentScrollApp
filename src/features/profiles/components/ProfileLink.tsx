@@ -1,12 +1,10 @@
-import { Button, Card, Link, Typography } from "@mui/material"
-import { ReactElement, createElement, useEffect } from "react"
+import { Button, Link } from "@mui/material"
+import { ReactElement, useEffect } from "react"
 
-import { LoadingSpinner } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import Profile from "../types/Profile"
 import { readProfile } from "../profileReducer"
-import { Icon } from "../../../res/icons"
+import ProfileBadge from "./ProfileBadge"
 
 export default function ProfileLink({ studentId }: Props): ReactElement {
   const profile = useAppSelector((state) => state.profiles[studentId])
@@ -17,29 +15,16 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
     dispatch(readProfile(studentId))
   }, [])
 
-  const content = (profile: Profile) => (
+  return (
     <Button
       color="inherit"
       component={Link}
       href={`/profile/${studentId}`}
-      sx={{ display: "flex", flexDirection: "column" }}
+      sx={{ padding: 0, borderRadius: 100 }}
     >
-      {createElement(Icon[profile.icon] ?? Icon.default, { sx: { width: "100%", height: "100%" } })}
-
-      <Typography
-        variant="caption"
-        textTransform="capitalize"
-        maxWidth="100%"
-        noWrap
-        textOverflow="ellipsis"
-        fontSize={10}
-      >
-        {profile.name}
-      </Typography>
+      <ProfileBadge profile={profile} />
     </Button>
   )
-
-  return <Card elevation={3}>{profile === undefined ? <LoadingSpinner /> : content(profile)}</Card>
 }
 
 interface Props {

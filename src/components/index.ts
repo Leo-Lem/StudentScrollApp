@@ -1,4 +1,5 @@
 export { default as AsyncButton } from "./buttons/AsyncButton"
+export { default as AsyncToggle } from "./buttons/AsyncToggle"
 export { default as BindingToggle } from "./buttons/BindingToggle"
 export { default as LinkMenuItem } from "./buttons/LinkMenuItem"
 export { default as PrimaryAction } from "./buttons/PrimaryAction"
