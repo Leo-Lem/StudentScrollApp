@@ -4,19 +4,14 @@ import { Box, Stack } from "@mui/material"
 import { Edit, Save } from "@mui/icons-material"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import {
-  BindingTextField,
-  BindingToggle,
-  IconSelect,
-  LoadingSpinner,
-  PrimaryAction
-} from "../../../components"
+import { BindingTextField, BindingToggle, LoadingSpinner, PrimaryAction } from "../../../components"
 import useIsCompact from "../../../hooks/useIsCompact"
 
 import { readProfile, updateProfile } from "../profileReducer"
 import { IconType } from "../../../res/icons"
 import useBinding from "../../../hooks/useBinding"
 import ProfileDetails from "./ProfileDetails"
+import ProfileIconSelect from "./ProfileIconSelect"
 
 export default function EditableProfileDetails({ studentId, isSelf }: Props): ReactElement {
   const isCompact = useIsCompact()
@@ -69,7 +64,7 @@ export default function EditableProfileDetails({ studentId, isSelf }: Props): Re
         {$isEditing.get
           ? (
             <Stack direction="column" gap={1} justifyContent={isCompact ? "center" : "end"}>
-              <IconSelect $icon={$newIcon} />
+              <ProfileIconSelect $icon={$newIcon} />
 
               <BindingTextField $value={$newName} placeholder={profile.name} fullWidth />
 

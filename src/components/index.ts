@@ -7,9 +7,6 @@ export { default as PrimaryAction } from "./buttons/PrimaryAction"
 export { default as BindingTextField } from "./textfield/BindingTextField"
 export { default as RequiredTextField } from "./textfield/RequiredTextField"
 
-export { default as TagsSelect } from "./selects/TagsSelect"
-export { default as IconSelect } from "./selects/IconSelect"
-
 export { default as Logo } from "./Logo"
 export { default as Label } from "./Label"
 export { default as ErrorFeedback } from "./ErrorFeedback"

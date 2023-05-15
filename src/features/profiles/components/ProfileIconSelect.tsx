@@ -2,13 +2,13 @@ import { ReactElement, useEffect, useState } from "react"
 import { Button, Grid } from "@mui/material"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
 
-import { Binding } from "../../hooks/useBinding"
-import { IconType, icons as iconsWithDefault } from "../../res/icons"
-import ProfileIcon from "../../features/profiles/components/ProfileIcon"
+import { Binding } from "../../../hooks/useBinding"
+import { Icon, IconType, icons as iconsWithDefault } from "../../../res/icons"
+import ProfileIcon from "./ProfileIcon"
 
 const icons = iconsWithDefault.filter((icon) => icon !== "default")
 
-export default function IconSelect({ $icon }: Props): ReactElement {
+export default function ProfileIconSelect({ $icon }: Props): ReactElement {
   const [iconIndex, setIconIndex] = useState(icons.indexOf($icon.get))
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function IconSelect({ $icon }: Props): ReactElement {
       </Grid>
 
       <Grid item xs={6}>
-        <ProfileIcon icon={icons[iconIndex]} />
+        <ProfileIcon icon={icons[iconIndex] ?? Icon.default} />
       </Grid>
 
       <Grid item xs={2}>

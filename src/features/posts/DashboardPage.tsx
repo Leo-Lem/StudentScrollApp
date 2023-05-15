@@ -1,5 +1,5 @@
 import { type ReactElement } from "react"
-import { Box, Grid, Slide, Card } from "@mui/material"
+import { Box, Grid, Slide, Card, Stack } from "@mui/material"
 
 import CreatePostMenu from "./components/CreatePostMenu"
 import PostsList from "./components/PostsList"
@@ -59,12 +59,12 @@ export default function DashboardPage(): ReactElement {
       position="sticky"
       bottom={10}
       alignSelf="end"
-      container
-      spacing={1}
     >
-      <Grid item xs>{followsList}</Grid>
-      <Grid item xs>{followersList}</Grid>
-      <Grid item xs>{createPostMenu}</Grid>
+      <Stack direction="column" spacing={1}>
+        <Grid item xs>{followsList}</Grid>
+        <Grid item xs>{followersList}</Grid>
+        <Grid item xs>{createPostMenu}</Grid>
+      </Stack>
     </Grid>
   )
 
