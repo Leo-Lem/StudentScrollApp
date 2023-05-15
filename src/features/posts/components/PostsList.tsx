@@ -10,7 +10,7 @@ import LoadingSpinner from "../../../components/LoadingSpinner"
 
 // TODO: figure out how to not send a billion requests for each scroll
 
-export default function PostsScroll(): ReactElement {
+export default function PostsList(): ReactElement {
   const posts = useAppSelector((state) => state.posts.posts)
   const newestFirst = useAppSelector((state) => state.posts.newestFirst)
   const nextPage = useAppSelector((state) => state.posts.nextPage)
