@@ -1,8 +1,8 @@
 import { type ReactElement } from "react"
-import { Box, Grid, Slide, Card } from "@mui/material"
+import { Box, Grid, Slide, Card, Stack } from "@mui/material"
 
 import CreatePostMenu from "./components/CreatePostMenu"
-import PostsScroll from "./components/PostsScroll"
+import PostsList from "./components/PostsList"
 
 import useIsCompact from "../../hooks/useIsCompact"
 import { BindingToggle, PrimaryAction, Label } from "../../components"
@@ -53,26 +53,25 @@ export default function DashboardPage(): ReactElement {
   )
 
   const regular = (
-    <Grid
-      item
-      md={4}
-      position="sticky"
-      bottom={10}
-      alignSelf="end"
-      display="flex"
-      direction="column"
-      gap={1}
-    >
-      {followsList}
-      {followersList}
-      {createPostMenu}
+    <Grid item md={4} position="sticky" bottom={10} alignSelf="end">
+      <Stack direction="column" spacing={1}>
+        <Grid item xs>
+          {followsList}
+        </Grid>
+        <Grid item xs>
+          {followersList}
+        </Grid>
+        <Grid item xs>
+          {createPostMenu}
+        </Grid>
+      </Stack>
     </Grid>
   )
 
   return (
     <Grid container direction="row" spacing={1}>
       <Grid item xs={12} md={8}>
-        <PostsScroll />
+        <PostsList />
       </Grid>
 
       {isCompact ? compactPostMenu : regular}

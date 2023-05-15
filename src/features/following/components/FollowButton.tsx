@@ -1,5 +1,6 @@
 import { ReactElement, useEffect } from "react"
-import { AsyncButton, Label } from "../../../components"
+
+import { Label, AsyncToggle } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { follow, readFollows, unfollow } from "../../following/followingReducer"
@@ -30,9 +31,9 @@ export default function FollowButton({ followId }: Props): ReactElement {
   }, [])
 
   return (
-    <AsyncButton action={isFollowing ? handleUnfollow : handleFollow} variant="outlined">
+    <AsyncToggle selected={isFollowing} action={isFollowing ? handleUnfollow : handleFollow}>
       <Label type={isFollowing ? "unfollow" : "follow"} display="iconOnly" />
-    </AsyncButton>
+    </AsyncToggle>
   )
 }
 

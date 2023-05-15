@@ -2,11 +2,12 @@ import { useState, type ReactElement } from "react"
 import { Stack } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
-import { AsyncButton, RequiredTextField, TagsSelect, Label } from "../../../components"
+import { AsyncButton, RequiredTextField, Label } from "../../../components"
 import { useAppDispatch } from "../../../redux"
 import useBinding from "../../../hooks/useBinding"
 
 import { createPost } from "../postsReducer"
+import TagsSelect from "./TagsSelect"
 
 export default function CreatePostMenu({ dismiss }: Props): ReactElement {
   const [t] = useTranslation()

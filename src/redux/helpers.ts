@@ -12,10 +12,15 @@ export function tryGettingAuthorizationHeader(thunkAPI: any): string {
   return `Bearer ${state.authentication.token}`
 }
 
-export function tryGettingStudentId(thunkAPI: any): number | undefined {
+export function tryGettingStudentId(thunkAPI: any): number {
   const state = thunkAPI.getState() as RootState
 
-  if (state.authentication.studentId === undefined) thunkAPI.dispatch(signOut())
+  const studentId = state.authentication.studentId
 
-  return state.authentication.studentId
+  if (studentId === undefined) {
+    thunkAPI.dispatch(signOut())
+    throw new Error("No student id found")
+  }
+
+  return studentId
 }
