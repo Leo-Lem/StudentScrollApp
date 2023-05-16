@@ -1,7 +1,7 @@
 import AuthenticationStatus from "../../types/AuthenticationStatus"
 import State from "../state"
 
-export default function signOut(state: State) {
+export default function handleSignOut(state: State) {
   state.status = AuthenticationStatus.unauthenticated
   state.token = undefined
   state.studentId = undefined

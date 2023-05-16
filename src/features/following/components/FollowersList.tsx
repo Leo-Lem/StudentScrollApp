@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 import { LoadingSpinner } from "../../../components"
 
-import { readFollowers } from "../followingReducer"
 import ProfilesList from "../../profiles/components/ProfilesList"
+import { readFollowers } from "../redux"
 
 export default function FollowersList({ studentId }: Props): ReactElement {
   const dispatch = useAppDispatch()
@@ -19,7 +19,7 @@ export default function FollowersList({ studentId }: Props): ReactElement {
 
   useEffect(() => {
     if (followerIds === undefined) void dispatch(readFollowers(id))
-  }, [studentId])
+  }, [studentId,])
 
   if (followerIds === undefined) return <LoadingSpinner />
   else return <ProfilesList studentIds={followerIds} label={t("FOLLOWERS")} />

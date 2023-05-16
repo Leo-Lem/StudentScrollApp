@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import signOut from "./actions/signOut"
-import setAuthenticated from "./actions/setAuthenticated"
-import setFailed from "./actions/setFailed"
+import handleSignOut from "./actions/handleSignOut"
+import handleSetAuthenticated from "./actions/handleSetAuthenticated"
+import handleSetFailed from "./actions/handleSetFailed"
 
 import { initialState } from "./state"
 
 const authentication = createSlice({
   name: "authentication",
   initialState,
-  reducers: { signOut, setAuthenticated, setFailed }
+  reducers: {
+    signOut: handleSignOut,
+    setAuthenticated: handleSetAuthenticated,
+    setFailed: handleSetFailed
+  }
 })
 
 export default authentication

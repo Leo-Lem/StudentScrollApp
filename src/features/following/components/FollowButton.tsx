@@ -3,7 +3,7 @@ import { ReactElement, useEffect } from "react"
 import { Label, AsyncToggle } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { follow, readFollows, unfollow } from "../../following/followingReducer"
+import { follow, readFollows, unfollow } from "../redux"
 
 export default function FollowButton({ followId }: Props): ReactElement {
   const dispatch = useAppDispatch()
