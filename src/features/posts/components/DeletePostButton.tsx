@@ -3,8 +3,7 @@ import { Delete } from "@mui/icons-material"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 import { AsyncButton } from "../../../components"
-
-import { deletePost } from "../postsReducer"
+import { deletePost } from "../redux"
 
 export default function DeletePostButton({ postId, posterId }: Props): ReactElement {
   const studentId = useAppSelector((state) => state.authentication.studentId)

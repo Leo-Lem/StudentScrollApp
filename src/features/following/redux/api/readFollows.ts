@@ -7,7 +7,6 @@ export default createAsyncThunk(
   "following/readFollows",
   async (studentId: number, thunkAPI) => {
     const response = await fetch(`/api/v1/students/${studentId}/follows`, {
-      method: "GET",
       headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
     })
 

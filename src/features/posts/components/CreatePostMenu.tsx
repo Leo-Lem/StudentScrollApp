@@ -6,8 +6,8 @@ import { AsyncButton, RequiredTextField, Label } from "../../../components"
 import { useAppDispatch } from "../../../redux"
 import useBinding from "../../../lib/useBinding"
 
-import { createPost } from "../postsReducer"
 import TagsSelect from "./TagsSelect"
+import { createPost } from "../redux"
 
 export default function CreatePostMenu({ dismiss }: Props): ReactElement {
   const [t] = useTranslation()

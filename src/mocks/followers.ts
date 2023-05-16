@@ -8,21 +8,20 @@ interface Follow {
 export const exampleFollows: Follow[] = [
   { studentId: 1, followerId: 2 },
   { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
+  { studentId: 1, followerId: 4 },
+  { studentId: 1, followerId: 5 },
+  { studentId: 1, followerId: 6 },
+  { studentId: 1, followerId: 7 },
+  { studentId: 1, followerId: 8 },
+  { studentId: 1, followerId: 9 },
   { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 3 }
+  { studentId: 3, followerId: 1 },
+  { studentId: 4, followerId: 1 },
+  { studentId: 5, followerId: 1 },
+  { studentId: 6, followerId: 1 },
+  { studentId: 7, followerId: 1 },
+  { studentId: 8, followerId: 1 },
+  { studentId: 9, followerId: 1 }
 ]
 
 export default function mockFollowing(server: Server) {

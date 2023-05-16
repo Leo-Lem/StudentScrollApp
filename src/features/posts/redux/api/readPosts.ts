@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { RootState, tryGettingAuthorizationHeader } from "../../../redux"
-import ContentPost from "../types/ContentPost"
+import { RootState, tryGettingAuthorizationHeader } from "../../../../redux"
+import ContentPost from "../../types/ContentPost"
+import { addPosts } from ".."
 
 export default createAsyncThunk(
   "posts/readPosts",
-  async (_, thunkAPI): Promise<{ posts: ContentPost[]; nextPage?: number }> => {
+  async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState
 
     const page = state.posts.nextPage
@@ -18,7 +19,6 @@ export default createAsyncThunk(
         !state.posts.newestFirst
       )}`,
       {
-        method: "GET",
         headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
       }
     )
@@ -29,7 +29,7 @@ export default createAsyncThunk(
       if (totalHeader === null) return { posts, nextPage: undefined }
       const nextPage = parseInt(totalHeader) > (page + 1) * pageSize ? page + 1 : undefined
 
-      return { posts, nextPage }
+      thunkAPI.dispatch(addPosts({ posts, nextPage }))
     } else throw new Error("Failed to read posts: " + response.statusText)
   }
 )

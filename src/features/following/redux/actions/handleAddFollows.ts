@@ -6,5 +6,8 @@ export default function handleAddFollows(state: State, action: PayloadAction<{ i
   const id = action.payload.id
 
   if (state[id] === undefined) state[id] = { follows: [] }
-  state[id].follows?.push(...action.payload.follows)
+
+  const follows = action.payload.follows.filter(follow => !state[id].follows?.includes(follow));
+
+  state[id].follows?.push(...follows)
 }

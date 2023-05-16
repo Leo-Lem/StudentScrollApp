@@ -11,18 +11,16 @@ export default function FollowsList({ studentId }: Props): ReactElement {
   const dispatch = useAppDispatch()
   const [t] = useTranslation()
 
-  const id = useAppSelector((state) => studentId ?? state.authentication.studentId)
-
-  if (id === undefined) throw new Error("Not authenticated")
-
-  const followIds = useAppSelector((state) => state.following[id]?.follows)
+  const followIds = useAppSelector((state) => (
+    studentId !== undefined ? state.following[studentId]?.follows : state.student?.follows
+  ))
 
   useEffect(() => {
-    if (followIds === undefined) void dispatch(readFollows(id))
+    if (studentId !== undefined && followIds === undefined)
+      void dispatch(readFollows(studentId))
   }, [studentId,])
 
-  if (followIds === undefined) return <LoadingSpinner />
-  else return <ProfilesList studentIds={followIds} label={t("FOLLOWS")} />
+  return <ProfilesList studentIds={followIds} label={t("FOLLOWS")} />
 }
 
 interface Props {
