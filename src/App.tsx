@@ -11,7 +11,7 @@ import { DashboardPage } from "./features/posts"
 import { ProfilePage } from "./features/profiles"
 import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
-import { readSettings } from "./features/settings/settingsReducer"
+import { readSettings } from "./features/settings/redux"
 
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
