@@ -2,7 +2,6 @@ import { ReactElement, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import { LoadingSpinner } from "../../../components"
 
 import ProfilesList from "../../profiles/components/ProfilesList"
 import { readFollows } from "../redux"

@@ -4,6 +4,7 @@ import State from "./state";
 
 import { setAuthenticated } from "../authentication/redux";
 import { addFollowers, addFollows, removeFollowers, removeFollows } from "../following/redux";
+import { addProfile, removeProfile } from "../profiles/redux";
 
 export default function extraReducers(builder: ActionReducerMapBuilder<State | null>) {
   builder
@@ -30,5 +31,13 @@ export default function extraReducers(builder: ActionReducerMapBuilder<State | n
       if (student === null || action.payload.id !== student.id) return
       if (student.followers === undefined) return
       student.followers = student.followers.filter(follower => !action.payload.followers.includes(follower))
+    })
+    .addCase(addProfile, (student, action) => {
+      if (student === null || action.payload.studentId !== student.id) return
+      student.profile = action.payload.profile
+    })
+    .addCase(removeProfile, (student, action) => {
+      if (student === null || action.payload !== student.id) return
+      delete student.profile
     })
 }

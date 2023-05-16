@@ -7,11 +7,12 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import { BindingTextField, BindingToggle, LoadingSpinner, PrimaryAction } from "../../../components"
 import useIsCompact from "../../../lib/useIsCompact"
 
-import { readProfile, updateProfile } from "../profileReducer"
 import { IconType } from "../../../res/icons"
 import useBinding from "../../../lib/useBinding"
 import ProfileDetails from "./ProfileDetails"
 import ProfileIconSelect from "./ProfileIconSelect"
+
+import { readProfile, updateProfile } from "../redux"
 
 export default function EditableProfileDetails({ studentId, isSelf }: Props): ReactElement {
   const isCompact = useIsCompact()

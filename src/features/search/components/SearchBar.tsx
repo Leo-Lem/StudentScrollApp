@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { readProfile } from "../../profiles"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
+import { readProfile } from "../../profiles/redux"
 
 export default function SearchBar(): ReactElement {
   const [t] = useTranslation()
