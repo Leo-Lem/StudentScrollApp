@@ -15,9 +15,9 @@ export default function FollowsList({ studentId }: Props): ReactElement {
   ))
 
   useEffect(() => {
-    if (studentId !== undefined && followIds === undefined)
+    if (followIds === undefined)
       void dispatch(readFollows(studentId))
-  }, [studentId,])
+  }, [studentId])
 
   return <ProfilesList studentIds={followIds} label={t("FOLLOWS")} />
 }

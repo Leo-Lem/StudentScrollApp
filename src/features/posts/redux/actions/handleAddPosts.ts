@@ -8,6 +8,6 @@ export default function handleAddPosts(state: State, action: PayloadAction<{ pos
 
   const filteredPost = state.posts.filter(existingPost => !action.payload.posts.some(newPost => newPost.id === existingPost.id))
 
-  state.posts = [...action.payload.posts, ...filteredPost]
+  state.posts = [...filteredPost, ...action.payload.posts]
   state.nextPage = action.payload.nextPage
 }

@@ -9,4 +9,8 @@ export default interface State {
   settings?: Settings
 }
 
-export const initialState: State = {}
+const studentId = sessionStorage.getItem("studentId")
+
+export const initialState: State = {
+  id: studentId !== null ? parseInt(studentId) : undefined,
+}

@@ -5,7 +5,7 @@ import { setSettings } from "..";
 import { Settings } from "../../settings";
 
 export default createAsyncThunk(
-  "settings/update",
+  "student/updateSettings",
   async (info: { newTheme?: string; newLocale?: string; newIsLocated?: boolean }, thunkAPI) => {
     const id = tryGettingStudentId(thunkAPI)
 

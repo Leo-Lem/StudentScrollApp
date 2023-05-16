@@ -13,7 +13,7 @@ export default {
   coffee: Icon.LocalCafe,
   building: Icon.AccountBalance,
   football: Icon.SportsFootball,
-  Bnsketball: Icon.SportsBasketball,
+  basketball: Icon.SportsBasketball,
   soccer: Icon.SportsSoccer,
   tennis: Icon.SportsTennis,
   music: Icon.MusicNote,

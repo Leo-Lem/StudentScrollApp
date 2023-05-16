@@ -5,7 +5,7 @@ import { setSettings } from ".."
 import { Settings } from "../../settings"
 
 export default createAsyncThunk(
-  "settings/read",
+  "student/readSettings",
   async (_, thunkAPI) => {
     const studentId = tryGettingStudentId(thunkAPI)
 

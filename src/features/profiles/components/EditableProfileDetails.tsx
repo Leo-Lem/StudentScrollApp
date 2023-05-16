@@ -1,85 +1,71 @@
 import { type ReactElement, useEffect } from "react"
 
-import { Box, Stack } from "@mui/material"
+import { Box } from "@mui/material"
 import { Edit, Save } from "@mui/icons-material"
 
-import { useAppDispatch, useAppSelector } from "../../../redux"
-import { BindingTextField, BindingToggle, LoadingSpinner, PrimaryAction } from "../../../components"
+import { useAppDispatch } from "../../../redux"
+import { BindingToggle, PrimaryAction } from "../../../components"
 import useIsCompact from "../../../lib/useIsCompact"
 
-import { IconType } from "../../../res/icons"
 import useBinding from "../../../lib/useBinding"
 import ProfileDetails from "./ProfileDetails"
-import ProfileIconSelect from "./ProfileIconSelect"
 
-import { readProfile, updateProfile } from "../redux"
+import { updateProfile } from "../redux"
+import EditProfileMenu from "./EditProfileMenu"
+import Profile from "../types/Profile"
 
-export default function EditableProfileDetails({ studentId, isSelf }: Props): ReactElement {
+export default function EditableProfileDetails({ profile }: Props): ReactElement {
   const isCompact = useIsCompact()
 
-  const profile = useAppSelector((state) => state.profiles[studentId])
   const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    if (profile !== undefined)
+      $profile.set({ ...profile, name: "" })
+  }, [profile])
+
   const $isEditing = useBinding(false)
-
-  const $newName = useBinding("")
-  const $newBio = useBinding("")
-  const $newIcon = useBinding<IconType>("default")
-
-  const update = () => {
-    const name = $newName.get !== "" && $newName.get !== profile?.name ? $newName.get : undefined
-    const bio = $newBio.get !== "" && $newBio.get !== profile?.bio ? $newBio.get : undefined
-    const icon =
-      $newIcon.get !== "default" && $newIcon.get !== profile?.icon ? $newIcon.get : undefined
-
-    if (name !== undefined || bio !== undefined || icon !== undefined)
-      void dispatch(updateProfile({ newName: name, newBio: bio, newIcon: icon }))
-  }
+  const $profile = useBinding(profile)
 
   useEffect(() => {
-    dispatch(readProfile(studentId)).then(() => {
-      if (profile !== undefined) {
-        $newBio.set(profile.bio)
-        $newIcon.set(profile.icon)
-      }
-    })
-  }, [studentId])
+    const newProfile = $profile.get
 
-  useEffect(() => {
-    if (profile !== undefined && !$isEditing.get) update()
+    if (!$isEditing.get && profile !== undefined && newProfile !== undefined) {
+      const newName = newProfile.name !== "" && newProfile.name !== profile.name ? newProfile.name : undefined
+      const newBio = newProfile.bio !== profile.bio ? newProfile.bio : undefined
+      const newIcon = newProfile.icon !== profile.icon ? newProfile.icon : undefined
+
+      if (newName !== undefined || newBio !== undefined || newIcon !== undefined)
+        void dispatch(updateProfile({ newName, newBio, newIcon }))
+    }
+
   }, [$isEditing.get])
 
-  if (profile === undefined) return <LoadingSpinner />
-  else
-    return (
-      <Box width="100%" position="relative">
-        {isSelf && (
-          <PrimaryAction
-            fixed={isCompact}
-            sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, zIndex: 10 }}
-          >
-            <BindingToggle $isSelected={$isEditing} sx={{ aspectRatio: 1 }}>
-              {$isEditing.get ? <Save /> : <Edit />}
-            </BindingToggle>
-          </PrimaryAction>
-        )}
 
-        {$isEditing.get ? (
-          <Stack direction="column" gap={1} justifyContent={isCompact ? "center" : "end"}>
-            <ProfileIconSelect $icon={$newIcon} />
+  return (
+    <Box
+      width="100%"
+      position="relative"
+      justifyContent={isCompact ? "center" : "end"}
+      textAlign={isCompact ? "center" : "end"}
+    >
+      <PrimaryAction
+        fixed={isCompact}
+        sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, zIndex: 10 }}
+      >
+        <BindingToggle $isSelected={$isEditing} sx={{ aspectRatio: 1 }}>
+          {$isEditing.get ? <Save /> : <Edit />}
+        </BindingToggle>
+      </PrimaryAction>
 
-            <BindingTextField $value={$newName} placeholder={profile.name} fullWidth />
-
-            <BindingTextField $value={$newBio} multiline minRows={4} fullWidth />
-          </Stack>
-        ) : (
-          <ProfileDetails studentId={studentId} profile={profile} showFollowButton={!isSelf} />
-        )}
-      </Box>
-    )
+      {$isEditing.get && $profile.get !== undefined
+        ? <EditProfileMenu $profile={$profile} name={profile.name} />
+        : <ProfileDetails profile={profile} />
+      }
+    </Box>
+  )
 }
 
 interface Props {
-  studentId: number
-  isSelf: boolean
+  profile: Profile
 }

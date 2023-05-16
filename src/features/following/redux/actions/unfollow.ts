@@ -15,7 +15,7 @@ export default createAsyncThunk(
 
     if (response.ok) {
       thunkAPI.dispatch(removeFollowers({ id: followId, followers: [studentId] }))
-      thunkAPI.dispatch(removeFollows({ id: studentId, follows: [followId] }))
+      thunkAPI.dispatch(removeFollows({ studentId: studentId, follows: [followId] }))
     } else throw new Error("Failed to unfollow: " + response.statusText)
   }
 )

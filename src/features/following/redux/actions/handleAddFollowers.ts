@@ -2,12 +2,12 @@ import { PayloadAction } from "@reduxjs/toolkit"
 
 import { State } from "../state"
 
-export default function handleAddFollowers(state: State, action: PayloadAction<{ id: number, followers: number[] }>) {
-  const id = action.payload.id
+export default function handleAddFollowers(state: State, action: PayloadAction<{ studentId: number, followers: number[] }>) {
+  const studentId = action.payload.studentId
 
-  if (state[id] === undefined) state[id] = { followers: [] }
+  if (state[studentId] === undefined) state[studentId] = { follows: [], followers: [] }
 
-  const followers = action.payload.followers.filter(follower => !state[id].followers?.includes(follower));
+  const followers = action.payload.followers.filter(follower => !state[studentId].followers?.includes(follower))
 
-  state[id].followers?.push(...followers)
+  state[studentId].followers?.push(...followers)
 }

@@ -14,8 +14,8 @@ export default createAsyncThunk(
     })
 
     if (response.ok) {
-      thunkAPI.dispatch(addFollowers({ id: followId, followers: [studentId] }))
-      thunkAPI.dispatch(addFollows({ id: studentId, follows: [followId] }))
+      thunkAPI.dispatch(addFollowers({ studentId: followId, followers: [studentId] }))
+      thunkAPI.dispatch(addFollows({ studentId: studentId, follows: [followId] }))
     } else throw new Error("Failed to follow: " + response.statusText)
   }
 )
