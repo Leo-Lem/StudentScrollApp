@@ -1,17 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit"
 
-import authentication from "../features/authentication/authenticationReducer"
+import studentReducer from "../features/student"
+import { authenticationReducer } from "../features/authentication"
 import { postsReducer } from "../features/posts"
 import { profileReducer } from "../features/profiles"
-import { settingsReducer } from "../features/settings"
 import { followingReducer } from "../features/following"
 
 const store = configureStore({
   reducer: {
-    authentication,
+    student: studentReducer,
+    authentication: authenticationReducer,
     posts: postsReducer,
     profiles: profileReducer,
-    settings: settingsReducer,
     following: followingReducer
   }
 })

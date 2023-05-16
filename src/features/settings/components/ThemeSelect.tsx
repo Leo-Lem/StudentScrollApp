@@ -11,7 +11,7 @@ import {
 } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
-import { Binding } from "../../../hooks/useBinding"
+import { Binding } from "../../../lib/useBinding"
 import { Theme, ThemeIcon, themes } from "../../../res/theme"
 
 export default function ThemeSelect({ $theme }: Props): ReactElement {
@@ -21,7 +21,7 @@ export default function ThemeSelect({ $theme }: Props): ReactElement {
     <FormControl>
       <FormLabel>
         <Divider variant="middle" sx={{ marginBottom: 1 }}>
-          <Chip label="Theme" />
+          <Chip label={t("SETTINGS_THEME")} />
         </Divider>
       </FormLabel>
 

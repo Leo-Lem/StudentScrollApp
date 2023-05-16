@@ -1,4 +1,4 @@
-import { Server } from "miragejs"
+import { Response, Server } from "miragejs"
 
 interface Follow {
   studentId: number
@@ -8,21 +8,16 @@ interface Follow {
 export const exampleFollows: Follow[] = [
   { studentId: 1, followerId: 2 },
   { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
-  { studentId: 1, followerId: 3 },
+  { studentId: 1, followerId: 4 },
+  { studentId: 1, followerId: 5 },
+  { studentId: 1, followerId: 6 },
+  { studentId: 1, followerId: 7 },
+  { studentId: 1, followerId: 8 },
+  { studentId: 1, followerId: 9 },
   { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 1 },
-  { studentId: 2, followerId: 3 }
+  { studentId: 3, followerId: 1 },
+  { studentId: 4, followerId: 1 },
+  { studentId: 5, followerId: 1 }
 ]
 
 export default function mockFollowing(server: Server) {
@@ -46,8 +41,7 @@ export default function mockFollowing(server: Server) {
   server.delete("students/:studentId/followers/:followerId", (schema, { url }) => {
     const studentId = parseInt(url.split("/")[4])
     const followerId = parseInt(url.split("/")[6])
-    console.log(studentId, followerId)
     schema.db.follows.remove({ studentId, followerId })
-    return schema.db.follows.where({ studentId }).map((f: Follow) => f.followerId)
+    return new Response(204)
   })
 }

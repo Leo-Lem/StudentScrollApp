@@ -3,10 +3,10 @@ import { Box, Slide, Stack } from "@mui/material"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { readPosts, resetPosts } from "../postsReducer"
 import ContentPostCard from "./PostCard"
 import NewestFirstSwitch from "./NewestFirstSwitch"
 import LoadingSpinner from "../../../components/LoadingSpinner"
+import { readPosts } from "../redux"
 
 // TODO: figure out how to not send a billion requests for each scroll
 
@@ -20,7 +20,6 @@ export default function PostsList(): ReactElement {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    dispatch(resetPosts())
     void dispatch(readPosts())
   }, [newestFirst])
 

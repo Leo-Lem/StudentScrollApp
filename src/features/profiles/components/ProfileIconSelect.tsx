@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useState } from "react"
 import { Button, Grid } from "@mui/material"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
 
-import { Binding } from "../../../hooks/useBinding"
+import { Binding } from "../../../lib/useBinding"
 import { Icon, IconType, icons as iconsWithDefault } from "../../../res/icons"
 import ProfileIcon from "./ProfileIcon"
 

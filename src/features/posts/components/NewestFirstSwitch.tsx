@@ -3,8 +3,8 @@ import { FormControlLabel, Switch, Typography } from "@mui/material"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { toggleNewestFirst } from "../postsReducer"
 import { useTranslation } from "react-i18next"
+import { toggleNewestFirst } from "../redux"
 
 export default function NewestFirstSwitch(): ReactElement {
   const newestFirst = useAppSelector((state) => state.posts.newestFirst)

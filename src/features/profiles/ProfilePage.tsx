@@ -1,29 +1,45 @@
-import { type ReactElement } from "react"
+import { useEffect, type ReactElement } from "react"
 import { Navigate, useParams } from "react-router-dom"
 import { Grid, Stack, Card } from "@mui/material"
 
-import useIsCompact from "../../hooks/useIsCompact"
+import useIsCompact from "../../lib/useIsCompact"
 
-import ProfileDetails from "./components/EditableProfileDetails"
-import { useAppSelector } from "../../redux"
+import EditableProfileDetails from "./components/EditableProfileDetails"
+import { useAppDispatch, useAppSelector } from "../../redux"
 import { FollowersList, FollowsList } from "../following"
+import ProfileDetails from "./components/ProfileDetails"
+import { readProfile } from "./redux"
+import { LoadingSpinner } from "../../components"
 
 export default function ProfilePage(): ReactElement {
   const isCompact = useIsCompact()
+
+  const dispatch = useAppDispatch()
+
   const currentStudentId = useAppSelector((state) => state.authentication.studentId)
 
   const { studentId } = useParams()
-  if (studentId === undefined || isNaN(parseInt(studentId))) return <Navigate to="/" />
+  if (currentStudentId === undefined || studentId === undefined || isNaN(parseInt(studentId)))
+    return <Navigate to="/" />
 
   const id = parseInt(studentId)
+  const profile = useAppSelector((state) => state.profiles[id])
+  const isSelf = id === currentStudentId
+
+  useEffect(() => {
+    if (profile === undefined) void dispatch(readProfile(id))
+  }, [id])
 
   const details = (
     <Card elevation={3}>
       <Stack direction="column" spacing={1} alignItems={isCompact ? "center" : "end"}>
-        <ProfileDetails
-          studentId={id}
-          isSelf={currentStudentId !== undefined && id === currentStudentId}
-        />
+        {profile === undefined ? (
+          <LoadingSpinner />
+        ) : isSelf ? (
+          <EditableProfileDetails profile={profile} />
+        ) : (
+          <ProfileDetails followId={id} profile={profile} />
+        )}
       </Stack>
     </Card>
   )

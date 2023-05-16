@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement, Fragment } from "react"
+import { type ReactElement, Fragment, useEffect } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline } from "@mui/material"
 
@@ -11,7 +11,7 @@ import { DashboardPage } from "./features/posts"
 import { ProfilePage } from "./features/profiles"
 import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
-import { readSettings } from "./features/settings/settingsReducer"
+import { loadStudent } from "./features/student"
 
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
@@ -19,8 +19,8 @@ export default function App(): ReactElement {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    void dispatch(readSettings())
-  }, [])
+    dispatch(loadStudent())
+  }, [isAuthenticated])
 
   const authenticated = (
     <Fragment>

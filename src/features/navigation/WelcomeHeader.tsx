@@ -2,7 +2,7 @@ import { AppBar, Box, Button, Stack, Typography } from "@mui/material"
 import { ReactElement } from "react"
 
 import { Logo } from "../../components"
-import useIsCompact from "../../hooks/useIsCompact"
+import useIsCompact from "../../lib/useIsCompact"
 import { useTranslation } from "react-i18next"
 
 export default function WelcomeHeader(): ReactElement {

@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import { readProfile } from "../../profiles"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
+import { readProfile } from "../../profiles/redux"
 
 export default function SearchBar(): ReactElement {
   const [t] = useTranslation()
@@ -78,7 +78,7 @@ export default function SearchBar(): ReactElement {
       groupBy={groupBy}
       getOptionLabel={getOptionLabel}
       renderInput={(props) => (
-        <TextField {...props} variant="standard" placeholder={t("SEARCH") ?? ""} />
+        <TextField {...props} variant="standard" placeholder={t("LABEL_SEARCH") ?? ""} />
       )}
       renderOption={(props, option) => renderOption(option)}
       onInputChange={(_, value) => {

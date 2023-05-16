@@ -1,18 +1,14 @@
 import { ReactElement } from "react"
 import { Grid, Typography } from "@mui/material"
 
-import useIsCompact from "../../../hooks/useIsCompact"
+import useIsCompact from "../../../lib/useIsCompact"
 import { FollowButton } from "../../following"
 
 import ProfileIcon from "./ProfileIcon"
 import Profile from "../types/Profile"
 import { PrimaryAction } from "../../../components"
 
-export default function ProfileDetails({
-  studentId,
-  profile,
-  showFollowButton
-}: Props): ReactElement {
+export default function ProfileDetails({ followId, profile }: Props): ReactElement {
   const isCompact = useIsCompact()
 
   return (
@@ -25,12 +21,12 @@ export default function ProfileDetails({
       padding={1}
     >
       <Grid item>
-        {showFollowButton && (
+        {followId !== undefined && (
           <PrimaryAction
             fixed={isCompact}
             sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, margin: 1 }}
           >
-            <FollowButton followId={studentId} />
+            <FollowButton followId={followId} />
           </PrimaryAction>
         )}
       </Grid>
@@ -53,7 +49,6 @@ export default function ProfileDetails({
 }
 
 interface Props {
-  studentId: number
   profile: Profile
-  showFollowButton: boolean
+  followId?: number
 }

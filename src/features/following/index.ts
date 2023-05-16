@@ -1,11 +1,4 @@
-export {
-  default as followingReducer,
-  type FollowingState,
-  follow,
-  unfollow,
-  readFollowers,
-  readFollows
-} from "./followingReducer"
+export { default as followingReducer } from "./redux"
 
 export { default as FollowButton } from "./components/FollowButton"
 export { default as FollowersList } from "./components/FollowersList"

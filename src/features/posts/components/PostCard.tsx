@@ -1,7 +1,7 @@
 import { type ReactElement } from "react"
 import { Grid, Typography, Card, Divider, Stack } from "@mui/material"
 
-import useIsCompact from "../../../hooks/useIsCompact"
+import useIsCompact from "../../../lib/useIsCompact"
 import ProfileLink from "../../profiles/components/ProfileLink"
 
 import type ContentPost from "../types/ContentPost"

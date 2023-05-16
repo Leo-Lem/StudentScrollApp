@@ -5,7 +5,7 @@ import { useAppSelector } from "../../redux"
 
 export default function AppLocaleProvider({ children }: Props): ReactElement {
   const [, i18n] = useTranslation()
-  const locale = useAppSelector((state) => state.settings.settings?.locale)
+  const locale = useAppSelector((state) => state.student?.settings?.locale)
 
   useEffect(() => {
     if (locale === undefined || locale === "system")

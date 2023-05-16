@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Binding } from "../../../hooks/useBinding"
+import { Binding } from "../../../lib/useBinding"
 import { Card, Stack, Switch, Typography } from "@mui/material"
 import { useTranslation } from "react-i18next"
 

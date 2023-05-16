@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { ReactElement } from "react"
-import { Binding } from "../../../hooks/useBinding"
+import { Binding } from "../../../lib/useBinding"
 import { useTranslation } from "react-i18next"
 import { Locale, locales } from "../../../res/locale"
 

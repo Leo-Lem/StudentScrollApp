@@ -3,11 +3,10 @@ import { type TextFieldProps } from "@mui/material/TextField"
 import { type ReactElement, useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Binding } from "../../hooks/useBinding"
+import { Binding } from "../../lib/useBinding"
 
 export default function RequiredTextField({
   $value,
-  showsFeedback,
   validate,
   invalidMessage,
   ...textFieldProps
@@ -23,17 +22,12 @@ export default function RequiredTextField({
       setValue("")
       setIsEmpty(undefined)
       setIsInvalid(undefined)
+    } else if ($value.get === "invalid") {
+      setValue("")
+      setIsEmpty(true)
+      setIsInvalid(false)
     }
-  }, [$value.get === undefined])
-
-  useEffect(() => {
-    if (showsFeedback ?? false) {
-      setValue($value.get === "invalid" ? "" : $value.get ?? "")
-    } else {
-      setIsEmpty(undefined)
-      setIsInvalid(undefined)
-    }
-  }, [showsFeedback ?? false])
+  }, [$value.get])
 
   const helperText = (): string | null => {
     if (isEmpty ?? false) return t("REQUIRED")
@@ -70,7 +64,6 @@ export default function RequiredTextField({
 
 interface Props {
   $value: Binding<string | "invalid" | undefined>
-  showsFeedback?: boolean
   validate?: (value: string) => boolean
   invalidMessage?: string | null
 }
