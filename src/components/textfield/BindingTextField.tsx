@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Binding } from "../../hooks/useBinding"
+import { Binding } from "../../lib/useBinding"
 import { TextField, TextFieldProps } from "@mui/material"
 
 export default function BindingTextField({

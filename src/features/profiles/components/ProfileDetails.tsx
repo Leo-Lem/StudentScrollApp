@@ -1,7 +1,7 @@
 import { ReactElement } from "react"
 import { Grid, Typography } from "@mui/material"
 
-import useIsCompact from "../../../hooks/useIsCompact"
+import useIsCompact from "../../../lib/useIsCompact"
 import { FollowButton } from "../../following"
 
 import ProfileIcon from "./ProfileIcon"

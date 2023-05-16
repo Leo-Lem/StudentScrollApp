@@ -7,7 +7,7 @@ import AccountMenu from "./AccountMenu"
 import HeaderNavigationButtons from "./NavigationButtons"
 import NavigationMenu from "./NavigationMenu"
 import CollapsibleSearchBar from "./CollapsibleSearchBar"
-import useIsCompact from "../../../hooks/useIsCompact"
+import useIsCompact from "../../../lib/useIsCompact"
 
 export default function Header(): ReactElement {
   const isCompact = useIsCompact()

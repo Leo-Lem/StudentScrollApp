@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import { Binding } from "../../../hooks/useBinding"
+import { Binding } from "../../../lib/useBinding"
 import { RequiredTextField } from "../../../components"
 import { useTranslation } from "react-i18next"
 

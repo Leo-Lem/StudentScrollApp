@@ -4,9 +4,9 @@ import { Box, Grid, Slide, Card, Stack } from "@mui/material"
 import CreatePostMenu from "./components/CreatePostMenu"
 import PostsList from "./components/PostsList"
 
-import useIsCompact from "../../hooks/useIsCompact"
+import useIsCompact from "../../lib/useIsCompact"
 import { BindingToggle, PrimaryAction, Label } from "../../components"
-import useBinding from "../../hooks/useBinding"
+import useBinding from "../../lib/useBinding"
 import { FollowsList, FollowersList } from "../following"
 
 export default function DashboardPage(): ReactElement {

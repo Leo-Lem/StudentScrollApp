@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from "react"
 import { Grid, Card } from "@mui/material"
 
-import useBinding from "../../hooks/useBinding"
+import useBinding from "../../lib/useBinding"
 import { useAppDispatch, useAppSelector } from "../../redux"
 import { LoadingSpinner } from "../../components"
 

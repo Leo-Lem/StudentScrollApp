@@ -4,7 +4,7 @@ import { Box, Stack } from "@mui/material"
 import AuthenticationForm from "./components/AuthenticationForm"
 import { Logo } from "../../components"
 
-import useIsCompact from "../../hooks/useIsCompact"
+import useIsCompact from "../../lib/useIsCompact"
 
 export default function WelcomePage(): ReactElement {
   const isCompact = useIsCompact()

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 
 import { AsyncButton, RequiredTextField, Label } from "../../../components"
 import { useAppDispatch } from "../../../redux"
-import useBinding from "../../../hooks/useBinding"
+import useBinding from "../../../lib/useBinding"
 
 import { createPost } from "../postsReducer"
 import TagsSelect from "./TagsSelect"

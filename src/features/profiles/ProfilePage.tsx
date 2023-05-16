@@ -2,7 +2,7 @@ import { type ReactElement } from "react"
 import { Navigate, useParams } from "react-router-dom"
 import { Grid, Stack, Card } from "@mui/material"
 
-import useIsCompact from "../../hooks/useIsCompact"
+import useIsCompact from "../../lib/useIsCompact"
 
 import ProfileDetails from "./components/EditableProfileDetails"
 import { useAppSelector } from "../../redux"
