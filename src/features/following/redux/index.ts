@@ -1,4 +1,4 @@
-import following from "./slice";
+import following from "./slice"
 
 export default following.reducer
 

@@ -20,8 +20,7 @@ export default function EditableProfileDetails({ profile }: Props): ReactElement
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (profile !== undefined)
-      $profile.set({ ...profile, name: "" })
+    if (profile !== undefined) $profile.set({ ...profile, name: "" })
   }, [profile])
 
   const $isEditing = useBinding(false)
@@ -31,16 +30,15 @@ export default function EditableProfileDetails({ profile }: Props): ReactElement
     const newProfile = $profile.get
 
     if (!$isEditing.get && profile !== undefined && newProfile !== undefined) {
-      const newName = newProfile.name !== "" && newProfile.name !== profile.name ? newProfile.name : undefined
+      const newName =
+        newProfile.name !== "" && newProfile.name !== profile.name ? newProfile.name : undefined
       const newBio = newProfile.bio !== profile.bio ? newProfile.bio : undefined
       const newIcon = newProfile.icon !== profile.icon ? newProfile.icon : undefined
 
       if (newName !== undefined || newBio !== undefined || newIcon !== undefined)
         void dispatch(updateProfile({ newName, newBio, newIcon }))
     }
-
   }, [$isEditing.get])
-
 
   return (
     <Box
@@ -58,10 +56,11 @@ export default function EditableProfileDetails({ profile }: Props): ReactElement
         </BindingToggle>
       </PrimaryAction>
 
-      {$isEditing.get && $profile.get !== undefined
-        ? <EditProfileMenu $profile={$profile} name={profile.name} />
-        : <ProfileDetails profile={profile} />
-      }
+      {$isEditing.get && $profile.get !== undefined ? (
+        <EditProfileMenu $profile={$profile} name={profile.name} />
+      ) : (
+        <ProfileDetails profile={profile} />
+      )}
     </Box>
   )
 }

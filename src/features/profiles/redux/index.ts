@@ -1,4 +1,4 @@
-import profiles from "./slice";
+import profiles from "./slice"
 
 export default profiles.reducer
 

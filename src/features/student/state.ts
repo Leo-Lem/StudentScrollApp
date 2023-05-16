@@ -12,5 +12,5 @@ export default interface State {
 const studentId = sessionStorage.getItem("studentId")
 
 export const initialState: State = {
-  id: studentId !== null ? parseInt(studentId) : undefined,
+  id: studentId !== null ? parseInt(studentId) : undefined
 }

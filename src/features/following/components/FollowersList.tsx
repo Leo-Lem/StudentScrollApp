@@ -10,13 +10,12 @@ export default function FollowersList({ studentId }: Props): ReactElement {
   const dispatch = useAppDispatch()
   const [t] = useTranslation()
 
-  const followerIds = useAppSelector((state) => (
+  const followerIds = useAppSelector((state) =>
     studentId !== undefined ? state.following[studentId]?.followers : state.student?.followers
-  ))
+  )
 
   useEffect(() => {
-    if (followerIds === undefined)
-      void dispatch(readFollowers(studentId))
+    if (followerIds === undefined) void dispatch(readFollowers(studentId))
   }, [studentId])
 
   return <ProfilesList studentIds={followerIds} label={t("FOLLOWERS")} />

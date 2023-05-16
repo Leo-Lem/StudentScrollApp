@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
-import { initialState } from "./state";
+import { initialState } from "./state"
 
-import handleAddFollows from "./actions/handleAddFollows";
-import handleAddFollowers from "./actions/handleAddFollowers";
-import handleRemoveFollows from "./actions/handleRemoveFollows";
-import handleRemoveFollowers from "./actions/handleRemoveFollowers";
+import handleAddFollows from "./actions/handleAddFollows"
+import handleAddFollowers from "./actions/handleAddFollowers"
+import handleRemoveFollows from "./actions/handleRemoveFollows"
+import handleRemoveFollowers from "./actions/handleRemoveFollowers"
 
 const following = createSlice({
   name: "following",

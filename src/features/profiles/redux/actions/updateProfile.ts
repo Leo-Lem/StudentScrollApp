@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
 import Profile from "../../types/Profile"
-import { addProfile } from "..";
+import { addProfile } from ".."
 
 export default createAsyncThunk(
   "profile/updateProfile",
@@ -18,7 +18,8 @@ export default createAsyncThunk(
       body: JSON.stringify(info)
     })
 
-    if (response.ok) thunkAPI.dispatch(addProfile({ studentId, profile: (await response.json()) as Profile }))
+    if (response.ok)
+      thunkAPI.dispatch(addProfile({ studentId, profile: (await response.json()) as Profile }))
     else throw new Error("Failed to update profile: " + response.statusText)
   }
 )

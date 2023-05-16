@@ -12,8 +12,7 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (profile === undefined)
-      void dispatch(readProfile(studentId))
+    if (profile === undefined) void dispatch(readProfile(studentId))
   }, [])
 
   return (

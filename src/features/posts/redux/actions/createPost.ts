@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
 
-import { addCreatedPost } from "..";
+import { addCreatedPost } from ".."
 import ContentPost from "../../types/ContentPost"
 
 export default createAsyncThunk(

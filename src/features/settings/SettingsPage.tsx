@@ -17,10 +17,12 @@ export default function SettingsPage(): ReactElement {
   }, [])
 
   const $settings = (settings: Settings) => ({
-    get: settings, set: (newSettings: Settings) => {
+    get: settings,
+    set: (newSettings: Settings) => {
       const newTheme = newSettings.theme !== settings.theme ? newSettings.theme : undefined
       const newLocale = newSettings.locale !== settings.locale ? newSettings.locale : undefined
-      const newIsLocated = newSettings.isLocated !== settings.isLocated ? newSettings.isLocated : undefined
+      const newIsLocated =
+        newSettings.isLocated !== settings.isLocated ? newSettings.isLocated : undefined
 
       if (newTheme !== undefined || newLocale !== undefined || newIsLocated !== undefined)
         void dispatch(updateSettings({ newTheme, newLocale, newIsLocated }))
@@ -29,9 +31,11 @@ export default function SettingsPage(): ReactElement {
 
   return (
     <Card elevation={3}>
-      {settings === undefined
-        ? <LoadingSpinner />
-        : <SettingsMenu $settings={$settings(settings)} />}
+      {settings === undefined ? (
+        <LoadingSpinner />
+      ) : (
+        <SettingsMenu $settings={$settings(settings)} />
+      )}
     </Card>
   )
 }

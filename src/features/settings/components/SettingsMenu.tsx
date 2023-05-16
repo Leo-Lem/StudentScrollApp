@@ -10,8 +10,14 @@ import ThemeSelect from "./ThemeSelect"
 import LocaleSelect from "./LocaleSelect"
 
 export default function SettingsMenu({ $settings }: Props): ReactElement {
-  const $theme: Binding<Theme> = { get: $settings.get.theme, set: (value) => $settings.set({ ...$settings.get, theme: value }) }
-  const $locale: Binding<Locale> = { get: $settings.get.locale, set: (value) => $settings.set({ ...$settings.get, locale: value }) }
+  const $theme: Binding<Theme> = {
+    get: $settings.get.theme,
+    set: (value) => $settings.set({ ...$settings.get, theme: value })
+  }
+  const $locale: Binding<Locale> = {
+    get: $settings.get.locale,
+    set: (value) => $settings.set({ ...$settings.get, locale: value })
+  }
   // const $isLocated: Binding<boolean> = { get: $settings.get.isLocated, set: (value) => $settings.set({ ...$settings.get, isLocated: value }) }
 
   return (

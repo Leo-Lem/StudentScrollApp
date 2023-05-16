@@ -23,7 +23,6 @@ export default function AuthenticationForm(): ReactElement {
   const $name = useBinding<string | "invalid" | undefined>(undefined)
   const $email = useBinding<string | "invalid" | undefined>(undefined)
   const $password = useBinding<string | "invalid" | undefined>(undefined)
-  const [isFeedbackActive, setIsFeedbackActive] = useState(false)
 
   const [t] = useTranslation()
 
@@ -36,10 +35,9 @@ export default function AuthenticationForm(): ReactElement {
       $password.get === undefined ||
       $password.get === "invalid"
     ) {
-      console.log("Invalid" + $name.get + $email.get + $password.get)
-
-      setIsFeedbackActive(true)
-      return false
+      if (isRegistering && $name.get === undefined) $name.set("invalid")
+      if ($email.get === undefined) $email.set("invalid")
+      if ($password.get === undefined) $password.set("invalid")
     } else if (isRegistering) {
       await dispatch(signUp({ name: $name.get ?? "", email: $email.get, password: $password.get }))
     } else {
@@ -53,15 +51,14 @@ export default function AuthenticationForm(): ReactElement {
     <Box display="flex" flexDirection="column" alignItems="center">
       <Stack spacing={2} marginTop={3}>
         <Collapse in={isRegistering}>
-          <NameTextField $name={$name} showsFeedback={isFeedbackActive} />
+          <NameTextField $name={$name} />
         </Collapse>
 
-        <EmailTextField $email={$email} validate={isRegistering} showsFeedback={isFeedbackActive} />
+        <EmailTextField $email={$email} validate={isRegistering} />
 
         <PasswordTextField
           $password={$password}
           isRegistering={isRegistering}
-          showsFeedback={isFeedbackActive}
           onSubmit={authenticate}
         />
 

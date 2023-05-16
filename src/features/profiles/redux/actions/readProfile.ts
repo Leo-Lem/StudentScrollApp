@@ -13,7 +13,8 @@ export default createAsyncThunk(
       headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
     })
 
-    if (response.ok) thunkAPI.dispatch(addProfile({ studentId: id, profile: (await response.json()) as Profile }))
+    if (response.ok)
+      thunkAPI.dispatch(addProfile({ studentId: id, profile: (await response.json()) as Profile }))
     else throw new Error("Failed to read profile: " + response.statusText)
   }
 )

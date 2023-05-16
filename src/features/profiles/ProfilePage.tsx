@@ -19,26 +19,27 @@ export default function ProfilePage(): ReactElement {
   const currentStudentId = useAppSelector((state) => state.authentication.studentId)
 
   const { studentId } = useParams()
-  if (currentStudentId === undefined || studentId === undefined || isNaN(parseInt(studentId))) return <Navigate to="/" />
+  if (currentStudentId === undefined || studentId === undefined || isNaN(parseInt(studentId)))
+    return <Navigate to="/" />
 
   const id = parseInt(studentId)
   const profile = useAppSelector((state) => state.profiles[id])
   const isSelf = id === currentStudentId
 
   useEffect(() => {
-    if (profile === undefined)
-      void dispatch(readProfile(id))
+    if (profile === undefined) void dispatch(readProfile(id))
   }, [id])
 
   const details = (
     <Card elevation={3}>
       <Stack direction="column" spacing={1} alignItems={isCompact ? "center" : "end"}>
-        {profile === undefined
-          ? <LoadingSpinner />
-          : isSelf
-            ? <EditableProfileDetails profile={profile} />
-            : <ProfileDetails followId={id} profile={profile} />
-        }
+        {profile === undefined ? (
+          <LoadingSpinner />
+        ) : isSelf ? (
+          <EditableProfileDetails profile={profile} />
+        ) : (
+          <ProfileDetails followId={id} profile={profile} />
+        )}
       </Stack>
     </Card>
   )

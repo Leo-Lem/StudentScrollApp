@@ -1,4 +1,4 @@
-import Profile from "../types/Profile";
+import Profile from "../types/Profile"
 
 export default interface State {
   [id: number]: Profile
