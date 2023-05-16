@@ -4,7 +4,6 @@ import studentReducer from "../features/student"
 import { authenticationReducer } from "../features/authentication"
 import { postsReducer } from "../features/posts"
 import { profileReducer } from "../features/profiles"
-import { settingsReducer } from "../features/settings"
 import { followingReducer } from "../features/following"
 
 const store = configureStore({
@@ -13,7 +12,6 @@ const store = configureStore({
     authentication: authenticationReducer,
     posts: postsReducer,
     profiles: profileReducer,
-    settings: settingsReducer,
     following: followingReducer
   }
 })

@@ -11,16 +11,11 @@ import { DashboardPage } from "./features/posts"
 import { ProfilePage } from "./features/profiles"
 import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
-import { readSettings } from "./features/settings/redux"
 
 export default function App(): ReactElement {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
 
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    void dispatch(readSettings())
-  }, [])
+  // const dispatch = useAppDispatch()
 
   const authenticated = (
     <Fragment>

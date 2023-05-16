@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
-import Settings from "../../types/Settings"
+import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../redux"
 import { setSettings } from "..";
+import { Settings } from "../../settings";
 
 export default createAsyncThunk(
   "settings/update",

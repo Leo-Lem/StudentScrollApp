@@ -9,7 +9,7 @@ import light from "./themes/light"
 import colorful from "./themes/colorful"
 
 export default function AppThemeProvider({ children }: Props): ReactElement {
-  const theme = useAppSelector((state) => state.settings.settings?.theme)
+  const theme = useAppSelector((state) => state.student?.settings?.theme)
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
 
   switch (theme) {

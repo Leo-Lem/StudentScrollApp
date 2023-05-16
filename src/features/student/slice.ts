@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 import { initialState } from "./state"
-import extraReducers from "./actions"
+import extraReducers from "./actions/actions"
+import handleSetSettings from "./actions/handleSetSettings"
 
 const student = createSlice({
   name: "student",
   initialState,
-  reducers: {},
+  reducers: {
+    setSettings: handleSetSettings
+  },
   extraReducers
 })
 

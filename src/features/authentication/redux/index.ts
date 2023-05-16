@@ -2,6 +2,6 @@ import authentication from "./slice"
 
 export default authentication.reducer
 
-export { default as signIn } from "./api/signIn"
-export { default as signUp } from "./api/signUp"
 export const { signOut, setAuthenticated, setFailed } = authentication.actions
+export { default as signIn } from "./actions/signIn"
+export { default as signUp } from "./actions/signUp"
