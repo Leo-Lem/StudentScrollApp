@@ -1,13 +1,21 @@
-import State from "../state"
+import { createAsyncThunk } from "@reduxjs/toolkit"
+import { tryGettingStudentId } from "../../../../redux"
+import { addLocation, saveLocation } from ".."
+import StudentLocation from "../../types/Location"
 
-export default function getLocation(state: State) {
-  if (!("geolocation" in navigator)) return
+export default createAsyncThunk("nearby/getLocation", async (_, thunkAPI) => {
+  const studentId = tryGettingStudentId(thunkAPI)
 
-  navigator.geolocation.getCurrentPosition((position) => {
-    state.location = {
-      name: "Current Location",
+  const { geolocation } = navigator
+
+  if (geolocation === undefined) return
+
+  geolocation.getCurrentPosition((position) => {
+    const location: StudentLocation = {
       lat: position.coords.latitude,
-      lon: position.coords.longitude
+      lng: position.coords.longitude
     }
+    thunkAPI.dispatch(addLocation({ studentId, location }))
+    thunkAPI.dispatch(saveLocation(location))
   })
-}
+})

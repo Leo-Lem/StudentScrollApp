@@ -1,5 +1,5 @@
-export default interface Location {
+export default interface StudentLocation {
   name?: string
   lat: number
-  lon: number
+  lng: number
 }

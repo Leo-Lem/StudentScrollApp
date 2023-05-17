@@ -1,7 +1,7 @@
-import Location from "../types/Location"
+import StudentLocation from "../types/Location"
 
 export default interface State {
-  location?: Location
+  [studentId: number]: StudentLocation
 }
 
 export const initialState: State = {}

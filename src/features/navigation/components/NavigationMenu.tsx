@@ -5,12 +5,9 @@ import { Menu as MenuIcon } from "@mui/icons-material"
 import SignOutMenuItem from "./SignOutMenuItem"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 
-import { useAppSelector } from "../../../redux"
 import { Label } from "../../../components"
 
 export default function NavigationMenu(): ReactElement {
-  const studentId = useAppSelector((state) => state.authentication.studentId)
-
   const [anchor, setAnchor] = useState<HTMLElement | null>(null)
 
   const dismiss = (): void => {
@@ -30,11 +27,11 @@ export default function NavigationMenu(): ReactElement {
       </IconButton>
 
       <Menu anchorEl={anchor} keepMounted open={Boolean(anchor)} onClose={dismiss}>
-        <LinkMenuItem href="" dismiss={dismiss}>
+        <LinkMenuItem href="/" dismiss={dismiss}>
           <Label type="posts" />
         </LinkMenuItem>
 
-        <LinkMenuItem href="chats" dismiss={dismiss}>
+        <LinkMenuItem href="/chats" dismiss={dismiss}>
           <Label type="chats" />
         </LinkMenuItem>
 
@@ -44,17 +41,13 @@ export default function NavigationMenu(): ReactElement {
 
         <Divider />
 
-        {studentId !== undefined && (
-          <Fragment>
-            <LinkMenuItem href={`/profile/${studentId}`} dismiss={dismiss}>
-              <Label type="profile" />
-            </LinkMenuItem>
+        <LinkMenuItem href={"/profile"} dismiss={dismiss}>
+          <Label type="profile" />
+        </LinkMenuItem>
 
-            <LinkMenuItem href="settings" dismiss={dismiss}>
-              <Label type="settings" />
-            </LinkMenuItem>
-          </Fragment>
-        )}
+        <LinkMenuItem href="/settings" dismiss={dismiss}>
+          <Label type="settings" />
+        </LinkMenuItem>
 
         <SignOutMenuItem dismiss={dismiss} />
       </Menu>

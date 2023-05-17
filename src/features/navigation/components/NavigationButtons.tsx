@@ -10,7 +10,7 @@ export default function NavigationButtons(): ReactElement {
         <Label type="posts" />
       </Button>
 
-      <Button variant="contained" href="/hats">
+      <Button variant="contained" href="/chats">
         <Label type="chats" />
       </Button>
 

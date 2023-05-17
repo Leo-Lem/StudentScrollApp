@@ -5,12 +5,9 @@ import { AccountCircle } from "@mui/icons-material"
 import SignOutMenuItem from "./SignOutMenuItem"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 
-import { useAppSelector } from "../../../redux"
 import { Label } from "../../../components"
 
 export default function AccountMenu(): ReactElement {
-  const studentId = useAppSelector((state) => state.authentication.studentId)
-
   const [anchor, setAnchor] = useState<HTMLElement | null>(null)
 
   const dismiss = (): void => {
@@ -30,7 +27,7 @@ export default function AccountMenu(): ReactElement {
       </IconButton>
 
       <Menu anchorEl={anchor} keepMounted open={Boolean(anchor)} onClose={dismiss}>
-        <LinkMenuItem href={`/profile/${studentId}`} dismiss={dismiss}>
+        <LinkMenuItem href={"/profile"} dismiss={dismiss}>
           <Label type="profile" />
         </LinkMenuItem>
 
