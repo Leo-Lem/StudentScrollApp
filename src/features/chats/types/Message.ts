@@ -3,5 +3,5 @@ export default interface Message {
   content: string
   senderId: number
   receiverId: number
-  timestamp: Date
+  timestamp: string
 }

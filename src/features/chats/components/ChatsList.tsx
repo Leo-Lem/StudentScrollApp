@@ -1,19 +1,33 @@
-import { Box, Stack, CircularProgress } from "@mui/material"
+import { Fragment } from "react"
+import { Card, Divider, Stack } from "@mui/material"
 
 import { useAppSelector } from "../../../redux"
 
 import ChatLink from "./ChatLink"
+import { LoadingSpinner } from "../../../components"
 
 export default function ChatsList() {
   const chatStudentIds = useAppSelector((state) => Object.keys(state.chats).map(key => parseInt(key)))
 
-  if (chatStudentIds === undefined) return <CircularProgress />
-  else
-    return (
-      <Box display="flex" flexDirection="column">
-        <Stack sx={{ textAlign: "center" }} spacing={2} marginTop={3}>
-          {chatStudentIds.map(studentId => <ChatLink key={studentId} studentId={studentId} />)}
-        </Stack>
-      </Box>
-    )
+  const list = (
+    <Stack>
+      {chatStudentIds.map(studentId => (
+        <Fragment key={studentId}>
+          <ChatLink studentId={studentId} />
+
+          {chatStudentIds.indexOf(studentId) !== chatStudentIds.length - 1 && <Divider />}
+        </Fragment>
+      ))
+      }
+    </Stack>
+  )
+
+  return (
+    <Card elevation={3}>
+      {chatStudentIds === undefined
+        ? <LoadingSpinner />
+        : list
+      }
+    </Card>
+  )
 }

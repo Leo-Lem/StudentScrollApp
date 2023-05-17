@@ -1,5 +1,5 @@
 import { type ReactElement } from "react"
-import { Grid } from "@mui/material"
+import { Card, Grid, Typography } from "@mui/material"
 import { useParams } from "react-router"
 
 import { useAppSelector } from "../../redux"
@@ -14,19 +14,19 @@ export default function ChatPage(): ReactElement {
   const chatIsOpen = studentId !== undefined && !isNaN(parseInt(studentId)) && currentStudentId !== parseInt(studentId)
 
   return (
-    <Grid container>
+    <Grid container spacing={1}>
       <Grid item xs={4}>
         <ChatsList />
       </Grid>
 
-      {chatIsOpen
-        ? (
-          <Grid item xs={7}>
-            <ChatView studentId={parseInt(studentId)} />
-          </Grid>
-        )
-        : "Click on a chat to open it…" // TODO: add better placeholder
-      }
+      <Grid item xs>
+        <Card elevation={2}>
+          {chatIsOpen
+            ? <ChatView studentId={parseInt(studentId)} />
+            : <Typography variant="h4" textAlign="center">Click on a chat to open it…</Typography> // TODO: add better placeholder
+          }
+        </Card>
+      </Grid>
 
     </Grid>
   )

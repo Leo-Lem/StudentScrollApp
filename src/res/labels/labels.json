@@ -12,5 +12,7 @@
   "about",
   "search",
   "follow",
-  "unfollow"
+  "unfollow",
+  "chat",
+  "send"
 ]

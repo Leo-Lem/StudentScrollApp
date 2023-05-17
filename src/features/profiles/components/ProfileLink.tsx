@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import ProfileBadge from "./ProfileBadge"
 import { readProfile } from "../redux"
 
-export default function ProfileLink({ studentId }: Props): ReactElement {
+export default function ProfileLink({ studentId, disabled }: Props): ReactElement {
   const profile = useAppSelector((state) => state.profiles[studentId])
 
   const dispatch = useAppDispatch()
@@ -19,6 +19,7 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
     <Button
       color="inherit"
       component={Link}
+      disabled={disabled ?? false}
       href={`/profile/${studentId}`}
       sx={{ padding: 0, borderRadius: 100 }}
     >
@@ -29,4 +30,5 @@ export default function ProfileLink({ studentId }: Props): ReactElement {
 
 interface Props {
   studentId: number
+  disabled?: boolean
 }

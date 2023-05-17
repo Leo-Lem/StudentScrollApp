@@ -1,16 +1,16 @@
 import { PayloadAction } from "@reduxjs/toolkit"
 
 import State from "../state"
-import Message from "../../types/Message";
+import Message from "../../types/Message"
 
-export default function handleAddMessages(
-  state: State, action: PayloadAction<{ studentId: number; messages: Message[] }>
-) {
+export default function handleAddMessages(state: State, action: PayloadAction<{ studentId: number; messages: Message[] }>) {
   if (state[action.payload.studentId] === undefined)
     state[action.payload.studentId] = [] as Message[]
-  const allMessages = [...state[action.payload.studentId], ...action.payload.messages];
 
-  const sortedMessages = allMessages.sort((lhs: Message, rhs: Message) => rhs.timestamp.getTime() - lhs.timestamp.getTime())
+  const filteredMessages = state[action.payload.studentId].filter((existingMessage) => !action.payload.messages.some((newMessage) => newMessage.id === existingMessage.id))
+  const allMessages = [...filteredMessages, ...action.payload.messages]
 
-  state[action.payload.studentId] = sortedMessages
+  allMessages.sort((lhs: Message, rhs: Message) => new Date(rhs.timestamp).getTime() - new Date(lhs.timestamp).getTime())
+
+  state[action.payload.studentId] = allMessages
 }

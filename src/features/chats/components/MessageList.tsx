@@ -1,26 +1,23 @@
-import { List, ListItem, ListItemText } from "@mui/material";
-import Message from "../types/Message";
+import { Fragment } from "react";
+import { Divider, Grid } from "@mui/material"
 
-export default function MessageList({ messages, name }: Props) {
+import Message from "../types/Message"
+import MessageItem from "./MessageItem"
+
+export default function MessageList({ messages, studentId }: Props) {
   return (
-    <List>
+    <Grid container direction="column" padding={1} spacing={1}>
       {messages.map((message: Message) => (
-        <ListItem key={message.id}>
-          <ListItemText primary={message.content} secondary={name} />
-
-          <ListItemText
-            sx={{ textAlign: "right" }}
-            primary={
-              message.timestamp.toLocaleTimeString([], { year: "2-digit", month: "narrow", day: "2-digit", hour: "2-digit", minute: "2-digit" })
-            }
-          />
-        </ListItem>
+        <Fragment key={message.id}>
+          <MessageItem message={message} studentId={studentId} />
+          {messages.indexOf(message) !== messages.length - 1 && <Divider variant="middle" />}
+        </Fragment>
       ))}
-    </List>
+    </Grid>
   )
 }
 
 interface Props {
   messages: Message[]
-  name: string
+  studentId: number
 }

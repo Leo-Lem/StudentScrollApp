@@ -23,6 +23,8 @@
     "LABEL_SEARCH": "搜索",
     "LABEL_FOLLOW": "遵循",
     "LABEL_UNFOLLOW": "取消关注",
+    "LABEL_CHAT": "聊天",
+    "LABEL_SEND": "发送",
     "SEARCH_PROFILES": "概况",
     "SEARCH_POSTS": "帖子",
     "SEARCH_OTHERS": "其他",

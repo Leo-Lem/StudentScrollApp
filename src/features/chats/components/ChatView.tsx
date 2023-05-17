@@ -1,54 +1,33 @@
 import { type ReactElement, useEffect } from "react"
-import {
-  Box,
-  Stack,
-  List,
-  Button,
-  CircularProgress
-} from "@mui/material"
+import { Stack } from "@mui/material"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
-import useBinding from "../../../lib/useBinding"
+import { LoadingSpinner } from "../../../components"
 
-import { readMessages, sendMessage } from "../redux"
+import { readMessages } from "../redux"
 import MessageList from "./MessageList"
-import { readProfile } from "../../profiles/redux"
-import { RequiredTextField } from "../../../components"
+import MessageSendMenu from "./MessageSendMenu"
 
 export default function ChatView({ studentId }: Props): ReactElement {
   const dispatch = useAppDispatch()
 
-  const messages = useAppSelector((state) => state.chats[studentId])
-  const profile = useAppSelector((state) => state.profiles[studentId])
+  const currentStudentId = useAppSelector(state => state.student.id)
+  if (currentStudentId === undefined) throw Error("Not authenticated")
 
-  const $newMessage = useBinding<string | undefined>("")
+  const messages = useAppSelector((state) => state.chats[studentId])
 
   useEffect(() => {
     if (messages === undefined) dispatch(readMessages(studentId))
-    if (profile === undefined) dispatch(readProfile(studentId))
   }, [studentId])
 
-  const handleSendMessage = () => {
-    if ($newMessage.get !== undefined) dispatch(sendMessage({ studentId, content: $newMessage.get }))
-    else $newMessage.set("invalid")
-  }
-
-  if (messages === undefined || profile === undefined) return <CircularProgress />
+  if (messages === undefined) return <LoadingSpinner />
   else
     return (
-      <Box display="flex" flexDirection="column" alignItems="right">
-        <Stack spacing={2} marginTop={3}>
-          <MessageList messages={messages} name={profile.name} />
+      <Stack direction="column">
+        <MessageSendMenu receiverId={studentId} />
 
-          <List>
-            <RequiredTextField $value={$newMessage} label="Type your message here" variant="outlined" />
-
-            <Button variant="contained" color="primary" onClick={handleSendMessage}>
-              Send
-            </Button>
-          </List>
-        </Stack>
-      </Box>
+        <MessageList messages={messages} studentId={currentStudentId} />
+      </Stack>
     )
 }
 
