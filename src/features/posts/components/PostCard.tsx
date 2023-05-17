@@ -1,4 +1,3 @@
-import { type ReactElement } from "react"
 import { Grid, Typography, Card, Divider, Stack } from "@mui/material"
 
 import useIsCompact from "../../../lib/useIsCompact"
@@ -8,9 +7,7 @@ import type ContentPost from "../types/ContentPost"
 import DeletePostButton from "./DeletePostButton"
 import TagsList from "./TagsList"
 
-export default function PostCard({
-  post: { id, title, tags, content, posterId }
-}: Props): ReactElement {
+export default function PostCard({ post: { id, title, tags, content, posterId } }: Props) {
   const isCompact = useIsCompact()
 
   return (

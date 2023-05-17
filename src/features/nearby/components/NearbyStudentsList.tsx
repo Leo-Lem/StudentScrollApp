@@ -6,7 +6,12 @@ export default function NearbyStudentsList({ nearbyStudentsIds }: Props) {
   const [t] = useTranslation()
 
   return (
-    <ProfilesList studentIds={nearbyStudentsIds} label={t("LABEL_NEARBY")} showCount={false} display="wrap" />
+    <ProfilesList
+      studentIds={nearbyStudentsIds}
+      label={t("LABEL_NEARBY")}
+      showCount={false}
+      display="wrap"
+    />
   )
 }
 

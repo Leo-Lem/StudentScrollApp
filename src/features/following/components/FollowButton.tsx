@@ -1,11 +1,11 @@
-import { ReactElement, useEffect } from "react"
+import { useEffect } from "react"
 
-import { Label, AsyncToggle } from "../../../components"
+import { AsyncToggle, Label } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { follow, readFollows, unfollow } from "../redux"
 
-export default function FollowButton({ followId }: Props): ReactElement {
+export default function FollowButton({ followId }: Props) {
   const dispatch = useAppDispatch()
 
   const studentId = useAppSelector((state) => state.authentication.studentId)

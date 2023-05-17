@@ -1,12 +1,11 @@
 import { Box } from "@mui/material"
-import { ReactElement } from "react"
 
 import Profile from "../types/Profile"
 import ProfileNameLabel from "./ProfileNameLabel"
 import ProfileIcon from "./ProfileIcon"
 import { useTranslation } from "react-i18next"
 
-export default function ProfileBadge({ profile, isSelf }: Props): ReactElement {
+export default function ProfileBadge({ profile, isSelf }: Props) {
   const { t } = useTranslation()
 
   return (

@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material"
 import { type TextFieldProps } from "@mui/material/TextField"
-import { type ReactElement, useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { Binding } from "../../lib/useBinding"
@@ -10,7 +10,7 @@ export default function RequiredTextField({
   validate,
   invalidMessage,
   ...textFieldProps
-}: Props & TextFieldProps): ReactElement {
+}: Props & TextFieldProps) {
   const [t] = useTranslation()
 
   const [value, setValue] = useState($value.get === "invalid" ? "" : $value.get ?? "")

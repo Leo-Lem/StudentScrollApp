@@ -1,7 +1,6 @@
 import { Paper, Typography } from "@mui/material"
-import { ReactElement } from "react"
 
-export default function ProfileNameLabel({ name }: Props): ReactElement {
+export default function ProfileNameLabel({ name }: Props) {
   return (
     <Paper
       elevation={5}

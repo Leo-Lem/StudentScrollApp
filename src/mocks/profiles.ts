@@ -84,8 +84,7 @@ export default function mockProfiles(server: Server) {
     const lat = parseFloat(queryParams.lat)
     const lng = parseFloat(queryParams.lng)
 
-    if (!isNaN(lat) && !isNaN(lng))
-      return [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    if (!isNaN(lat) && !isNaN(lng)) return [1, 2, 3, 4, 5, 6, 7, 8, 9]
   })
 
   server.put("students/:studentId/profile", async (schema: any, { url, requestBody }) => {

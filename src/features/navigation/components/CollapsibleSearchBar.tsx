@@ -1,10 +1,10 @@
 import { Box, Collapse, ToggleButton } from "@mui/material"
-import { useState, type ReactElement, Fragment } from "react"
+import { Fragment, useState } from "react"
 
-import SearchBar from "../../search/components/SearchBar"
 import { Label } from "../../../components"
+import SearchBar from "../../search/components/SearchBar"
 
-export default function CollapsibleSearchBar(): ReactElement {
+export default function CollapsibleSearchBar() {
   const [isShowingSearch, setIsShowingSearch] = useState(false)
 
   return (

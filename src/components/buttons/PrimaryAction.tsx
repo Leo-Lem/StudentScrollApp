@@ -1,12 +1,6 @@
 import { CardProps, Paper } from "@mui/material"
-import { ReactElement } from "react"
 
-export default function PrimaryAction({
-  fixed,
-  children,
-  sx,
-  ...props
-}: Props & CardProps): ReactElement {
+export default function PrimaryAction({ fixed, children, sx, ...props }: Props & CardProps) {
   return (
     <Paper
       elevation={5}

@@ -1,13 +1,13 @@
-import { Box, IconButton, Menu } from "@mui/material"
-import { ReactElement, useState } from "react"
 import { AccountCircle } from "@mui/icons-material"
+import { Box, IconButton, Menu } from "@mui/material"
+import { useState } from "react"
 
-import SignOutMenuItem from "./SignOutMenuItem"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
+import SignOutMenuItem from "./SignOutMenuItem"
 
 import { Label } from "../../../components"
 
-export default function AccountMenu(): ReactElement {
+export default function AccountMenu() {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null)
 
   const dismiss = (): void => {

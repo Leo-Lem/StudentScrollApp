@@ -1,14 +1,14 @@
-import { type ReactElement, useEffect, useState } from "react"
 import { Box, Slide, Stack } from "@mui/material"
+import { useEffect, useState } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import ContentPostCard from "./PostCard"
-import NewestFirstSwitch from "./NewestFirstSwitch"
 import LoadingSpinner from "../../../components/LoadingSpinner"
 import { readPosts } from "../redux"
+import NewestFirstSwitch from "./NewestFirstSwitch"
+import ContentPostCard from "./PostCard"
 
-export default function PostsList(): ReactElement {
+export default function PostsList() {
   const posts = useAppSelector((state) => state.posts.posts)
   const newestFirst = useAppSelector((state) => state.posts.newestFirst)
   const nextPage = useAppSelector((state) => state.posts.nextPage)

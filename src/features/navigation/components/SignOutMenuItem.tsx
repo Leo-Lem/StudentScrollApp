@@ -1,12 +1,11 @@
 import { MenuItem } from "@mui/material"
-import { ReactElement } from "react"
 
 import { useAppDispatch } from "../../../redux"
 import { Label } from "../../../components"
 
 import { signOut } from "../../authentication/redux"
 
-export default function SignOutMenuItem({ dismiss }: Props): ReactElement {
+export default function SignOutMenuItem({ dismiss }: Props) {
   const dispatch = useAppDispatch()
 
   return (

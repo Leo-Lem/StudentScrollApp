@@ -1,10 +1,9 @@
 import { Box, Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
-import { ReactElement } from "react"
 
 import { tags } from "../../../res/tags"
 import { Binding } from "../../../lib/useBinding"
 
-export default function TagsSelect({ $tags: $selection }: Props): ReactElement {
+export default function TagsSelect({ $tags: $selection }: Props) {
   return (
     <FormControl fullWidth>
       <InputLabel>Tags</InputLabel>

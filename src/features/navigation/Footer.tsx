@@ -1,10 +1,9 @@
 import { Chip, Divider, Stack, Typography } from "@mui/material"
-import { type ReactElement } from "react"
 import { useTranslation } from "react-i18next"
 
 import { Label } from "../../components"
 
-export default function Footer(): ReactElement {
+export default function Footer() {
   const [t] = useTranslation()
 
   return (

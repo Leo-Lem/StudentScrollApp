@@ -1,9 +1,7 @@
-import { type ReactElement } from "react"
-
 import SchoolIcon from "@mui/icons-material/School"
 import { Stack, Typography } from "@mui/material"
 
-export default function Logo({ compact, iconOnly, size: sizeProp }: Props): ReactElement {
+export default function Logo({ compact, iconOnly, size: sizeProp }: Props) {
   const size = sizeProp ?? "60%"
 
   if (compact ?? false)

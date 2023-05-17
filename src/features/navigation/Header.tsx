@@ -1,4 +1,3 @@
-import { type ReactElement } from "react"
 import { AppBar, Box, Button, Divider, Stack, Toolbar } from "@mui/material"
 
 import { Logo } from "../../components"
@@ -9,7 +8,7 @@ import NavigationMenu from "./components/NavigationMenu"
 import CollapsibleSearchBar from "./components/CollapsibleSearchBar"
 import useIsCompact from "../../lib/useIsCompact"
 
-export default function Header(): ReactElement {
+export default function Header() {
   const isCompact = useIsCompact()
 
   const divider = <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />

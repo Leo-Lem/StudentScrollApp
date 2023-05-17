@@ -1,9 +1,8 @@
 import { Button, Stack } from "@mui/material"
-import { ReactElement } from "react"
 
 import { Label } from "../../../components"
 
-export default function NavigationButtons(): ReactElement {
+export default function NavigationButtons() {
   return (
     <Stack direction="row" spacing={3} alignItems="center" paddingX={1}>
       <Button variant="contained" href="/">

@@ -1,4 +1,3 @@
-import { type ReactElement } from "react"
 import { Box, Grid, Slide, Card, Stack } from "@mui/material"
 
 import CreatePostMenu from "./components/CreatePostMenu"
@@ -9,7 +8,7 @@ import { BindingToggle, PrimaryAction, Label } from "../../components"
 import useBinding from "../../lib/useBinding"
 import { FollowsList, FollowersList } from "../following"
 
-export default function DashboardPage(): ReactElement {
+export default function DashboardPage() {
   const isCompact = useIsCompact()
 
   const $isPosting = useBinding(false)

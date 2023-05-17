@@ -12,11 +12,10 @@ export default createAsyncThunk(
     })
 
     if (response.ok) {
-      (await response.json() as number[]).forEach(studentId => {
+      ;((await response.json()) as number[]).forEach((studentId) => {
         if ((thunkAPI.getState() as RootState).profiles[studentId] === undefined)
           thunkAPI.dispatch(readProfile(studentId))
       })
-    } else
-      console.error("Failed to save location: " + response.status + " " + response.statusText)
+    } else console.error("Failed to save location: " + response.status + " " + response.statusText)
   }
 )

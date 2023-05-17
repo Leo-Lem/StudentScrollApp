@@ -1,4 +1,3 @@
-import { type ReactElement } from "react"
 import { Card, Grid, Typography } from "@mui/material"
 import { useParams } from "react-router-dom"
 
@@ -8,7 +7,7 @@ import ChatsList from "./components/ChatsList"
 import ChatView from "./components/ChatDetail"
 import useIsCompact from "../../lib/useIsCompact"
 
-export default function ChatsPage(): ReactElement {
+export default function ChatsPage() {
   const isCompact = useIsCompact()
 
   const { studentId } = useParams()

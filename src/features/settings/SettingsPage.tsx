@@ -1,14 +1,14 @@
-import { ReactElement, useEffect } from "react"
 import { Card } from "@mui/material"
+import { useEffect } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../redux"
 import { LoadingSpinner } from "../../components"
+import { useAppDispatch, useAppSelector } from "../../redux"
 
-import Settings from "./types/Settings"
-import SettingsMenu from "./components/SettingsMenu"
 import { readSettings, updateSettings } from "../student"
+import SettingsMenu from "./components/SettingsMenu"
+import Settings from "./types/Settings"
 
-export default function SettingsPage(): ReactElement {
+export default function SettingsPage() {
   const settings = useAppSelector((state) => state.student?.settings)
   const dispatch = useAppDispatch()
 

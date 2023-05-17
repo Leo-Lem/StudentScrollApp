@@ -1,6 +1,6 @@
-import { ReactElement, useEffect, useState } from "react"
-import { Button, Grid } from "@mui/material"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
+import { Button, Grid } from "@mui/material"
+import { useEffect, useState } from "react"
 
 import { Binding } from "../../../lib/useBinding"
 import { Icon, IconType, icons as iconsWithDefault } from "../../../res/icons"
@@ -8,7 +8,7 @@ import ProfileIcon from "./ProfileIcon"
 
 const icons = iconsWithDefault.filter((icon) => icon !== "default")
 
-export default function ProfileIconSelect({ $icon }: Props): ReactElement {
+export default function ProfileIconSelect({ $icon }: Props) {
   const [iconIndex, setIconIndex] = useState(icons.indexOf($icon.get))
 
   useEffect(() => {

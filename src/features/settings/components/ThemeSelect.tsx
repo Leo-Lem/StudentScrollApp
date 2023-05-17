@@ -1,4 +1,3 @@
-import { ReactElement, createElement } from "react"
 import {
   Chip,
   Divider,
@@ -9,12 +8,13 @@ import {
   ToggleButtonGroup,
   Typography
 } from "@mui/material"
+import { createElement } from "react"
 import { useTranslation } from "react-i18next"
 
 import { Binding } from "../../../lib/useBinding"
 import { Theme, ThemeIcon, themes } from "../../../res/theme"
 
-export default function ThemeSelect({ $theme }: Props): ReactElement {
+export default function ThemeSelect({ $theme }: Props) {
   const [t] = useTranslation()
 
   return (

@@ -1,6 +1,6 @@
 import { EmojiPeople } from "@mui/icons-material"
 import { Box, Stack } from "@mui/material"
-import { Marker, OVERLAY_LAYER, OverlayViewF } from "@react-google-maps/api"
+import { OVERLAY_LAYER, OverlayViewF } from "@react-google-maps/api"
 import { useEffect } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
@@ -26,6 +26,7 @@ export default function StudentMarker({ studentId, isSelf }: Props) {
         x: -(width / 2),
         y: -height
       })}
+      zIndex={isSelf ?? false ? 10 : 1}
     >
       <Stack color="black" direction="column" alignItems="center">
         {profile !== undefined && (

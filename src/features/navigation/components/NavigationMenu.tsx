@@ -1,13 +1,13 @@
-import { Divider, IconButton, Menu } from "@mui/material"
-import { Fragment, ReactElement, useState } from "react"
 import { Menu as MenuIcon } from "@mui/icons-material"
+import { Divider, IconButton, Menu } from "@mui/material"
+import { Fragment, useState } from "react"
 
-import SignOutMenuItem from "./SignOutMenuItem"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
+import SignOutMenuItem from "./SignOutMenuItem"
 
 import { Label } from "../../../components"
 
-export default function NavigationMenu(): ReactElement {
+export default function NavigationMenu() {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null)
 
   const dismiss = (): void => {

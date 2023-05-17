@@ -1,4 +1,3 @@
-import { ReactElement } from "react"
 import { Stack } from "@mui/material"
 
 import { Binding } from "../../../lib/useBinding"
@@ -8,7 +7,7 @@ import { IconType } from "../../../res/icons"
 import Profile from "../types/Profile"
 import ProfileIconSelect from "./ProfileIconSelect"
 
-export default function EditProfileMenu({ $profile, name }: Props): ReactElement {
+export default function EditProfileMenu({ $profile, name }: Props) {
   const $newIcon = {
     get: $profile.get.icon,
     set: (newIcon: IconType) => $profile.set({ ...$profile.get, icon: newIcon })

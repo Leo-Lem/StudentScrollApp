@@ -1,13 +1,8 @@
-import { ReactElement } from "react"
 import { Binding } from "../../../lib/useBinding"
 import { RequiredTextField } from "../../../components"
 import { useTranslation } from "react-i18next"
 
-export default function PasswordTextField({
-  $password,
-  isRegistering,
-  onSubmit
-}: Props): ReactElement {
+export default function PasswordTextField({ $password, isRegistering, onSubmit }: Props) {
   const [t] = useTranslation()
 
   return (

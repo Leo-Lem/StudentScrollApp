@@ -1,19 +1,19 @@
-import { useState, type ReactElement } from "react"
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { ErrorFeedback, AsyncButton, Label } from "../../../components"
-import { useAppDispatch, useAppSelector } from "../../../redux"
+import { AsyncButton, ErrorFeedback, Label } from "../../../components"
 import useBinding from "../../../lib/useBinding"
+import { useAppDispatch, useAppSelector } from "../../../redux"
 
-import NameTextField from "./NameTextField"
 import EmailTextField from "./EmailTextField"
+import NameTextField from "./NameTextField"
 import PasswordTextField from "./PasswordTextField"
 
 import { signIn, signUp } from "../redux"
 import AuthenticationStatus from "../types/AuthenticationStatus"
 
-export default function AuthenticationForm(): ReactElement {
+export default function AuthenticationForm() {
   const status = useAppSelector((state) => state.authentication.status)
   const error = useAppSelector((state) => state.authentication.error)
 

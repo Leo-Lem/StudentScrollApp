@@ -1,20 +1,20 @@
-import { type ReactElement, useEffect } from "react"
+import { useEffect } from "react"
 
-import { Box } from "@mui/material"
 import { Edit, Save } from "@mui/icons-material"
+import { Box } from "@mui/material"
 
-import { useAppDispatch } from "../../../redux"
 import { BindingToggle, PrimaryAction } from "../../../components"
 import useIsCompact from "../../../lib/useIsCompact"
+import { useAppDispatch } from "../../../redux"
 
 import useBinding from "../../../lib/useBinding"
 import ProfileDetails from "./ProfileDetails"
 
 import { updateProfile } from "../redux"
-import EditProfileMenu from "./EditProfileMenu"
 import Profile from "../types/Profile"
+import EditProfileMenu from "./EditProfileMenu"
 
-export default function EditableProfileDetails({ profile }: Props): ReactElement {
+export default function EditableProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()
 
   const dispatch = useAppDispatch()

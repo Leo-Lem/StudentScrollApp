@@ -1,6 +1,7 @@
-import { type ReactNode, useState, type ReactElement } from "react"
 import { Cancel, CheckCircle } from "@mui/icons-material"
 import { ToggleButton, ToggleButtonProps } from "@mui/material"
+import { useState, type ReactNode } from "react"
+
 import LoadingSpinner from "../LoadingSpinner"
 
 export default function AsyncToggle({
@@ -8,7 +9,7 @@ export default function AsyncToggle({
   children,
   action,
   ...props
-}: Props & Omit<ToggleButtonProps, "value">): ReactElement {
+}: Props & Omit<ToggleButtonProps, "value">) {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
 

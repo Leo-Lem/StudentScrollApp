@@ -1,15 +1,14 @@
 import { Grid } from "@mui/material"
-import { ReactElement } from "react"
 
 import { Binding } from "../../../lib/useBinding"
 import { Locale } from "../../../res/locale"
 import { Theme } from "../../../res/theme"
 
 import Settings from "../types/Settings"
-import ThemeSelect from "./ThemeSelect"
 import LocaleSelect from "./LocaleSelect"
+import ThemeSelect from "./ThemeSelect"
 
-export default function SettingsMenu({ $settings }: Props): ReactElement {
+export default function SettingsMenu({ $settings }: Props) {
   const $theme: Binding<Theme> = {
     get: $settings.get.theme,
     set: (value) => $settings.set({ ...$settings.get, theme: value })

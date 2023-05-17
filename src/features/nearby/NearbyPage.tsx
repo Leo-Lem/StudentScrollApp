@@ -27,8 +27,7 @@ export default function NearbyPage() {
   }, [])
 
   useEffect(() => {
-    if (location !== undefined)
-      dispatch(readNearbyStudents(location))
+    if (location !== undefined) dispatch(readNearbyStudents(location))
   }, [location])
 
   if (location === undefined) return <LoadingSpinner />

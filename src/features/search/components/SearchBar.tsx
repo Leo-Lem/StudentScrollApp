@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from "@mui/material"
-import { useState, type ReactElement, useEffect, ReactNode } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 import { readProfile } from "../../profiles/redux"
 
-export default function SearchBar(): ReactElement {
+export default function SearchBar() {
   const [t] = useTranslation()
 
   const dispatch = useAppDispatch()
