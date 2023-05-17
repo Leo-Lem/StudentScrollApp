@@ -5,12 +5,14 @@ import { authenticationReducer } from "../features/authentication"
 import { postsReducer } from "../features/posts"
 import { profileReducer } from "../features/profiles"
 import { followingReducer } from "../features/following"
+import { chatsReducer } from "../features/chats"
 
 const store = configureStore({
   reducer: {
     student: studentReducer,
     authentication: authenticationReducer,
     posts: postsReducer,
+    chats: chatsReducer,
     profiles: profileReducer,
     following: followingReducer
   }

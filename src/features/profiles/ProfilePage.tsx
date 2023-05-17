@@ -10,6 +10,7 @@ import { FollowersList, FollowsList } from "../following"
 import ProfileDetails from "./components/ProfileDetails"
 import { readProfile } from "./redux"
 import { LoadingSpinner } from "../../components"
+import StartChatButton from "../chats/components/StartChatButton"
 
 export default function ProfilePage(): ReactElement {
   const isCompact = useIsCompact()
@@ -82,6 +83,12 @@ export default function ProfilePage(): ReactElement {
           <Grid item md={12}>
             {details}
           </Grid>
+
+          {!isSelf &&
+            <Grid item md>
+              <StartChatButton studentId={id} />
+            </Grid>
+          }
 
           <Grid item md={12}>
             {followsList}

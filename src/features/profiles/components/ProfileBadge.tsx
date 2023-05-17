@@ -7,9 +7,7 @@ import ProfileIcon from "./ProfileIcon"
 
 export default function ProfileBadge({ profile }: Props): ReactElement {
   return (
-    <Box
-      sx={{ aspectRatio: 1, padding: 0, minHeight: 50, position: "relative", borderRadius: 100 }}
-    >
+    <Box padding={0} minHeight={50} position="relative" borderRadius={100} sx={{ aspectRatio: 1 }}>
       <ProfileIcon icon={profile?.icon} />
 
       <Box position="absolute" bottom={0} zIndex={1} width="100%">
