@@ -1,4 +1,4 @@
-import { type ReactElement, Fragment, useEffect } from "react"
+import { Fragment, useEffect } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline } from "@mui/material"
 
@@ -13,8 +13,9 @@ import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
 import { ChatPage } from "./features/chats"
 import { loadStudent } from "./features/student"
+import { NearbyPage } from "./features/nearby"
 
-export default function App(): ReactElement {
+export default function App() {
   const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
 
   const dispatch = useAppDispatch()
@@ -29,6 +30,7 @@ export default function App(): ReactElement {
       <Routes>
         <Route path="/" element={addPageChip("posts", <DashboardPage />)} />
         <Route path="/settings" element={addPageChip("settings", <SettingsPage />)} />
+        <Route path="/nearby" element={addPageChip("nearby", <NearbyPage />)} />
         <Route path="/profile/:studentId?" element={addPageChip("profile", <ProfilePage />)} />
         <Route path="/chats/:studentId?" element={addPageChip("chats", <ChatPage />)} />
 

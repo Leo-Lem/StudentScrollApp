@@ -18,6 +18,7 @@ export default {
   search: Icon.Search,
   follow: Icon.PersonAdd,
   unfollow: Icon.PersonRemove,
+  nearby: Icon.Map,
   chat: Icon.Chat,
   send: Icon.Send
 } as { [key in LabelType]: ComponentType<any> }

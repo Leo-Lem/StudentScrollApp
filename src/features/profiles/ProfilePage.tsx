@@ -1,8 +1,12 @@
-import { useEffect, type ReactElement, Fragment } from "react"
+import { useEffect, Fragment } from "react"
 import { Navigate, useParams } from "react-router-dom"
-import { Grid, Stack, Card } from "@mui/material"
+import { Card, Grid, Stack } from "@mui/material"
 
 import useIsCompact from "../../lib/useIsCompact"
+import { LoadingSpinner } from "../../components"
+import { useAppDispatch, useAppSelector } from "../../redux"
+import { FollowersList, FollowsList } from "../following"
+import StartChatButton from "../chats/components/StartChatButton"
 
 import EditableProfileDetails from "./components/EditableProfileDetails"
 import { useAppDispatch, useAppSelector } from "../../redux"

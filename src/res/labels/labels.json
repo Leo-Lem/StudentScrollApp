@@ -13,6 +13,7 @@
   "search",
   "follow",
   "unfollow",
+  "nearby",
   "chat",
   "send"
 ]

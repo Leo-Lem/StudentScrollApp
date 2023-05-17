@@ -23,6 +23,7 @@
     "LABEL_SEARCH": "Search",
     "LABEL_FOLLOW": "Follow",
     "LABEL_UNFOLLOW": "Unfollow",
+    "LABEL_NEARBY": "Nearby",
     "LABEL_CHAT": "Chat",
     "LABEL_SEND": "Send",
     "SEARCH_PROFILES": "Profiles",
