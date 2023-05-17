@@ -11,7 +11,10 @@ export default function ChatPage(): ReactElement {
   const { studentId } = useParams()
   const currentStudentId = useAppSelector((state) => state.student.id)
 
-  const chatIsOpen = studentId !== undefined && !isNaN(parseInt(studentId)) && currentStudentId !== parseInt(studentId)
+  const chatIsOpen =
+    studentId !== undefined &&
+    !isNaN(parseInt(studentId)) &&
+    currentStudentId !== parseInt(studentId)
 
   return (
     <Grid container spacing={1}>
@@ -21,13 +24,17 @@ export default function ChatPage(): ReactElement {
 
       <Grid item xs>
         <Card elevation={2}>
-          {chatIsOpen
-            ? <ChatView studentId={parseInt(studentId)} />
-            : <Typography variant="h4" textAlign="center">Click on a chat to open it…</Typography> // TODO: add better placeholder
+          {
+            chatIsOpen ? (
+              <ChatView studentId={parseInt(studentId)} />
+            ) : (
+              <Typography variant="h4" textAlign="center">
+                Click on a chat to open it…
+              </Typography>
+            ) // TODO: add better placeholder
           }
         </Card>
       </Grid>
-
     </Grid>
   )
 }

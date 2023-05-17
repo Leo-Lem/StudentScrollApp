@@ -11,7 +11,7 @@ import MessageSendMenu from "./MessageSendMenu"
 export default function ChatView({ studentId }: Props): ReactElement {
   const dispatch = useAppDispatch()
 
-  const currentStudentId = useAppSelector(state => state.student.id)
+  const currentStudentId = useAppSelector((state) => state.student.id)
   if (currentStudentId === undefined) throw Error("Not authenticated")
 
   const messages = useAppSelector((state) => state.chats[studentId])

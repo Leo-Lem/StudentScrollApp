@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment } from "react"
 import { Divider, Grid } from "@mui/material"
 
 import Message from "../types/Message"

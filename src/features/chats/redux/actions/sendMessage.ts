@@ -6,7 +6,7 @@ import { addMessages } from ".."
 
 export default createAsyncThunk(
   "chats/sendMessage",
-  async (request: { studentId: number, content: string }, thunkAPI) => {
+  async (request: { studentId: number; content: string }, thunkAPI) => {
     const response = await fetch("/api/v1/chats", {
       method: "POST",
       headers: {
@@ -22,6 +22,8 @@ export default createAsyncThunk(
 
     if (!response.ok) throw Error("Failed to send message")
 
-    thunkAPI.dispatch(addMessages({ studentId: request.studentId, messages: [await response.json() as Message] }))
+    thunkAPI.dispatch(
+      addMessages({ studentId: request.studentId, messages: [(await response.json()) as Message] })
+    )
   }
 )

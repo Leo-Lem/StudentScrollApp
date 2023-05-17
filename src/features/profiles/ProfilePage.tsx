@@ -84,11 +84,11 @@ export default function ProfilePage(): ReactElement {
             {details}
           </Grid>
 
-          {!isSelf &&
+          {!isSelf && (
             <Grid item md>
               <StartChatButton studentId={id} />
             </Grid>
-          }
+          )}
 
           <Grid item md={12}>
             {followsList}

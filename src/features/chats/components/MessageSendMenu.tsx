@@ -1,10 +1,10 @@
-import { Grid } from "@mui/material";
+import { Grid } from "@mui/material"
 
-import { AsyncButton, Label, RequiredTextField } from "../../../components";
-import useBinding from "../../../lib/useBinding";
-import { useAppDispatch } from "../../../redux";
+import { AsyncButton, Label, RequiredTextField } from "../../../components"
+import useBinding from "../../../lib/useBinding"
+import { useAppDispatch } from "../../../redux"
 
-import { sendMessage } from "../redux";
+import { sendMessage } from "../redux"
 
 export default function MessageSendMenu({ receiverId }: Props) {
   const dispatch = useAppDispatch()
@@ -27,11 +27,21 @@ export default function MessageSendMenu({ receiverId }: Props) {
   return (
     <Grid container direction="row" gap={1}>
       <Grid item xs>
-        <RequiredTextField $value={$newMessage} label="Type your message here" variant="outlined" fullWidth />
+        <RequiredTextField
+          $value={$newMessage}
+          label="Type your message here"
+          variant="outlined"
+          fullWidth
+        />
       </Grid>
 
       <Grid item xs={2}>
-        <AsyncButton action={handleSendMessage} variant="contained" color="primary" sx={{ width: "100%", height: "100%" }}>
+        <AsyncButton
+          action={handleSendMessage}
+          variant="contained"
+          color="primary"
+          sx={{ width: "100%", height: "100%" }}
+        >
           <Label type="send" />
         </AsyncButton>
       </Grid>

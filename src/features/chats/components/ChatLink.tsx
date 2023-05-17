@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import { useNavigate } from "react-router"
 import { Button, Stack, Typography } from "@mui/material"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
@@ -9,7 +8,6 @@ import { Label } from "../../../components"
 
 export default function ChatLink({ studentId }: Props) {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const profile = useAppSelector((state) => state.profiles[studentId])
 
