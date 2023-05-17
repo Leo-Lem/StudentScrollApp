@@ -5,9 +5,12 @@ import { useParams } from "react-router"
 import { useAppSelector } from "../../redux"
 
 import ChatsList from "./components/ChatsList"
-import ChatView from "./components/ChatView"
+import ChatView from "./components/ChatDetail"
+import useIsCompact from "../../lib/useIsCompact"
 
 export default function ChatPage(): ReactElement {
+  const isCompact = useIsCompact()
+
   const { studentId } = useParams()
   const currentStudentId = useAppSelector((state) => state.student.id)
 
@@ -16,9 +19,19 @@ export default function ChatPage(): ReactElement {
     !isNaN(parseInt(studentId)) &&
     currentStudentId !== parseInt(studentId)
 
-  return (
+  const compact = chatIsOpen ? (
+    <Card elevation={2}>
+      <ChatView studentId={parseInt(studentId)} />
+    </Card>
+  ) : (
+    <Grid item xs={4}>
+      <ChatsList />
+    </Grid>
+  )
+
+  const regular = (
     <Grid container spacing={1}>
-      <Grid item xs={4}>
+      <Grid item xs={5}>
         <ChatsList />
       </Grid>
 
@@ -37,4 +50,6 @@ export default function ChatPage(): ReactElement {
       </Grid>
     </Grid>
   )
+
+  return isCompact ? compact : regular
 }

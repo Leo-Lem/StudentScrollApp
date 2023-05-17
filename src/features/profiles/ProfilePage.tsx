@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement } from "react"
+import { useEffect, type ReactElement, Fragment } from "react"
 import { Navigate, useParams } from "react-router-dom"
 import { Grid, Stack, Card } from "@mui/material"
 
@@ -63,9 +63,12 @@ export default function ProfilePage(): ReactElement {
     </Card>
   )
 
+  const startChat = <Fragment>{!isSelf && <StartChatButton studentId={id} />}</Fragment>
+
   const compact = (
     <Stack direction="column" spacing={1}>
       {details}
+      {startChat}
       {followsList}
       {followersList}
       {posts}
@@ -84,11 +87,9 @@ export default function ProfilePage(): ReactElement {
             {details}
           </Grid>
 
-          {!isSelf && (
-            <Grid item md>
-              <StartChatButton studentId={id} />
-            </Grid>
-          )}
+          <Grid item md>
+            {startChat}
+          </Grid>
 
           <Grid item md={12}>
             {followsList}

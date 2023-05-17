@@ -4,9 +4,9 @@ import { Divider, Grid } from "@mui/material"
 import Message from "../types/Message"
 import MessageItem from "./MessageItem"
 
-export default function MessageList({ messages, studentId }: Props) {
+export default function MessageList({ messages, studentId, newestFirst }: Props) {
   return (
-    <Grid container direction="column" padding={1} spacing={1}>
+    <Grid container direction={newestFirst ? "column" : "column-reverse"} padding={1} spacing={1}>
       {messages.map((message: Message) => (
         <Fragment key={message.id}>
           <MessageItem message={message} studentId={studentId} />
@@ -20,4 +20,5 @@ export default function MessageList({ messages, studentId }: Props) {
 interface Props {
   messages: Message[]
   studentId: number
+  newestFirst: boolean
 }

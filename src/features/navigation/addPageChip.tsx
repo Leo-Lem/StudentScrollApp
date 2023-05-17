@@ -11,7 +11,7 @@ export default function addPageChip(type: LabelType, page: ReactNode): ReactElem
       <Chip
         color="primary"
         label={<Label type={type} fontSize="small" />}
-        sx={{ position: "fixed", margin: 1, bottom: 0, left: 0 }}
+        sx={{ position: "fixed", margin: 1, bottom: 0, left: 0, zIndex: 10 }}
       />
     </Box>
   )
