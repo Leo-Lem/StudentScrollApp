@@ -11,7 +11,7 @@ import { DashboardPage } from "./features/posts"
 import { ProfilePage } from "./features/profiles"
 import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
-import { ChatPage } from "./features/chats"
+import { ChatsPage } from "./features/chats"
 import { loadStudent } from "./features/student"
 import { NearbyPage } from "./features/nearby"
 
@@ -32,7 +32,7 @@ export default function App() {
         <Route path="/settings" element={addPageChip("settings", <SettingsPage />)} />
         <Route path="/nearby" element={addPageChip("nearby", <NearbyPage />)} />
         <Route path="/profile/:studentId?" element={addPageChip("profile", <ProfilePage />)} />
-        <Route path="/chats/:studentId?" element={addPageChip("chats", <ChatPage />)} />
+        <Route path="/chats/:studentId?" element={addPageChip("chats", <ChatsPage />)} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -8,7 +8,7 @@ import ChatsList from "./components/ChatsList"
 import ChatView from "./components/ChatDetail"
 import useIsCompact from "../../lib/useIsCompact"
 
-export default function ChatPage(): ReactElement {
+export default function ChatsPage(): ReactElement {
   const isCompact = useIsCompact()
 
   const { studentId } = useParams()
@@ -37,15 +37,13 @@ export default function ChatPage(): ReactElement {
 
       <Grid item xs>
         <Card elevation={2}>
-          {
-            chatIsOpen ? (
-              <ChatView studentId={parseInt(studentId)} />
-            ) : (
-              <Typography variant="h4" textAlign="center">
-                Click on a chat to open it…
-              </Typography>
-            )
-          }
+          {chatIsOpen ? (
+            <ChatView studentId={parseInt(studentId)} />
+          ) : (
+            <Typography variant="h4" textAlign="center">
+              Click on a chat to open it…
+            </Typography>
+          )}
         </Card>
       </Grid>
     </Grid>

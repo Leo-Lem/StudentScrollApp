@@ -18,13 +18,11 @@ export default function SettingsMenu({ $settings }: Props): ReactElement {
     get: $settings.get.locale,
     set: (value) => $settings.set({ ...$settings.get, locale: value })
   }
-  // const $isLocated: Binding<boolean> = { get: $settings.get.isLocated, set: (value) => $settings.set({ ...$settings.get, isLocated: value }) }
 
   return (
     <Grid container direction="column" gap={3}>
       <ThemeSelect $theme={$theme} />
       <LocaleSelect $locale={$locale} />
-      {/* <IsLocatedSwitch $isLocated={$isLocated} /> */}
     </Grid>
   )
 }

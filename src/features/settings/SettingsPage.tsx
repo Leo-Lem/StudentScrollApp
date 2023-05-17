@@ -21,11 +21,9 @@ export default function SettingsPage(): ReactElement {
     set: (newSettings: Settings) => {
       const newTheme = newSettings.theme !== unwrapped.theme ? newSettings.theme : undefined
       const newLocale = newSettings.locale !== unwrapped.locale ? newSettings.locale : undefined
-      const newIsLocated =
-        newSettings.isLocated !== unwrapped.isLocated ? newSettings.isLocated : undefined
 
-      if (newTheme !== undefined || newLocale !== undefined || newIsLocated !== undefined)
-        void dispatch(updateSettings({ newTheme, newLocale, newIsLocated }))
+      if (newTheme !== undefined || newLocale !== undefined)
+        void dispatch(updateSettings({ newTheme, newLocale }))
     }
   })
 

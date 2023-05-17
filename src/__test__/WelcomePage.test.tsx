@@ -1,3 +1,1 @@
-it("renders welcome message", () => {
-
-})
+it("renders welcome message", () => {})
