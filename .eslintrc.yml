@@ -31,3 +31,5 @@ rules:
   no-duplicate-imports: error
   "@typescript-eslint/no-namespace": off
   "@typescript-eslint/no-explicit-any": off
+  "react-hooks/exhaustive-deps": off
+  prettier/prettier: warn
