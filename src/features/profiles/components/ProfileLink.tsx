@@ -1,5 +1,5 @@
 import { Button, Link } from "@mui/material"
-import { ReactElement, useEffect } from "react"
+import { useEffect } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 

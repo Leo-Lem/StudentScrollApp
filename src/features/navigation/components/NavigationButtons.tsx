@@ -9,8 +9,13 @@ export default function NavigationButtons(): ReactElement {
       <Button variant="contained" href="/">
         <Label type="posts" />
       </Button>
-      <Button variant="contained" href="chats">
+
+      <Button variant="contained" href="/hats">
         <Label type="chats" />
+      </Button>
+
+      <Button variant="contained" href="/nearby">
+        <Label type="nearby" />
       </Button>
     </Stack>
   )

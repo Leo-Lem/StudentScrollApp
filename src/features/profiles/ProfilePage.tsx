@@ -9,14 +9,10 @@ import { FollowersList, FollowsList } from "../following"
 import StartChatButton from "../chats/components/StartChatButton"
 
 import EditableProfileDetails from "./components/EditableProfileDetails"
-import { useAppDispatch, useAppSelector } from "../../redux"
-import { FollowersList, FollowsList } from "../following"
 import ProfileDetails from "./components/ProfileDetails"
 import { readProfile } from "./redux"
-import { LoadingSpinner } from "../../components"
-import StartChatButton from "../chats/components/StartChatButton"
 
-export default function ProfilePage(): ReactElement {
+export default function ProfilePage() {
   const isCompact = useIsCompact()
 
   const dispatch = useAppDispatch()

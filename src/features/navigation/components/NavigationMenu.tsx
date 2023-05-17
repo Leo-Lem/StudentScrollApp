@@ -38,6 +38,10 @@ export default function NavigationMenu(): ReactElement {
           <Label type="chats" />
         </LinkMenuItem>
 
+        <LinkMenuItem href="/nearby" dismiss={dismiss}>
+          <Label type="nearby" />
+        </LinkMenuItem>
+
         <Divider />
 
         {studentId !== undefined && (
