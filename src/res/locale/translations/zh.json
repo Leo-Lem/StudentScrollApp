@@ -10,6 +10,7 @@
     "EMAIL_INVALID": "无效的电子邮件地址",
     "PASSWORD_TOO_SHORT": "至少有六个字符",
     "CREATED_BY": "由{{names}}创建",
+    "YOU": "你",
     "LABEL_SIGNIN": "请登录",
     "LABEL_SIGNUP": "注册",
     "LABEL_SIGNOUT": "注册",

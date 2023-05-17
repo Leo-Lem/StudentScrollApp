@@ -8,7 +8,7 @@ import { readProfile } from "../../profiles/redux"
 import StudentLocation from "../types/Location"
 import ProfileBadge from "../../profiles/components/ProfileBadge"
 
-export default function StudentMarker({ studentId, location }: Props) {
+export default function StudentMarker({ studentId, location, isSelf }: Props) {
   const dispatch = useAppDispatch()
 
   const profile = useAppSelector((state) => state.profiles[studentId])
@@ -29,7 +29,7 @@ export default function StudentMarker({ studentId, location }: Props) {
       <Stack color="darkgreen" direction="column" alignItems="center">
         {profile !== undefined && (
           <Box width={50}>
-            <ProfileBadge profile={profile} />
+            <ProfileBadge profile={profile} isSelf={isSelf} />
           </Box>
         )}
 
@@ -42,4 +42,5 @@ export default function StudentMarker({ studentId, location }: Props) {
 interface Props {
   studentId: number
   location: StudentLocation
+  isSelf?: boolean
 }

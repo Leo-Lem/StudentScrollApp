@@ -10,6 +10,7 @@
     "EMAIL_INVALID": "Email inválido",
     "PASSWORD_TOO_SHORT": "Al menos 6 caracteres",
     "CREATED_BY": "Creado por {{names}}",
+    "YOU": "Tú",
     "LABEL_SIGNIN": "Ingresar",
     "LABEL_SIGNUP": "Regístrate",
     "LABEL_SIGNOUT": "Salir",

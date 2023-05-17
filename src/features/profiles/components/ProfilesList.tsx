@@ -1,14 +1,17 @@
-import { ReactElement } from "react"
 import { Chip, Grid } from "@mui/material"
 
 import { ProfileLink } from ".."
 import { LoadingSpinner } from "../../../components"
 
-export default function ProfilesList({ studentIds, label, showCount }: Props): ReactElement {
+export default function ProfilesList({ studentIds, label, showCount, display }: Props) {
+  const wrap = display === "scroll" ? "nowrap" : "wrap"
+  const overflow = display === "scroll" ? "scroll" : "auto"
+
   return (
     <Grid container direction="column" spacing={1}>
       <Grid item container justifyContent="space-between">
         <Chip label={label} />
+
         {studentIds === undefined ? (
           <LoadingSpinner />
         ) : (
@@ -16,7 +19,7 @@ export default function ProfilesList({ studentIds, label, showCount }: Props): R
         )}
       </Grid>
 
-      <Grid item container spacing={1} wrap="nowrap" overflow="scroll" paddingY={1}>
+      <Grid item container spacing={1} wrap={wrap} overflow={overflow} paddingY={1}>
         {studentIds === undefined ? (
           <Grid item xs={2}>
             <LoadingSpinner />
@@ -37,4 +40,5 @@ interface Props {
   studentIds?: number[]
   label: string
   showCount?: boolean
+  display: "scroll" | "wrap"
 }

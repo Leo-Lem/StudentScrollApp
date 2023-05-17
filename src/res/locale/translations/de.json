@@ -9,6 +9,7 @@
     "SWITCH_TO_SIGNIN": "Haben Sie bereits einen Account? Anmelden",
     "EMAIL_INVALID": "Ungültige E-Mail-Adresse",
     "PASSWORD_TOO_SHORT": "Mindestens 6 Zeichen",
+    "YOU": "Ich",
     "CREATED_BY": "Erstellt von {{names}}",
     "LABEL_SIGNIN": "Einloggen",
     "LABEL_SIGNUP": "Registrieren",
