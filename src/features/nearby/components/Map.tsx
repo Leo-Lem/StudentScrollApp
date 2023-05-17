@@ -10,12 +10,12 @@ export default function Map({ center, zoom, children }: Props) {
 
   if (isLoaded)
     return (
-      <Box height="600px">
+      <Box height="70vh">
         <GoogleMap
           mapContainerClassName="map-container"
           mapContainerStyle={{ width: "100%", height: "100%" }}
           center={{ lat: center.lat, lng: center.lng }}
-          zoom={zoom ?? 16}
+          zoom={zoom ?? 14}
         >
           {children}
         </GoogleMap>

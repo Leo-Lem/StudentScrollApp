@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
+
 import { tryGettingStudentId } from "../../../../redux"
 import { addLocation, saveLocation } from ".."
 import StudentLocation from "../../types/Location"
@@ -15,6 +16,7 @@ export default createAsyncThunk("nearby/getLocation", async (_, thunkAPI) => {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     }
+
     thunkAPI.dispatch(addLocation({ studentId, location }))
     thunkAPI.dispatch(saveLocation(location))
   })

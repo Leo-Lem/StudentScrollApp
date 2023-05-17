@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import ProfileBadge from "./ProfileBadge"
 import { readProfile } from "../redux"
 
-export default function ProfileLink({ studentId, disabled }: Props) {
+export default function ProfileLink({ studentId, isSelf, disabled }: Props) {
   const profile = useAppSelector((state) => state.profiles[studentId])
 
   const dispatch = useAppDispatch()
@@ -23,7 +23,7 @@ export default function ProfileLink({ studentId, disabled }: Props) {
       href={`/profile/${studentId}`}
       sx={{ padding: 0, borderRadius: 100 }}
     >
-      <ProfileBadge profile={profile} />
+      <ProfileBadge profile={profile} isSelf={isSelf} />
     </Button>
   )
 }
@@ -31,4 +31,5 @@ export default function ProfileLink({ studentId, disabled }: Props) {
 interface Props {
   studentId: number
   disabled?: boolean
+  isSelf?: boolean
 }

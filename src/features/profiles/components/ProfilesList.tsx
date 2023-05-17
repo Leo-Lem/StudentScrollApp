@@ -5,7 +5,7 @@ import { LoadingSpinner } from "../../../components"
 
 export default function ProfilesList({ studentIds, label, showCount, display }: Props) {
   const wrap = display === "scroll" ? "nowrap" : "wrap"
-  const overflow = display === "scroll" ? "scroll" : "auto"
+  const overflow = display === "scroll" ? "scroll" : "hidden"
 
   return (
     <Grid container direction="column" spacing={1}>

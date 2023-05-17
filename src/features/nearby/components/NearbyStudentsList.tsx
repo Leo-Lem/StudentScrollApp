@@ -1,4 +1,3 @@
-import { Stack } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
 import ProfilesList from "../../profiles/components/ProfilesList"
