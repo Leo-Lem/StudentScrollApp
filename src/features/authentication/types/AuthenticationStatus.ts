@@ -1,4 +1,4 @@
-export enum AuthenticationStatus {
+enum AuthenticationStatus {
   unauthenticated = "unauthenticated",
   loading = "loading",
   authenticated = "authenticated",

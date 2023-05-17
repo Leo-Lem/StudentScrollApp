@@ -16,13 +16,13 @@ export default function SettingsPage(): ReactElement {
     void dispatch(readSettings())
   }, [])
 
-  const $settings = (settings: Settings) => ({
-    get: settings,
+  const $settings = (unwrapped: Settings) => ({
+    get: unwrapped,
     set: (newSettings: Settings) => {
-      const newTheme = newSettings.theme !== settings.theme ? newSettings.theme : undefined
-      const newLocale = newSettings.locale !== settings.locale ? newSettings.locale : undefined
+      const newTheme = newSettings.theme !== unwrapped.theme ? newSettings.theme : undefined
+      const newLocale = newSettings.locale !== unwrapped.locale ? newSettings.locale : undefined
       const newIsLocated =
-        newSettings.isLocated !== settings.isLocated ? newSettings.isLocated : undefined
+        newSettings.isLocated !== unwrapped.isLocated ? newSettings.isLocated : undefined
 
       if (newTheme !== undefined || newLocale !== undefined || newIsLocated !== undefined)
         void dispatch(updateSettings({ newTheme, newLocale, newIsLocated }))

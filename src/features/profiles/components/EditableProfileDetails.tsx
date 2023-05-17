@@ -19,12 +19,12 @@ export default function EditableProfileDetails({ profile }: Props): ReactElement
 
   const dispatch = useAppDispatch()
 
+  const $isEditing = useBinding(false)
+  const $profile = useBinding(profile)
+
   useEffect(() => {
     if (profile !== undefined) $profile.set({ ...profile, name: "" })
   }, [profile])
-
-  const $isEditing = useBinding(false)
-  const $profile = useBinding(profile)
 
   useEffect(() => {
     const newProfile = $profile.get

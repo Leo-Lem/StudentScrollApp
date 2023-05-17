@@ -40,21 +40,21 @@ export default function RequiredTextField({
       error={(isEmpty ?? false) || (isInvalid ?? false)}
       helperText={helperText()}
       value={value}
-      onChange={({ target: { value } }) => {
+      onChange={({ target: { value: v } }) => {
         setValue(value)
 
-        if (value === "") {
+        if (v === "") {
           setIsEmpty(true)
           setIsInvalid(false)
           $value.set("invalid")
-        } else if (validate !== undefined && !validate(value)) {
+        } else if (validate !== undefined && !validate(v)) {
           setIsEmpty(false)
           setIsInvalid(true)
           $value.set("invalid")
         } else {
           setIsEmpty(false)
           setIsInvalid(false)
-          $value.set(value)
+          $value.set(v)
         }
       }}
     />

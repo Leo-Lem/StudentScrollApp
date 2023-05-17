@@ -1,5 +1,5 @@
 import { useEffect, Fragment } from "react"
-import { Navigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { Card, Grid, Stack } from "@mui/material"
 
 import useIsCompact from "../../lib/useIsCompact"
@@ -11,19 +11,16 @@ import StartChatButton from "../chats/components/StartChatButton"
 import EditableProfileDetails from "./components/EditableProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
 import { readProfile } from "./redux"
+import { useStudentId } from "../../redux/hooks"
 
 export default function ProfilePage() {
   const isCompact = useIsCompact()
-
   const dispatch = useAppDispatch()
-
-  const currentStudentId = useAppSelector((state) => state.authentication.studentId)
+  const currentStudentId = useStudentId()
 
   const { studentId } = useParams()
-  if (currentStudentId === undefined || studentId === undefined || isNaN(parseInt(studentId)))
-    return <Navigate to="/" />
 
-  const id = parseInt(studentId)
+  const id = isNaN(parseInt(studentId ?? "")) ? currentStudentId : parseInt(studentId ?? "")
   const profile = useAppSelector((state) => state.profiles[id])
   const isSelf = id === currentStudentId
 

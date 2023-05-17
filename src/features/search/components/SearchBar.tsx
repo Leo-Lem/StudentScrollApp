@@ -13,14 +13,16 @@ export default function SearchBar(): ReactElement {
   const dispatch = useAppDispatch()
 
   const [searchQuery, setSearchQuery] = useState("")
+  const [profileByIdQuery, setProfileByIdQuery] = useState<number | undefined>(undefined)
+
   useEffect(() => {
     setProfileByIdQuery(isNaN(parseInt(searchQuery)) ? undefined : parseInt(searchQuery))
   }, [searchQuery])
 
-  const [profileByIdQuery, setProfileByIdQuery] = useState<number | undefined>(undefined)
   useEffect(() => {
-    profileByIdQuery !== undefined && dispatch(readProfile(profileByIdQuery))
+    if (profileByIdQuery !== undefined) dispatch(readProfile(profileByIdQuery))
   }, [profileByIdQuery])
+
   const profileById = useAppSelector(({ profiles }) =>
     profileByIdQuery === undefined ? undefined : profiles[profileByIdQuery]
   )
@@ -55,17 +57,13 @@ export default function SearchBar(): ReactElement {
         return (
           <LinkMenuItem
             href={`/profile/${profileByIdQuery}`}
-            dismiss={clear}
+            dismiss={() => setSearchQuery("")}
             key={profileByIdQuery}
           >
             {option.value.name}
           </LinkMenuItem>
         )
     }
-  }
-
-  const clear = () => {
-    setSearchQuery("")
   }
 
   return (

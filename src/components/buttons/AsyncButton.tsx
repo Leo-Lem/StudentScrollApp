@@ -13,9 +13,9 @@ export default function AsyncButton({
   const handleLoading = (): void => {
     setIsLoading(true)
 
-    void action().then((isSuccess) => {
+    void action().then((newIsSuccess) => {
       setIsLoading(false)
-      setIsSuccess(isSuccess)
+      setIsSuccess(newIsSuccess)
       setTimeout(() => {
         setIsSuccess(null)
       }, 1000)

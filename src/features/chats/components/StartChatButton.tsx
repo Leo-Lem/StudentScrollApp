@@ -21,7 +21,6 @@ export default function StartChatButton({ studentId }: Props) {
     navigate(`/chats/${studentId}`)
   }
 
-  // TODO: add icon to button
   return (
     <Button variant="contained" fullWidth onClick={handleStartChat}>
       {chatExists ? "Open Chat" : "Start Chat"}

@@ -44,7 +44,7 @@ export default function ChatPage(): ReactElement {
               <Typography variant="h4" textAlign="center">
                 Click on a chat to open it…
               </Typography>
-            ) // TODO: add better placeholder
+            )
           }
         </Card>
       </Grid>
