@@ -1,7 +1,7 @@
 export interface State {
   [studentId: number]: {
-    follows?: number[]
-    followers?: number[]
+    follows: number[]
+    followers: number[]
   }
 }
 

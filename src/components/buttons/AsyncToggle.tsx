@@ -34,7 +34,7 @@ export default function AsyncToggle({
       {...props}
       selected={selected}
       value={selected}
-      disabled={isLoading}
+      disabled={isLoading || isSuccess !== null}
       color={isSuccess === null ? "primary" : isSuccess ? "success" : "error"}
       onChange={handleLoading}
     >

@@ -39,7 +39,7 @@ export default function extraReducers(builder: ActionReducerMapBuilder<State>) {
       if (
         student.id === undefined ||
         student.followers === undefined ||
-        student.id !== action.payload.id
+        student.id !== action.payload.studentId
       )
         return
       student.followers = student.followers.filter(

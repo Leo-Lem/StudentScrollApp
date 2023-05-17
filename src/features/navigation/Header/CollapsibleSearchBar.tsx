@@ -10,7 +10,6 @@ export default function CollapsibleSearchBar(): ReactElement {
   return (
     <Fragment>
       <Collapse in={isShowingSearch} orientation="horizontal">
-        {/* TODO: make this take up all available width */}
         <Box width="30vw">
           <SearchBar />
         </Box>

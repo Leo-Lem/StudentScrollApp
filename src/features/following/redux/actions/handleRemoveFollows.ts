@@ -6,5 +6,8 @@ export default function handleRemoveFollows(
   state: State,
   action: PayloadAction<{ studentId: number; follows: number[] }>
 ) {
-  state[action.payload.studentId]?.follows?.filter((id) => !action.payload.follows.includes(id))
+  if (state[action.payload.studentId].follows !== undefined)
+    state[action.payload.studentId].follows = state[action.payload.studentId].follows.filter(
+      (id) => !action.payload.follows.includes(id)
+    )
 }
