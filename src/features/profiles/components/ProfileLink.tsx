@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import ProfileBadge from "./ProfileBadge"
 import { readProfile } from "../redux"
 
-export default function ProfileLink({ studentId, disabled }: Props): ReactElement {
+export default function ProfileLink({ studentId, disabled }: Props) {
   const profile = useAppSelector((state) => state.profiles[studentId])
 
   const dispatch = useAppDispatch()

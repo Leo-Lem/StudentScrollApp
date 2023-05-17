@@ -1,6 +1,6 @@
 import { type ReactElement } from "react"
 import { Card, Grid, Typography } from "@mui/material"
-import { useParams } from "react-router"
+import { useParams } from "react-router-dom"
 
 import { useAppSelector } from "../../redux"
 

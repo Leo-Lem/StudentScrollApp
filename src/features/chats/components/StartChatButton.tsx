@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router"
+import { Button } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { readMessages, startChat } from "../redux"
-import { Button } from "@mui/material"
 import { useEffect } from "react"
 
 export default function StartChatButton({ studentId }: Props) {

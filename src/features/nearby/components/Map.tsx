@@ -19,7 +19,7 @@ export default function Map({ center, children }: Props) {
         >
           {children}
         </GoogleMap>
-      </Box >
+      </Box>
     )
   else return <LoadingSpinner />
 }
