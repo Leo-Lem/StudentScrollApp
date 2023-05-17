@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement } from "react"
+import { useEffect, type ReactElement, Fragment } from "react"
 import { Navigate, useParams } from "react-router-dom"
 import { Grid, Stack, Card } from "@mui/material"
 
@@ -10,6 +10,7 @@ import { FollowersList, FollowsList } from "../following"
 import ProfileDetails from "./components/ProfileDetails"
 import { readProfile } from "./redux"
 import { LoadingSpinner } from "../../components"
+import StartChatButton from "../chats/components/StartChatButton"
 
 export default function ProfilePage(): ReactElement {
   const isCompact = useIsCompact()
@@ -62,9 +63,12 @@ export default function ProfilePage(): ReactElement {
     </Card>
   )
 
+  const startChat = <Fragment>{!isSelf && <StartChatButton studentId={id} />}</Fragment>
+
   const compact = (
     <Stack direction="column" spacing={1}>
       {details}
+      {startChat}
       {followsList}
       {followersList}
       {posts}
@@ -81,6 +85,10 @@ export default function ProfilePage(): ReactElement {
         <Grid container spacing={1}>
           <Grid item md={12}>
             {details}
+          </Grid>
+
+          <Grid item md>
+            {startChat}
           </Grid>
 
           <Grid item md={12}>

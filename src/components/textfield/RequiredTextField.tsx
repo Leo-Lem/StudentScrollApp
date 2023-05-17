@@ -23,7 +23,6 @@ export default function RequiredTextField({
       setIsEmpty(undefined)
       setIsInvalid(undefined)
     } else if ($value.get === "invalid") {
-      setValue("")
       setIsEmpty(true)
       setIsInvalid(false)
     }

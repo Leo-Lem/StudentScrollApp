@@ -23,6 +23,8 @@
     "LABEL_SEARCH": "Buscar",
     "LABEL_FOLLOW": "Seguir",
     "LABEL_UNFOLLOW": "Dejar de seguir",
+    "LABEL_CHAT": "Chat",
+    "LABEL_SEND": "Enviar",
     "SEARCH_PROFILES": "Perfiles",
     "SEARCH_OTHERS": "Otros",
     "SEARCH_POSTS": "Posts",

@@ -62,6 +62,22 @@ export default function mockProfiles(server: Server) {
     return JSON.stringify(schema.profiles.findBy({ studentsId: parseInt(url.split("/")[4]) }).attrs)
   })
 
+  server.get("/students/:studentId", async (schema: any, request) => {
+    return schema.profiles.findBy({ id: request.params.studentId })
+  })
+
+  server.get("/students/:studentName", async (schema: any, request) => {
+    return schema.profiles.where({ name: request.params.studentName })
+  })
+
+  server.get("/students", async (schema: any) => {
+    return schema.profiles.all()
+  })
+
+  server.get("/profile/:studentId", async (schema: any, request) => {
+    return schema.profiles.findBy({ id: request.params.studentId })
+  })
+
   server.put("students/:studentId/profile", async (schema: any, { url, requestBody }) => {
     const profile = schema.profiles.findBy({ studentsId: parseInt(url.split("/")[4]) })
     const { newName, newBio, newIcon } = JSON.parse(requestBody)

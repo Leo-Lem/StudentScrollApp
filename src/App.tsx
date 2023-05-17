@@ -1,5 +1,5 @@
 import { type ReactElement, Fragment, useEffect } from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline } from "@mui/material"
 
 import { useAppDispatch, useAppSelector } from "./redux"
@@ -11,6 +11,7 @@ import { DashboardPage } from "./features/posts"
 import { ProfilePage } from "./features/profiles"
 import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
+import { ChatPage } from "./features/chats"
 import { loadStudent } from "./features/student"
 
 export default function App(): ReactElement {
@@ -27,9 +28,11 @@ export default function App(): ReactElement {
       <Header />
       <Routes>
         <Route path="/" element={addPageChip("posts", <DashboardPage />)} />
-        <Route path="/profile/:studentId" element={addPageChip("profile", <ProfilePage />)} />
         <Route path="/settings" element={addPageChip("settings", <SettingsPage />)} />
-        <Route path="/chats" element={addPageChip("chats", <h1>Chats</h1>)} />
+        <Route path="/profile/:studentId?" element={addPageChip("profile", <ProfilePage />)} />
+        <Route path="/chats/:studentId?" element={addPageChip("chats", <ChatPage />)} />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Fragment>
   )

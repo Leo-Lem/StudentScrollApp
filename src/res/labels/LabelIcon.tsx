@@ -17,5 +17,7 @@ export default {
   about: Icon.Info,
   search: Icon.Search,
   follow: Icon.PersonAdd,
-  unfollow: Icon.PersonRemove
+  unfollow: Icon.PersonRemove,
+  chat: Icon.Chat,
+  send: Icon.Send
 } as { [key in LabelType]: ComponentType<any> }
