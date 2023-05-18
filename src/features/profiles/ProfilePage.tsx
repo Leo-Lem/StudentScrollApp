@@ -12,6 +12,7 @@ import EditableProfileDetails from "./components/EditableProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
 import { readProfile } from "./redux"
 import { useStudentId } from "../../redux/hooks"
+import { DisplayPost } from "../profiles/api/displayPosts"
 
 export default function ProfilePage() {
   const isCompact = useIsCompact()
@@ -56,7 +57,7 @@ export default function ProfilePage() {
 
   const posts = (
     <Card elevation={2}>
-      <h1>Posts</h1>
+      <DisplayPost id={id} />
     </Card>
   )
 
