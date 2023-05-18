@@ -1,32 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { RootState, tryGettingAuthorizationHeader } from "../../../../redux"
-import ContentPost from "../../types/ContentPost"
+import { RootState } from "../../../../redux"
+import API from "../../../../lib/API"
+import Result from "../../../../lib/Result"
+
 import { addPosts } from ".."
+import ContentPost from "../../types/ContentPost"
 
 export default createAsyncThunk("posts/readPosts", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as RootState
 
-  const page = state.posts.nextPage
-  const pageSize = state.posts.pageSize
+  const { nextPage, pageSize } = state.posts
 
-  if (page === undefined) throw new Error("No more posts to read")
+  if (nextPage === undefined) return
 
-  const response = await fetch(
-    `/api/v1/posts?page=${page}&size=${pageSize}&sort=timestamp&sortAscending=${JSON.stringify(
-      !state.posts.newestFirst
-    )}`,
-    {
-      headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
-    }
-  )
+  const result: Result<ContentPost[], API.Error> = await API.get(thunkAPI, `posts?page=${nextPage}&size=${pageSize}&sort=timestamp`)
 
-  if (response.ok) {
-    const posts = (await response.json()) as ContentPost[]
-    const totalHeader = response.headers.get("X-Total-Count")
-    if (totalHeader === null) return { posts, nextPage: undefined }
-    const nextPage = parseInt(totalHeader) > (page + 1) * pageSize ? page + 1 : undefined
-
-    thunkAPI.dispatch(addPosts({ posts, nextPage }))
-  } else throw new Error("Failed to read posts: " + response.statusText)
+  // TODO: verify this works reasonably well without the headers
+  if (result.ok) {
+    thunkAPI.dispatch(addPosts({
+      posts: result.value,
+      nextPage: result.value.length < pageSize ? undefined : nextPage + 1
+    }))
+  } else console.log(result.error.message)
 })

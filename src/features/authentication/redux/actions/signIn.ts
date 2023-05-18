@@ -10,7 +10,11 @@ import AuthenticationError from "../../types/AuthenticationError"
 export default createAsyncThunk(
   "authentication/signIn",
   async (credentials: { email: string; password: string }, thunkAPI) => {
-    const result: Result<{ id: number, token: string }, API.Error> = await API.post(thunkAPI, "signin", credentials)
+    const result: Result<{ id: number; token: string }, API.Error> = await API.post(
+      thunkAPI,
+      "signin",
+      credentials
+    )
 
     if (result.ok) {
       thunkAPI.dispatch(setAuthenticated({ studentId: result.value.id, token: result.value.token }))

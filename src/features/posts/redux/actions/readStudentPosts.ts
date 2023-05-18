@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingAuthorizationHeader } from "../../../../redux"
-import ContentPost from "../../types/ContentPost"
+import Result from "../../../../lib/Result"
+import API from "../../../../lib/API"
+
 import { addStudentPosts } from ".."
+import ContentPost from "../../types/ContentPost"
 
 export default createAsyncThunk("posts/readPosts", async (posterId: number, thunkAPI) => {
-  const response = await fetch(`/api/v1/posts?posterIds=${posterId}}`, {
-    headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
-  })
+  const result: Result<ContentPost[], API.Error> = await API.get(thunkAPI, `posts?posterIds=${posterId}`)
 
-  if (response.ok) thunkAPI.dispatch(addStudentPosts({ posterId, posts: await response.json() as ContentPost[] }))
-  else throw new Error("Failed to read posts: " + response.statusText)
+  if (result.ok) thunkAPI.dispatch(addStudentPosts({ posterId, posts: result.value }))
+  else console.error(result.error.message)
 })

@@ -4,7 +4,8 @@ import ContentPost from "../../types/ContentPost"
 import State from "../state"
 
 export default function handleAddStudentPosts(
-  state: State, action: PayloadAction<{ posterId: number, posts: ContentPost[] }>
+  state: State,
+  action: PayloadAction<{ posterId: number; posts: ContentPost[] }>
 ) {
   const id = action.payload.posterId
 

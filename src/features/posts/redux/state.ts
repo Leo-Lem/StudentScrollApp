@@ -10,4 +10,9 @@ export default interface State {
   }
 }
 
-export const initialState: State = { newestFirst: true, pageSize: 10, nextPage: 0, studentPosts: {} }
+export const initialState: State = {
+  newestFirst: true,
+  pageSize: 10,
+  nextPage: 0,
+  studentPosts: {}
+}

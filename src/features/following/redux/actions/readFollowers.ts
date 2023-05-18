@@ -13,9 +13,7 @@ export default createAsyncThunk(
 
     const result: Result<number[], API.Error> = await API.get(thunkAPI, `students/${id}/followers`)
 
-    if (result.ok)
-      thunkAPI.dispatch(addFollowers({ studentId: id, followers: result.value }))
-    else
-      console.error(result.error.message)
+    if (result.ok) thunkAPI.dispatch(addFollowers({ studentId: id, followers: result.value }))
+    else console.error(result.error.message)
   }
 )

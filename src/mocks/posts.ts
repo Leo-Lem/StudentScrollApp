@@ -129,7 +129,7 @@ export default function mockPosts(server: Server) {
     const sortAscending = JSON.parse(queryParams.sortAscending) as boolean
 
     if (queryParams.posterIds !== undefined) {
-    const posterIds = JSON.parse(queryParams.posterIds) as number
+      const posterIds = JSON.parse(queryParams.posterIds) as number
     }
 
     return new Response(
