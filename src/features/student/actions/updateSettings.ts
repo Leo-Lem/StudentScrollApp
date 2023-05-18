@@ -3,22 +3,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../redux"
 import { setSettings } from ".."
 import { Settings } from "../../settings"
+import Result from "../../../lib/Result"
+import API from "../../../lib/API"
 
 export default createAsyncThunk(
   "student/updateSettings",
   async (info: { newTheme?: string; newLocale?: string; newIsLocated?: boolean }, thunkAPI) => {
-    const id = tryGettingStudentId(thunkAPI)
+    const result: Result<Settings, API.Error> = await API.put(thunkAPI, `students/${tryGettingStudentId(thunkAPI)}/settings`, info)
 
-    const response = await fetch(`/api/v1/students/${id}/settings`, {
-      method: "PUT",
-      headers: {
-        Authorization: tryGettingAuthorizationHeader(thunkAPI),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(info)
-    })
-
-    if (response.ok) thunkAPI.dispatch(setSettings((await response.json()) as Settings))
-    else throw new Error("Failed to update settings: " + response.statusText)
+    if (result.ok) thunkAPI.dispatch(setSettings(result.value))
+    else console.error(result.error.message)
   }
 )

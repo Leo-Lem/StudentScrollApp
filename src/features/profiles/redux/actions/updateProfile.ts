@@ -3,23 +3,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
 import Profile from "../../types/Profile"
 import { addProfile } from ".."
+import Result from "../../../../lib/Result"
+import API from "../../../../lib/API"
 
 export default createAsyncThunk(
   "profile/updateProfile",
   async (info: { newName?: string; newBio?: string; newIcon?: string }, thunkAPI) => {
     const studentId = tryGettingStudentId(thunkAPI)
 
-    const response = await fetch(`/api/v1/students/${studentId}/profile`, {
-      method: "PUT",
-      headers: {
-        Authorization: tryGettingAuthorizationHeader(thunkAPI),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(info)
-    })
+    const result: Result<Profile, API.Error> = await API.put(thunkAPI, `students/${studentId}/profile`, info)
 
-    if (response.ok)
-      thunkAPI.dispatch(addProfile({ studentId, profile: (await response.json()) as Profile }))
-    else throw new Error("Failed to update profile: " + response.statusText)
+    if (result.ok) thunkAPI.dispatch(addProfile({ studentId, profile: result.value }))
+    else console.error(result.error.message)
   }
 )
