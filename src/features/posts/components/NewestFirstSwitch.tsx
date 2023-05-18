@@ -1,4 +1,3 @@
-import { ReactElement } from "react"
 import { FormControlLabel, Switch, Typography } from "@mui/material"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
@@ -6,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import { useTranslation } from "react-i18next"
 import { toggleNewestFirst } from "../redux"
 
-export default function NewestFirstSwitch(): ReactElement {
+export default function NewestFirstSwitch() {
   const newestFirst = useAppSelector((state) => state.posts.newestFirst)
 
   const dispatch = useAppDispatch()

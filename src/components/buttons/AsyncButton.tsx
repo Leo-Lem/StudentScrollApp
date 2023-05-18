@@ -1,21 +1,17 @@
-import { type ReactNode, useState, type ReactElement } from "react"
+import { type ReactNode, useState } from "react"
 import { Cancel, CheckCircle } from "@mui/icons-material"
 import { Button, ButtonProps, CircularProgress } from "@mui/material"
 
-export default function AsyncButton({
-  children,
-  action,
-  ...buttonProps
-}: Props & ButtonProps): ReactElement {
+export default function AsyncButton({ children, action, ...buttonProps }: Props & ButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null)
 
   const handleLoading = (): void => {
     setIsLoading(true)
 
-    void action().then((isSuccess) => {
+    void action().then((newIsSuccess) => {
       setIsLoading(false)
-      setIsSuccess(isSuccess)
+      setIsSuccess(newIsSuccess)
       setTimeout(() => {
         setIsSuccess(null)
       }, 1000)

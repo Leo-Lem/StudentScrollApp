@@ -1,10 +1,10 @@
 import { Stack, SvgIconProps } from "@mui/material"
-import { Fragment, ReactElement, createElement } from "react"
+import { Fragment, createElement } from "react"
 import { useTranslation } from "react-i18next"
 
 import { LabelIcon, LabelType } from "../res/labels"
 
-export default function Label({ type, display, ...props }: Props & SvgIconProps): ReactElement {
+export default function Label({ type, display, ...props }: Props & SvgIconProps) {
   const [t] = useTranslation()
 
   const icon = createElement(LabelIcon[type] ?? <></>, props)

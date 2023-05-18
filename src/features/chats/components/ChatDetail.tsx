@@ -1,15 +1,15 @@
-import { type ReactElement, useEffect, useRef } from "react"
 import { Stack } from "@mui/material"
+import { useEffect, useRef } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../redux"
 import { LoadingSpinner } from "../../../components"
+import { useAppDispatch, useAppSelector } from "../../../redux"
 
+import useIsCompact from "../../../lib/useIsCompact"
 import { readMessages } from "../redux"
 import MessageList from "./MessageList"
 import MessageSendMenu from "./MessageSendMenu"
-import useIsCompact from "../../../lib/useIsCompact"
 
-export default function ChatDetail({ studentId }: Props): ReactElement {
+export default function ChatDetail({ studentId }: Props) {
   const isCompact = useIsCompact()
   const dispatch = useAppDispatch()
 

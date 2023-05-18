@@ -1,10 +1,10 @@
 import { Paper, PaperProps } from "@mui/material"
-import { ReactElement, createElement } from "react"
+import { createElement } from "react"
 
 import { LoadingSpinner } from "../../../components"
 import { Icon, IconType } from "../../../res/icons"
 
-export default function ProfileIcon({ icon, ...props }: PaperProps & Props): ReactElement {
+export default function ProfileIcon({ icon, ...props }: PaperProps & Props) {
   return (
     <Paper
       {...props}

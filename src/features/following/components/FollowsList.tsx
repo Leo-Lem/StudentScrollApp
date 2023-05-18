@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from "react"
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import ProfilesList from "../../profiles/components/ProfilesList"
 import { readFollows } from "../redux"
 
-export default function FollowsList({ studentId }: Props): ReactElement {
+export default function FollowsList({ studentId }: Props) {
   const dispatch = useAppDispatch()
   const [t] = useTranslation()
 
@@ -18,7 +18,7 @@ export default function FollowsList({ studentId }: Props): ReactElement {
     if (followIds === undefined) void dispatch(readFollows(studentId))
   }, [studentId])
 
-  return <ProfilesList studentIds={followIds} label={t("FOLLOWS")} />
+  return <ProfilesList studentIds={followIds} label={t("FOLLOWS")} display="scroll" />
 }
 
 interface Props {

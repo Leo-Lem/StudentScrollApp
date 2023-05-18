@@ -1,10 +1,10 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
-import { ReactElement } from "react"
+
 import { Binding } from "../../../lib/useBinding"
 import { useTranslation } from "react-i18next"
 import { Locale, locales } from "../../../res/locale"
 
-export default function LocaleSelect({ $locale }: Props): ReactElement {
+export default function LocaleSelect({ $locale }: Props) {
   const [t] = useTranslation()
 
   return (

@@ -1,15 +1,14 @@
 import { Grid } from "@mui/material"
-import { ReactElement } from "react"
 
 import { Binding } from "../../../lib/useBinding"
 import { Locale } from "../../../res/locale"
 import { Theme } from "../../../res/theme"
 
 import Settings from "../types/Settings"
-import ThemeSelect from "./ThemeSelect"
 import LocaleSelect from "./LocaleSelect"
+import ThemeSelect from "./ThemeSelect"
 
-export default function SettingsMenu({ $settings }: Props): ReactElement {
+export default function SettingsMenu({ $settings }: Props) {
   const $theme: Binding<Theme> = {
     get: $settings.get.theme,
     set: (value) => $settings.set({ ...$settings.get, theme: value })
@@ -18,13 +17,11 @@ export default function SettingsMenu({ $settings }: Props): ReactElement {
     get: $settings.get.locale,
     set: (value) => $settings.set({ ...$settings.get, locale: value })
   }
-  // const $isLocated: Binding<boolean> = { get: $settings.get.isLocated, set: (value) => $settings.set({ ...$settings.get, isLocated: value }) }
 
   return (
     <Grid container direction="column" gap={3}>
       <ThemeSelect $theme={$theme} />
       <LocaleSelect $locale={$locale} />
-      {/* <IsLocatedSwitch $isLocated={$isLocated} /> */}
     </Grid>
   )
 }

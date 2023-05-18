@@ -1,10 +1,8 @@
-import { ReactElement } from "react"
-
 import { Binding } from "../../../lib/useBinding"
 import { RequiredTextField } from "../../../components"
 import { useTranslation } from "react-i18next"
 
-export default function EmailTextField({ $email, validate }: Props): ReactElement {
+export default function EmailTextField({ $email, validate }: Props) {
   const [t] = useTranslation()
 
   return (

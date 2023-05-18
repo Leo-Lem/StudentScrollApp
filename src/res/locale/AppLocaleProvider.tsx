@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 
 import { useAppSelector } from "../../redux"
 
-export default function AppLocaleProvider({ children }: Props): ReactElement {
+export default function AppLocaleProvider({ children }: Props) {
   const [, i18n] = useTranslation()
   const locale = useAppSelector((state) => state.student?.settings?.locale)
 

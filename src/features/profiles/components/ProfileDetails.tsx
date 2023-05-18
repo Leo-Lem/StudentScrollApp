@@ -1,4 +1,3 @@
-import { ReactElement } from "react"
 import { Grid, Typography } from "@mui/material"
 
 import useIsCompact from "../../../lib/useIsCompact"
@@ -8,7 +7,7 @@ import ProfileIcon from "./ProfileIcon"
 import Profile from "../types/Profile"
 import { PrimaryAction } from "../../../components"
 
-export default function ProfileDetails({ followId, profile }: Props): ReactElement {
+export default function ProfileDetails({ followId, profile }: Props) {
   const isCompact = useIsCompact()
 
   return (

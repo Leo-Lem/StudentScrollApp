@@ -1,4 +1,3 @@
-import { type ReactElement } from "react"
 import { Box, Stack } from "@mui/material"
 
 import AuthenticationForm from "./components/AuthenticationForm"
@@ -6,7 +5,7 @@ import { Logo } from "../../components"
 
 import useIsCompact from "../../lib/useIsCompact"
 
-export default function WelcomePage(): ReactElement {
+export default function WelcomePage() {
   const isCompact = useIsCompact()
 
   if (isCompact) return <AuthenticationForm />

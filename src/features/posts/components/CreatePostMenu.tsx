@@ -1,4 +1,3 @@
-import { type ReactElement } from "react"
 import { Stack } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
@@ -9,7 +8,7 @@ import useBinding from "../../../lib/useBinding"
 import TagsSelect from "./TagsSelect"
 import { createPost } from "../redux"
 
-export default function CreatePostMenu({ dismiss }: Props): ReactElement {
+export default function CreatePostMenu({ dismiss }: Props) {
   const [t] = useTranslation()
   const dispatch = useAppDispatch()
 

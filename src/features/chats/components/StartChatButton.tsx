@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router"
+import { Button } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
 
 import { readMessages, startChat } from "../redux"
-import { Button } from "@mui/material"
 import { useEffect } from "react"
 
 export default function StartChatButton({ studentId }: Props) {
@@ -21,7 +21,6 @@ export default function StartChatButton({ studentId }: Props) {
     navigate(`/chats/${studentId}`)
   }
 
-  // TODO: add icon to button
   return (
     <Button variant="contained" fullWidth onClick={handleStartChat}>
       {chatExists ? "Open Chat" : "Start Chat"}

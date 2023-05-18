@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from "@mui/material"
-import { useState, type ReactElement, useEffect, ReactNode } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "../../../redux"
@@ -7,20 +7,22 @@ import { useAppDispatch, useAppSelector } from "../../../redux"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 import { readProfile } from "../../profiles/redux"
 
-export default function SearchBar(): ReactElement {
+export default function SearchBar() {
   const [t] = useTranslation()
 
   const dispatch = useAppDispatch()
 
   const [searchQuery, setSearchQuery] = useState("")
+  const [profileByIdQuery, setProfileByIdQuery] = useState<number | undefined>(undefined)
+
   useEffect(() => {
     setProfileByIdQuery(isNaN(parseInt(searchQuery)) ? undefined : parseInt(searchQuery))
   }, [searchQuery])
 
-  const [profileByIdQuery, setProfileByIdQuery] = useState<number | undefined>(undefined)
   useEffect(() => {
-    profileByIdQuery !== undefined && dispatch(readProfile(profileByIdQuery))
+    if (profileByIdQuery !== undefined) dispatch(readProfile(profileByIdQuery))
   }, [profileByIdQuery])
+
   const profileById = useAppSelector(({ profiles }) =>
     profileByIdQuery === undefined ? undefined : profiles[profileByIdQuery]
   )
@@ -55,17 +57,13 @@ export default function SearchBar(): ReactElement {
         return (
           <LinkMenuItem
             href={`/profile/${profileByIdQuery}`}
-            dismiss={clear}
+            dismiss={() => setSearchQuery("")}
             key={profileByIdQuery}
           >
             {option.value.name}
           </LinkMenuItem>
         )
     }
-  }
-
-  const clear = () => {
-    setSearchQuery("")
   }
 
   return (

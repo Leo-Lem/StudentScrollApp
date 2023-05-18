@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material"
 import { type TextFieldProps } from "@mui/material/TextField"
-import { type ReactElement, useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { Binding } from "../../lib/useBinding"
@@ -10,7 +10,7 @@ export default function RequiredTextField({
   validate,
   invalidMessage,
   ...textFieldProps
-}: Props & TextFieldProps): ReactElement {
+}: Props & TextFieldProps) {
   const [t] = useTranslation()
 
   const [value, setValue] = useState($value.get === "invalid" ? "" : $value.get ?? "")
@@ -40,21 +40,21 @@ export default function RequiredTextField({
       error={(isEmpty ?? false) || (isInvalid ?? false)}
       helperText={helperText()}
       value={value}
-      onChange={({ target: { value } }) => {
-        setValue(value)
+      onChange={({ target: { value: v } }) => {
+        setValue(v)
 
-        if (value === "") {
+        if (v === "") {
           setIsEmpty(true)
           setIsInvalid(false)
           $value.set("invalid")
-        } else if (validate !== undefined && !validate(value)) {
+        } else if (validate !== undefined && !validate(v)) {
           setIsEmpty(false)
           setIsInvalid(true)
           $value.set("invalid")
         } else {
           setIsEmpty(false)
           setIsInvalid(false)
-          $value.set(value)
+          $value.set(v)
         }
       }}
     />

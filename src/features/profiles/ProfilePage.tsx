@@ -1,29 +1,26 @@
-import { useEffect, type ReactElement, Fragment } from "react"
-import { Navigate, useParams } from "react-router-dom"
-import { Grid, Stack, Card } from "@mui/material"
+import { useEffect, Fragment } from "react"
+import { useParams } from "react-router-dom"
+import { Card, Grid, Stack } from "@mui/material"
 
 import useIsCompact from "../../lib/useIsCompact"
-
-import EditableProfileDetails from "./components/EditableProfileDetails"
+import { LoadingSpinner } from "../../components"
 import { useAppDispatch, useAppSelector } from "../../redux"
 import { FollowersList, FollowsList } from "../following"
-import ProfileDetails from "./components/ProfileDetails"
-import { readProfile } from "./redux"
-import { LoadingSpinner } from "../../components"
 import StartChatButton from "../chats/components/StartChatButton"
 
-export default function ProfilePage(): ReactElement {
+import EditableProfileDetails from "./components/EditableProfileDetails"
+import ProfileDetails from "./components/ProfileDetails"
+import { readProfile } from "./redux"
+import { useStudentId } from "../../redux/hooks"
+
+export default function ProfilePage() {
   const isCompact = useIsCompact()
-
   const dispatch = useAppDispatch()
-
-  const currentStudentId = useAppSelector((state) => state.authentication.studentId)
+  const currentStudentId = useStudentId()
 
   const { studentId } = useParams()
-  if (currentStudentId === undefined || studentId === undefined || isNaN(parseInt(studentId)))
-    return <Navigate to="/" />
 
-  const id = parseInt(studentId)
+  const id = isNaN(parseInt(studentId ?? "")) ? currentStudentId : parseInt(studentId ?? "")
   const profile = useAppSelector((state) => state.profiles[id])
   const isSelf = id === currentStudentId
 
