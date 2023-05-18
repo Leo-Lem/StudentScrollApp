@@ -50,6 +50,8 @@
     "LOCALE_SYSTEM": "Sistema",
     "SETTINGS_IS_LOCATED": "Utiliza tu ubicación",
     "FOLLOWERS": "Followers",
-    "FOLLOWS": "Sigo"
+    "FOLLOWS": "Sigo",
+    "NO_ITEMS_PLACEHOLDER": "No hay nada aquí",
+    "NO_POSTS_PLACEHOLDER": "No hay posts aquí"
   }
 }

@@ -14,13 +14,18 @@ export default createAsyncThunk("posts/readPosts", async (_, thunkAPI) => {
 
   if (nextPage === undefined) return
 
-  const result: Result<ContentPost[], API.Error> = await API.get(thunkAPI, `posts?page=${nextPage}&size=${pageSize}&sort=timestamp`)
+  const result: Result<ContentPost[], API.Error> = await API.get(
+    thunkAPI,
+    `posts?page=${nextPage}&size=${pageSize}&sort=timestamp`
+  )
 
   // TODO: verify this works reasonably well without the headers
   if (result.ok) {
-    thunkAPI.dispatch(addPosts({
-      posts: result.value,
-      nextPage: result.value.length < pageSize ? undefined : nextPage + 1
-    }))
+    thunkAPI.dispatch(
+      addPosts({
+        posts: result.value,
+        nextPage: result.value.length < pageSize ? undefined : nextPage + 1
+      })
+    )
   } else console.log(result.error.message)
 })

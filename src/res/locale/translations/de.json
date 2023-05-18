@@ -50,6 +50,8 @@
     "LOCALE_SYSTEM": "System",
     "SETTINGS_IS_LOCATED": "Standortzugriff erlauben",
     "FOLLOWERS": "Follower",
-    "FOLLOWS": "Folge ich"
+    "FOLLOWS": "Folge ich",
+    "NO_ITEMS_PLACEHOLDER": "Nichts zu sehen hier…",
+    "NO_POSTS_PLACEHOLDER": "Noch keine Posts"
   }
 }

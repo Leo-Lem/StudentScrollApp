@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
+import { tryGettingStudentId } from "../../../../redux"
 import { removeFollowers, removeFollows } from ".."
 import API from "../../../../lib/API"
 

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { addProfile } from ".."
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
+import { tryGettingStudentId } from "../../../../redux"
 import Profile from "../../types/Profile"
 import Result from "../../../../lib/Result"
 import API from "../../../../lib/API"

@@ -1,4 +1,4 @@
-import { Response, Server } from "miragejs"
+import { Server } from "miragejs"
 
 export const examplePosts = [
   {
@@ -132,16 +132,10 @@ export default function mockPosts(server: Server) {
       const posterIds = JSON.parse(queryParams.posterIds) as number
     }
 
-    return new Response(
-      200,
-      { "X-Total-Count": JSON.stringify(posts.length) },
-      JSON.stringify(
-        posts
-          .sort((lhs: any, rhs: any) => (sortAscending ? lhs.id - rhs.id : rhs.id - lhs.id))
-          .slice(page * size, (page + 1) * size)
-          .map((model) => ({ ...model.attrs, id: parseInt(model.id) }))
-      )
-    )
+    return posts
+      .sort((lhs: any, rhs: any) => (sortAscending ? lhs.id - rhs.id : rhs.id - lhs.id))
+      .slice(page * size, (page + 1) * size)
+      .map((model) => ({ ...model.attrs, id: parseInt(model.id) }))
   })
 
   server.delete("posts/:id", (schema: any, { params }) => {
