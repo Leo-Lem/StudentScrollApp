@@ -13,8 +13,8 @@ export function DisplayPost({ id }: Props): ReactElement {
 
   const fetchUserPosts = async () => {
     try {
-      const response = await fetch(`https://studentscroll.net/api/v1/posts?posterIds=${id}`);
-      const data = await response.json();
+      const response = await fetch(`api/v1/posts?posterIds=${id}`);
+      const data = await response.json() as ContentPost[];
       setUserPosts(data);
     } catch (error) {
       console.error("Error fetching user posts:", error);
