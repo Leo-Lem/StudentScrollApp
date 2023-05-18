@@ -6,5 +6,6 @@ export default function handleAddLocation(
   state: State,
   action: PayloadAction<{ studentId: number; location: StudentLocation }>
 ) {
-  state[action.payload.studentId] = action.payload.location
+  if (!isNaN(action.payload.studentId))
+    state.locations[action.payload.studentId] = action.payload.location
 }

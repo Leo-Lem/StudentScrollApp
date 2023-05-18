@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { RootState, tryGettingAuthorizationHeader } from "../../../../redux"
 
-import StudentLocation from "../../types/Location"
 import { readProfile } from "../../../profiles/redux"
+import StudentLocation from "../../types/Location"
 
 export default createAsyncThunk(
   "nearby/readNearbyStudents",
@@ -12,10 +12,12 @@ export default createAsyncThunk(
     })
 
     if (response.ok) {
-      ;((await response.json()) as number[]).forEach((studentId) => {
-        if ((thunkAPI.getState() as RootState).profiles[studentId] === undefined)
-          thunkAPI.dispatch(readProfile(studentId))
-      })
+      ;((await response.json()) as number[])
+        .filter((studentId) => !isNaN(studentId))
+        .forEach((studentId) => {
+          if ((thunkAPI.getState() as RootState).profiles[studentId] === undefined)
+            thunkAPI.dispatch(readProfile(studentId))
+        })
     } else console.error("Failed to save location: " + response.status + " " + response.statusText)
   }
 )

@@ -77,7 +77,9 @@ export const exampleProfiles = [
 
 export default function mockProfiles(server: Server) {
   server.get("students/:studentId/profile", async (schema: any, { url }) => {
-    return JSON.stringify(schema.profiles.findBy({ studentsId: parseInt(url.split("/")[4]) }).attrs)
+    return JSON.stringify(
+      schema.profiles.findBy({ studentsId: parseInt(url.split("/")[4]) })?.attrs
+    )
   })
 
   server.get("/students", async (schema: any, { queryParams }) => {

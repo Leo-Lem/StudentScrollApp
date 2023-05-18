@@ -11,31 +11,30 @@ export default function StudentMarker({ studentId, isSelf }: Props) {
   const dispatch = useAppDispatch()
 
   const profile = useAppSelector((state) => state.profiles[studentId])
-  const location = useAppSelector((state) => state.nearby[studentId])
+  const location = useAppSelector((state) => state.nearby.locations[studentId])
 
   useEffect(() => {
-    console.log(profile)
-    dispatch(readProfile(studentId))
+    if (profile === undefined || location === undefined) dispatch(readProfile(studentId))
   }, [studentId])
 
   return (
     <OverlayViewF
       mapPaneName={OVERLAY_LAYER}
-      position={{ lat: location.lat, lng: location.lng }}
+      position={{ lat: location?.lat, lng: location?.lng }}
       getPixelPositionOffset={(width, height) => ({
         x: -(width / 2),
         y: -height
       })}
       zIndex={isSelf ?? false ? 10 : 1}
     >
-      <Stack color="black" direction="column" alignItems="center">
+      <Stack color={isSelf ?? false ? "darkgreen" : "black"} direction="column" alignItems="center">
         {profile !== undefined && (
           <Box width={50}>
             <ProfileBadge profile={profile} isSelf={isSelf} />
           </Box>
         )}
 
-        <EmojiPeople sx={{ fontSize: "4vw" }} />
+        <EmojiPeople sx={{ fontSize: "5vh" }} />
       </Stack>
     </OverlayViewF>
   )

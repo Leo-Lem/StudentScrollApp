@@ -1,5 +1,5 @@
 import { Fragment } from "react"
-import { Card, Divider, Stack } from "@mui/material"
+import { Card, Divider, Stack, Typography } from "@mui/material"
 
 import { useAppSelector } from "../../../redux"
 
@@ -23,5 +23,21 @@ export default function ChatsList() {
     </Stack>
   )
 
-  return <Card elevation={3}>{chatStudentIds === undefined ? <LoadingSpinner /> : list}</Card>
+  const placeholder = (
+    <Typography variant="h4" textAlign="center">
+      No chats yet…
+    </Typography>
+  )
+
+  return (
+    <Card elevation={3}>
+      {chatStudentIds === undefined ? (
+        <LoadingSpinner />
+      ) : chatStudentIds.length === 0 ? (
+        placeholder
+      ) : (
+        list
+      )}
+    </Card>
+  )
 }

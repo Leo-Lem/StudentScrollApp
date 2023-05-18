@@ -1,12 +1,12 @@
-import { useEffect } from "react"
 import { Card, Grid } from "@mui/material"
+import { useEffect } from "react"
 
 import { LoadingSpinner } from "../../components"
+import useIsCompact from "../../lib/useIsCompact"
 import { useAppSelector } from "../../redux"
 import { useAppDispatch, useStudentId } from "../../redux/hooks"
-import useIsCompact from "../../lib/useIsCompact"
 
-import Map from "./components/Map"
+import MapWithPermission from "./components/MapWithPermission"
 import NearbyStudentsList from "./components/NearbyStudentsList"
 import StudentMarker from "./components/StudentMarker"
 import getLocation from "./redux/actions/getLocation"
@@ -15,11 +15,12 @@ import readNearbyStudents from "./redux/actions/readNearbyStudents"
 export default function NearbyPage() {
   const dispatch = useAppDispatch()
   const isCompact = useIsCompact()
-
   const studentId = useStudentId()
-  const location = useAppSelector((state) => state.nearby[studentId])
+
+  const isAllowed = useAppSelector((state) => state.nearby.isAllowed)
+  const location = useAppSelector((state) => state.nearby.locations[studentId])
   const nearbyStudentsIds: number[] = useAppSelector((state) =>
-    Object.keys(state.nearby).map(Number)
+    Object.keys(state.nearby.locations).map((key) => parseInt(key))
   )
 
   useEffect(() => {
@@ -30,12 +31,12 @@ export default function NearbyPage() {
     if (location !== undefined) dispatch(readNearbyStudents(location))
   }, [location])
 
-  if (location === undefined) return <LoadingSpinner />
+  if (isAllowed === undefined || (isAllowed && location === undefined)) return <LoadingSpinner />
   else
     return (
       <Grid container direction={isCompact ? "column" : "row"} spacing={1}>
-        <Grid item xs>
-          <Map center={location}>
+        <Grid item xs position="relative">
+          <MapWithPermission center={location} isAllowed={isAllowed}>
             {nearbyStudentsIds.map((nearbyStudentId) => (
               <StudentMarker
                 key={nearbyStudentId}
@@ -43,7 +44,7 @@ export default function NearbyPage() {
                 isSelf={nearbyStudentId === studentId}
               />
             ))}
-          </Map>
+          </MapWithPermission>
         </Grid>
 
         <Grid item xs={4}>
@@ -52,6 +53,7 @@ export default function NearbyPage() {
               nearbyStudentsIds={nearbyStudentsIds.filter(
                 (nearbyStudentId) => nearbyStudentId !== studentId
               )}
+              locationIsAllowed={isAllowed}
             />
           </Card>
         </Grid>
