@@ -4,7 +4,6 @@ import * as Icon from "@mui/icons-material"
 import { IconType } from "."
 
 export default {
-  default: Icon.Person,
   diversity: Icon.AccessibilityNew,
   graduation: Icon.School,
   pencil: Icon.Create,
@@ -22,5 +21,6 @@ export default {
   paintbrush: Icon.Brush,
   globe: Icon.Public,
   anchor: Icon.Anchor,
-  star: Icon.Star
+  star: Icon.Star,
+  default: Icon.Person
 } as { [key in IconType]: ComponentType<any> }
