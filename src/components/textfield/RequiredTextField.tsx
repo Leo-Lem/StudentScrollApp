@@ -41,7 +41,7 @@ export default function RequiredTextField({
       helperText={helperText()}
       value={value}
       onChange={({ target: { value: v } }) => {
-        setValue(value)
+        setValue(v)
 
         if (v === "") {
           setIsEmpty(true)
