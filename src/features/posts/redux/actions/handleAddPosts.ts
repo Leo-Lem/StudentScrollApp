@@ -9,10 +9,10 @@ export default function handleAddPosts(
 ) {
   if (state.posts === undefined) state.posts = []
 
-  const filteredPost = state.posts.filter(
+  const filteredPosts = state.posts.filter(
     (existingPost) => !action.payload.posts.some((newPost) => newPost.id === existingPost.id)
   )
 
-  state.posts = [...filteredPost, ...action.payload.posts]
+  state.posts = [...filteredPosts, ...action.payload.posts]
   state.nextPage = action.payload.nextPage
 }

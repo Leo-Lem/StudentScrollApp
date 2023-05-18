@@ -1,20 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { addProfile } from ".."
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
+import { tryGettingStudentId } from "../../../../redux"
 import Profile from "../../types/Profile"
+import Result from "../../../../lib/Result"
+import API from "../../../../lib/API"
 
 export default createAsyncThunk(
   "profile/readProfile",
   async (studentId: number | undefined, thunkAPI) => {
     const id = studentId ?? tryGettingStudentId(thunkAPI)
 
-    const response = await fetch(`/api/v1/students/${id}/profile`, {
-      headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
-    })
+    const result: Result<Profile, API.Error> = await API.get(thunkAPI, `students/${id}/profile`)
 
-    if (response.ok)
-      thunkAPI.dispatch(addProfile({ studentId: id, profile: (await response.json()) as Profile }))
-    else throw new Error("Failed to read profile: " + response.statusText)
+    if (result.ok) thunkAPI.dispatch(addProfile({ studentId: id, profile: result.value }))
+    else console.error(result.error.message)
   }
 )

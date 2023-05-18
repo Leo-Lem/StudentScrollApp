@@ -12,6 +12,7 @@ import EditableProfileDetails from "./components/EditableProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
 import { readProfile } from "./redux"
 import { useStudentId } from "../../redux/hooks"
+import StudentPostsList from "../posts/components/list/StudentPostsList"
 
 export default function ProfilePage() {
   const isCompact = useIsCompact()
@@ -54,11 +55,7 @@ export default function ProfilePage() {
     </Card>
   )
 
-  const posts = (
-    <Card elevation={2}>
-      <h1>Posts</h1>
-    </Card>
-  )
+  const posts = <StudentPostsList studentId={id} />
 
   const startChat = <Fragment>{!isSelf && <StartChatButton studentId={id} />}</Fragment>
 

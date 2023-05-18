@@ -1,11 +1,5 @@
 import { Response, Server } from "miragejs"
 
-export const exampleStudents = [
-  { id: "1", name: "Raoul Duke", email: "raoul@duke.legend" },
-  { id: "2", name: "Hunter S. Thompson", email: "hunter@stockton.thompson" },
-  { id: "3", name: "Dr. Gonzo", email: "dr@gonzo.legend" }
-]
-
 export default function mockAuthentication(server: Server) {
   server.post("signin", (schema: any, { requestBody }) => {
     const { email } = JSON.parse(requestBody)

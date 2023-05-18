@@ -1,11 +1,5 @@
 import { Server } from "miragejs"
 
-export const exampleSettings = {
-  theme: "system",
-  locale: "system",
-  isLocated: true
-}
-
 export default function mockSettings(server: Server) {
   server.get("students/:studentId/settings", async (schema: any) => {
     return JSON.stringify(schema.settings.first().attrs)

@@ -50,6 +50,8 @@
     "LOCALE_SYSTEM": "系统",
     "SETTINGS_IS_LOCATED": "使用你的位置",
     "FOLLOWERS": "跟随者",
-    "FOLLOWS": "以下"
+    "FOLLOWS": "以下",
+    "NO_ITEMS_PLACEHOLDER": "没有项目",
+    "NO_POSTS_PLACEHOLDER": "没有帖子"
   }
 }

@@ -1,29 +1,34 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import AuthenticationError from "../../types/AuthenticationError"
-import { setAuthenticated, setFailed } from ".."
 import { loadStudent } from "../../../student"
+import API from "../../../../lib/API"
+import Result from "../../../../lib/Result"
+
+import { setAuthenticated, setFailed } from ".."
+import AuthenticationError from "../../types/AuthenticationError"
 
 export default createAsyncThunk(
   "authentication/signIn",
-  async (info: { email: string; password: string }, thunkAPI) => {
-    const response = await fetch("/api/v1/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info)
-    })
+  async (credentials: { email: string; password: string }, thunkAPI) => {
+    const result: Result<{ id: number; token: string }, API.Error> = await API.post(
+      thunkAPI,
+      "signin",
+      credentials,
+      false
+    )
 
-    if (response.ok) {
-      const json: { id: number; token: string } = await response.json()
-      thunkAPI.dispatch(setAuthenticated({ studentId: json.id, token: json.token }))
+    if (result.ok) {
+      thunkAPI.dispatch(setAuthenticated({ studentId: result.value.id, token: result.value.token }))
       thunkAPI.dispatch(loadStudent())
-    } else
-      switch (response.status) {
+    } else {
+      switch (result.error.code) {
         case 401:
           thunkAPI.dispatch(setFailed(AuthenticationError.invalidCredentials))
           break
         default:
           thunkAPI.dispatch(setFailed(AuthenticationError.unknown))
+          console.error(result.error.message)
       }
+    }
   }
 )

@@ -1,12 +1,12 @@
 import { Box, Grid, Slide, Card, Stack } from "@mui/material"
 
 import CreatePostMenu from "./components/CreatePostMenu"
-import PostsList from "./components/PostsList"
 
 import useIsCompact from "../../lib/useIsCompact"
 import { BindingToggle, PrimaryAction, Label } from "../../components"
 import useBinding from "../../lib/useBinding"
 import { FollowsList, FollowersList } from "../following"
+import ScrollablePostsListWithSwitch from "./components/list/ScrollablePostsListWithSwitch"
 
 export default function DashboardPage() {
   const isCompact = useIsCompact()
@@ -70,7 +70,7 @@ export default function DashboardPage() {
   return (
     <Grid container direction="row" spacing={1}>
       <Grid item xs={12} md={8}>
-        <PostsList />
+        <ScrollablePostsListWithSwitch />
       </Grid>
 
       {isCompact ? compactPostMenu : regular}

@@ -1,16 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingAuthorizationHeader } from "../../../../redux"
+import API from "../../../../lib/API"
+
 import { removePost } from ".."
 
 export default createAsyncThunk("posts/deletePost", async (postId: number, thunkAPI) => {
-  const response = await fetch(`/api/v1/posts/${postId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: tryGettingAuthorizationHeader(thunkAPI),
-      "Content-Type": "application/json"
-    }
-  })
+  const result = await API.del(thunkAPI, `posts/${postId}`)
 
-  if (response.ok) thunkAPI.dispatch(removePost(postId))
+  if (result.ok) thunkAPI.dispatch(removePost(postId))
+  else console.error(result.error.message)
 })

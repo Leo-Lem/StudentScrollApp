@@ -33,3 +33,4 @@ rules:
   "@typescript-eslint/no-explicit-any": off
   "react-hooks/exhaustive-deps": off
   prettier/prettier: warn
+  "@typescript-eslint/no-namespace": off
