@@ -3,16 +3,16 @@ import { PayloadAction } from "@reduxjs/toolkit"
 import ContentPost from "../../types/ContentPost"
 import State from "../state"
 
-export default function handleAddPosts(
-  state: State,
-  action: PayloadAction<{ posts: ContentPost[]; nextPage?: number }>
+export default function handleAddStudentPosts(
+  state: State, action: PayloadAction<{ posterId: number, posts: ContentPost[] }>
 ) {
-  if (state.posts === undefined) state.posts = []
+  const id = action.payload.posterId
 
-  const filteredPosts = state.posts.filter(
+  if (state.studentPosts[id] === undefined) state.studentPosts[id] = []
+
+  const filteredPosts = state.studentPosts[id].filter(
     (existingPost) => !action.payload.posts.some((newPost) => newPost.id === existingPost.id)
   )
 
   state.posts = [...filteredPosts, ...action.payload.posts]
-  state.nextPage = action.payload.nextPage
 }

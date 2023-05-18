@@ -5,6 +5,9 @@ export default interface State {
   newestFirst: boolean
   pageSize: number
   nextPage: number | undefined
+  studentPosts: {
+    [posterId: number]: ContentPost[]
+  }
 }
 
-export const initialState: State = { newestFirst: true, pageSize: 10, nextPage: 0 }
+export const initialState: State = { newestFirst: true, pageSize: 10, nextPage: 0, studentPosts: {} }
