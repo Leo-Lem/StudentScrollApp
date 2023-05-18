@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
+import Result from "../../../../lib/Result"
+import API from "../../../../lib/API"
+
+import { tryGettingStudentId } from "../../../../redux"
 import { addFollowers } from ".."
 
 export default createAsyncThunk(
@@ -8,14 +11,11 @@ export default createAsyncThunk(
   async (studentId: number | undefined, thunkAPI) => {
     const id = studentId ?? tryGettingStudentId(thunkAPI)
 
-    const response = await fetch(`/api/v1/students/${id}/followers`, {
-      headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
-    })
+    const result: Result<number[], API.Error> = await API.get(thunkAPI, `students/${id}/followers`)
 
-    if (response.ok)
-      thunkAPI.dispatch(
-        addFollowers({ studentId: id, followers: (await response.json()) as number[] })
-      )
-    else throw new Error("Failed to read followers: " + response.statusText)
+    if (result.ok)
+      thunkAPI.dispatch(addFollowers({ studentId: id, followers: result.value }))
+    else
+      console.error(result.error.message)
   }
 )

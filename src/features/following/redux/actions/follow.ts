@@ -1,18 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
+import { tryGettingStudentId } from "../../../../redux"
 import { addFollowers, addFollows } from ".."
+import API from "../../../../lib/API"
 
 export default createAsyncThunk("following/follow", async (followId: number, thunkAPI) => {
   const studentId = tryGettingStudentId(thunkAPI)
 
-  const response = await fetch(`/api/v1/students/${followId}/followers/${studentId}`, {
-    method: "POST",
-    headers: { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
-  })
+  // TODO: verify this with the empty body
+  const result = await API.post(thunkAPI, `students/${followId}/followers/${studentId}`, {})
 
-  if (response.ok) {
+  if (result.ok) {
     thunkAPI.dispatch(addFollowers({ studentId: followId, followers: [studentId] }))
     thunkAPI.dispatch(addFollows({ studentId: studentId, follows: [followId] }))
-  } else throw new Error("Failed to follow: " + response.statusText)
+  } else {
+    console.error(result.error.message)
+  }
 })

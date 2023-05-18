@@ -1,28 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import AuthenticationError from "../../types/AuthenticationError"
-import { setAuthenticated, setFailed } from ".."
+
 import { loadStudent } from "../../../student"
+import API from "../../../../lib/API"
+import Result from "../../../../lib/Result"
+
+import { setAuthenticated, setFailed } from ".."
+import AuthenticationError from "../../types/AuthenticationError"
 
 export default createAsyncThunk(
   "authentication/signUp",
   async (info: { name: string; email: string; password: string }, thunkAPI) => {
-    const response = await fetch("/api/v1/students", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info)
-    })
+    const result: Result<{ id: number, token: string }, API.Error> = await API.post(thunkAPI, "students", info)
 
-    if (response.ok) {
-      const json: { id: number; token: string } = await response.json()
-      thunkAPI.dispatch(setAuthenticated({ studentId: json.id, token: json.token }))
+    if (result.ok) {
+      thunkAPI.dispatch(setAuthenticated({ studentId: result.value.id, token: result.value.token }))
       thunkAPI.dispatch(loadStudent())
-    } else
-      switch (response.status) {
-        case 401:
+    } else {
+      switch (result.error.code) {
+        case 409:
           thunkAPI.dispatch(setFailed(AuthenticationError.emailInUse))
           break
         default:
           thunkAPI.dispatch(setFailed(AuthenticationError.unknown))
+          console.error(result.error.message)
       }
+    }
   }
 )
