@@ -10,13 +10,15 @@ import ContentPost from "../../types/ContentPost"
 export default createAsyncThunk("posts/readPosts", async (_, thunkAPI) => {
   const state = thunkAPI.getState() as RootState
 
-  const { nextPage, pageSize } = state.posts
+  const { nextPage, pageSize, newestFirst } = state.posts
 
   if (nextPage === undefined) return
 
   const result: Result<ContentPost[], API.Error> = await API.get(
     thunkAPI,
-    `posts?page=${nextPage}&size=${pageSize}&sort=timestamp`
+    `posts?page=${nextPage}&size=${pageSize}&sort=timestamp&sortAscending=${JSON.stringify(
+      !newestFirst
+    )}`
   )
 
   // TODO: verify this works reasonably well without the headers
@@ -27,5 +29,5 @@ export default createAsyncThunk("posts/readPosts", async (_, thunkAPI) => {
         nextPage: result.value.length < pageSize ? undefined : nextPage + 1
       })
     )
-  } else console.log(result.error.message)
+  } else console.error(result.error.message)
 })

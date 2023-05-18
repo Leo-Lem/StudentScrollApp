@@ -13,7 +13,8 @@ export default createAsyncThunk(
     const result: Result<{ id: number; token: string }, API.Error> = await API.post(
       thunkAPI,
       "students",
-      info
+      info,
+      false
     )
 
     if (result.ok) {

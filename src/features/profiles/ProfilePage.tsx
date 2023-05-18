@@ -55,11 +55,7 @@ export default function ProfilePage() {
     </Card>
   )
 
-  const posts = (
-    <Card elevation={2}>
-      <StudentPostsList studentId={id} />
-    </Card>
-  )
+  const posts = <StudentPostsList studentId={id} />
 
   const startChat = <Fragment>{!isSelf && <StartChatButton studentId={id} />}</Fragment>
 

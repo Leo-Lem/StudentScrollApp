@@ -15,5 +15,5 @@ export default function handleAddStudentPosts(
     (existingPost) => !action.payload.posts.some((newPost) => newPost.id === existingPost.id)
   )
 
-  state.posts = [...filteredPosts, ...action.payload.posts]
+  state.studentPosts[id] = [...filteredPosts, ...action.payload.posts]
 }

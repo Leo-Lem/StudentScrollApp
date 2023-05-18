@@ -1,10 +1,10 @@
 import { Model, belongsTo, createServer } from "miragejs"
-import mockAuthentication, { exampleStudents } from "./auth"
-import mockPosts, { examplePosts } from "./posts"
-import mockProfiles, { exampleProfiles } from "./profiles"
-import mockSettings, { exampleSettings } from "./settings"
-import mockFollowing, { exampleFollows } from "./followers"
-import mockChats, { exampleMessages } from "./chats"
+
+import { mockAuthentication, mockSettings, exampleStudents, exampleSettings } from "./students"
+import { mockProfiles, exampleProfiles } from "./profiles"
+import { examplePosts, mockPosts } from "./posts"
+import { exampleFollowers, mockFollowers } from "./followers"
+import { exampleMessages, mockMessages } from "./chats"
 
 createServer({
   namespace: "api/v1",
@@ -21,16 +21,16 @@ createServer({
     mockPosts(this)
     mockProfiles(this)
     mockSettings(this)
-    mockFollowing(this)
-    mockChats(this)
+    mockFollowers(this)
+    mockMessages(this)
   },
   seeds(server) {
     server.db.loadData({
-      posts: examplePosts,
       students: exampleStudents,
+      posts: examplePosts,
       profiles: exampleProfiles,
       settings: exampleSettings,
-      follows: exampleFollows,
+      follows: exampleFollowers,
       messages: exampleMessages
     })
   }

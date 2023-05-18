@@ -15,13 +15,13 @@ export default function StudentPostsList({ studentId }: Props) {
 
   useEffect(() => {
     if (posts === undefined) dispatch(readStudentPosts(studentId))
-  }, [])
+  }, [studentId])
 
   if (posts === undefined) return <LoadingSpinner />
   else if (posts.length < 1) return <NoItemsPlaceholder message="NO_POSTS_PLACEHOLDER" />
   else
     return (
-      <Stack spacing={1} alignItems="center">
+      <Stack spacing={1} alignItems="center" direction="column-reverse">
         <PostsList posts={posts} />
       </Stack>
     )

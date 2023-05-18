@@ -19,14 +19,14 @@ export default function ScrollablePostsListWithSwitch() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    void dispatch(readPosts())
+    dispatch(readPosts())
   }, [newestFirst])
 
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 2 &&
-        nextPage !== undefined
+        nextPage !== undefined &&
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 2
       ) {
         setIsLoading(true)
         dispatch(readPosts()).then(() => {

@@ -8,7 +8,7 @@ import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 import { readProfile } from "../../profiles/redux"
 
 export default function SearchBar() {
-  const [t] = useTranslation()
+  const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
 
