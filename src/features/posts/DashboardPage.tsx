@@ -51,7 +51,7 @@ export default function DashboardPage() {
   )
 
   const regular = (
-    <Grid item md={4} position="sticky" bottom={10} alignSelf="end">
+    <Grid item md={4} position="sticky" top={100} alignSelf="start">
       <Stack direction="column" spacing={1}>
         <Grid item xs>
           {followsList}

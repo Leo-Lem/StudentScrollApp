@@ -77,7 +77,7 @@ export default function ProfilePage() {
         {posts}
       </Grid>
 
-      <Grid item md={4}>
+      <Grid item md={4} position="sticky" top={100} alignSelf="start">
         <Grid container spacing={1}>
           <Grid item md={12}>
             {details}
