@@ -1,10 +1,10 @@
 import { Button, Link } from "@mui/material"
 import { useEffect } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../redux"
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
 
-import ProfileBadge from "./ProfileBadge"
 import { readProfile } from "../redux"
+import ProfileBadge from "./ProfileBadge"
 
 export default function ProfileLink({ studentId, isSelf, disabled }: Props) {
   const profile = useAppSelector((state) => state.profiles[studentId])

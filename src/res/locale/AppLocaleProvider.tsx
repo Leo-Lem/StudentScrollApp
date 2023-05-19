@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
-import { useAppSelector } from "../../redux"
+import useAppSelector from "../../lib/hooks/useAppSelector"
 
 export default function AppLocaleProvider({ children }: Props) {
   const [, i18n] = useTranslation()

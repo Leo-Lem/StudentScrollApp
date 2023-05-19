@@ -1,6 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit"
+
 import State from "../state"
-import StudentLocation from "../../types/Location"
+import StudentLocation from "../../types/StudentLocation"
 
 export default function handleAddLocation(
   state: State,

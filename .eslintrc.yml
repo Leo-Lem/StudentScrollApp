@@ -34,3 +34,5 @@ rules:
   "react-hooks/exhaustive-deps": off
   prettier/prettier: warn
   "@typescript-eslint/no-namespace": off
+
+ignorePatterns: ["src/mocks/*"]

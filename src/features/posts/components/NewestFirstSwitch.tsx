@@ -1,8 +1,8 @@
 import { FormControlLabel, Switch, Typography } from "@mui/material"
-
-import { useAppDispatch, useAppSelector } from "../../../redux"
-
 import { useTranslation } from "react-i18next"
+
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
+
 import { toggleNewestFirst } from "../redux"
 
 export default function NewestFirstSwitch() {

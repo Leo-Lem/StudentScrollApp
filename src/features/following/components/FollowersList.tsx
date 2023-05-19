@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
-import { useAppDispatch, useAppSelector } from "../../../redux"
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
 
 import ProfilesList from "../../profiles/components/ProfilesList"
 import { readFollowers } from "../redux"

@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { RootState } from "../../../../redux"
-import API from "../../../../lib/API"
-import Result from "../../../../lib/Result"
+import { RootState } from "../../../../store"
+import API, { APIResult } from "../../../../lib/API"
 
 import { addPosts } from ".."
 import ContentPost from "../../types/ContentPost"
@@ -14,7 +13,7 @@ export default createAsyncThunk("posts/readPosts", async (_, thunkAPI) => {
 
   if (nextPage === undefined) return
 
-  const result: Result<ContentPost[], API.Error> = await API.get(
+  const result: APIResult<ContentPost[]> = await API.get(
     thunkAPI,
     `posts?page=${nextPage}&size=${pageSize}&sort=timestamp&sortAscending=${JSON.stringify(
       !newestFirst

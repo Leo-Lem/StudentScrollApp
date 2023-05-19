@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../../redux"
+import { LoadingSpinner } from "../../../../components"
+import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
 
-import LoadingSpinner from "../../../../components/LoadingSpinner"
 import { readPosts } from "../../redux"
 import NewestFirstSwitch from "../NewestFirstSwitch"
 

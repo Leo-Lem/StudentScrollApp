@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material"
 
-import { Binding } from "../../../lib/useBinding"
+import { Binding } from "../../../lib/hooks"
 import { Locale } from "../../../res/locale"
 import { Theme } from "../../../res/theme"
 

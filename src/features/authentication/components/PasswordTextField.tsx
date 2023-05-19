@@ -1,6 +1,6 @@
-import { Binding } from "../../../lib/useBinding"
-import { RequiredTextField } from "../../../components"
 import { useTranslation } from "react-i18next"
+import { RequiredTextField } from "../../../components"
+import { Binding } from "../../../lib/hooks"
 
 export default function PasswordTextField({ $password, isRegistering, onSubmit }: Props) {
   const [t] = useTranslation()

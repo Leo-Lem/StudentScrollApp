@@ -2,9 +2,7 @@ import { Card, Grid } from "@mui/material"
 import { useEffect } from "react"
 
 import { LoadingSpinner } from "../../components"
-import useIsCompact from "../../lib/useIsCompact"
-import { useAppSelector } from "../../redux"
-import { useAppDispatch, useStudentId } from "../../redux/hooks"
+import { useAppDispatch, useAppSelector, useIsCompact, useStudentId } from "../../lib/hooks"
 
 import MapWithPermission from "./components/MapWithPermission"
 import NearbyStudentsList from "./components/NearbyStudentsList"

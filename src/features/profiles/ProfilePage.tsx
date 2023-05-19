@@ -1,33 +1,35 @@
-import { useEffect, Fragment } from "react"
-import { useParams } from "react-router-dom"
 import { Card, Grid, Stack } from "@mui/material"
+import { Fragment, useEffect } from "react"
 
-import useIsCompact from "../../lib/useIsCompact"
 import { LoadingSpinner } from "../../components"
-import { useAppDispatch, useAppSelector } from "../../redux"
-import { FollowersList, FollowsList } from "../following"
-import StartChatButton from "../chats/components/StartChatButton"
+import {
+  useAppDispatch,
+  useAppSelector,
+  useIdParam,
+  useIsCompact,
+  useStudentId
+} from "../../lib/hooks"
 
+import StartChatButton from "../chats/components/StartChatButton"
+import { FollowersList, FollowsList } from "../following"
+import StudentPostsList from "../posts/components/list/StudentPostsList"
 import EditableProfileDetails from "./components/EditableProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
 import { readProfile } from "./redux"
-import { useStudentId } from "../../redux/hooks"
-import StudentPostsList from "../posts/components/list/StudentPostsList"
 
 export default function ProfilePage() {
   const isCompact = useIsCompact()
   const dispatch = useAppDispatch()
+
   const currentStudentId = useStudentId()
+  const studentId = useIdParam("studentId") ?? currentStudentId
+  const isSelf = studentId === currentStudentId
 
-  const { studentId } = useParams()
-
-  const id = isNaN(parseInt(studentId ?? "")) ? currentStudentId : parseInt(studentId ?? "")
-  const profile = useAppSelector((state) => state.profiles[id])
-  const isSelf = id === currentStudentId
+  const profile = useAppSelector((state) => state.profiles[studentId])
 
   useEffect(() => {
-    if (profile === undefined) void dispatch(readProfile(id))
-  }, [id])
+    if (profile === undefined) void dispatch(readProfile(studentId))
+  }, [studentId])
 
   const details = (
     <Card elevation={3}>
@@ -37,7 +39,7 @@ export default function ProfilePage() {
         ) : isSelf ? (
           <EditableProfileDetails profile={profile} />
         ) : (
-          <ProfileDetails followId={id} profile={profile} />
+          <ProfileDetails followId={studentId} profile={profile} />
         )}
       </Stack>
     </Card>
@@ -45,19 +47,19 @@ export default function ProfilePage() {
 
   const followsList = (
     <Card elevation={2}>
-      <FollowsList studentId={id} />
+      <FollowsList studentId={studentId} />
     </Card>
   )
 
   const followersList = (
     <Card elevation={2}>
-      <FollowersList studentId={id} />
+      <FollowersList studentId={studentId} />
     </Card>
   )
 
-  const posts = <StudentPostsList studentId={id} />
+  const posts = <StudentPostsList studentId={studentId} />
 
-  const startChat = <Fragment>{!isSelf && <StartChatButton studentId={id} />}</Fragment>
+  const startChat = <Fragment>{!isSelf && <StartChatButton studentId={studentId} />}</Fragment>
 
   const compact = (
     <Stack direction="column" spacing={1}>

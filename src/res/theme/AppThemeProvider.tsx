@@ -2,7 +2,7 @@ import { ThemeProvider } from "@emotion/react"
 import { useMediaQuery } from "@mui/material"
 import { ReactNode } from "react"
 
-import { useAppSelector } from "../../redux"
+import useAppSelector from "../../lib/hooks/useAppSelector"
 
 import colorful from "./themes/colorful"
 import dark from "./themes/dark"

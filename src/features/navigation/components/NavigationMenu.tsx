@@ -2,10 +2,9 @@ import { Menu as MenuIcon } from "@mui/icons-material"
 import { Divider, IconButton, Menu } from "@mui/material"
 import { Fragment, useState } from "react"
 
-import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
-import SignOutMenuItem from "./SignOutMenuItem"
+import { Label, LinkMenuItem } from "../../../components"
 
-import { Label } from "../../../components"
+import SignOutMenuItem from "./SignOutMenuItem"
 
 export default function NavigationMenu() {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null)

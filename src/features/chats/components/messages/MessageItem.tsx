@@ -1,8 +1,16 @@
+import { useEffect } from "react"
 import { Grid, Typography } from "@mui/material"
-import { ProfileLink } from "../../profiles"
-import Message from "../types/Message"
 
-export default function MessageItem({ message, studentId }: Props) {
+import { LoadingSpinner } from "../../../../components"
+import { useAppDispatch, useAppSelector, useStudentId } from "../../../../lib/hooks"
+
+import { ProfileLink } from "../../../profiles"
+import Message from "../../types/Message"
+import readMessage from "../../redux/actions/readMessage"
+
+export function RenderMessageItem({ message }: { message: Message }) {
+  const studentId = useStudentId()
+
   return (
     <Grid
       item
@@ -41,7 +49,20 @@ export default function MessageItem({ message, studentId }: Props) {
   )
 }
 
+export default function MessageItem({ chatId, messageId }: Props) {
+  const dispatch = useAppDispatch()
+
+  const message = useAppSelector((state) => state.chats.messages[messageId])
+
+  useEffect(() => {
+    if (message === undefined) dispatch(readMessage({ chatId, messageId }))
+  }, [chatId, messageId])
+
+  if (message === undefined) return <LoadingSpinner />
+  else return <RenderMessageItem message={message} />
+}
+
 interface Props {
-  message: Message
-  studentId: number
+  chatId: number
+  messageId: number
 }

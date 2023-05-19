@@ -1,10 +1,11 @@
-import { useEffect } from "react"
 import { Button, Stack, Typography } from "@mui/material"
+import { useEffect } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../redux"
-import { readProfile } from "../../profiles/redux"
-import ProfileIcon from "../../profiles/components/ProfileIcon"
-import { Label } from "../../../components"
+import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
+
+import { Label } from "../../../../components"
+import ProfileIcon from "../../../profiles/components/ProfileIcon"
+import { readProfile } from "../../../profiles/redux"
 
 export default function ChatLink({ studentId }: Props) {
   const dispatch = useAppDispatch()

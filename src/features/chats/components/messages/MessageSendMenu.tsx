@@ -1,12 +1,11 @@
 import { Grid } from "@mui/material"
 
-import { AsyncButton, Label, RequiredTextField } from "../../../components"
-import useBinding from "../../../lib/useBinding"
-import { useAppDispatch } from "../../../redux"
+import { AsyncButton, Label, RequiredTextField } from "../../../../components"
+import { useAppDispatch, useBinding } from "../../../../lib/hooks"
 
-import { sendMessage } from "../redux"
+import { sendMessage } from "../../redux"
 
-export default function MessageSendMenu({ receiverId }: Props) {
+export default function MessageSendMenu({ chatId }: Props) {
   const dispatch = useAppDispatch()
 
   const $newMessage = useBinding<string | undefined>("")
@@ -18,7 +17,7 @@ export default function MessageSendMenu({ receiverId }: Props) {
       $newMessage.set("invalid")
       return false
     } else {
-      await dispatch(sendMessage({ studentId: receiverId, content: $newMessage.get }))
+      await dispatch(sendMessage({ chatId, content: $newMessage.get }))
       $newMessage.set(undefined)
       return true
     }
@@ -50,5 +49,5 @@ export default function MessageSendMenu({ receiverId }: Props) {
 }
 
 interface Props {
-  receiverId: number
+  chatId: number
 }

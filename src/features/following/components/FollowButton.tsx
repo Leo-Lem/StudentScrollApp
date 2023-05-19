@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 
 import { AsyncToggle, Label } from "../../../components"
-import { useAppDispatch, useAppSelector } from "../../../redux"
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
 
 import { follow, readFollows, unfollow } from "../redux"
 

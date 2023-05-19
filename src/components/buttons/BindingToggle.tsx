@@ -1,6 +1,6 @@
 import { ToggleButton, ToggleButtonProps } from "@mui/material"
 
-import { Binding } from "../../lib/useBinding"
+import { Binding } from "../../lib/hooks/useBinding"
 
 export default function BindingToggle({
   $isSelected,

@@ -1,8 +1,8 @@
-import { Grid, Typography, Card, Divider, Stack } from "@mui/material"
+import { Card, Divider, Grid, Stack, Typography } from "@mui/material"
 
-import useIsCompact from "../../../lib/useIsCompact"
+import { useIsCompact } from "../../../lib/hooks"
+
 import ProfileLink from "../../profiles/components/ProfileLink"
-
 import type ContentPost from "../types/ContentPost"
 import DeletePostButton from "./DeletePostButton"
 import TagsList from "./TagsList"

@@ -1,11 +1,10 @@
-import { Box, Grid, Slide, Card, Stack } from "@mui/material"
+import { Box, Card, Grid, Slide, Stack } from "@mui/material"
 
+import { BindingToggle, Label, PrimaryAction } from "../../components"
+import { useBinding, useIsCompact } from "../../lib/hooks"
+
+import { FollowersList, FollowsList } from "../following"
 import CreatePostMenu from "./components/CreatePostMenu"
-
-import useIsCompact from "../../lib/useIsCompact"
-import { BindingToggle, PrimaryAction, Label } from "../../components"
-import useBinding from "../../lib/useBinding"
-import { FollowsList, FollowersList } from "../following"
 import ScrollablePostsListWithSwitch from "./components/list/ScrollablePostsListWithSwitch"
 
 export default function DashboardPage() {

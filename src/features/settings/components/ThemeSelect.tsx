@@ -11,7 +11,7 @@ import {
 import { createElement } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Binding } from "../../../lib/useBinding"
+import { Binding } from "../../../lib/hooks"
 import { Theme, ThemeIcon, themes } from "../../../res/theme"
 
 export default function ThemeSelect({ $theme }: Props) {

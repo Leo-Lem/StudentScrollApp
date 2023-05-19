@@ -1,8 +1,8 @@
 import { AppBar, Box, Button, Stack, Typography } from "@mui/material"
-
-import { Logo } from "../../components"
-import useIsCompact from "../../lib/useIsCompact"
 import { useTranslation } from "react-i18next"
+
+import { useIsCompact } from "../../lib/hooks"
+import { Logo } from "../../components"
 
 export default function WelcomeHeader() {
   const isCompact = useIsCompact()

@@ -1,4 +1,4 @@
-import StudentLocation from "../types/Location"
+import StudentLocation from "../types/StudentLocation"
 
 export default interface State {
   isAllowed?: boolean

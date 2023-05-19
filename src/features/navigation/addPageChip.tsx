@@ -1,7 +1,7 @@
 import { Box, Chip } from "@mui/material"
 import { ReactNode } from "react"
 
-import Label from "../../components/Label"
+import { Label } from "../../components"
 import { LabelType } from "../../res/labels"
 
 export default function addPageChip(type: LabelType, page: ReactNode) {

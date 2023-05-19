@@ -1,12 +1,13 @@
 import { AppBar, Box, Button, Divider, Stack, Toolbar } from "@mui/material"
 
 import { Logo } from "../../components"
+
 import SearchBar from "../search/components/SearchBar"
 import AccountMenu from "./components/AccountMenu"
 import HeaderNavigationButtons from "./components/NavigationButtons"
 import NavigationMenu from "./components/NavigationMenu"
 import CollapsibleSearchBar from "./components/CollapsibleSearchBar"
-import useIsCompact from "../../lib/useIsCompact"
+import useIsCompact from "../../lib/hooks/useIsCompact"
 
 export default function Header() {
   const isCompact = useIsCompact()

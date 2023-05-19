@@ -1,8 +1,8 @@
 import { Card } from "@mui/material"
 import { useEffect } from "react"
 
+import { useAppDispatch, useAppSelector } from "../../lib/hooks"
 import { LoadingSpinner } from "../../components"
-import { useAppDispatch, useAppSelector } from "../../redux"
 
 import { readSettings, updateSettings } from "../student"
 import SettingsMenu from "./components/SettingsMenu"

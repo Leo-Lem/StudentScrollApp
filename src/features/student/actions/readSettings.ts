@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingStudentId } from "../../../redux"
+import { tryGettingStudentId } from "../../../lib/redux"
+import API, { APIResult } from "../../../lib/API"
+
 import { setSettings } from ".."
 import { Settings } from "../../settings"
-import Result from "../../../lib/Result"
-import API from "../../../lib/API"
 
 export default createAsyncThunk("student/readSettings", async (_, thunkAPI) => {
-  const result: Result<Settings, API.Error> = await API.get(
+  const result: APIResult<Settings> = await API.get(
     thunkAPI,
     `students/${tryGettingStudentId(thunkAPI)}/settings`
   )

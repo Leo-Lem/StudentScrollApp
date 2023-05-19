@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material"
 
-import { Binding } from "../../../lib/useBinding"
 import { BindingTextField } from "../../../components"
+import { Binding } from "../../../lib/hooks"
 import { IconType } from "../../../res/icons"
 
 import Profile from "../types/Profile"

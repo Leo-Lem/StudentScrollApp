@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material"
 import { Fragment, ReactNode } from "react"
+
 import Map from "./Map"
-import StudentLocation from "../types/Location"
+
+import StudentLocation from "../types/StudentLocation"
 
 export default function MapWithPermission({ center, isAllowed, children: markers }: Props) {
   return (

@@ -1,14 +1,16 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import Result from "../../../../lib/Result";
-import API from "../../../../lib/API";
-import { tryGettingStudentId } from "../../../../redux";
+import { tryGettingStudentId } from "../../../../lib/redux"
+import API, { APIResult } from "../../../../lib/API"
 
-import Chat from "../../types/Chat";
-import { addChats } from "..";
+import { addChats } from ".."
+import Chat from "../../types/Chat"
 
 export default createAsyncThunk("chats/readStudentChats", async (_, thunkAPI) => {
-  const result: Result<Chat[], API.Error> = await API.get(thunkAPI, `chats?participantId=${tryGettingStudentId(thunkAPI)}`)
+  const result: APIResult<Chat[]> = await API.get(
+    thunkAPI,
+    `chats?participantId=${tryGettingStudentId(thunkAPI)}`
+  )
 
   if (result.ok) thunkAPI.dispatch(addChats(result.value))
   else console.error(result.error)

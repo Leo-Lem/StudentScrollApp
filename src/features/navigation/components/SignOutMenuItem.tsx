@@ -1,7 +1,7 @@
 import { MenuItem } from "@mui/material"
 
-import { useAppDispatch } from "../../../redux"
 import { Label } from "../../../components"
+import { useAppDispatch } from "../../../lib/hooks"
 
 import { signOut } from "../../authentication/redux"
 

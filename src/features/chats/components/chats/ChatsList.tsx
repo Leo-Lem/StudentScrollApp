@@ -1,10 +1,10 @@
-import { Fragment } from "react"
 import { Card, Divider, Stack, Typography } from "@mui/material"
+import { Fragment } from "react"
 
-import { useAppSelector } from "../../../redux"
+import { useAppSelector } from "../../../../lib/hooks"
+import { LoadingSpinner } from "../../../../components"
 
 import ChatLink from "./ChatLink"
-import { LoadingSpinner } from "../../../components"
 
 export default function ChatsList() {
   const chatStudentIds = useAppSelector((state) =>

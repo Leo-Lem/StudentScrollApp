@@ -1,12 +1,11 @@
 import { Stack } from "@mui/material"
-
-import { LoadingSpinner } from "../../../../components"
-import NoItemsPlaceholder from "../../../../components/NoItemsPlaceholder"
-import { useAppDispatch, useAppSelector } from "../../../../redux"
-
-import PostsList from "./PostsList"
 import { useEffect } from "react"
+
+import { LoadingSpinner, NoItemsPlaceholder } from "../../../../components"
+import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
+
 import readStudentPosts from "../../redux/actions/readStudentPosts"
+import PostsList from "./PostsList"
 
 export default function StudentPostsList({ studentId }: Props) {
   const dispatch = useAppDispatch()

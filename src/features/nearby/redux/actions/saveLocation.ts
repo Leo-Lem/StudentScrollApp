@@ -1,24 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { tryGettingAuthorizationHeader, tryGettingStudentId } from "../../../../redux"
-import StudentLocation from "../../types/Location"
+
+import { tryGettingStudentId } from "../../../../lib/redux"
+import API from "../../../../lib/API"
+
+import StudentLocation from "../../types/StudentLocation"
 
 export default createAsyncThunk(
   "nearby/saveLocation",
   async (location: StudentLocation, thunkAPI) => {
-    const studentId = tryGettingStudentId(thunkAPI)
-
-    const response = await fetch(`/api/v1/student/${studentId}/profile}`, {
-      method: "PUT",
-      headers: {
-        Authorization: tryGettingAuthorizationHeader(thunkAPI),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        newLocation: location
-      })
+    const result = await API.put(thunkAPI, `student/${tryGettingStudentId(thunkAPI)}/profile`, {
+      newLocation: location
     })
 
-    if (!response.ok)
-      console.log("Failed to save location: " + response.status + " " + response.statusText)
+    if (!result.ok) console.error(result.error)
   }
 )
