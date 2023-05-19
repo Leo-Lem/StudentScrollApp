@@ -21,7 +21,7 @@ export default function StudentMarker({ studentId, isSelf }: Props) {
   return (
     <OverlayViewF
       mapPaneName={OVERLAY_LAYER}
-      position={{ lat: location?.lat, lng: location?.lng }}
+      position={{ lat: location?.latitude, lng: location?.longitude }}
       getPixelPositionOffset={(width, height) => ({
         x: -(width / 2),
         y: -height

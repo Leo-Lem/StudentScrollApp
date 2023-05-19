@@ -15,8 +15,8 @@ export default createAsyncThunk("nearby/getLocation", async (_, thunkAPI) => {
   geolocation.watchPosition(
     (position) => {
       const location: StudentLocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
       }
 
       thunkAPI.dispatch(setAllowed(true))

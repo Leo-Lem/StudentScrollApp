@@ -8,7 +8,7 @@ import StudentLocation from "../types/StudentLocation"
 export default function MapWithPermission({ center, isAllowed, children: markers }: Props) {
   return (
     <Fragment>
-      <Map center={center ?? { lat: -36.87, lng: 174.78 }}>{isAllowed && markers}</Map>
+      <Map center={center ?? { latitude: -36.87, longitude: 174.78 }}>{isAllowed && markers}</Map>
 
       {!isAllowed && (
         <Box

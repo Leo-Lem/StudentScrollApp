@@ -15,7 +15,7 @@ export default function Map({ center, zoom, children }: Props) {
         <GoogleMap
           mapContainerClassName="map-container"
           mapContainerStyle={{ width: "100%", height: "100%" }}
-          center={{ lat: center.lat, lng: center.lng }}
+          center={{ lat: center.latitude, lng: center.longitude }}
           zoom={zoom ?? 14}
         >
           {children}
