@@ -11,8 +11,6 @@ export default function MessageSendMenu({ chatId }: Props) {
   const $newMessage = useBinding<string | undefined>(undefined)
 
   const handleSendMessage = async (): Promise<boolean> => {
-    console.log($newMessage.get)
-
     if ($newMessage.get === "invalid") {
       return false
     } else if ($newMessage.get === undefined) {

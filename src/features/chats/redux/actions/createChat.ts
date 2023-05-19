@@ -17,6 +17,6 @@ export default createAsyncThunk(
     if (result.ok) {
       thunkAPI.dispatch(addChats([result.value]))
       return result.value.id
-    } else console.log(result.error)
+    } else console.error(result.error)
   }
 )
