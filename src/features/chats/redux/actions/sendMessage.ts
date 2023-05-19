@@ -14,7 +14,8 @@ export default createAsyncThunk(
       senderId: tryGettingStudentId(thunkAPI)
     })
 
-    if (result.ok) thunkAPI.dispatch(addMessages([result.value]))
-    else console.log(result.error)
+    if (result.ok) {
+      thunkAPI.dispatch(addMessages({ chatId: request.chatId, messages: [result.value] }))
+    } else console.log(result.error)
   }
 )

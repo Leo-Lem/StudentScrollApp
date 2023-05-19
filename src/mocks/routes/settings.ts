@@ -1,6 +1,6 @@
 import { Server } from "miragejs"
 
-export default function mockSettings(server: Server) {
+export default function mock(server: Server) {
   server.get("students/:studentId/settings", async (schema: any) => {
     return JSON.stringify(schema.settings.first().attrs)
   })

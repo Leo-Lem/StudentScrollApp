@@ -8,7 +8,7 @@ import { ProfileLink } from "../../../profiles"
 import Message from "../../types/Message"
 import readMessage from "../../redux/actions/readMessage"
 
-export function RenderMessageItem({ message }: { message: Message }) {
+export default function MessageItem({ message }: { message: Message }) {
   const studentId = useStudentId()
 
   return (
@@ -47,22 +47,4 @@ export function RenderMessageItem({ message }: { message: Message }) {
       </Grid>
     </Grid>
   )
-}
-
-export default function MessageItem({ chatId, messageId }: Props) {
-  const dispatch = useAppDispatch()
-
-  const message = useAppSelector((state) => state.chats.messages[messageId])
-
-  useEffect(() => {
-    if (message === undefined) dispatch(readMessage({ chatId, messageId }))
-  }, [chatId, messageId])
-
-  if (message === undefined) return <LoadingSpinner />
-  else return <RenderMessageItem message={message} />
-}
-
-interface Props {
-  chatId: number
-  messageId: number
 }

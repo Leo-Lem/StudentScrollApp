@@ -1,8 +1,11 @@
 import { Response, Server } from "miragejs"
 
-import Follower from "./follower"
+interface Follower {
+  studentId: number
+  followerId: number
+}
 
-export default function mockFollowers(server: Server) {
+export default function mock(server: Server) {
   server.get("students/:studentId/followers", (schema, request) => {
     const studentId = request.params.studentId
     return schema.db.follows.where({ studentId }).map((f: Follower) => f.followerId)

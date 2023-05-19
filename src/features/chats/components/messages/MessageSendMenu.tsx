@@ -31,6 +31,9 @@ export default function MessageSendMenu({ chatId }: Props) {
           label="Type your message here"
           variant="outlined"
           fullWidth
+          onKeyDown={({ key }) => {
+            if (key === "Enter") handleSendMessage()
+          }}
         />
       </Grid>
 

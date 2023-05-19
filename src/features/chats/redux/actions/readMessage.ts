@@ -8,12 +8,12 @@ import { addMessages } from ".."
 export default createAsyncThunk(
   "chats/readMessage",
   async (params: { chatId: number; messageId: number }, thunkAPI) => {
-    const result: APIResult<Message[]> = await API.get(
+    const result: APIResult<Message> = await API.get(
       thunkAPI,
       `chats/${params.chatId}/messages/${params.messageId}`
     )
 
-    if (result.ok) thunkAPI.dispatch(addMessages(result.value))
+    if (result.ok) thunkAPI.dispatch(addMessages({ chatId: params.chatId, messages: [result.value] }))
     else console.error(result.error)
   }
 )

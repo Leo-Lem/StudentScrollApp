@@ -1,15 +1,30 @@
 import { Server } from "miragejs"
 
-export default function mockChats(server: Server) {
-  server.get("chats", (schema: any, { queryParams }) => {
-    return schema.messages.all().models
+export default function mock(server: Server) {
+  server.get("chats/:chatId", (schema: any, { params: { chatId } }) =>
+    respond(schema.chats.findBy({ id: chatId })))
+
+  server.get("chats", (schema: any, { queryParams: { participantId } }) => {
+    if (participantId)
+      return schema.chats
+        .where((chat: any) => chat.participantIds.includes(participantId))
+        .models.map(respond)
   })
 
-  server.post("chats", (schema: any, { requestBody }) => {
-    const participantIds: number[] = JSON.parse(requestBody)
+  server.post("chats", (schema: any, { requestBody }) =>
+    respond(schema.chats.create({ participantIds: JSON.parse(requestBody).map(String), messageIds: [] })))
+}
 
-    return schema.chats.create({
-      participants: participantIds.map((id) => schema.students.find(id))
-    })
-  })
+interface Response {
+  id: number
+  participantIds: number[]
+  messageIds: number[]
+}
+
+function respond({ id, participantIds, messageIds }: any): Response {
+  return {
+    id: parseInt(id),
+    participantIds: participantIds.map(Number),
+    messageIds: messageIds.map(Number)
+  }
 }

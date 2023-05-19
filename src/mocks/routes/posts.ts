@@ -1,32 +1,20 @@
 import { Server } from "miragejs"
 
-export default function mockPosts(server: Server) {
-  server.post("posts", (schema: any, { requestBody }) => {
-    const post = schema.posts.create(JSON.parse(requestBody))
-    return { ...post.attrs, id: parseInt(post.id) }
-  })
+export default function mock(server: Server) {
+  server.post("posts", (schema: any, { requestBody }) =>
+    respond(schema.posts.create(JSON.parse(requestBody))))
 
-  server.get("posts", (schema: any, { queryParams }) => {
-    const {
-      page: pageParam,
-      size: sizeParam,
-      sortAscending: sortAscendingParam,
-      posterIds: posterIdsParam
-    } = queryParams
+  server.get("posts", (schema: any, { queryParams: { posterIds: po, page: pa, size: si, sortAscending: so } }) => {
+    const posterIds = po !== undefined ? po.split(",") : undefined
 
-    const page = pageParam !== undefined ? parseInt(pageParam) : undefined
-    const size = sizeParam !== undefined ? parseInt(sizeParam) : undefined
-    const sortAscending =
-      sortAscendingParam !== undefined ? sortAscendingParam === "true" : undefined
-    const posterIds =
-      posterIdsParam !== undefined
-        ? posterIdsParam.split(",").map((id: string) => parseInt(id))
-        : undefined
+    const page = pa !== undefined ? parseInt(pa) : undefined
+    const size = si !== undefined ? parseInt(si) : undefined
+    const sortAscending = so !== undefined ? so === "true" : undefined
 
     let posts
 
     if (posterIds !== undefined)
-      posts = schema.posts.where((post: any) => posterIds.includes(parseInt(post.posterId))).models
+      posts = schema.posts.where((post: any) => posterIds.includes(post.posterId)).models
     else if (page !== undefined && size !== undefined && sortAscending !== undefined)
       posts = schema.posts
         .all()
@@ -34,14 +22,28 @@ export default function mockPosts(server: Server) {
         .slice(page * size, (page + 1) * size)
     else posts = schema.posts.all().models
 
-    return posts.map((model: any) => ({
-      ...model.attrs,
-      id: parseInt(model.id),
-      posterId: parseInt(model.posterId)
-    }))
+    return posts.map(respond)
   })
 
-  server.delete("posts/:id", (schema: any, { params }) => {
-    return schema.posts.find(params.id).destroy()
+  server.delete("posts/:postId", (schema: any, { params: { postId } }) => {
+    return schema.posts.find(postId).destroy()
   })
+}
+
+interface Response {
+  id: number
+  title: string
+  tags: string[]
+  content: string
+  posterId: number
+}
+
+function respond(post: any): Response {
+  return {
+    id: parseInt(post.id),
+    title: post.title,
+    tags: post.tags,
+    content: post.content,
+    posterId: parseInt(post.posterId)
+  }
 }

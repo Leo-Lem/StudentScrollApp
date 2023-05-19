@@ -17,9 +17,10 @@ export default function ChatDetail({ chatId }: Props) {
     if (isCompact) scrollRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [scrollRef])
 
-  const chat = useAppSelector((state) => state.chats.chats[chatId])
+  const chat = useAppSelector((state) => state.chats.chats?.find((c) => c.id === chatId))
   useEffect(() => {
-    dispatch(readChat(chatId))
+    if (chat === undefined)
+      dispatch(readChat(chatId))
   }, [chatId])
 
   if (chat === undefined) return <LoadingSpinner />

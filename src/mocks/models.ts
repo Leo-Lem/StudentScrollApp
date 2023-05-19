@@ -1,4 +1,4 @@
-import { Model, belongsTo } from "miragejs";
+import { Model, belongsTo } from "miragejs"
 
 const models = {
   student: Model,

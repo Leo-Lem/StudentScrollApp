@@ -16,14 +16,14 @@ export default function ChatsPage() {
       </Card>
     ) : (
       <Grid item xs={4}>
-        <ChatsList />
+        <ChatsList openChatId={chatId} />
       </Grid>
     )
 
   const regular = (
     <Grid container spacing={1}>
       <Grid item xs={5}>
-        <ChatsList />
+        <ChatsList openChatId={chatId} />
       </Grid>
 
       <Grid item xs>

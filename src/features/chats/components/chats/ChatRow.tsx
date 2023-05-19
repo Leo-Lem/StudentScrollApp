@@ -8,7 +8,7 @@ import ProfileIcon from "../../../profiles/components/ProfileIcon"
 import { readProfile } from "../../../profiles/redux"
 import Chat from "../../types/Chat"
 
-export default function ChatLink({ chat }: Props) {
+export default function ChatRow({ chat, isOpen }: Props) {
   const dispatch = useAppDispatch()
   const studentId = useStudentId()
 
@@ -25,14 +25,19 @@ export default function ChatLink({ chat }: Props) {
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between" paddingY={1}>
       <Button color="inherit" href={`/profile/${participantId}`}>
-        <ProfileIcon icon={profile.icon} sx={{ maxHeight: 50 }} />
+        <ProfileIcon icon={profile?.icon} sx={{ maxHeight: 50 }} />
 
         <Typography variant="h6" textTransform="capitalize" width="100%" paddingX={1}>
-          {profile.name}
+          {profile?.name}
         </Typography>
       </Button>
 
-      <Button color="inherit" href={`/chats/${chat.id}`}>
+      <Button
+        href={isOpen ? "/chats" : `/chats/${chat.id}`}
+        variant={isOpen ? "contained" : "text"}
+        color={isOpen ? "success" : "inherit"}
+        sx={{ borderRadius: 100 }}
+      >
         <Label type="chat" display="iconOnly" />
       </Button>
     </Stack>
@@ -41,4 +46,5 @@ export default function ChatLink({ chat }: Props) {
 
 interface Props {
   chat: Chat
+  isOpen: boolean
 }

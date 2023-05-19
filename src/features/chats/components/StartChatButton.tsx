@@ -11,16 +11,19 @@ export default function StartChatButton({ studentId }: Props) {
   const dispatch = useAppDispatch()
 
   const chatId = useAppSelector(
-    (state) => state.chats?.chats?.find((chat) => chat.participantIds.includes(studentId))?.id
+    (state) => state.chats.chats?.find((chat) => chat.participantIds.includes(studentId))?.id
   )
   useEffect(() => {
     if (chatId === undefined) dispatch(readAllChats())
   })
 
   const openChat = async (): Promise<boolean> => {
-    while (chatId === undefined) await dispatch(createChat(studentId))
+    let id = chatId
 
-    navigate(`/chats/${chatId}`)
+    while (id === undefined)
+      id = (await dispatch(createChat(studentId))).payload as number | undefined
+
+    navigate(`/chats/${id}`)
     return true
   }
 

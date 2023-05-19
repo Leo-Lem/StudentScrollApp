@@ -38,26 +38,13 @@ namespace API {
           }
         }
     } catch (error: any) {
-      if (
-        error.message.contains("The string did not match the expected pattern") &&
-        process.env.NODE_ENV === "development"
-      )
-        return {
-          ok: false,
-          error: {
-            code: 666,
-            message:
-              "MirageJS is not running. Please navigate to another page and back to start it up."
-          }
+      return {
+        ok: false,
+        error: {
+          code: 666,
+          message: `Failed to ${method} '${fullUrl}': (Error) ${error}`
         }
-      else
-        return {
-          ok: false,
-          error: {
-            code: 666,
-            message: `Failed to ${method} '${fullUrl}': (Error) ${error}`
-          }
-        }
+      }
     }
   }
 
