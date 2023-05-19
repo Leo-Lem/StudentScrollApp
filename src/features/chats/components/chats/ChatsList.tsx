@@ -1,43 +1,38 @@
 import { Card, Divider, Stack, Typography } from "@mui/material"
-import { Fragment } from "react"
+import { Fragment, useEffect } from "react"
 
-import { useAppSelector } from "../../../../lib/hooks"
-import { LoadingSpinner } from "../../../../components"
+import { useAppDispatch, useAppSelector, useStudentId } from "../../../../lib/hooks"
+import { LoadingSpinner, NoItemsPlaceholder } from "../../../../components"
 
 import ChatLink from "./ChatLink"
+import { readAllChats } from "../../redux"
 
 export default function ChatsList() {
-  const chatStudentIds = useAppSelector((state) =>
-    Object.keys(state.chats).map((key) => parseInt(key))
-  )
+  const dispatch = useAppDispatch()
+  const studentId = useStudentId()
 
-  const list = (
-    <Stack>
-      {chatStudentIds.map((studentId) => (
-        <Fragment key={studentId}>
-          <ChatLink studentId={studentId} />
+  const chats = useAppSelector((state) => state.chats.chats)
+  useEffect(() => {
+    if (chats === undefined)
+      dispatch(readAllChats())
+  }, [])
 
-          {chatStudentIds.indexOf(studentId) !== chatStudentIds.length - 1 && <Divider />}
+  const render = () => {
+    if (chats === undefined) return <LoadingSpinner />
+    else if (chats.length < 1) return <NoItemsPlaceholder />
+    else return <Stack>
+      {chats.map((chat) => (
+        <Fragment key={chat.id}>
+          <ChatLink chat={chat} />
+
+          {chats.indexOf(chat) !== chats.length - 1 && <Divider />}
         </Fragment>
       ))}
     </Stack>
-  )
-
-  const placeholder = (
-    <Typography variant="h4" textAlign="center">
-      No chats yet…
-    </Typography>
-  )
-
+  }
   return (
     <Card elevation={3}>
-      {chatStudentIds === undefined ? (
-        <LoadingSpinner />
-      ) : chatStudentIds.length === 0 ? (
-        placeholder
-      ) : (
-        list
-      )}
+      {render()}
     </Card>
   )
 }

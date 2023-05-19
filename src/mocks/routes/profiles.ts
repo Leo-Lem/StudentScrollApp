@@ -3,7 +3,7 @@ import { Server } from "miragejs"
 export default function mockProfiles(server: Server) {
   server.get("students/:studentId/profile", async (schema: any, { url }) => {
     return JSON.stringify(
-      schema.profiles.findBy({ studentsId: parseInt(url.split("/")[4]) })?.attrs
+      schema.profiles.findBy({ id: parseInt(url.split("/")[4]) })?.attrs
     )
   })
 
@@ -15,7 +15,7 @@ export default function mockProfiles(server: Server) {
   })
 
   server.put("students/:studentId/profile", async (schema: any, { url, requestBody }) => {
-    const profile = schema.profiles.findBy({ studentsId: parseInt(url.split("/")[4]) })
+    const profile = schema.profiles.findBy({ id: parseInt(url.split("/")[4]) })
     const { newName, newBio, newIcon, newInterests, newLocation } = JSON.parse(requestBody)
 
     profile.update({
@@ -25,6 +25,7 @@ export default function mockProfiles(server: Server) {
       interests: newInterests ?? profile.interests,
       location: newLocation ?? profile.location
     })
+
     return JSON.stringify(profile.attrs)
   })
 }

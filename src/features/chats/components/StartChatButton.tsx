@@ -11,7 +11,7 @@ export default function StartChatButton({ studentId }: Props) {
   const dispatch = useAppDispatch()
 
   const chatId = useAppSelector(
-    (state) => state.chats.chats.find((chat) => chat.participantIds.includes(studentId))?.id
+    (state) => state.chats?.chats?.find((chat) => chat.participantIds.includes(studentId))?.id
   )
   useEffect(() => {
     if (chatId === undefined) dispatch(readAllChats())
