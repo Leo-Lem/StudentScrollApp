@@ -3,7 +3,8 @@ import { Box } from "@mui/material"
 import { GoogleMap, useLoadScript } from "@react-google-maps/api"
 
 import { LoadingSpinner } from "../../../components"
-import StudentLocation from "../types/Location"
+
+import StudentLocation from "../types/StudentLocation"
 
 export default function Map({ center, zoom, children }: Props) {
   const { isLoaded } = useLoadScript({ googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY ?? "" })

@@ -1,11 +1,11 @@
 import { Grid, Typography } from "@mui/material"
 
-import useIsCompact from "../../../lib/useIsCompact"
-import { FollowButton } from "../../following"
-
-import ProfileIcon from "./ProfileIcon"
-import Profile from "../types/Profile"
+import { useIsCompact } from "../../../lib/hooks"
 import { PrimaryAction } from "../../../components"
+
+import { FollowButton } from "../../following"
+import Profile from "../types/Profile"
+import ProfileIcon from "./ProfileIcon"
 
 export default function ProfileDetails({ followId, profile }: Props) {
   const isCompact = useIsCompact()

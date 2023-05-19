@@ -4,15 +4,12 @@ import { Edit, Save } from "@mui/icons-material"
 import { Box } from "@mui/material"
 
 import { BindingToggle, PrimaryAction } from "../../../components"
-import useIsCompact from "../../../lib/useIsCompact"
-import { useAppDispatch } from "../../../redux"
-
-import useBinding from "../../../lib/useBinding"
-import ProfileDetails from "./ProfileDetails"
+import { useAppDispatch, useBinding, useIsCompact } from "../../../lib/hooks"
 
 import { updateProfile } from "../redux"
 import Profile from "../types/Profile"
 import EditProfileMenu from "./EditProfileMenu"
+import ProfileDetails from "./ProfileDetails"
 
 export default function EditableProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()

@@ -1,12 +1,11 @@
 import { Stack } from "@mui/material"
-
-import { LoadingSpinner } from "../../../../components"
-import NoItemsPlaceholder from "../../../../components/NoItemsPlaceholder"
-import { useAppDispatch, useAppSelector } from "../../../../redux"
-
-import PostsList from "./PostsList"
 import { useEffect } from "react"
+
+import { LoadingSpinner, Placeholder } from "../../../../components"
+import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
+
 import readStudentPosts from "../../redux/actions/readStudentPosts"
+import PostsList from "./PostsList"
 
 export default function StudentPostsList({ studentId }: Props) {
   const dispatch = useAppDispatch()
@@ -18,7 +17,7 @@ export default function StudentPostsList({ studentId }: Props) {
   }, [studentId])
 
   if (posts === undefined) return <LoadingSpinner />
-  else if (posts.length < 1) return <NoItemsPlaceholder message="NO_POSTS_PLACEHOLDER" />
+  else if (posts.length < 1) return <Placeholder message="NO_POSTS_PLACEHOLDER" />
   else
     return (
       <Stack spacing={1} alignItems="center" direction="column-reverse">

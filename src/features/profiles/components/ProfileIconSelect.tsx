@@ -2,8 +2,9 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material"
 import { Button, Grid } from "@mui/material"
 import { useEffect, useState } from "react"
 
-import { Binding } from "../../../lib/useBinding"
+import { Binding } from "../../../lib/hooks"
 import { Icon, IconType, icons as iconsWithDefault } from "../../../res/icons"
+
 import ProfileIcon from "./ProfileIcon"
 
 const icons = iconsWithDefault.filter((icon) => icon !== "default")

@@ -3,9 +3,10 @@ import { Box, Stack } from "@mui/material"
 import { OVERLAY_LAYER, OverlayViewF } from "@react-google-maps/api"
 import { useEffect } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../redux"
-import { readProfile } from "../../profiles/redux"
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
+
 import ProfileBadge from "../../profiles/components/ProfileBadge"
+import { readProfile } from "../../profiles/redux"
 
 export default function StudentMarker({ studentId, isSelf }: Props) {
   const dispatch = useAppDispatch()

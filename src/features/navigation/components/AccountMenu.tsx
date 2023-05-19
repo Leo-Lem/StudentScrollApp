@@ -2,10 +2,9 @@ import { AccountCircle } from "@mui/icons-material"
 import { Box, IconButton, Menu } from "@mui/material"
 import { useState } from "react"
 
-import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
-import SignOutMenuItem from "./SignOutMenuItem"
+import { Label, LinkMenuItem } from "../../../components"
 
-import { Label } from "../../../components"
+import SignOutMenuItem from "./SignOutMenuItem"
 
 export default function AccountMenu() {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null)

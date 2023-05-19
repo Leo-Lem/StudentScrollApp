@@ -3,7 +3,7 @@ import { type TextFieldProps } from "@mui/material/TextField"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { Binding } from "../../lib/useBinding"
+import { Binding } from "../../lib/hooks/useBinding"
 
 export default function RequiredTextField({
   $value,

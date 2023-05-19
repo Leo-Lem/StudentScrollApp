@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingStudentId } from "../../../redux"
+import { tryGettingStudentId } from "../../../lib/redux"
+
 import { readProfile } from "../../profiles/redux"
 import { readFollowers, readFollows } from "../../following/redux"
 import readSettings from "./readSettings"

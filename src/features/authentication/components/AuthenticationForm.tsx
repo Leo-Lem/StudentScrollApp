@@ -3,8 +3,7 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { AsyncButton, ErrorFeedback, Label } from "../../../components"
-import useBinding from "../../../lib/useBinding"
-import { useAppDispatch, useAppSelector } from "../../../redux"
+import { useBinding, useAppSelector, useAppDispatch } from "../../../lib/hooks"
 
 import EmailTextField from "./EmailTextField"
 import NameTextField from "./NameTextField"

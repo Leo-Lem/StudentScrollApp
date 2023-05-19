@@ -1,47 +1,47 @@
-import { Card, Grid, Typography } from "@mui/material"
-import { useParams } from "react-router-dom"
+import { Box, Button, Card, Grid } from "@mui/material"
 
-import { useAppSelector } from "../../redux"
+import { useIdParam, useIsCompact } from "../../lib/hooks"
 
-import ChatsList from "./components/ChatsList"
-import ChatView from "./components/ChatDetail"
-import useIsCompact from "../../lib/useIsCompact"
+import { Label, Placeholder, PrimaryAction } from "../../components"
+import ChatDetail from "./components/chats/ChatDetail"
+import ChatsList from "./components/chats/ChatsList"
 
 export default function ChatsPage() {
   const isCompact = useIsCompact()
+  const chatId = useIdParam("chatId")
 
-  const { studentId } = useParams()
-  const currentStudentId = useAppSelector((state) => state.student.id)
-
-  const chatIsOpen =
-    studentId !== undefined &&
-    !isNaN(parseInt(studentId)) &&
-    currentStudentId !== parseInt(studentId)
-
-  const compact = chatIsOpen ? (
-    <Card elevation={2}>
-      <ChatView studentId={parseInt(studentId)} />
-    </Card>
-  ) : (
-    <Grid item xs={4}>
-      <ChatsList />
-    </Grid>
-  )
+  const compact =
+    chatId !== undefined ? (
+      <Box>
+        <Card elevation={2}>
+          <ChatDetail chatId={chatId} />
+        </Card>
+        {isCompact && (
+          <PrimaryAction fixed={true}>
+            <Button href="/chats" variant="contained" sx={{ aspectRatio: 1 }}>
+              <Label type="back" display="iconOnly" />
+            </Button>
+          </PrimaryAction>
+        )}
+      </Box>
+    ) : (
+      <Grid item xs={4}>
+        <ChatsList openChatId={chatId} />
+      </Grid>
+    )
 
   const regular = (
     <Grid container spacing={1}>
       <Grid item xs={5}>
-        <ChatsList />
+        <ChatsList openChatId={chatId} />
       </Grid>
 
       <Grid item xs>
         <Card elevation={2}>
-          {chatIsOpen ? (
-            <ChatView studentId={parseInt(studentId)} />
+          {chatId !== undefined ? (
+            <ChatDetail chatId={chatId} />
           ) : (
-            <Typography variant="h4" textAlign="center">
-              Click on a chat to open it…
-            </Typography>
+            <Placeholder message="NO_CHAT_IS_OPENED_PLACEHOLDER" />
           )}
         </Card>
       </Grid>

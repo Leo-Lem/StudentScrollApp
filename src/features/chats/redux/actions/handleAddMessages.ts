@@ -5,21 +5,24 @@ import Message from "../../types/Message"
 
 export default function handleAddMessages(
   state: State,
-  action: PayloadAction<{ studentId: number; messages: Message[] }>
+  action: PayloadAction<{ chatId: number; messages: Message[] }>
 ) {
-  if (state[action.payload.studentId] === undefined)
-    state[action.payload.studentId] = [] as Message[]
+  const chatIndex = state.chats?.findIndex((chat) => chat.id === action.payload.chatId)
 
-  const filteredMessages = state[action.payload.studentId].filter(
-    (existingMessage) =>
-      !action.payload.messages.some((newMessage) => newMessage.id === existingMessage.id)
-  )
-  const allMessages = [...filteredMessages, ...action.payload.messages]
+  if (chatIndex === undefined || chatIndex === -1 || state.chats === undefined) return
 
-  allMessages.sort(
-    (lhs: Message, rhs: Message) =>
-      new Date(rhs.timestamp).getTime() - new Date(lhs.timestamp).getTime()
+  const filteredMessageIds = state.chats[chatIndex].messageIds.filter(
+    (existing) => !action.payload.messages.some((newer) => newer.id === existing)
   )
 
-  state[action.payload.studentId] = allMessages
+  state.chats[chatIndex].messageIds = [
+    ...filteredMessageIds,
+    ...action.payload.messages.map((message) => message.id)
+  ]
+
+  const filtered = state.messages.filter(
+    (existing) => !action.payload.messages.some((newer) => newer.id === existing.id)
+  )
+
+  state.messages = [...filtered, ...action.payload.messages]
 }

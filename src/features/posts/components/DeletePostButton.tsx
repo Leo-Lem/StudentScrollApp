@@ -2,7 +2,8 @@ import { Delete } from "@mui/icons-material"
 import { Fragment } from "react"
 
 import { AsyncButton } from "../../../components"
-import { useAppDispatch, useAppSelector } from "../../../redux"
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
+
 import { deletePost } from "../redux"
 
 export default function DeletePostButton({ postId, posterId }: Props) {

@@ -1,34 +1,38 @@
-import { tryGettingAuthorizationHeader } from "../redux"
+import { tryGettingAuthzHeader } from "./redux"
 import Result from "./Result"
 
-namespace API {
-  export interface Error {
-    code: number
-    message: string
-  }
+export type APIResult<T> = Result<T, APIError>
 
+export interface APIError {
+  code: number
+  message: string
+}
+
+namespace API {
   export async function call<Body, Success>(
     thunkAPI: any,
     method: "get" | "post" | "put" | "delete",
     url: string,
     requiresAuthorization = true,
     body?: Body
-  ): Promise<Result<Success, Error>> {
+  ): Promise<APIResult<Success>> {
     const fullUrl = `/api/v1/${url}`
 
     try {
       const response = await fetch(fullUrl, {
         method: method.toUpperCase(),
         headers: {
-          ...(requiresAuthorization
-            ? { Authorization: tryGettingAuthorizationHeader(thunkAPI) }
-            : {}),
+          ...(requiresAuthorization ? { Authorization: tryGettingAuthzHeader(thunkAPI) } : {}),
           ...(body !== undefined ? { "Content-Type": "application/json" } : {})
         },
         ...(body !== undefined && { body: JSON.stringify(body) })
       })
 
-      if (response.ok) return { ok: true, value: (await response.json()) as Success }
+      if (response.ok)
+        return {
+          ok: true,
+          value: (response.status === 204 ? undefined : await response.json()) as Success
+        }
       else
         return {
           ok: false,
@@ -38,26 +42,13 @@ namespace API {
           }
         }
     } catch (error: any) {
-      if (
-        error.message.contains("The string did not match the expected pattern") &&
-        process.env.NODE_ENV === "development"
-      )
-        return {
-          ok: false,
-          error: {
-            code: 666,
-            message:
-              "MirageJS is not running. Please navigate to another page and back to start it up."
-          }
+      return {
+        ok: false,
+        error: {
+          code: 666,
+          message: `Failed to ${method} '${fullUrl}': (Error) ${error}`
         }
-      else
-        return {
-          ok: false,
-          error: {
-            code: 666,
-            message: `Failed to ${method} '${fullUrl}': (Error) ${error}`
-          }
-        }
+      }
     }
   }
 
@@ -65,7 +56,7 @@ namespace API {
     thunkAPI: any,
     url: string,
     requiresAuthorization = true
-  ): Promise<Result<Success, Error>> {
+  ): Promise<APIResult<Success>> {
     return call(thunkAPI, "get", url, requiresAuthorization)
   }
 
@@ -74,7 +65,7 @@ namespace API {
     url: string,
     body: Body,
     requiresAuthorization = true
-  ): Promise<Result<Success, Error>> {
+  ): Promise<APIResult<Success>> {
     return call(thunkAPI, "post", url, requiresAuthorization, body)
   }
 
@@ -83,7 +74,7 @@ namespace API {
     url: string,
     body: Body,
     requiresAuthorization = true
-  ): Promise<Result<Success, Error>> {
+  ): Promise<APIResult<Success>> {
     return call(thunkAPI, "put", url, requiresAuthorization, body)
   }
 
@@ -91,7 +82,7 @@ namespace API {
     thunkAPI: any,
     url: string,
     requiresAuthorization = true
-  ): Promise<Result<void, Error>> {
+  ): Promise<APIResult<undefined>> {
     return call(thunkAPI, "delete", url, requiresAuthorization)
   }
 }

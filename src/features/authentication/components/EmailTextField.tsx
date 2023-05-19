@@ -1,9 +1,10 @@
-import { Binding } from "../../../lib/useBinding"
-import { RequiredTextField } from "../../../components"
 import { useTranslation } from "react-i18next"
 
+import { RequiredTextField } from "../../../components"
+import { type Binding } from "../../../lib/hooks"
+
 export default function EmailTextField({ $email, validate }: Props) {
-  const [t] = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <RequiredTextField

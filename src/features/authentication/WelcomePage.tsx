@@ -1,9 +1,9 @@
 import { Box, Stack } from "@mui/material"
 
-import AuthenticationForm from "./components/AuthenticationForm"
 import { Logo } from "../../components"
+import AuthenticationForm from "./components/AuthenticationForm"
 
-import useIsCompact from "../../lib/useIsCompact"
+import { useIsCompact } from "../../lib/hooks"
 
 export default function WelcomePage() {
   const isCompact = useIsCompact()

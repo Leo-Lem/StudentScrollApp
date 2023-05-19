@@ -2,7 +2,9 @@ import { Fragment, useEffect } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline } from "@mui/material"
 
-import { useAppDispatch, useAppSelector } from "./redux"
+import useAppSelector from "./lib/hooks/useAppSelector"
+import useAppDispatch from "./lib/hooks/useAppDispatch"
+
 import { AppThemeProvider } from "./res/theme"
 import { AppLocaleProvider } from "./res/locale"
 
@@ -32,7 +34,7 @@ export default function App() {
         <Route path="/settings" element={addPageChip("settings", <SettingsPage />)} />
         <Route path="/nearby" element={addPageChip("nearby", <NearbyPage />)} />
         <Route path="/profile/:studentId?" element={addPageChip("profile", <ProfilePage />)} />
-        <Route path="/chats/:studentId?" element={addPageChip("chats", <ChatsPage />)} />
+        <Route path="/chats/:chatId?" element={addPageChip("chats", <ChatsPage />)} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

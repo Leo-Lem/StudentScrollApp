@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import { loadStudent } from "../../../student"
-import API from "../../../../lib/API"
-import Result from "../../../../lib/Result"
+import API, { APIResult } from "../../../../lib/API"
 
 import { setAuthenticated, setFailed } from ".."
 import AuthenticationError from "../../types/AuthenticationError"
@@ -10,7 +9,7 @@ import AuthenticationError from "../../types/AuthenticationError"
 export default createAsyncThunk(
   "authentication/signUp",
   async (info: { name: string; email: string; password: string }, thunkAPI) => {
-    const result: Result<{ id: number; token: string }, API.Error> = await API.post(
+    const result: APIResult<{ id: number; token: string }> = await API.post(
       thunkAPI,
       "students",
       info,

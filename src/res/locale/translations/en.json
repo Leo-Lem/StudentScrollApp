@@ -27,6 +27,7 @@
     "LABEL_NEARBY": "Nearby",
     "LABEL_CHAT": "Chat",
     "LABEL_SEND": "Send",
+    "LABEL_BACK": "Back",
     "SEARCH_PROFILES": "Profiles",
     "SEARCH_OTHERS": "Others",
     "SEARCH_POSTS": "Posts",
@@ -52,6 +53,7 @@
     "FOLLOWERS": "Followers",
     "FOLLOWS": "I'm following",
     "NO_ITEMS_PLACEHOLDER": "Nothing to see here…",
-    "NO_POSTS_PLACEHOLDER": "Nothing posted yet…"
+    "NO_POSTS_PLACEHOLDER": "Nothing posted yet…",
+    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Click on a chat to open it…"
   }
 }

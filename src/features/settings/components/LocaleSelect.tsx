@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
-
-import { Binding } from "../../../lib/useBinding"
 import { useTranslation } from "react-i18next"
+
+import { Binding } from "../../../lib/hooks"
 import { Locale, locales } from "../../../res/locale"
 
 export default function LocaleSelect({ $locale }: Props) {

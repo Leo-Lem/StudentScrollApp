@@ -20,5 +20,6 @@ export default {
   unfollow: Icon.PersonRemove,
   nearby: Icon.Map,
   chat: Icon.Chat,
-  send: Icon.Send
+  send: Icon.Send,
+  back: Icon.ArrowBack
 } as { [key in LabelType]: ComponentType<any> }

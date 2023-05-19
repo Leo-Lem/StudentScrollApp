@@ -1,12 +1,11 @@
 import { Stack } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
-import { AsyncButton, RequiredTextField, Label } from "../../../components"
-import { useAppDispatch } from "../../../redux"
-import useBinding from "../../../lib/useBinding"
+import { AsyncButton, Label, RequiredTextField } from "../../../components"
+import { useAppDispatch, useBinding } from "../../../lib/hooks"
 
-import TagsSelect from "./TagsSelect"
 import { createPost } from "../redux"
+import TagsSelect from "./TagsSelect"
 
 export default function CreatePostMenu({ dismiss }: Props) {
   const [t] = useTranslation()

@@ -1,4 +1,4 @@
-import { Binding } from "../../lib/useBinding"
+import { Binding } from "../../lib/hooks/useBinding"
 import { TextField, TextFieldProps } from "@mui/material"
 
 export default function BindingTextField({ $value, ...props }: Props & TextFieldProps) {

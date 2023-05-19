@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingStudentId } from "../../../../redux"
-import { removeFollowers, removeFollows } from ".."
 import API from "../../../../lib/API"
+import { tryGettingStudentId } from "../../../../lib/redux"
+
+import { removeFollowers, removeFollows } from ".."
 
 export default createAsyncThunk("following/unfollow", async (followId: number, thunkAPI) => {
   const studentId = tryGettingStudentId(thunkAPI)

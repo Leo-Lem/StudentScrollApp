@@ -1,7 +1,8 @@
 import { Chip, Grid } from "@mui/material"
 
-import { ProfileLink } from ".."
 import { LoadingSpinner } from "../../../components"
+
+import { ProfileLink } from ".."
 
 export default function ProfilesList({ studentIds, label, showCount, display }: Props) {
   const wrap = display === "scroll" ? "nowrap" : "wrap"

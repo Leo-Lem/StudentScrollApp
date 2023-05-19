@@ -1,17 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingStudentId } from "../../../../redux"
-import Profile from "../../types/Profile"
+import API, { APIResult } from "../../../../lib/API"
+import { tryGettingStudentId } from "../../../../lib/redux"
+
 import { addProfile } from ".."
-import Result from "../../../../lib/Result"
-import API from "../../../../lib/API"
+import Profile from "../../types/Profile"
 
 export default createAsyncThunk(
   "profile/updateProfile",
   async (info: { newName?: string; newBio?: string; newIcon?: string }, thunkAPI) => {
     const studentId = tryGettingStudentId(thunkAPI)
 
-    const result: Result<Profile, API.Error> = await API.put(
+    const result: APIResult<Profile> = await API.put(
       thunkAPI,
       `students/${studentId}/profile`,
       info

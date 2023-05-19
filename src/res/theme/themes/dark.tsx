@@ -1,9 +1,9 @@
 import { createTheme } from "@mui/material"
 
-import linkSettings from "../settings/linkSettings"
-import cardSettings from "../settings/cardSettings"
-import appBarSettings from "../settings/appBarSettings"
-import noScrollbarsSettings from "../settings/noScrollbars"
+import linkSettings from "../settings/link"
+import cardSettings from "../settings/card"
+import appBarSettings from "../settings/appBar"
+import baselineSettings from "../settings/baseline"
 
 export default createTheme(
   {
@@ -14,5 +14,5 @@ export default createTheme(
   linkSettings,
   cardSettings,
   appBarSettings,
-  noScrollbarsSettings
+  baselineSettings
 )
