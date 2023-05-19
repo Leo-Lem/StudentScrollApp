@@ -28,7 +28,8 @@ namespace API {
         ...(body !== undefined && { body: JSON.stringify(body) })
       })
 
-      if (response.ok) return { ok: true, value: (await response.json()) as Success }
+      if (response.ok)
+        return { ok: true, value: (response.status === 204 ? undefined : await response.json()) as Success }
       else
         return {
           ok: false,
@@ -78,7 +79,7 @@ namespace API {
     thunkAPI: any,
     url: string,
     requiresAuthorization = true
-  ): Promise<APIResult<void>> {
+  ): Promise<APIResult<undefined>> {
     return call(thunkAPI, "delete", url, requiresAuthorization)
   }
 }

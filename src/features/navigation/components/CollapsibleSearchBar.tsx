@@ -1,4 +1,4 @@
-import { Box, Collapse, ToggleButton } from "@mui/material"
+import { Box, Slide, ToggleButton } from "@mui/material"
 import { Fragment, useState } from "react"
 
 import { Label } from "../../../components"
@@ -9,11 +9,11 @@ export default function CollapsibleSearchBar() {
 
   return (
     <Fragment>
-      <Collapse in={isShowingSearch} orientation="horizontal">
-        <Box width="30vw">
+      <Slide in={isShowingSearch} direction="down">
+        <Box width="100%">
           <SearchBar />
         </Box>
-      </Collapse>
+      </Slide>
 
       <ToggleButton
         size="small"

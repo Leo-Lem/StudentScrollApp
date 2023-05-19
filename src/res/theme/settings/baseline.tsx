@@ -9,8 +9,8 @@ const baselineSettings = {
           display: "none"
         },
         "*": {
-          "-ms-overflow-style": "none",
-          "scrollbar-width": "none"
+          msOverflowStyle: "none",
+          scrollbarWidth: "none"
         }
       }
     }
