@@ -10,9 +10,9 @@ export default createAsyncThunk("nearby/getLocation", async (_, thunkAPI) => {
 
   const { geolocation } = navigator
 
-  if (geolocation === undefined) return
+  if (geolocation === undefined) thunkAPI.dispatch(setAllowed(false))
 
-  geolocation.getCurrentPosition(
+  geolocation.watchPosition(
     (position) => {
       const location: StudentLocation = {
         lat: position.coords.latitude,

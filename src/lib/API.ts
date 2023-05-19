@@ -29,7 +29,10 @@ namespace API {
       })
 
       if (response.ok)
-        return { ok: true, value: (response.status === 204 ? undefined : await response.json()) as Success }
+        return {
+          ok: true,
+          value: (response.status === 204 ? undefined : await response.json()) as Success
+        }
       else
         return {
           ok: false,

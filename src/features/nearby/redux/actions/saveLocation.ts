@@ -8,7 +8,7 @@ import StudentLocation from "../../types/StudentLocation"
 export default createAsyncThunk(
   "nearby/saveLocation",
   async (location: StudentLocation, thunkAPI) => {
-    const result = await API.put(thunkAPI, `student/${tryGettingStudentId(thunkAPI)}/profile`, {
+    const result = await API.put(thunkAPI, `students/${tryGettingStudentId(thunkAPI)}/profile`, {
       newLocation: location
     })
 

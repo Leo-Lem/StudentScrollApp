@@ -10,24 +10,25 @@ export default function ChatsPage() {
   const isCompact = useIsCompact()
   const chatId = useIdParam("chatId")
 
-  const compact = chatId !== undefined ? (
-    <Box>
-      <Card elevation={2}>
-        <ChatDetail chatId={chatId} />
-      </Card>
-      {isCompact && (
-        <PrimaryAction fixed={true} >
-          <Button href="/chats" variant="contained" sx={{ aspectRatio: 1 }}>
-            <Label type="back" display="iconOnly" />
-          </Button>
-        </PrimaryAction>
-      )}
-    </Box>
-  ) : (
-    <Grid item xs={4}>
-      <ChatsList openChatId={chatId} />
-    </Grid>
-  )
+  const compact =
+    chatId !== undefined ? (
+      <Box>
+        <Card elevation={2}>
+          <ChatDetail chatId={chatId} />
+        </Card>
+        {isCompact && (
+          <PrimaryAction fixed={true}>
+            <Button href="/chats" variant="contained" sx={{ aspectRatio: 1 }}>
+              <Label type="back" display="iconOnly" />
+            </Button>
+          </PrimaryAction>
+        )}
+      </Box>
+    ) : (
+      <Grid item xs={4}>
+        <ChatsList openChatId={chatId} />
+      </Grid>
+    )
 
   const regular = (
     <Grid container spacing={1}>

@@ -1,4 +1,4 @@
-import { Autocomplete, TextField, UseAutocompleteProps } from "@mui/material"
+import { Autocomplete, TextField } from "@mui/material"
 import { ReactNode, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
