@@ -1,7 +1,7 @@
 import { Box, BoxProps } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
-export default function NoItemsPlaceholder({ message, ...props }: BoxProps & Props) {
+export default function Placeholder({ message, ...props }: BoxProps & Props) {
   const { t } = useTranslation()
 
   return (

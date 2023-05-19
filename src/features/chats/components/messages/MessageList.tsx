@@ -6,14 +6,15 @@ import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
 import readMessage from "../../redux/actions/readMessage"
 import Chat from "../../types/Chat"
 import MessageItem from "./MessageItem"
-import { LoadingSpinner } from "../../../../components"
+import { LoadingSpinner, Placeholder as Placeholder } from "../../../../components"
 
 export default function MessageList({ chat, newestFirst }: Props) {
   const dispatch = useAppDispatch()
 
-  const messages = useAppSelector((state) => state.chats.messages
-    .filter((m) => chat.messageIds.includes(m.id))
-    .sort((lhs, rhs) => new Date(rhs.timestamp).getTime() - new Date(lhs.timestamp).getTime())
+  const messages = useAppSelector((state) =>
+    state.chats.messages
+      .filter((m) => chat.messageIds.includes(m.id))
+      .sort((lhs, rhs) => new Date(rhs.timestamp).getTime() - new Date(lhs.timestamp).getTime())
   )
 
   const notFinished = messages.length < chat.messageIds.length
@@ -27,6 +28,7 @@ export default function MessageList({ chat, newestFirst }: Props) {
 
   return (
     <Grid container direction={newestFirst ? "column" : "column-reverse"} padding={1} spacing={1}>
+      {messages.length < 1 && <Placeholder />}
       {messages.map((message) => (
         <Fragment key={message.id}>
           <MessageItem message={message} />

@@ -8,9 +8,11 @@ import { sendMessage } from "../../redux"
 export default function MessageSendMenu({ chatId }: Props) {
   const dispatch = useAppDispatch()
 
-  const $newMessage = useBinding<string | undefined>("")
+  const $newMessage = useBinding<string | undefined>(undefined)
 
   const handleSendMessage = async (): Promise<boolean> => {
+    console.log($newMessage.get)
+
     if ($newMessage.get === "invalid") {
       return false
     } else if ($newMessage.get === undefined) {
@@ -24,7 +26,7 @@ export default function MessageSendMenu({ chatId }: Props) {
   }
 
   return (
-    <Grid container direction="row" gap={1}>
+    <Grid container direction="row" spacing={1}>
       <Grid item xs>
         <RequiredTextField
           $value={$newMessage}

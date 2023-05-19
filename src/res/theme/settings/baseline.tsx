@@ -1,7 +1,10 @@
-const noScrollbarsSettings = {
-  overrides: {
+const baselineSettings = {
+  components: {
     MuiCssBaseline: {
-      "@global": {
+      styleOverrides: {
+        body: {
+          margin: 10
+        },
         "*::-webkit-scrollbar": {
           display: "none"
         },
@@ -14,4 +17,4 @@ const noScrollbarsSettings = {
   }
 }
 
-export default noScrollbarsSettings
+export default baselineSettings

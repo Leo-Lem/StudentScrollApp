@@ -27,6 +27,7 @@
     "LABEL_NEARBY": "附近的",
     "LABEL_CHAT": "聊天",
     "LABEL_SEND": "发送",
+    "LABEL_BACK": "背部",
     "SEARCH_PROFILES": "概况",
     "SEARCH_POSTS": "帖子",
     "SEARCH_OTHERS": "其他",
@@ -52,6 +53,7 @@
     "FOLLOWERS": "跟随者",
     "FOLLOWS": "以下",
     "NO_ITEMS_PLACEHOLDER": "没有项目",
-    "NO_POSTS_PLACEHOLDER": "没有帖子"
+    "NO_POSTS_PLACEHOLDER": "没有帖子",
+    "NO_CHAT_IS_OPENED_PLACEHOLDER": "没有打开的聊天"
   }
 }

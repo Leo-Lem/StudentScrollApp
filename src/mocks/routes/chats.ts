@@ -2,7 +2,8 @@ import { Server } from "miragejs"
 
 export default function mock(server: Server) {
   server.get("chats/:chatId", (schema: any, { params: { chatId } }) =>
-    respond(schema.chats.findBy({ id: chatId })))
+    respond(schema.chats.findBy({ id: chatId }))
+  )
 
   server.get("chats", (schema: any, { queryParams: { participantId } }) => {
     if (participantId)
@@ -12,7 +13,10 @@ export default function mock(server: Server) {
   })
 
   server.post("chats", (schema: any, { requestBody }) =>
-    respond(schema.chats.create({ participantIds: JSON.parse(requestBody).map(String), messageIds: [] })))
+    respond(
+      schema.chats.create({ participantIds: JSON.parse(requestBody).map(String), messageIds: [] })
+    )
+  )
 }
 
 interface Response {

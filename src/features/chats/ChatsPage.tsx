@@ -1,7 +1,8 @@
-import { Card, Grid, Typography } from "@mui/material"
+import { Box, Button, Card, Grid } from "@mui/material"
 
 import { useIdParam, useIsCompact } from "../../lib/hooks"
 
+import { Label, Placeholder, PrimaryAction } from "../../components"
 import ChatDetail from "./components/chats/ChatDetail"
 import ChatsList from "./components/chats/ChatsList"
 
@@ -11,9 +12,18 @@ export default function ChatsPage() {
 
   const compact =
     chatId !== undefined ? (
-      <Card elevation={2}>
-        <ChatDetail chatId={chatId} />
-      </Card>
+      <Box>
+        <Card elevation={2}>
+          <ChatDetail chatId={chatId} />
+        </Card>
+        {isCompact && (
+          <PrimaryAction fixed={true} >
+            <Button href="/chats" variant="contained" sx={{ aspectRatio: 1 }}>
+              <Label type="back" display="iconOnly" />
+            </Button>
+          </PrimaryAction>
+        )}
+      </Box>
     ) : (
       <Grid item xs={4}>
         <ChatsList openChatId={chatId} />
@@ -31,9 +41,7 @@ export default function ChatsPage() {
           {chatId !== undefined ? (
             <ChatDetail chatId={chatId} />
           ) : (
-            <Typography variant="h4" textAlign="center">
-              Click on a chat to open it…
-            </Typography>
+            <Placeholder message="NO_CHAT_IS_OPENED_PLACEHOLDER" />
           )}
         </Card>
       </Grid>

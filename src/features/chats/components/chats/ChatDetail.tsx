@@ -19,17 +19,21 @@ export default function ChatDetail({ chatId }: Props) {
 
   const chat = useAppSelector((state) => state.chats.chats?.find((c) => c.id === chatId))
   useEffect(() => {
-    if (chat === undefined)
-      dispatch(readChat(chatId))
+    if (chat === undefined) dispatch(readChat(chatId))
   }, [chatId])
 
   if (chat === undefined) return <LoadingSpinner />
   else
     return (
-      <Stack direction={isCompact ? "column-reverse" : "column"}>
-        <MessageSendMenu chatId={chatId} />
-        <MessageList chat={chat} newestFirst={!isCompact} />
-        <div ref={scrollRef} />
+      <Stack maxHeight="80vh">
+        {!isCompact && <MessageSendMenu chatId={chatId} />}
+
+        <Stack direction={isCompact ? "column-reverse" : "column"} overflow="scroll">
+          <MessageList chat={chat} newestFirst={!isCompact} />
+          <div ref={scrollRef} />
+        </Stack>
+
+        {isCompact && <MessageSendMenu chatId={chatId} />}
       </Stack>
     )
 }

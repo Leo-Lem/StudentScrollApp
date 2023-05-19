@@ -1,12 +1,9 @@
-import { useEffect } from "react"
 import { Grid, Typography } from "@mui/material"
 
-import { LoadingSpinner } from "../../../../components"
-import { useAppDispatch, useAppSelector, useStudentId } from "../../../../lib/hooks"
+import { useStudentId } from "../../../../lib/hooks"
 
 import { ProfileLink } from "../../../profiles"
 import Message from "../../types/Message"
-import readMessage from "../../redux/actions/readMessage"
 
 export default function MessageItem({ message }: { message: Message }) {
   const studentId = useStudentId()

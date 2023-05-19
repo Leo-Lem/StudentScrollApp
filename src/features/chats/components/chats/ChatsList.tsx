@@ -2,7 +2,7 @@ import { Card, Divider, Stack } from "@mui/material"
 import { Fragment, useEffect } from "react"
 
 import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
-import { LoadingSpinner, NoItemsPlaceholder } from "../../../../components"
+import { LoadingSpinner, Placeholder } from "../../../../components"
 
 import ChatLink from "./ChatRow"
 import { readAllChats } from "../../redux"
@@ -17,7 +17,7 @@ export default function ChatsList({ openChatId }: Props) {
 
   const render = () => {
     if (chats === undefined) return <LoadingSpinner />
-    else if (chats.length < 1) return <NoItemsPlaceholder />
+    else if (chats.length < 1) return <Placeholder />
     else
       return (
         <Stack>
@@ -27,7 +27,8 @@ export default function ChatsList({ openChatId }: Props) {
               <Fragment key={chat.id}>
                 <ChatLink chat={chat} isOpen={openChatId !== undefined && chat.id === openChatId} />
 
-                {[...chats].sort((lhs, rhs) => lhs.id - rhs.id).indexOf(chat) !== chats.length - 1 && <Divider />}
+                {[...chats].sort((lhs, rhs) => lhs.id - rhs.id).indexOf(chat) !==
+                  chats.length - 1 && <Divider />}
               </Fragment>
             ))}
         </Stack>

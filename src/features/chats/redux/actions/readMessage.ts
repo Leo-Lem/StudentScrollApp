@@ -13,7 +13,8 @@ export default createAsyncThunk(
       `chats/${params.chatId}/messages/${params.messageId}`
     )
 
-    if (result.ok) thunkAPI.dispatch(addMessages({ chatId: params.chatId, messages: [result.value] }))
+    if (result.ok)
+      thunkAPI.dispatch(addMessages({ chatId: params.chatId, messages: [result.value] }))
     else console.error(result.error)
   }
 )
