@@ -11,7 +11,7 @@ export default createAsyncThunk(
   async (location: StudentLocation, thunkAPI) => {
     const result: APIResult<number[]> = await API.get(
       thunkAPI,
-      `students?lat=${location.lat}&lng=${location.lng}}`
+      `students?lat=${location.lat}&lng=${location.lng}`
     )
 
     if (result.ok) {
