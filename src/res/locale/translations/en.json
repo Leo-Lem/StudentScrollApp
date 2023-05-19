@@ -28,6 +28,7 @@
     "LABEL_CHAT": "Chat",
     "LABEL_SEND": "Send",
     "LABEL_BACK": "Back",
+    "LABEL_REFRESH": "Refresh",
     "SEARCH_PROFILES": "Profiles",
     "SEARCH_OTHERS": "Others",
     "SEARCH_POSTS": "Posts",

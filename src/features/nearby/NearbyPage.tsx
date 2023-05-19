@@ -1,7 +1,7 @@
-import { Card, Grid } from "@mui/material"
+import { Button, Card, Grid } from "@mui/material"
 import { useEffect } from "react"
 
-import { LoadingSpinner } from "../../components"
+import { Label, LoadingSpinner } from "../../components"
 import { useAppDispatch, useAppSelector, useIsCompact, useStudentId } from "../../lib/hooks"
 
 import MapWithPermission from "./components/MapWithPermission"
@@ -33,7 +33,7 @@ export default function NearbyPage() {
   else
     return (
       <Grid container direction={isCompact ? "column" : "row"} spacing={1}>
-        <Grid item xs position="relative">
+        <Grid item xs position="relative" sx={{ position: "relative" }}>
           <MapWithPermission center={location} isAllowed={isAllowed}>
             {nearbyStudentsIds.map((nearbyStudentId) => (
               <StudentMarker
@@ -43,6 +43,25 @@ export default function NearbyPage() {
               />
             ))}
           </MapWithPermission>
+
+          <Button
+            color="inherit"
+            variant="contained"
+            onClick={() => {
+              dispatch(getLocation())
+              window.location.reload()
+            }}
+            sx={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              aspectRatio: 1,
+              marginTop: 2,
+              marginRight: 1
+            }}
+          >
+            <Label type="refresh" display="iconOnly" />
+          </Button>
         </Grid>
 
         <Grid item xs={4}>

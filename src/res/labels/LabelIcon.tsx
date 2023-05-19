@@ -21,5 +21,6 @@ export default {
   nearby: Icon.Map,
   chat: Icon.Chat,
   send: Icon.Send,
-  back: Icon.ArrowBack
+  back: Icon.ArrowBack,
+  refresh: Icon.Refresh
 } as { [key in LabelType]: ComponentType<any> }
