@@ -1,12 +1,13 @@
 import { Grid } from "@mui/material"
 
 import { AsyncButton, Label, RequiredTextField } from "../../../../components"
-import { useAppDispatch, useBinding } from "../../../../lib/hooks"
+import { useAppDispatch, useBinding, useIsCompact } from "../../../../lib/hooks"
 
 import { sendMessage } from "../../redux"
 
 export default function MessageSendMenu({ chatId }: Props) {
   const dispatch = useAppDispatch()
+  const isCompact = useIsCompact()
 
   const $newMessage = useBinding<string | undefined>(undefined)
 
@@ -37,14 +38,14 @@ export default function MessageSendMenu({ chatId }: Props) {
         />
       </Grid>
 
-      <Grid item xs={2}>
+      <Grid item xs={3} md={2}>
         <AsyncButton
           action={handleSendMessage}
           variant="contained"
           color="primary"
           sx={{ width: "100%", height: "100%" }}
         >
-          <Label type="send" />
+          <Label type="send" display={isCompact ? "iconOnly" : undefined} />
         </AsyncButton>
       </Grid>
     </Grid>

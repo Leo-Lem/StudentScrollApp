@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingStudentId } from "../../../../lib/redux"
 import API, { APIResult } from "../../../../lib/API"
 
 import { addMessages } from ".."

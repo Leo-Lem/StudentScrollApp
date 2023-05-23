@@ -7,11 +7,15 @@ interface Follower {
 
 export default function mock(server: Server) {
   server.get("students/:studentId/followers", (schema, { params: { studentId } }) => {
-    return schema.db.profiles.findBy({ studentId }).followers.map((id: string) => schema.db.profiles.findBy({ studentId: id }))
+    return schema.db.profiles
+      .findBy({ studentId })
+      .followers.map((id: string) => schema.db.profiles.findBy({ studentId: id }))
   })
 
   server.get("students/:studentId/follows", (schema, { params: { studentId } }) => {
-    return schema.db.profiles.findBy({ studentId }).follows.map((id: string) => schema.db.profiles.findBy({ studentId: id }))
+    return schema.db.profiles
+      .findBy({ studentId })
+      .follows.map((id: string) => schema.db.profiles.findBy({ studentId: id }))
   })
 
   server.post("students/:studentId/followers", (schema) => {

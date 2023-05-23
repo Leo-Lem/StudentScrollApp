@@ -1,4 +1,4 @@
-import StudentLocation from "./StudentLocation";
+import StudentLocation from "./StudentLocation"
 
 type LocationStatus = StudentLocation | "denied" | "unavailable"
 

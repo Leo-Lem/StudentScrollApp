@@ -9,7 +9,7 @@ export default function mock(server: Server) {
     const lat = parseFloat(queryParams.lat)
     const lng = parseFloat(queryParams.lng)
 
-    if (!isNaN(lat) && !isNaN(lng)) return schema.profiles.all().models;
+    if (!isNaN(lat) && !isNaN(lng)) return schema.profiles.all().models
   })
 
   server.put("students", async (schema: any, { requestBody }) => {

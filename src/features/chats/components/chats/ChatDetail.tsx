@@ -29,8 +29,8 @@ export default function ChatDetail({ chatId }: Props) {
         {!isCompact && <MessageSendMenu chatId={chatId} />}
 
         <Stack direction={isCompact ? "column-reverse" : "column"} overflow="scroll">
-          <MessageList chat={chat} newestFirst={!isCompact} />
           <div ref={scrollRef} />
+          <MessageList chat={chat} newestFirst={!isCompact} />
         </Stack>
 
         {isCompact && <MessageSendMenu chatId={chatId} />}

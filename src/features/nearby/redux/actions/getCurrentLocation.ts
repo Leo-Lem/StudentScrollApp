@@ -1,10 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-
 import { deleteLocation, saveLocation, setStatus } from ".."
 import Result from "../../../../lib/Result"
 import StudentLocation from "../../types/StudentLocation"
-
 
 async function getLocation(): Promise<Result<StudentLocation, boolean>> {
   return new Promise((resolve) => {

@@ -4,14 +4,13 @@ import { useEffect } from "react"
 import { Label } from "../../components"
 import { useAppDispatch, useAppSelector, useIsCompact, useStudentId } from "../../lib/hooks"
 
-import { readProfile } from "../profiles/redux"
 import MapWithPermission from "./components/MapWithPermission"
 import NearbyStudentsList from "./components/NearbyStudentsList"
 import StudentMarker from "./components/StudentMarker"
+import { setStatus } from "./redux"
 import getLocation from "./redux/actions/getCurrentLocation"
 import readNearbyStudents from "./redux/actions/readNearbyStudents"
 import StudentLocation from "./types/StudentLocation"
-import { setStatus } from "./redux"
 
 export default function NearbyPage() {
   const dispatch = useAppDispatch()
@@ -20,15 +19,16 @@ export default function NearbyPage() {
 
   const status = useAppSelector((state) => state.nearby.status)
   const nearbyStudentsIds = useAppSelector((state) =>
-    state.nearby.locations !== undefined ? Object.keys(state.nearby.locations).map(Number) : undefined
+    state.nearby.locations !== undefined
+      ? Object.keys(state.nearby.locations).map(Number)
+      : undefined
   )
 
   const location = status as StudentLocation
 
   useEffect(() => {
     if (status === undefined) dispatch(getLocation())
-    else if (location !== undefined)
-      dispatch(readNearbyStudents(location))
+    else if (location !== undefined) dispatch(readNearbyStudents(location))
   }, [status])
 
   return (
@@ -68,13 +68,13 @@ export default function NearbyPage() {
       <Grid item xs={4}>
         <Card elevation={3}>
           <NearbyStudentsList
-            nearbyStudentsIds={nearbyStudentsIds?.filter(
-              (nearbyStudentId) => nearbyStudentId !== studentId
-            ) ?? []}
+            nearbyStudentsIds={
+              nearbyStudentsIds?.filter((nearbyStudentId) => nearbyStudentId !== studentId) ?? []
+            }
             locationIsAllowed={status !== "denied"}
           />
         </Card>
       </Grid>
-    </Grid >
+    </Grid>
   )
 }
