@@ -12,7 +12,8 @@ export default function StudentMarker({ studentId, isSelf }: Props) {
   const dispatch = useAppDispatch()
 
   const profile = useAppSelector((state) => state.profiles[studentId])
-  const location = useAppSelector((state) => state.nearby.locations[studentId])
+  const location = useAppSelector((state) =>
+    state.nearby.locations !== undefined ? state.nearby.locations[studentId] : undefined)
 
   useEffect(() => {
     if (profile === undefined || location === undefined) dispatch(readProfile(studentId))

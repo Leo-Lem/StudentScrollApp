@@ -1,10 +1,11 @@
+import LocationStatus from "../types/LocationStatus"
 import StudentLocation from "../types/StudentLocation"
 
 export default interface State {
-  isAllowed?: boolean
-  locations: {
+  status?: LocationStatus
+  locations?: {
     [studentId: number]: StudentLocation
   }
 }
 
-export const initialState: State = { locations: {} }
+export const initialState: State = {}
