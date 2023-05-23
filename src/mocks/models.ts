@@ -5,7 +5,6 @@ const models = {
   profile: Model.extend({ student: belongsTo() }),
   settings: Model,
   post: Model,
-  follower: Model,
   chat: Model,
   message: Model.extend({
     chat: belongsTo(),

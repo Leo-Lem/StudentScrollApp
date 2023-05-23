@@ -11,7 +11,7 @@ export default createAsyncThunk(
   async (studentId: number | undefined, thunkAPI) => {
     const id = studentId ?? tryGettingStudentId(thunkAPI)
 
-    const result: APIResult<Profile> = await API.get(thunkAPI, `students/${id}/profile`)
+    const result: APIResult<Profile> = await API.get(thunkAPI, `students/${id}`)
 
     if (result.ok) thunkAPI.dispatch(addProfile({ studentId: id, profile: result.value }))
     else console.error(result.error.message)

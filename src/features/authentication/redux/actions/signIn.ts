@@ -11,7 +11,7 @@ export default createAsyncThunk(
   async (credentials: { email: string; password: string }, thunkAPI) => {
     const result: APIResult<{ id: number; token: string }> = await API.post(
       thunkAPI,
-      "signin",
+      "account",
       credentials,
       false
     )

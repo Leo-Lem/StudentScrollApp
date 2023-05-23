@@ -8,13 +8,11 @@ export default function mock(server: Server) {
     }
   )
 
-  server.post("chats/:chatId/messages", (schema, { requestBody }) => {
-    const { content, senderId }: { content: string; senderId: number } = JSON.parse(requestBody)
-
+  server.post("chats/:chatId/messages", (schema, { requestBody: content }) => {
     return respond(
       schema.db.messages.insert({
         content: content,
-        senderId: senderId,
+        senderId: 1,
         timestamp: new Date()
       })
     )

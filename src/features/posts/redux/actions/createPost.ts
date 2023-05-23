@@ -9,10 +9,7 @@ import ContentPost from "../../types/ContentPost"
 export default createAsyncThunk(
   "posts/createPost",
   async (info: { title: string; tags: string[]; content: string }, thunkAPI) => {
-    const result: APIResult<ContentPost> = await API.post(thunkAPI, "posts", {
-      ...info,
-      posterId: tryGettingStudentId(thunkAPI)
-    })
+    const result: APIResult<ContentPost> = await API.post(thunkAPI, "posts", info)
 
     if (result.ok) thunkAPI.dispatch(addCreatedPost(result.value))
     else console.error(result.error.message)

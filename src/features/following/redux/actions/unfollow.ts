@@ -6,11 +6,10 @@ import { tryGettingStudentId } from "../../../../lib/redux"
 import { removeFollowers, removeFollows } from ".."
 
 export default createAsyncThunk("following/unfollow", async (followId: number, thunkAPI) => {
-  const studentId = tryGettingStudentId(thunkAPI)
-
-  const result = await API.del(thunkAPI, `students/${followId}/followers/${studentId}`)
+  const result = await API.del(thunkAPI, `students/${followId}/followers`)
 
   if (result.ok) {
+    const studentId = tryGettingStudentId(thunkAPI)
     thunkAPI.dispatch(removeFollowers({ studentId: followId, followers: [studentId] }))
     thunkAPI.dispatch(removeFollows({ studentId: studentId, follows: [followId] }))
   } else {

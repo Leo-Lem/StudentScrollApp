@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingStudentId } from "../../../../lib/redux"
 import API from "../../../../lib/API"
 
 import StudentLocation from "../../types/StudentLocation"
@@ -8,7 +7,7 @@ import StudentLocation from "../../types/StudentLocation"
 export default createAsyncThunk(
   "nearby/saveLocation",
   async (location: StudentLocation, thunkAPI) => {
-    const result = await API.put(thunkAPI, `students/${tryGettingStudentId(thunkAPI)}/profile`, {
+    const result = await API.put(thunkAPI, "students", {
       newLocation: location
     })
 

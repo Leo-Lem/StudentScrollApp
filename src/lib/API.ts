@@ -16,7 +16,7 @@ namespace API {
     requiresAuthorization = true,
     body?: Body
   ): Promise<APIResult<Success>> {
-    const fullUrl = `/api/v1/${url}`
+    const fullUrl = `/api/v2/${url}`
 
     try {
       const response = await fetch(fullUrl, {

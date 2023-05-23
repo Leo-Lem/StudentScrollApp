@@ -3,6 +3,7 @@ import { Tag } from "../../../res/tags"
 import StudentLocation from "../../nearby/types/StudentLocation"
 
 export default interface Profile {
+  studentId: number
   name: string
   bio: string
   icon: IconType

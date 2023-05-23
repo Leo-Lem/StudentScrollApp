@@ -6,12 +6,10 @@ import API from "../../../../lib/API"
 import { addFollowers, addFollows } from ".."
 
 export default createAsyncThunk("following/follow", async (followId: number, thunkAPI) => {
-  const studentId = tryGettingStudentId(thunkAPI)
-
-  // TODO: verify this with the empty body
-  const result = await API.post(thunkAPI, `students/${followId}/followers/${studentId}`, {})
+  const result = await API.post(thunkAPI, `students/${followId}/followers`, {})
 
   if (result.ok) {
+    const studentId = tryGettingStudentId(thunkAPI.getState())
     thunkAPI.dispatch(addFollowers({ studentId: followId, followers: [studentId] }))
     thunkAPI.dispatch(addFollows({ studentId: studentId, follows: [followId] }))
   } else {

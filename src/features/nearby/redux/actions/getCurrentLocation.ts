@@ -5,7 +5,7 @@ import { tryGettingStudentId } from "../../../../lib/redux"
 import { addLocation, deleteLocation, saveLocation, setAllowed } from ".."
 import StudentLocation from "../../types/StudentLocation"
 
-export default createAsyncThunk("nearby/getLocation", async (_, thunkAPI) => {
+export default createAsyncThunk("nearby/getCurrentLocation", async (_, thunkAPI) => {
   const studentId = tryGettingStudentId(thunkAPI)
 
   const { geolocation } = navigator

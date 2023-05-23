@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector, useIsCompact, useStudentId } from "../.
 import MapWithPermission from "./components/MapWithPermission"
 import NearbyStudentsList from "./components/NearbyStudentsList"
 import StudentMarker from "./components/StudentMarker"
-import getLocation from "./redux/actions/getLocation"
+import getLocation from "./redux/actions/getCurrentLocation"
 import readNearbyStudents from "./redux/actions/readNearbyStudents"
 
 export default function NearbyPage() {

@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit"
 
 import { initialState } from "./state"
 import handleAddLocation from "./actions/handleAddLocation"
-import extraReducers from "./actions/actions"
 import handleSetAllowed from "./actions/handleSetAllowed"
 
 const nearby = createSlice({
@@ -11,8 +10,7 @@ const nearby = createSlice({
   reducers: {
     addLocation: handleAddLocation,
     setAllowed: handleSetAllowed
-  },
-  extraReducers
+  }
 })
 
 export default nearby
