@@ -8,7 +8,7 @@ import { Settings } from "../../settings"
 export default createAsyncThunk(
   "student/updateSettings",
   async (info: { newTheme?: string; newLocale?: string; newIsLocated?: boolean }, thunkAPI) => {
-    const result: APIResult<Settings> = await API.put(thunkAPI, "settings", info)
+    const result: APIResult<Settings> = await API.put(thunkAPI, "account/settings", info)
 
     if (result.ok) thunkAPI.dispatch(setSettings(result.value))
     else console.error(result.error.message)
