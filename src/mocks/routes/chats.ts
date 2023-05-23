@@ -5,11 +5,8 @@ export default function mock(server: Server) {
     respond(schema.chats.findBy({ id: chatId }))
   )
 
-  server.get("chats", (schema: any, { queryParams: { participantId } }) => {
-    if (participantId)
-      return schema.chats
-        .where((chat: any) => chat.participantIds.includes(participantId))
-        .models.map(respond)
+  server.get("chats", (schema: any) => {
+    return schema.chats.all().models.map((chat: any) => respond(chat))
   })
 
   server.post("chats", (schema: any, { requestBody }) =>

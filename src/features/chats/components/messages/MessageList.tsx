@@ -29,9 +29,12 @@ export default function MessageList({ chat, newestFirst }: Props) {
   return (
     <Grid container direction={newestFirst ? "column" : "column-reverse"} padding={1} spacing={1}>
       {messages.length < 1 && <Placeholder />}
+
       {messages.map((message) => (
         <Fragment key={message.id}>
-          <MessageItem message={message} />
+          <Grid item xs marginY={1}>
+            <MessageItem message={message} />
+          </Grid>
 
           {messages.indexOf(message) !== messages.length - 1 && <Divider variant="middle" />}
         </Fragment>

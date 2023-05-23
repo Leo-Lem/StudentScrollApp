@@ -1,5 +1,47 @@
 [
-  { "id": "1", "name": "Raoul Duke", "email": "raoul@duke.legend" },
-  { "id": "2", "name": "Hunter S. Thompson", "email": "hunter@stockton.thompson" },
-  { "id": "3", "name": "Dr. Gonzo", "email": "dr@gonzo.legend" }
+  {
+    "id": "1",
+    "name": "Raoul Duke",
+    "email": "raoul@duke.legend"
+  },
+  {
+    "id": "2",
+    "name": "Hunter S. Thompson",
+    "email": "hunter@stockton.thompson"
+  },
+  {
+    "id": "3",
+    "name": "Dr. Gonzo",
+    "email": "dr@gonzo.legend"
+  },
+  {
+    "id": "4",
+    "name": "Oscar Zeta Acosta",
+    "email": "oscar@acosta.legend"
+  },
+  {
+    "id": "5",
+    "name": "Lucy",
+    "email": "lucy@legend"
+  },
+  {
+    "id": "6",
+    "name": "L. Ron Bumquist",
+    "email": "ron@bumquist"
+  },
+  {
+    "id": "7",
+    "name": "Dr. Loomis",
+    "email": "dr@loomis"
+  },
+  {
+    "id": "8",
+    "name": "Sandy",
+    "email": "sandy@legend"
+  },
+  {
+    "id": "9",
+    "name": "The Hitchhiker",
+    "email": "hitchhiker@legend"
+  }
 ]

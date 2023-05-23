@@ -9,15 +9,12 @@ import Profile from "../../types/Profile"
 export default createAsyncThunk(
   "profile/updateProfile",
   async (info: { newName?: string; newBio?: string; newIcon?: string }, thunkAPI) => {
-    const studentId = tryGettingStudentId(thunkAPI)
+    const result: APIResult<Profile> = await API.put(thunkAPI, "students", info)
 
-    const result: APIResult<Profile> = await API.put(
-      thunkAPI,
-      `students/${studentId}/profile`,
-      info
-    )
-
-    if (result.ok) thunkAPI.dispatch(addProfile({ studentId, profile: result.value }))
+    if (result.ok)
+      thunkAPI.dispatch(
+        addProfile({ studentId: tryGettingStudentId(thunkAPI), profile: result.value })
+      )
     else console.error(result.error.message)
   }
 )

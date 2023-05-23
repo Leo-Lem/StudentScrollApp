@@ -16,10 +16,11 @@ export default function ChatsPage() {
         <Card elevation={2}>
           <ChatDetail chatId={chatId} />
         </Card>
+
         {isCompact && (
           <PrimaryAction fixed={true}>
             <Button href="/chats" variant="contained" sx={{ aspectRatio: 1 }}>
-              <Label type="back" display="iconOnly" />
+              <Label type="chats" display="iconOnly" />
             </Button>
           </PrimaryAction>
         )}

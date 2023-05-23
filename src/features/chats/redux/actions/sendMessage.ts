@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { tryGettingStudentId } from "../../../../lib/redux"
 import API, { APIResult } from "../../../../lib/API"
 
 import { addMessages } from ".."
@@ -12,14 +11,11 @@ export default createAsyncThunk(
     const result: APIResult<Message> = await API.post(
       thunkAPI,
       `chats/${request.chatId}/messages`,
-      {
-        content: request.content,
-        senderId: tryGettingStudentId(thunkAPI)
-      }
+      request.content
     )
 
-    if (result.ok) {
+    if (result.ok)
       thunkAPI.dispatch(addMessages({ chatId: request.chatId, messages: [result.value] }))
-    } else console.error(result.error)
+    else console.error(result.error)
   }
 )

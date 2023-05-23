@@ -8,31 +8,24 @@ import Message from "../../types/Message"
 export default function MessageItem({ message }: { message: Message }) {
   const studentId = useStudentId()
 
-  return (
-    <Grid
-      item
-      xs
-      container
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
-      marginY={1}
-    >
-      <Grid item xs={1}>
-        <ProfileLink
-          studentId={message.senderId === studentId ? studentId : message.senderId}
-          disabled={message.senderId === studentId}
-        />
-      </Grid>
+  const isSender = message.senderId === studentId
 
-      <Grid item xs>
-        <Typography variant="h4" textAlign="center">
+  const badge = (
+    <Grid item xs={3} sm={2}>
+      <ProfileLink studentId={message.senderId} disabled={isSender} />
+    </Grid>
+  )
+
+  return (
+    <Grid container direction="row" alignItems="center" gap={1}>
+      {!isSender && badge}
+
+      <Grid item xs container direction="column" gap={1} alignItems={isSender ? "end" : "start"}>
+        <Typography noWrap variant="h4" textAlign="center" fontSize="min(5vw, 5vh)">
           {message.content}
         </Typography>
-      </Grid>
 
-      <Grid item xs={2} alignSelf="end">
-        <Typography variant="caption" align="right">
+        <Typography noWrap variant="caption">
           {new Date(message.timestamp).toLocaleTimeString([], {
             year: "2-digit",
             month: "short",
@@ -42,6 +35,8 @@ export default function MessageItem({ message }: { message: Message }) {
           })}
         </Typography>
       </Grid>
+
+      {isSender && badge}
     </Grid>
   )
 }

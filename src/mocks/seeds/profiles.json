@@ -1,73 +1,91 @@
 [
   {
+    "studentId": "1",
     "name": "Raoul Duke",
     "bio": "A man who procrastinates in his choosing will inevitably have his choice made for him by circumstance.",
     "icon": "diversity",
     "interests": ["Travel", "Music", "AUT"],
     "location": { "latitude": -36.85489, "longitude": 174.7669 },
-    "studentsId": "1"
+    "followers": ["2", "3", "6", "7", "8", "9"],
+    "follows": ["2", "3", "4", "5"]
   },
   {
+    "studentId": "2",
     "name": "Hunter S. Thompson",
     "bio": "I hate to advocate drugs, alcohol, violence, or insanity to anyone, but they've always worked for me.",
     "icon": "graduation",
     "interests": ["Writing", "Journalism", "Politics"],
     "location": { "latitude": -36.85, "longitude": 174.75 },
-    "studentsId": "2"
+    "followers": ["1"],
+    "follows": ["1"]
   },
   {
+    "studentId": "3",
     "name": "Dr. Gonzo",
     "bio": "There he goes. One of God's own prototypes. A high-powered mutant of some kind never even considered for mass production. Too weird to live, and too rare to die.",
     "icon": "music",
     "interests": ["Drugs", "Alcohol", "Guns"],
     "location": { "latitude": -36.845, "longitude": 174.76 },
-    "studentsId": "3"
+    "followers": ["1"],
+    "follows": ["1"]
   },
   {
+    "studentId": "4",
     "name": "Oscar Zeta Acosta",
     "bio": "I was a heavy smoker, a habitual drinker, and a recreational drug user, and I'd just barely survived a bout with Dr. Gonzo in the Mojave Desert.",
     "icon": "camera",
     "interests": ["Law", "Politics", "Activism"],
     "location": { "latitude": -36.8549, "longitude": 174.7668 },
-    "studentsId": "4"
+    "followers": ["1"],
+    "follows": []
   },
   {
+    "studentId": "5",
     "name": "Lucy",
     "bio": "I love you, Raoul Duke. And I want to have your abortion.",
     "icon": "paintbrush",
     "interests": ["Art", "Music", "Drugs"],
     "location": { "latitude": -36.865, "longitude": 174.755 },
-    "studentsId": "5"
+    "followers": ["1"],
+    "follows": []
   },
   {
+    "studentId": "6",
     "name": "L. Ron Bumquist",
     "bio": "I hate to say this, but this place is getting to me. I think I'm getting the Fear.",
     "icon": "globe",
     "interests": ["Writing", "Journalism", "Politics"],
     "location": { "latitude": -36.845, "longitude": 174.78 },
-    "studentsId": "6"
+    "followers": [],
+    "follows": ["1"]
   },
   {
+    "studentId": "7",
     "name": "Dr. Loomis",
     "bio": "I have a theory that the truth is never told during the nine-to-five hours.",
     "icon": "book",
     "interests": ["Writing", "Journalism", "Politics"],
     "location": { "latitude": -36.86, "longitude": 174.79 },
-    "studentsId": "7"
+    "followers": [],
+    "follows": ["1"]
   },
   {
+    "studentId": "8",
     "name": "Sandy",
     "bio": "I hope you were the anti-Christ, so I can keep on hating you.",
     "icon": "star",
     "interests": ["Writing", "Journalism", "Politics"],
     "location": { "latitude": -36.855, "longitude": 174.8 },
-    "studentsId": "8"
+    "followers": [],
+    "follows": ["1"]
   },
   {
+    "studentId": "9",
     "name": "The Hitchhiker",
     "bio": "I'm going to eat your brains and gain your knowledge.",
     "icon": "backpack",
     "interests": ["Writing", "Journalism", "Politics"],
-    "studentsId": "9"
+    "followers": [],
+    "follows": ["1"]
   }
 ]

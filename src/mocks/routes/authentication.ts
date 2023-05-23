@@ -1,21 +1,19 @@
 import { Response, Server } from "miragejs"
 
 export default function mock(server: Server) {
-  server.post("signin", (schema: any, { requestBody }) => {
-    const { email } = JSON.parse(requestBody)
-
-    const student = schema.students.findBy({ email: email })
-
-    if (student !== null) return respond(student)
-    else return new Response(401, {})
-  })
-
-  server.post("students", (schema: any, { requestBody }) => {
+  server.post("account", (schema: any, { requestBody }) => {
     const { name, email } = JSON.parse(requestBody)
 
-    if (schema.students.findBy({ email: email }) === null)
-      return respond(schema.students.create({ name: name, email: email }))
-    else return new Response(409, {})
+    if (name === undefined) {
+      const student = schema.students.findBy({ email: email })
+
+      if (student !== null) return respond(student)
+      else return new Response(401, {})
+    } else {
+      if (schema.students.findBy({ email: email }) === null)
+        return respond(schema.students.create({ name: name, email: email }))
+      else return new Response(409, {})
+    }
   })
 }
 
