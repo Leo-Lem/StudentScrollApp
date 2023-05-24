@@ -53,11 +53,12 @@
     "LOCALE_ES": "西班牙语",
     "LOCALE_ZH": "中文",
     "LOCALE_SYSTEM": "系统",
-    "SETTINGS_IS_LOCATED": "使用你的位置",
     "FOLLOWERS": "跟随者",
     "FOLLOWS": "以下",
     "NO_ITEMS_PLACEHOLDER": "没有项目",
     "NO_POSTS_PLACEHOLDER": "没有帖子",
-    "NO_CHAT_IS_OPENED_PLACEHOLDER": "没有打开的聊天"
+    "NO_CHAT_IS_OPENED_PLACEHOLDER": "没有打开的聊天",
+    "LOCATION_DENIED": "位置被拒绝",
+    "LOCATION_UNAVAILABLE": "位置不可用"
   }
 }

@@ -53,11 +53,12 @@
     "LOCALE_ES": "Spanisch",
     "LOCALE_ZH": "Chinesisch",
     "LOCALE_SYSTEM": "System",
-    "SETTINGS_IS_LOCATED": "Standortzugriff erlauben",
     "FOLLOWERS": "Follower",
     "FOLLOWS": "Folge ich",
     "NO_ITEMS_PLACEHOLDER": "Nichts zu sehen hier…",
     "NO_POSTS_PLACEHOLDER": "Noch keine Posts",
-    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Klicke auf einen Chat, um ihn zu öffnen"
+    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Klicke auf einen Chat, um ihn zu öffnen",
+    "LOCATION_DENIED": "Bitte erlaube den Zugriff auf deinen Standort",
+    "LOCATION_UNAVAILABLE": "Standort nicht verfügbar… Bitte versuche es später erneut"
   }
 }

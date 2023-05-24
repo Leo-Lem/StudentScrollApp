@@ -9,7 +9,7 @@ export default function MessageList({ chat, newestFirst }: Props) {
   const ids = chat.messageIds
 
   return (
-    <Grid container direction={newestFirst ? "column" : "column-reverse"} padding={1} spacing={1}>
+    <Grid container direction={newestFirst ? "column-reverse" : "column"} padding={1} spacing={1}>
       {ids.length < 1 && <Placeholder />}
 
       {ids.map((id) => (

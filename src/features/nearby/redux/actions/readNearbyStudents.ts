@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import API, { APIResult } from "../../../../lib/API"
 
-import { addLocation } from ".."
 import StudentLocation from "../../types/StudentLocation"
 import { Profile } from "../../../profiles"
+import { addProfile } from "../../../profiles/redux/slice"
 
 export default createAsyncThunk(
   "nearby/readNearbyStudents",
@@ -14,13 +14,7 @@ export default createAsyncThunk(
       `students?lat=${location.latitude}&lng=${location.longitude}`
     )
 
-    if (result.ok) {
-      result.value.forEach((profile) => {
-        if (profile.location !== undefined)
-          thunkAPI.dispatch(
-            addLocation({ studentId: profile.studentId, location: profile.location })
-          )
-      })
-    } else console.error(result.error)
+    if (result.ok) result.value.forEach((profile) => thunkAPI.dispatch(addProfile(profile)))
+    else console.error(result.error)
   }
 )

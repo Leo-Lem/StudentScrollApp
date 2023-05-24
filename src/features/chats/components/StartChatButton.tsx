@@ -12,7 +12,7 @@ export default function StartChatButton({ studentId }: Props) {
   const openChat = async (): Promise<boolean> => {
     let id = chatId
 
-    id = await createChat(studentId)
+    if (id === undefined) id = await createChat(studentId)
 
     navigate(`/chats/${id}`)
     return true

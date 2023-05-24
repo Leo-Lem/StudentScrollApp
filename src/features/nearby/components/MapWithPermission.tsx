@@ -1,35 +1,52 @@
-import { Box, Typography } from "@mui/material"
+import { Chip } from "@mui/material"
 import { Fragment, ReactNode } from "react"
 
 import Map from "./Map"
 
+import { useTranslation } from "react-i18next"
+import { LoadingSpinner } from "../../../components"
+import LocationStatus from "../types/LocationStatus"
 import StudentLocation from "../types/StudentLocation"
 
-export default function MapWithPermission({ center, isAllowed, children: markers }: Props) {
+export default function MapWithPermission({ center, status, children: markers }: Props) {
+  const [t] = useTranslation()
+
+  const infoText = (() => {
+    switch (status) {
+      case "denied":
+        return t("LOCATION_DENIED")
+      case "unavailable":
+        return t("LOCATION_UNAVAILABLE")
+      case undefined:
+        return <LoadingSpinner />
+      default:
+        return undefined
+    }
+  })()
+
+  const infoColor = (() => {
+    switch (status) {
+      case "denied":
+        return "error"
+      case "unavailable":
+        return "warning"
+      default:
+        return undefined
+    }
+  })()
+
   return (
     <Fragment>
-      <Map center={center ?? { latitude: -36.87, longitude: 174.78 }}>{isAllowed && markers}</Map>
+      <Map center={center ?? { latitude: -36.87, longitude: 174.78 }}>
+        {status === "permitted" && markers}
+      </Map>
 
-      {!isAllowed && (
-        <Box
-          position="absolute"
-          width="100%"
-          height="100%"
-          top={0}
-          left={0}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Typography
-            color="black"
-            variant="h3"
-            textAlign="center"
-            sx={{ rotate: "30deg", transformOrigin: "center", textShadow: "0 0 10px green" }}
-          >
-            Please enable your location to use this feature…
-          </Typography>
-        </Box>
+      {infoText !== undefined && (
+        <Chip
+          label={infoText}
+          color={infoColor}
+          sx={{ position: "absolute", bottom: 10, left: 10 }}
+        />
       )}
     </Fragment>
   )
@@ -37,6 +54,6 @@ export default function MapWithPermission({ center, isAllowed, children: markers
 
 interface Props {
   center?: StudentLocation
-  isAllowed: boolean
+  status?: LocationStatus
   children: ReactNode
 }

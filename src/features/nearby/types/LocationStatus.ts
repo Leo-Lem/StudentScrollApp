@@ -1,5 +1,3 @@
-import StudentLocation from "./StudentLocation"
-
-type LocationStatus = StudentLocation | "denied" | "unavailable"
+type LocationStatus = "permitted" | "denied" | "unavailable"
 
 export default LocationStatus

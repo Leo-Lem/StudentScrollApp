@@ -2,7 +2,6 @@ import { Container, CssBaseline } from "@mui/material"
 import { Fragment } from "react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
-
 import { AppLocaleProvider } from "./res/locale"
 import { AppThemeProvider } from "./res/theme"
 

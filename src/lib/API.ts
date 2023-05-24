@@ -25,7 +25,7 @@ namespace API {
           ...(requiresAuthorization ? { Authorization: tryGettingAuthzHeader(thunkAPI) } : {}),
           ...(body !== undefined ? { "Content-Type": "application/json" } : {})
         },
-        ...(body !== undefined && { body: JSON.stringify(body) })
+        ...(body !== undefined && { body: typeof body === "string" ? body : JSON.stringify(body) })
       })
 
       if (response.ok)
