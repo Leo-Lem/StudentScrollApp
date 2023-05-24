@@ -1,11 +1,11 @@
 import { Server } from "miragejs"
 
 export default function mock(server: Server) {
-  server.get("settings", async (schema: any) => {
+  server.get("account/settings", async (schema: any) => {
     return JSON.stringify(schema.settings.first().attrs)
   })
 
-  server.put("settings", async (schema: any, { requestBody }) => {
+  server.put("account/settings", async (schema: any, { requestBody }) => {
     const settings = schema.settings.first()
     const { newTheme, newLocale } = JSON.parse(requestBody)
 

@@ -6,7 +6,7 @@ import { useMessage } from "../../redux"
 import Message from "../../types/Message"
 import { LoadingSpinner } from "../../../../components"
 
-function Render({ message, isSender }: { message: Message, isSender: boolean }) {
+function Render({ message, isSender }: { message: Message; isSender: boolean }) {
   const badge = (
     <Grid item xs={3} sm={2}>
       <ProfileLink studentId={message.senderId} disabled={isSender} />

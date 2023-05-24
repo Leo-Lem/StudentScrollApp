@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import API, { APIResult } from "../../../../lib/API"
-import { loadStudent } from "../../../student"
 import { setAuthenticated, setFailed } from "../slice"
+import loadStudent from "../../../student/actions/loadStudent"
 
 export default createAsyncThunk(
   "authentication/authenticate",

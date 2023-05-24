@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import API, { APIResult } from "../../../../lib/API"
 
 import Message from "../../types/Message"
-import { addMessages } from "../slice";
+import { addMessages } from "../slice"
 
 export default createAsyncThunk(
   "chats/sendMessage",

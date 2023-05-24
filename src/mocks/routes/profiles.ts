@@ -1,4 +1,4 @@
-import { Server } from "miragejs"
+import { Response, Server } from "miragejs"
 import StudentLocation from "../../features/nearby/types/StudentLocation"
 
 export default function mock(server: Server) {
@@ -27,9 +27,17 @@ export default function mock(server: Server) {
 
     return respond(profile.attrs)
   })
+
+  server.post("students/:studentId/followers", (schema) => {
+    return new Response(201)
+  })
+
+  server.delete("students/:studentId/followers", (schema, { url }) => {
+    return new Response(204)
+  })
 }
 
-interface Response {
+interface ProfileResponse {
   studentId: number
   name: string
   bio: string
@@ -40,15 +48,17 @@ interface Response {
   follows: number[]
 }
 
-function respond(profile: any): Response {
-  return {
-    studentId: parseInt(profile.studentId),
-    name: profile.name,
-    bio: profile.bio,
-    icon: profile.icon,
-    interests: profile.interests,
-    location: profile.location,
-    followers: profile.followers.map((follower: any) => parseInt(follower.studentId)),
-    follows: profile.follows.map((follow: any) => parseInt(follow.studentId))
-  }
+function respond(profile: any | undefined): ProfileResponse | undefined {
+  if (profile === undefined) return undefined
+  else
+    return {
+      studentId: parseInt(profile.studentId),
+      name: profile.name,
+      bio: profile.bio,
+      icon: profile.icon,
+      interests: profile.interests,
+      location: profile.location,
+      followers: profile.followers.map((follower: any) => parseInt(follower)),
+      follows: profile.follows.map((follow: any) => parseInt(follow))
+    }
 }

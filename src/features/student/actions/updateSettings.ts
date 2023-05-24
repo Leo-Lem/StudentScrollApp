@@ -2,8 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import API, { APIResult } from "../../../lib/API"
 
-import { setSettings } from ".."
 import { Settings } from "../../settings"
+import { setSettings } from "../slice"
 
 export default createAsyncThunk(
   "student/updateSettings",

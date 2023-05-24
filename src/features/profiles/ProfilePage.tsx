@@ -5,12 +5,13 @@ import { LoadingSpinner } from "../../components"
 import { useIdParam, useIsCompact } from "../../lib/hooks"
 
 import StartChatButton from "../chats/components/StartChatButton"
-import { FollowersList, FollowsList } from "../following"
 import StudentPostsList from "../posts/components/list/StudentPostsList"
 import EditableProfileDetails from "./components/EditableProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
 import { useProfile } from "./redux"
 import { useStudentId } from "../student"
+import FollowsList from "./components/following/FollowsList"
+import FollowersList from "./components/following/FollowersList"
 
 export default function ProfilePage() {
   const isCompact = useIsCompact()

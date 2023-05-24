@@ -1,5 +1,5 @@
-import Chat from "../../types/Chat";
-import useChats from "./useChats";
+import Chat from "../../types/Chat"
+import useChats from "./useChats"
 
 export default function useChatIdWithStudent(studentId: number): number | undefined {
   const chats = useChats()

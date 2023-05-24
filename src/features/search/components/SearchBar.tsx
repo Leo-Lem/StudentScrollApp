@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
 
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
-import { useProfile } from "../../profiles/redux"
 import readProfile from "../../profiles/redux/actions/readProfile"
 
 export default function SearchBar() {

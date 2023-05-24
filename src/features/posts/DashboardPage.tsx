@@ -3,9 +3,10 @@ import { Box, Card, Grid, Slide, Stack } from "@mui/material"
 import { BindingToggle, Label, PrimaryAction } from "../../components"
 import { useBinding, useIsCompact } from "../../lib/hooks"
 
-import { FollowersList, FollowsList } from "../following"
 import CreatePostMenu from "./components/CreatePostMenu"
 import ScrollablePostsListWithSwitch from "./components/list/ScrollablePostsListWithSwitch"
+import FollowersList from "../profiles/components/following/FollowersList"
+import FollowsList from "../profiles/components/following/FollowsList"
 
 export default function DashboardPage() {
   const isCompact = useIsCompact()

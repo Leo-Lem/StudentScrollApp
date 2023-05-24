@@ -1,30 +1,22 @@
-import { Fragment, useEffect } from "react"
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Container, CssBaseline } from "@mui/material"
+import { Fragment } from "react"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
-import useAppSelector from "./lib/hooks/useAppSelector"
-import useAppDispatch from "./lib/hooks/useAppDispatch"
 
-import { AppThemeProvider } from "./res/theme"
 import { AppLocaleProvider } from "./res/locale"
+import { AppThemeProvider } from "./res/theme"
 
-import { Header, Footer, WelcomeHeader, addPageChip } from "./features/navigation"
+import { WelcomePage } from "./features/authentication"
+import { useIsAuthenticated } from "./features/authentication/redux"
+import { ChatsPage } from "./features/chats"
+import { Footer, Header, WelcomeHeader, addPageChip } from "./features/navigation"
+import { NearbyPage } from "./features/nearby"
 import { DashboardPage } from "./features/posts"
 import { ProfilePage } from "./features/profiles"
-import { WelcomePage } from "./features/authentication"
 import { SettingsPage } from "./features/settings"
-import { ChatsPage } from "./features/chats"
-import { loadStudent } from "./features/student"
-import { NearbyPage } from "./features/nearby"
 
 export default function App() {
-  const isAuthenticated = useAppSelector((state) => state.authentication.status === "authenticated")
-
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(loadStudent())
-  }, [isAuthenticated])
+  const isAuthenticated = useIsAuthenticated()
 
   const authenticated = (
     <Fragment>
