@@ -2,6 +2,6 @@ import authentication from "./slice"
 
 export default authentication.reducer
 
-export const { signOut, setAuthenticated, setFailed } = authentication.actions
-export { default as signIn } from "./actions/signIn"
-export { default as signUp } from "./actions/signUp"
+export { default as useAuthenticate } from "./hooks/useAuthenticate"
+export { default as useAuthenticationStatus } from "./hooks/useAuthenticationStatus"
+export { default as useSignOut } from "./hooks/useSignOut"

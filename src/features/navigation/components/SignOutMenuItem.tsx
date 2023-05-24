@@ -1,17 +1,15 @@
 import { MenuItem } from "@mui/material"
 
 import { Label } from "../../../components"
-import { useAppDispatch } from "../../../lib/hooks"
-
-import { signOut } from "../../authentication/redux"
+import { useSignOut } from "../../authentication/redux"
 
 export default function SignOutMenuItem({ dismiss }: Props) {
-  const dispatch = useAppDispatch()
+  const signOut = useSignOut()
 
   return (
     <MenuItem
       onClick={() => {
-        dispatch(signOut())
+        signOut()
         dismiss()
       }}
       sx={{ gap: 1 }}

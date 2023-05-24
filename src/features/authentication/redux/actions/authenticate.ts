@@ -1,14 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { loadStudent } from "../../../student"
 import API, { APIResult } from "../../../../lib/API"
-
-import { setAuthenticated, setFailed } from ".."
-import AuthenticationError from "../../types/AuthenticationError"
+import { loadStudent } from "../../../student"
+import { setAuthenticated, setFailed } from "../slice"
 
 export default createAsyncThunk(
-  "authentication/signUp",
-  async (info: { name: string; email: string; password: string }, thunkAPI) => {
+  "authentication/authenticate",
+  async (info: { name?: string; email: string; password: string }, thunkAPI) => {
     const result: APIResult<{ id: number; token: string }> = await API.post(
       thunkAPI,
       "account",
@@ -21,11 +19,14 @@ export default createAsyncThunk(
       thunkAPI.dispatch(loadStudent())
     } else {
       switch (result.error.code) {
+        case 401:
+          thunkAPI.dispatch(setFailed("invalidCredentials"))
+          break
         case 409:
-          thunkAPI.dispatch(setFailed(AuthenticationError.emailInUse))
+          thunkAPI.dispatch(setFailed("emailInUse"))
           break
         default:
-          thunkAPI.dispatch(setFailed(AuthenticationError.unknown))
+          thunkAPI.dispatch(setFailed("unknown"))
           console.error(result.error.message)
       }
     }

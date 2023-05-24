@@ -1,7 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit"
 
 import State from "../state"
-import AuthenticationStatus from "../../types/AuthenticationStatus"
 
 export default function handleSetAuthenticated(
   state: State,
@@ -13,5 +12,5 @@ export default function handleSetAuthenticated(
 
   sessionStorage.setItem("token", state.token)
 
-  state.status = AuthenticationStatus.authenticated
+  state.status = "authenticated"
 }

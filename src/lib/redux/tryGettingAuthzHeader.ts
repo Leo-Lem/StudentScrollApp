@@ -1,4 +1,4 @@
-import { signOut } from "../../features/authentication/redux"
+import { signOut } from "../../features/authentication/redux/slice"
 import { RootState } from "../../store"
 
 export default function tryGettingAuthorizationHeader(thunkAPI: any): string {

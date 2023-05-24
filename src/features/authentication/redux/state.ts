@@ -10,7 +10,6 @@ export default interface State {
 const token = sessionStorage.getItem("token")
 
 export const initialState: State = {
-  status:
-    token !== null ? AuthenticationStatus.authenticated : AuthenticationStatus.unauthenticated,
+  status: token !== null ? "authenticated" : "unauthenticated",
   token: token !== null ? token : undefined
 }

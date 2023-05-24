@@ -17,3 +17,4 @@ const authentication = createSlice({
 })
 
 export default authentication
+export const { signOut, setAuthenticated, setFailed } = authentication.actions

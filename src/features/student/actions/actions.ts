@@ -2,8 +2,8 @@ import { ActionReducerMapBuilder } from "@reduxjs/toolkit"
 
 import State from "../state"
 
-import { setAuthenticated } from "../../authentication/redux"
 import { addProfile, removeProfile } from "../../profiles/redux/slice"
+import { setAuthenticated } from "../../authentication/redux/slice"
 
 export default function extraReducers(builder: ActionReducerMapBuilder<State>) {
   builder

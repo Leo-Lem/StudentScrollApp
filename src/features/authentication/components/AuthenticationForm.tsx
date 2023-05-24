@@ -3,30 +3,27 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { AsyncButton, ErrorFeedback, Label } from "../../../components"
-import { useBinding, useAppSelector, useAppDispatch } from "../../../lib/hooks"
+import { useBinding } from "../../../lib/hooks"
 
 import EmailTextField from "./EmailTextField"
 import NameTextField from "./NameTextField"
 import PasswordTextField from "./PasswordTextField"
 
-import { signIn, signUp } from "../redux"
-import AuthenticationStatus from "../types/AuthenticationStatus"
-import AuthenticationError from "../types/AuthenticationError"
+import { useAuthenticate } from "../redux"
+import useAuthenticationStatus from "../redux/hooks/useAuthenticationStatus"
 
 export default function AuthenticationForm() {
-  const status = useAppSelector((state) => state.authentication.status)
-  const error = useAppSelector((state) => state.authentication.error)
+  const [t] = useTranslation()
 
-  const dispatch = useAppDispatch()
+  const { status, error } = useAuthenticationStatus()
+  const authenticate = useAuthenticate()
 
   const [isRegistering, setIsRegistering] = useState(false)
   const $name = useBinding<string | "invalid" | undefined>(undefined)
   const $email = useBinding<string | "invalid" | undefined>(undefined)
   const $password = useBinding<string | "invalid" | undefined>(undefined)
 
-  const [t] = useTranslation()
-
-  const authenticate = async (): Promise<boolean> => {
+  const handleAuthentication = async (): Promise<boolean> => {
     if (
       (isRegistering && $name.get === undefined) ||
       (isRegistering && $name.get === "invalid") ||
@@ -38,17 +35,17 @@ export default function AuthenticationForm() {
       if (isRegistering && $name.get === undefined) $name.set("invalid")
       if ($email.get === undefined) $email.set("invalid")
       if ($password.get === undefined) $password.set("invalid")
-    } else if (isRegistering) {
-      await dispatch(signUp({ name: $name.get ?? "", email: $email.get, password: $password.get }))
     } else {
-      await dispatch(signIn({ email: $email.get, password: $password.get }))
+      await authenticate($name.get, $email.get, $password.get)
     }
 
     return status === "authenticated"
   }
 
-  function helperText(error: AuthenticationError) {
+  const helperText = (() => {
     switch (error) {
+      case undefined:
+        return ""
       case "invalidCredentials":
         return t("INVALID_CREDENTIALS")
       case "emailInUse":
@@ -56,7 +53,7 @@ export default function AuthenticationForm() {
       case "unknown":
         return t("UNKNOWN_ERROR")
     }
-  }
+  })()
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -70,14 +67,14 @@ export default function AuthenticationForm() {
         <PasswordTextField
           $password={$password}
           isRegistering={isRegistering}
-          onSubmit={authenticate}
+          onSubmit={handleAuthentication}
         />
 
-        <AsyncButton action={authenticate} variant="contained">
+        <AsyncButton action={handleAuthentication} variant="contained">
           <Label type={isRegistering ? "signup" : "signin"} />
         </AsyncButton>
 
-        <ErrorFeedback isError={status === "failed"} message={error ?? ""} />
+        <ErrorFeedback isError={status === "failed"} message={helperText} />
 
         <Button
           variant="text"
