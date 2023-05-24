@@ -11,6 +11,7 @@ import PasswordTextField from "./PasswordTextField"
 
 import { signIn, signUp } from "../redux"
 import AuthenticationStatus from "../types/AuthenticationStatus"
+import AuthenticationError from "../types/AuthenticationError"
 
 export default function AuthenticationForm() {
   const status = useAppSelector((state) => state.authentication.status)
@@ -43,7 +44,18 @@ export default function AuthenticationForm() {
       await dispatch(signIn({ email: $email.get, password: $password.get }))
     }
 
-    return status === AuthenticationStatus.authenticated
+    return status === "authenticated"
+  }
+
+  function helperText(error: AuthenticationError) {
+    switch (error) {
+      case "invalidCredentials":
+        return t("INVALID_CREDENTIALS")
+      case "emailInUse":
+        return t("EMAIL_IN_USE")
+      case "unknown":
+        return t("UNKNOWN_ERROR")
+    }
   }
 
   return (
@@ -65,7 +77,7 @@ export default function AuthenticationForm() {
           <Label type={isRegistering ? "signup" : "signin"} />
         </AsyncButton>
 
-        <ErrorFeedback isError={status === AuthenticationStatus.failed} message={error ?? ""} />
+        <ErrorFeedback isError={status === "failed"} message={error ?? ""} />
 
         <Button
           variant="text"

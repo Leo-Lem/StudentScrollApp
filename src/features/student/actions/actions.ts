@@ -8,8 +8,8 @@ import { addProfile, removeProfile } from "../../profiles/redux/slice"
 export default function extraReducers(builder: ActionReducerMapBuilder<State>) {
   builder
     .addCase(setAuthenticated, (student, action) => {
-      if (student.id === undefined) student.id = action.payload.studentId
-      else student.id = action.payload.studentId
+      student.id = action.payload.studentId
+      sessionStorage.setItem("studentId", action.payload.studentId.toString())
     })
     .addCase(addProfile, (student, action) => {
       if (student.id === undefined || student.id !== action.payload.studentId) return

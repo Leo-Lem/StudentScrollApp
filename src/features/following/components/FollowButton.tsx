@@ -4,11 +4,12 @@ import { AsyncToggle, Label } from "../../../components"
 import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
 
 import { follow, readFollows, unfollow } from "../redux"
+import { useStudentId } from "../../student"
 
 export default function FollowButton({ followId }: Props) {
   const dispatch = useAppDispatch()
 
-  const studentId = useAppSelector((state) => state.authentication.studentId)
+  const studentId = useStudentId()
 
   if (studentId === undefined) throw new Error("Not authenticated")
 

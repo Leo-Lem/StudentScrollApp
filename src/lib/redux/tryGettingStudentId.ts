@@ -4,7 +4,7 @@ import { RootState } from "../../store"
 export default function tryGettingStudentId(thunkAPI: any): number {
   const state = thunkAPI.getState() as RootState
 
-  const studentId = state.authentication.studentId
+  const studentId = state.student.id
 
   if (studentId === undefined) {
     thunkAPI.dispatch(signOut())
