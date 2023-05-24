@@ -1,27 +1,18 @@
-import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
 import { AsyncButton, Label } from "../../../components"
-
-import { createChat, readAllChats } from "../redux"
+import { useChatIdWithStudent, useCreateChat } from "../redux"
 
 export default function StartChatButton({ studentId }: Props) {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
 
-  const chatId = useAppSelector(
-    (state) => state.chats.chats?.find((chat) => chat.participantIds.includes(studentId))?.id
-  )
-  useEffect(() => {
-    if (chatId === undefined) dispatch(readAllChats())
-  })
+  const chatId = useChatIdWithStudent(studentId)
+  const createChat = useCreateChat()
 
   const openChat = async (): Promise<boolean> => {
     let id = chatId
 
-    while (id === undefined)
-      id = (await dispatch(createChat(studentId))).payload as number | undefined
+    id = await createChat(studentId)
 
     navigate(`/chats/${id}`)
     return true
