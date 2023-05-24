@@ -1,5 +1,5 @@
 import { Box, Button, Collapse, Stack, Typography } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { AsyncButton, ErrorFeedback, Label } from "../../../components"
@@ -22,6 +22,14 @@ export default function AuthenticationForm() {
   const $name = useBinding<string | "invalid" | undefined>(undefined)
   const $email = useBinding<string | "invalid" | undefined>(undefined)
   const $password = useBinding<string | "invalid" | undefined>(undefined)
+
+  useEffect(() => {
+    if (!isRegistering) $name.set(undefined)
+    else {
+      $email.set(undefined)
+      $password.set(undefined)
+    }
+  }, [isRegistering])
 
   const handleAuthentication = async (): Promise<boolean> => {
     if (

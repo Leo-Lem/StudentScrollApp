@@ -6,7 +6,7 @@ import { Binding } from "../../../lib/hooks"
 export default function NameTextField({ $name }: Props) {
   const [t] = useTranslation()
 
-  return <RequiredTextField $value={$name} label={t("NAME")} autoComplete="name" />
+  return <RequiredTextField $value={$name} label={t("NAME")} autoComplete="name" fullWidth />
 }
 
 interface Props {

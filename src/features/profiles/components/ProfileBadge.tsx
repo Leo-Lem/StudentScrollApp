@@ -12,7 +12,7 @@ export default function ProfileBadge({ profile, isSelf }: Props) {
     <Box position="relative" borderRadius={100} sx={{ aspectRatio: 1 }}>
       <ProfileIcon icon={profile?.icon} />
 
-      <Box position="absolute" bottom={0} zIndex={1} width="100%">
+      <Box position="absolute" bottom={0} zIndex={1} width={1}>
         {profile !== undefined && (
           <ProfileNameLabel name={isSelf ?? false ? t("YOU") : profile.name} />
         )}

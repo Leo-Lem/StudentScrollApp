@@ -24,7 +24,6 @@ export default function RequiredTextField({
       setIsInvalid(undefined)
     } else if ($value.get === "invalid") {
       setIsEmpty(true)
-      setIsInvalid(false)
     }
   }, [$value.get])
 

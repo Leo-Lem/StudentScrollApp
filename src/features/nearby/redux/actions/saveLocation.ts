@@ -4,6 +4,7 @@ import API from "../../../../lib/API"
 
 import StudentLocation from "../../types/StudentLocation"
 import { setLocation } from "../slice"
+import loadStudent from "../../../student/actions/loadStudent"
 
 export default createAsyncThunk(
   "nearby/saveLocation",
@@ -14,6 +15,7 @@ export default createAsyncThunk(
       newLocation: location
     })
 
-    if (!result.ok) console.error(result.error)
+    if (result.ok) thunkAPI.dispatch(loadStudent())
+    else console.error(result.error)
   }
 )

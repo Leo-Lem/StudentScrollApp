@@ -22,7 +22,7 @@ export default function ProfileIcon({ icon, ...props }: PaperProps & Props) {
         <LoadingSpinner />
       ) : (
         createElement(Icon[icon] ?? Icon.default, {
-          sx: { aspectRatio: 1, padding: 1, width: "100%", height: "100%" }
+          sx: { aspectRatio: 1, padding: 1, width: 1, height: 1 }
         })
       )}
     </Paper>

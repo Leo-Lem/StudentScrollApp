@@ -8,13 +8,13 @@ import { LoadingSpinner } from "../../../../components"
 
 function Render({ message, isSender }: { message: Message; isSender: boolean }) {
   const badge = (
-    <Grid item xs={3} sm={2}>
+    <Grid item xs={3} sm={2} md={2}>
       <ProfileLink studentId={message.senderId} disabled={isSender} />
     </Grid>
   )
 
   return (
-    <Grid container direction="row" alignItems="center" gap={1}>
+    <Grid container direction="row" alignItems="center" spacing={1}>
       {!isSender && badge}
 
       <Grid item xs container direction="column" gap={1} alignItems={isSender ? "end" : "start"}>

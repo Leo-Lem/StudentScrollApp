@@ -19,9 +19,6 @@ export default function useFollow(
   else
     return {
       isFollowing,
-      toggle: async () => {
-        if (isFollowing) await dispatch(follow(followId))
-        else await dispatch(unfollow(followId))
-      }
+      toggle: async () => void (await dispatch(isFollowing ? unfollow(followId) : follow(followId)))
     }
 }

@@ -6,9 +6,11 @@ import { useIsCompact } from "../../../lib/hooks"
 import Profile from "../types/Profile"
 import ProfileIcon from "./ProfileIcon"
 import FollowButton from "./following/FollowButton"
+import { useStudentId } from "../../student"
 
 export default function ProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()
+  const isSelf = profile.studentId === useStudentId()
 
   return (
     <Grid
@@ -19,14 +21,16 @@ export default function ProfileDetails({ profile }: Props) {
       position="relative"
       padding={1}
     >
-      <Grid item>
-        <PrimaryAction
-          fixed={isCompact}
-          sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, margin: 1 }}
-        >
-          <FollowButton followId={profile.studentId} />
-        </PrimaryAction>
-      </Grid>
+      {!isSelf && (
+        <Grid item>
+          <PrimaryAction
+            fixed={isCompact}
+            sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, margin: 1 }}
+          >
+            <FollowButton followId={profile.studentId} />
+          </PrimaryAction>
+        </Grid>
+      )}
 
       <Grid item xs={6}>
         <ProfileIcon icon={profile.icon} />

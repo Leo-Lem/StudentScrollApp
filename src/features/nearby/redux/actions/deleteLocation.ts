@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 
 import API from "../../../../lib/API"
 import { setLocation } from "../slice"
+import loadStudent from "../../../student/actions/loadStudent"
 
 export default createAsyncThunk("nearby/saveLocation", async (_, thunkAPI) => {
   thunkAPI.dispatch(setLocation(undefined))
@@ -10,5 +11,6 @@ export default createAsyncThunk("nearby/saveLocation", async (_, thunkAPI) => {
     newLocation: null
   })
 
-  if (!result.ok) console.error(result.error)
+  if (result.ok) thunkAPI.dispatch(loadStudent())
+  else console.error(result.error)
 })
