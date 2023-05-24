@@ -1,15 +1,12 @@
 import { Grid, Typography } from "@mui/material"
 
-import { useStudentId } from "../../../../lib/hooks"
-
 import { ProfileLink } from "../../../profiles"
+import { useStudentId } from "../../../student"
+import { useMessage } from "../../redux"
 import Message from "../../types/Message"
+import { LoadingSpinner } from "../../../../components"
 
-export default function MessageItem({ message }: { message: Message }) {
-  const studentId = useStudentId()
-
-  const isSender = message.senderId === studentId
-
+function Render({ message, isSender }: { message: Message; isSender: boolean }) {
   const badge = (
     <Grid item xs={3} sm={2}>
       <ProfileLink studentId={message.senderId} disabled={isSender} />
@@ -39,4 +36,18 @@ export default function MessageItem({ message }: { message: Message }) {
       {isSender && badge}
     </Grid>
   )
+}
+
+export default function MessageItem({ chatId, messageId }: Props) {
+  const studentId = useStudentId()
+
+  const message = useMessage(chatId, messageId)
+
+  if (message === undefined) return <LoadingSpinner />
+  else return <Render message={message} isSender={message.senderId === studentId} />
+}
+
+interface Props {
+  chatId: number
+  messageId: number
 }

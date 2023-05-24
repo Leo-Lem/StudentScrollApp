@@ -3,9 +3,7 @@ import StudentLocation from "../types/StudentLocation"
 
 export default interface State {
   status?: LocationStatus
-  locations?: {
-    [studentId: number]: StudentLocation
-  }
+  location?: StudentLocation
 }
 
 export const initialState: State = {}

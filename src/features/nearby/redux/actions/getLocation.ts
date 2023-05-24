@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { deleteLocation, saveLocation, setStatus } from ".."
 import Result from "../../../../lib/Result"
 import StudentLocation from "../../types/StudentLocation"
+import { setStatus } from "../slice"
+import saveLocation from "./saveLocation"
+import deleteLocation from "./deleteLocation"
 
 async function getLocation(): Promise<Result<StudentLocation, boolean>> {
   return new Promise((resolve) => {
@@ -23,7 +25,7 @@ async function getLocation(): Promise<Result<StudentLocation, boolean>> {
   })
 }
 
-export default createAsyncThunk("nearby/getCurrentLocation", async (_, thunkAPI) => {
+export default createAsyncThunk("nearby/getLocation", async (_, thunkAPI) => {
   const { geolocation } = navigator
 
   if (geolocation === undefined) thunkAPI.dispatch(setStatus("unavailable"))
@@ -31,11 +33,11 @@ export default createAsyncThunk("nearby/getCurrentLocation", async (_, thunkAPI)
   const location = await getLocation()
 
   if (location.ok) {
-    thunkAPI.dispatch(setStatus(location.value))
     thunkAPI.dispatch(saveLocation(location.value))
+    thunkAPI.dispatch(setStatus("permitted"))
   } else if (!location.ok && location.error) {
-    thunkAPI.dispatch(setStatus("denied"))
     thunkAPI.dispatch(deleteLocation())
+    thunkAPI.dispatch(setStatus("denied"))
   } else {
     thunkAPI.dispatch(setStatus("unavailable"))
   }

@@ -9,8 +9,11 @@
     "SWITCH_TO_SIGNIN": "Already have an account? Sign in",
     "EMAIL_INVALID": "Invalid email address",
     "PASSWORD_TOO_SHORT": "At least 6 characters",
-    "CREATED_BY": "Created by {{names}}",
+    "INVALID_CREDENTIALS": "Email or password is incorrect",
+    "EMAIL_IN_USE": "Email address already in use",
+    "UNEXPECTED_ERROR": "Unexpected error… Please try again later",
     "YOU": "You",
+    "CREATED_BY": "Created by {{names}}",
     "LABEL_SIGNIN": "Sign in",
     "LABEL_SIGNUP": "Sign up",
     "LABEL_SIGNOUT": "Sign out",
@@ -50,11 +53,12 @@
     "LOCALE_ES": "Spanish",
     "LOCALE_ZH": "Chinese",
     "LOCALE_SYSTEM": "System",
-    "SETTINGS_IS_LOCATED": "Use your location",
     "FOLLOWERS": "Followers",
     "FOLLOWS": "I'm following",
     "NO_ITEMS_PLACEHOLDER": "Nothing to see here…",
     "NO_POSTS_PLACEHOLDER": "Nothing posted yet…",
-    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Click on a chat to open it…"
+    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Click on a chat to open it…",
+    "LOCATION_DENIED": "Please allow access to your location",
+    "LOCATION_UNAVAILABLE": "Location unavailable… Please try again later"
   }
 }

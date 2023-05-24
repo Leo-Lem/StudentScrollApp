@@ -15,3 +15,4 @@ const chats = createSlice({
 })
 
 export default chats
+export const { addChats, addMessages } = chats.actions

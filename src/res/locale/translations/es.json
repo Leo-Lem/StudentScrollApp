@@ -9,6 +9,9 @@
     "SWITCH_TO_SIGNIN": "¿Ya tienes una cuenta? Inicia sesión",
     "EMAIL_INVALID": "Email inválido",
     "PASSWORD_TOO_SHORT": "Al menos 6 caracteres",
+    "INVALID_CREDENTIALS": "Email o contraseña inválidos",
+    "EMAIL_IN_USE": "Email en uso",
+    "UNEXPECTED_ERROR": "Error inesperado… Por favor, inténtalo de nuevo más tarde",
     "CREATED_BY": "Creado por {{names}}",
     "YOU": "Tú",
     "LABEL_SIGNIN": "Ingresar",
@@ -50,11 +53,12 @@
     "LOCALE_ES": "Español",
     "LOCALE_ZH": "Chino",
     "LOCALE_SYSTEM": "Sistema",
-    "SETTINGS_IS_LOCATED": "Utiliza tu ubicación",
     "FOLLOWERS": "Followers",
     "FOLLOWS": "Sigo",
     "NO_ITEMS_PLACEHOLDER": "No hay nada aquí",
     "NO_POSTS_PLACEHOLDER": "No hay posts aquí",
-    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Cliquee en un chat para abrirlo"
+    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Cliquee en un chat para abrirlo",
+    "LOCATION_DENIED": "Por favor, permite el acceso a tu ubicación",
+    "LOCATION_UNAVAILABLE": "Ubicación no disponible… Por favor, inténtalo de nuevo más tarde"
   }
 }

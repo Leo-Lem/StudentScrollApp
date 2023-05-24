@@ -9,6 +9,9 @@
     "SWITCH_TO_SIGNIN": "Haben Sie bereits einen Account? Anmelden",
     "EMAIL_INVALID": "Ungültige E-Mail-Adresse",
     "PASSWORD_TOO_SHORT": "Mindestens 6 Zeichen",
+    "INVALID_CREDENTIALS": "Email oder Passwort falsch",
+    "EMAIL_IN_USE": "Diese E-Mail-Adresse wird bereits verwendet",
+    "UNEXPECTED_ERROR": "Unerwarteter Fehler… Versuche es später noch einmal",
     "YOU": "Ich",
     "CREATED_BY": "Erstellt von {{names}}",
     "LABEL_SIGNIN": "Einloggen",
@@ -50,11 +53,12 @@
     "LOCALE_ES": "Spanisch",
     "LOCALE_ZH": "Chinesisch",
     "LOCALE_SYSTEM": "System",
-    "SETTINGS_IS_LOCATED": "Standortzugriff erlauben",
     "FOLLOWERS": "Follower",
     "FOLLOWS": "Folge ich",
     "NO_ITEMS_PLACEHOLDER": "Nichts zu sehen hier…",
     "NO_POSTS_PLACEHOLDER": "Noch keine Posts",
-    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Klicke auf einen Chat, um ihn zu öffnen"
+    "NO_CHAT_IS_OPENED_PLACEHOLDER": "Klicke auf einen Chat, um ihn zu öffnen",
+    "LOCATION_DENIED": "Bitte erlaube den Zugriff auf deinen Standort",
+    "LOCATION_UNAVAILABLE": "Standort nicht verfügbar… Bitte versuche es später erneut"
   }
 }

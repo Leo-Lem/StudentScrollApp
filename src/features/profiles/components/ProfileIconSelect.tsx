@@ -12,15 +12,13 @@ const icons = iconsWithDefault.filter((icon) => icon !== "default")
 export default function ProfileIconSelect({ $icon }: Props) {
   const [iconIndex, setIconIndex] = useState(icons.indexOf($icon.get))
 
-  useEffect(() => {
-    $icon.set(icons[iconIndex])
-  }, [iconIndex])
+  useEffect(() => $icon.set(icons[iconIndex]), [iconIndex])
 
-  const selectPrevious = () => {
+  function selectPrevious() {
     setIconIndex((((iconIndex - 1) % icons.length) + icons.length) % icons.length)
   }
 
-  const selectNext = () => {
+  function selectNext() {
     setIconIndex((iconIndex + 1) % icons.length)
   }
 

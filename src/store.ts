@@ -4,7 +4,6 @@ import studentReducer from "./features/student"
 import { authenticationReducer } from "./features/authentication"
 import { postsReducer } from "./features/posts"
 import { profileReducer } from "./features/profiles"
-import { followingReducer } from "./features/following"
 import { chatsReducer } from "./features/chats"
 import { nearbyReducer } from "./features/nearby"
 
@@ -15,7 +14,6 @@ const store = configureStore({
     posts: postsReducer,
     chats: chatsReducer,
     profiles: profileReducer,
-    following: followingReducer,
     nearby: nearbyReducer
   }
 })

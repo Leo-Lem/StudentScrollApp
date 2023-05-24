@@ -4,9 +4,9 @@ import { Edit, Save } from "@mui/icons-material"
 import { Box } from "@mui/material"
 
 import { BindingToggle, PrimaryAction } from "../../../components"
-import { useAppDispatch, useBinding, useIsCompact } from "../../../lib/hooks"
+import { useBinding, useIsCompact } from "../../../lib/hooks"
 
-import { updateProfile } from "../redux"
+import useUpdateProfile from "../redux/hooks/useUpdateProfile"
 import Profile from "../types/Profile"
 import EditProfileMenu from "./EditProfileMenu"
 import ProfileDetails from "./ProfileDetails"
@@ -14,7 +14,7 @@ import ProfileDetails from "./ProfileDetails"
 export default function EditableProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()
 
-  const dispatch = useAppDispatch()
+  const update = useUpdateProfile()
 
   const $isEditing = useBinding(false)
   const $profile = useBinding(profile)
@@ -33,7 +33,7 @@ export default function EditableProfileDetails({ profile }: Props) {
       const newIcon = newProfile.icon !== profile.icon ? newProfile.icon : undefined
 
       if (newName !== undefined || newBio !== undefined || newIcon !== undefined)
-        void dispatch(updateProfile({ newName, newBio, newIcon }))
+        void update(newName, newBio, newIcon)
     }
   }, [$isEditing.get])
 

@@ -1,8 +1,3 @@
-enum AuthenticationStatus {
-  unauthenticated = "unauthenticated",
-  loading = "loading",
-  authenticated = "authenticated",
-  failed = "failed"
-}
+type AuthenticationStatus = "unauthenticated" | "loading" | "authenticated" | "failed"
 
 export default AuthenticationStatus

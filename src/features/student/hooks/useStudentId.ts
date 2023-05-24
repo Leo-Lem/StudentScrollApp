@@ -1,4 +1,4 @@
-import useAppSelector from "./useAppSelector"
+import useAppSelector from "../../../lib/hooks/useAppSelector"
 
 export default function useStudentId() {
   const studentId = useAppSelector((state) => state.student.id)

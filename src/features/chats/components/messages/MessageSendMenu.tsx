@@ -1,14 +1,13 @@
 import { Grid } from "@mui/material"
 
 import { AsyncButton, Label, RequiredTextField } from "../../../../components"
-import { useAppDispatch, useBinding, useIsCompact } from "../../../../lib/hooks"
-
-import { sendMessage } from "../../redux"
+import { useBinding, useIsCompact } from "../../../../lib/hooks"
+import { useSendMessage } from "../../redux"
 
 export default function MessageSendMenu({ chatId }: Props) {
-  const dispatch = useAppDispatch()
   const isCompact = useIsCompact()
 
+  const sendMessage = useSendMessage()
   const $newMessage = useBinding<string | undefined>(undefined)
 
   const handleSendMessage = async (): Promise<boolean> => {
@@ -18,7 +17,7 @@ export default function MessageSendMenu({ chatId }: Props) {
       $newMessage.set("invalid")
       return false
     } else {
-      await dispatch(sendMessage({ chatId, content: $newMessage.get }))
+      sendMessage(chatId, $newMessage.get)
       $newMessage.set(undefined)
       return true
     }

@@ -1,19 +1,13 @@
 import { Card, Divider, Stack } from "@mui/material"
-import { Fragment, useEffect } from "react"
+import { Fragment } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
 import { LoadingSpinner, Placeholder } from "../../../../components"
 
+import { useChats } from "../../redux"
 import ChatLink from "./ChatRow"
-import { readAllChats } from "../../redux"
 
 export default function ChatsList({ openChatId }: Props) {
-  const dispatch = useAppDispatch()
-
-  const chats = useAppSelector((state) => state.chats.chats)
-  useEffect(() => {
-    if (chats === undefined) dispatch(readAllChats())
-  }, [openChatId])
+  const chats = useChats()
 
   const render = () => {
     if (chats === undefined) return <LoadingSpinner />
@@ -34,6 +28,7 @@ export default function ChatsList({ openChatId }: Props) {
         </Stack>
       )
   }
+
   return <Card elevation={3}>{render()}</Card>
 }
 

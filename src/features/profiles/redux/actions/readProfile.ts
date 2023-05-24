@@ -3,8 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import API, { APIResult } from "../../../../lib/API"
 import { tryGettingStudentId } from "../../../../lib/redux"
 
-import { addProfile } from ".."
 import Profile from "../../types/Profile"
+import { addProfile } from "../slice"
 
 export default createAsyncThunk(
   "profile/readProfile",
@@ -13,7 +13,7 @@ export default createAsyncThunk(
 
     const result: APIResult<Profile> = await API.get(thunkAPI, `students/${id}`)
 
-    if (result.ok) thunkAPI.dispatch(addProfile({ studentId: id, profile: result.value }))
+    if (result.ok) thunkAPI.dispatch(addProfile(result.value))
     else console.error(result.error.message)
   }
 )

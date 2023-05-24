@@ -1,19 +1,12 @@
 import { Button, Link } from "@mui/material"
-import { useEffect } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
-
-import { readProfile } from "../redux"
+import { useStudentId } from "../../student"
+import { useProfile } from "../redux"
 import ProfileBadge from "./ProfileBadge"
 
-export default function ProfileLink({ studentId, isSelf, disabled }: Props) {
-  const profile = useAppSelector((state) => state.profiles[studentId])
-
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    if (profile === undefined) void dispatch(readProfile(studentId))
-  }, [])
+export default function ProfileLink({ studentId, disabled }: Props) {
+  const currentStudentId = useStudentId()
+  const profile = useProfile(studentId)
 
   return (
     <Button
@@ -23,7 +16,7 @@ export default function ProfileLink({ studentId, isSelf, disabled }: Props) {
       href={`/profile/${studentId}`}
       sx={{ padding: 0, borderRadius: 100 }}
     >
-      <ProfileBadge profile={profile} isSelf={isSelf} />
+      <ProfileBadge profile={profile} isSelf={currentStudentId === studentId} />
     </Button>
   )
 }
@@ -31,5 +24,4 @@ export default function ProfileLink({ studentId, isSelf, disabled }: Props) {
 interface Props {
   studentId: number
   disabled?: boolean
-  isSelf?: boolean
 }

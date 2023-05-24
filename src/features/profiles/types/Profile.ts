@@ -9,4 +9,6 @@ export default interface Profile {
   icon: IconType
   interests: Tag[]
   location?: StudentLocation
+  followers: number[]
+  follows: number[]
 }

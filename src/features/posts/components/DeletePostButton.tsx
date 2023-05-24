@@ -2,12 +2,13 @@ import { Delete } from "@mui/icons-material"
 import { Fragment } from "react"
 
 import { AsyncButton } from "../../../components"
-import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
+import { useAppDispatch } from "../../../lib/hooks"
 
+import { useStudentId } from "../../student"
 import { deletePost } from "../redux"
 
 export default function DeletePostButton({ postId, posterId }: Props) {
-  const studentId = useAppSelector((state) => state.authentication.studentId)
+  const studentId = useStudentId()
   const dispatch = useAppDispatch()
 
   const deleteThis = async (): Promise<boolean> => {
