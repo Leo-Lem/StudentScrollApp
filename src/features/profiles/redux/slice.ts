@@ -14,3 +14,4 @@ const profiles = createSlice({
 })
 
 export default profiles
+export const { addProfile, removeProfile } = profiles.actions

@@ -1,7 +1,7 @@
 import Profile from "../types/Profile"
 
-export default interface State {
-  [id: number]: Profile
-}
+type State = Profile[]
 
-export const initialState = {} as State
+export default State
+
+export const initialState = [] as State

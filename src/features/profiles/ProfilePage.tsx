@@ -1,35 +1,25 @@
 import { Card, Grid, Stack } from "@mui/material"
-import { Fragment, useEffect } from "react"
+import { Fragment } from "react"
 
 import { LoadingSpinner } from "../../components"
-import {
-  useAppDispatch,
-  useAppSelector,
-  useIdParam,
-  useIsCompact,
-  useStudentId
-} from "../../lib/hooks"
+import { useIdParam, useIsCompact } from "../../lib/hooks"
 
 import StartChatButton from "../chats/components/StartChatButton"
 import { FollowersList, FollowsList } from "../following"
 import StudentPostsList from "../posts/components/list/StudentPostsList"
 import EditableProfileDetails from "./components/EditableProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
-import { readProfile } from "./redux"
+import { useProfile } from "./redux"
+import { useStudentId } from "../student"
 
 export default function ProfilePage() {
   const isCompact = useIsCompact()
-  const dispatch = useAppDispatch()
 
   const currentStudentId = useStudentId()
   const studentId = useIdParam("studentId") ?? currentStudentId
   const isSelf = studentId === currentStudentId
 
-  const profile = useAppSelector((state) => state.profiles[studentId])
-
-  useEffect(() => {
-    if (profile === undefined) void dispatch(readProfile(studentId))
-  }, [studentId])
+  const profile = useProfile(studentId)
 
   const details = (
     <Card elevation={3}>
@@ -39,7 +29,7 @@ export default function ProfilePage() {
         ) : isSelf ? (
           <EditableProfileDetails profile={profile} />
         ) : (
-          <ProfileDetails followId={studentId} profile={profile} />
+          <ProfileDetails profile={profile} />
         )}
       </Stack>
     </Card>

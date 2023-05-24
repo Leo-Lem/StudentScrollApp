@@ -7,7 +7,7 @@ import { FollowButton } from "../../following"
 import Profile from "../types/Profile"
 import ProfileIcon from "./ProfileIcon"
 
-export default function ProfileDetails({ followId, profile }: Props) {
+export default function ProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()
 
   return (
@@ -20,14 +20,12 @@ export default function ProfileDetails({ followId, profile }: Props) {
       padding={1}
     >
       <Grid item>
-        {followId !== undefined && (
-          <PrimaryAction
-            fixed={isCompact}
-            sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, margin: 1 }}
-          >
-            <FollowButton followId={followId} />
-          </PrimaryAction>
-        )}
+        <PrimaryAction
+          fixed={isCompact}
+          sx={isCompact ? {} : { position: "absolute", top: 0, left: 0, margin: 1 }}
+        >
+          <FollowButton followId={profile.studentId} />
+        </PrimaryAction>
       </Grid>
 
       <Grid item xs={6}>
@@ -49,5 +47,4 @@ export default function ProfileDetails({ followId, profile }: Props) {
 
 interface Props {
   profile: Profile
-  followId?: number
 }

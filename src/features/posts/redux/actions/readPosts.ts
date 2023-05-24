@@ -20,7 +20,6 @@ export default createAsyncThunk("posts/readPosts", async (_, thunkAPI) => {
     )}`
   )
 
-  // TODO: verify this works reasonably well without the headers
   if (result.ok) {
     thunkAPI.dispatch(
       addPosts({
