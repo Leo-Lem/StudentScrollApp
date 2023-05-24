@@ -2,8 +2,9 @@ import { Button, Card, Grid } from "@mui/material"
 import { useEffect } from "react"
 
 import { Label } from "../../components"
-import { useAppDispatch, useAppSelector, useIsCompact, useStudentId } from "../../lib/hooks"
+import { useAppDispatch, useAppSelector, useIsCompact } from "../../lib/hooks"
 
+import { useStudentId } from "../student"
 import MapWithPermission from "./components/MapWithPermission"
 import NearbyStudentsList from "./components/NearbyStudentsList"
 import StudentMarker from "./components/StudentMarker"

@@ -11,7 +11,7 @@ export default function FollowsList({ studentId }: Props) {
   const [t] = useTranslation()
 
   const followIds = useAppSelector((state) =>
-    studentId !== undefined ? state.following[studentId]?.follows : state.student?.follows
+    studentId !== undefined ? state.following[studentId]?.follows : state.student.profile?.follows
   )
 
   useEffect(() => {

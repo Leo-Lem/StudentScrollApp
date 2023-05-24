@@ -7,7 +7,8 @@ export default function useUpdateProfile(): (
   newIcon?: string
 ) => Promise<void> {
   const dispatch = useAppDispatch()
+
   return async (newName?: string, newBio?: string, newIcon?: string) => {
-    dispatch(updateProfile({ newName, newBio, newIcon }))
+    await dispatch(updateProfile({ newName, newBio, newIcon }))
   }
 }

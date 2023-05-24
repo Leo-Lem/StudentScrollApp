@@ -1,20 +1,14 @@
 import { Card } from "@mui/material"
-import { useEffect } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../lib/hooks"
 import { LoadingSpinner } from "../../components"
 
-import { readSettings, updateSettings } from "../student"
+import { useSettings, useUpdateSettings } from "../student"
 import SettingsMenu from "./components/SettingsMenu"
 import Settings from "./types/Settings"
 
 export default function SettingsPage() {
-  const settings = useAppSelector((state) => state.student?.settings)
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    void dispatch(readSettings())
-  }, [])
+  const settings = useSettings()
+  const updateSettings = useUpdateSettings()
 
   const $settings = (unwrapped: Settings) => ({
     get: unwrapped,
@@ -23,7 +17,7 @@ export default function SettingsPage() {
       const newLocale = newSettings.locale !== unwrapped.locale ? newSettings.locale : undefined
 
       if (newTheme !== undefined || newLocale !== undefined)
-        void dispatch(updateSettings({ newTheme, newLocale }))
+        void updateSettings(newTheme, newLocale)
     }
   })
 

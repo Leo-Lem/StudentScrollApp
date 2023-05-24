@@ -1,24 +1,18 @@
 import { EmojiPeople } from "@mui/icons-material"
 import { Box, Stack } from "@mui/material"
 import { OVERLAY_LAYER, OverlayViewF } from "@react-google-maps/api"
-import { Fragment, useEffect } from "react"
+import { Fragment } from "react"
 
-import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
+import { useAppSelector } from "../../../lib/hooks"
 
 import ProfileBadge from "../../profiles/components/ProfileBadge"
-import { readProfile } from "../../profiles/redux"
+import { useProfile } from "../../profiles/redux"
 
 export default function StudentMarker({ studentId, isSelf }: Props) {
-  const dispatch = useAppDispatch()
-
-  const profile = useAppSelector((state) => state.profiles[studentId])
+  const profile = useProfile(studentId)
   const location = useAppSelector((state) =>
     state.nearby.locations !== undefined ? state.nearby.locations[studentId] : undefined
   )
-
-  useEffect(() => {
-    if (profile === undefined || location === undefined) dispatch(readProfile(studentId))
-  }, [studentId])
 
   return (
     <Fragment>

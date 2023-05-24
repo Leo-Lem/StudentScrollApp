@@ -1,9 +1,8 @@
 import { Grid, Typography } from "@mui/material"
 
-import { useStudentId } from "../../../../lib/hooks"
-
 import { ProfileLink } from "../../../profiles"
 import Message from "../../types/Message"
+import { useStudentId } from "../../../student"
 
 export default function MessageItem({ message }: { message: Message }) {
   const studentId = useStudentId()

@@ -1,10 +1,10 @@
 import { Button, Link } from "@mui/material"
 
+import { useStudentId } from "../../student"
 import { useProfile } from "../redux"
 import ProfileBadge from "./ProfileBadge"
-import { useStudentId } from "../../student"
 
-export default function ProfileLink({ studentId, isSelf, disabled }: Props) {
+export default function ProfileLink({ studentId, disabled }: Props) {
   const currentStudentId = useStudentId()
   const profile = useProfile(studentId)
 
@@ -24,5 +24,4 @@ export default function ProfileLink({ studentId, isSelf, disabled }: Props) {
 interface Props {
   studentId: number
   disabled?: boolean
-  isSelf?: boolean
 }

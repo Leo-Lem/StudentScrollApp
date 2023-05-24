@@ -4,8 +4,6 @@ import { Settings } from "../settings"
 export default interface State {
   id?: number
   profile?: Profile
-  followers?: number[]
-  follows?: number[]
   settings?: Settings
 }
 

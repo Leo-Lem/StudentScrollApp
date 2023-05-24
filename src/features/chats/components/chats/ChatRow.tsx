@@ -1,26 +1,19 @@
 import { Button, Stack, Typography } from "@mui/material"
-import { useEffect } from "react"
-
-import { useAppDispatch, useAppSelector, useStudentId } from "../../../../lib/hooks"
 
 import { Label } from "../../../../components"
 import ProfileIcon from "../../../profiles/components/ProfileIcon"
-import { readProfile } from "../../../profiles/redux"
+import { useProfile } from "../../../profiles/redux"
+import { useStudentId } from "../../../student"
 import Chat from "../../types/Chat"
 
 export default function ChatRow({ chat, isOpen }: Props) {
-  const dispatch = useAppDispatch()
   const studentId = useStudentId()
 
   const participantId = chat.participantIds.find((id) => id !== studentId)
 
   if (participantId === undefined) throw new Error("No participant in chat")
 
-  const profile = useAppSelector((state) => state.profiles[participantId])
-
-  useEffect(() => {
-    if (profile === undefined) dispatch(readProfile(participantId))
-  }, [participantId])
+  const profile = useProfile(participantId)
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="space-between" paddingY={1}>

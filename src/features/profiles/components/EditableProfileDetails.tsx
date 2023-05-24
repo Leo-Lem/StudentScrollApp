@@ -17,7 +17,7 @@ export default function EditableProfileDetails({ profile }: Props) {
   const update = useUpdateProfile()
 
   const $isEditing = useBinding(false)
-  const $profile = useBinding({ ...profile, name: "" })
+  const $profile = useBinding(profile)
 
   useEffect(() => {
     if (profile !== undefined) $profile.set({ ...profile, name: "" })
@@ -33,7 +33,7 @@ export default function EditableProfileDetails({ profile }: Props) {
       const newIcon = newProfile.icon !== profile.icon ? newProfile.icon : undefined
 
       if (newName !== undefined || newBio !== undefined || newIcon !== undefined)
-        update(newName, newBio, newIcon)
+        void update(newName, newBio, newIcon)
     }
   }, [$isEditing.get])
 
