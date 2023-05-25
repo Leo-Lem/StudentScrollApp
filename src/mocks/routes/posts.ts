@@ -7,8 +7,13 @@ export default function mock(server: Server) {
 
   server.get(
     "posts",
-    (schema: any, { queryParams: { posterIds: po, page: pa, size: si, sortAscending: so } }) => {
+    (
+      schema: any,
+      { queryParams: { title, tags: t, posterIds: po, page: pa, size: si, sortAscending: so } }
+    ) => {
       const posterIds = po !== undefined ? po.split(",") : undefined
+
+      const tags = t !== undefined ? t.split(",") : undefined
 
       const page = pa !== undefined ? parseInt(pa) : undefined
       const size = si !== undefined ? parseInt(si) : undefined
@@ -18,6 +23,12 @@ export default function mock(server: Server) {
 
       if (posterIds !== undefined)
         posts = schema.posts.where((post: any) => posterIds.includes(post.posterId)).models
+      else if (title !== undefined)
+        posts = schema.posts.where((post: any) => post.title.includes(title)).models
+      else if (tags !== undefined)
+        posts = schema.posts.where((post: any) =>
+          tags.every((tag: string) => post.tags.includes(tag))
+        ).models
       else if (page !== undefined && size !== undefined && sortAscending !== undefined)
         posts = schema.posts
           .all()

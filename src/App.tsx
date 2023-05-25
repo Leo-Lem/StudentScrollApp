@@ -22,6 +22,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={addPageChip("posts", <DashboardPage />)} />
+        <Route path="/posts/:postId?" element={addPageChip("posts", <DashboardPage />)} />
         <Route path="/settings" element={addPageChip("settings", <SettingsPage />)} />
         <Route path="/nearby" element={addPageChip("nearby", <NearbyPage />)} />
         <Route path="/profile/:studentId?" element={addPageChip("profile", <ProfilePage />)} />

@@ -2,8 +2,7 @@ import posts from "./slice"
 
 export default posts.reducer
 
-export const { toggleNewestFirst, addCreatedPost, addPosts, removePost, addStudentPosts } =
-  posts.actions
-export { default as createPost } from "./actions/createPost"
-export { default as readPosts } from "./actions/readPosts"
-export { default as deletePost } from "./actions/deletePost"
+export { default as useCreatePost } from "./hooks/useCreatePost"
+export { default as usePost } from "./hooks/usePost"
+export { default as useDashboardPosts } from "./hooks/useDashboardPosts"
+export { default as useStudentPosts } from "./hooks/useStudentPosts"

@@ -1,7 +1,7 @@
 import { Box, Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 
-import { Binding } from "../../../lib/hooks"
-import { tags } from "../../../res/tags"
+import { Binding } from "../../../../lib/hooks"
+import { tags } from "../../../../res/tags"
 
 export default function TagsSelect({ $tags: $selection }: Props) {
   return (

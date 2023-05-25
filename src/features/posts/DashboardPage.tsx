@@ -1,15 +1,17 @@
 import { Box, Card, Grid, Slide, Stack } from "@mui/material"
 
 import { BindingToggle, Label, PrimaryAction } from "../../components"
-import { useBinding, useIsCompact } from "../../lib/hooks"
+import { useBinding, useIdParam, useIsCompact } from "../../lib/hooks"
 
-import CreatePostMenu from "./components/CreatePostMenu"
-import ScrollablePostsListWithSwitch from "./components/list/ScrollablePostsListWithSwitch"
+import CreatePostMenu from "./components/menus/CreatePostMenu"
+import ScrollablePostsListWithSwitch from "./components/lists/ScrollablePostsListWithSwitch"
 import FollowersList from "../profiles/components/following/FollowersList"
 import FollowsList from "../profiles/components/following/FollowsList"
+import HighlightedPost from "./components/HighlightedPost"
 
 export default function DashboardPage() {
   const isCompact = useIsCompact()
+  const postId = useIdParam("postId")
 
   const $isPosting = useBinding(false)
 
@@ -70,10 +72,14 @@ export default function DashboardPage() {
   return (
     <Grid container direction="row" spacing={1}>
       <Grid item xs={12} md={8}>
+        <Slide direction="down" in={postId !== undefined}>
+          <Box>{postId !== undefined && <HighlightedPost postId={postId} />}</Box>
+        </Slide>
         <ScrollablePostsListWithSwitch />
       </Grid>
 
-      {isCompact ? compactPostMenu : regular}
+      {!isCompact && regular}
+      {isCompact && compactPostMenu}
     </Grid>
   )
 }

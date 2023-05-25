@@ -2,7 +2,7 @@ import { Box, Slide, ToggleButton } from "@mui/material"
 import { Fragment, useState } from "react"
 
 import { Label } from "../../../components"
-import SearchBar from "../../search/components/SearchBar"
+import SearchBar from "../../search/SearchBar"
 
 export default function CollapsibleSearchBar() {
   const [isShowingSearch, setIsShowingSearch] = useState(false)

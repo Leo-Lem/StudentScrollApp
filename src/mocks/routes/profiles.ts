@@ -7,10 +7,17 @@ export default function mock(server: Server) {
   })
 
   server.get("students", async (schema: any, { queryParams }) => {
+    const name = queryParams.name
+    const interests = queryParams.interests
     const lat = parseFloat(queryParams.lat)
     const lng = parseFloat(queryParams.lng)
 
-    if (!isNaN(lat) && !isNaN(lng)) return schema.profiles.all().models.map(respond)
+    if (name) return schema.profiles.where((p: any) => p.name.includes(name)).models.map(respond)
+    else if (interests)
+      return schema.profiles
+        .where((profile: any) => profile.interests.includes(interests))
+        .models.map(respond)
+    else if (!isNaN(lat) && !isNaN(lng)) return schema.profiles.all().models.map(respond)
   })
 
   server.put("students", async (schema: any, { requestBody }) => {

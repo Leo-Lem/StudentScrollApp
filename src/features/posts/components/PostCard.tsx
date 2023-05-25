@@ -1,21 +1,24 @@
-import { Card, Divider, Grid, Stack, Typography } from "@mui/material"
+import { Card, CardProps, Divider, Grid, Stack, Typography } from "@mui/material"
 
 import { useIsCompact } from "../../../lib/hooks"
 
 import ProfileLink from "../../profiles/components/ProfileLink"
 import type ContentPost from "../types/ContentPost"
-import DeletePostButton from "./DeletePostButton"
-import TagsList from "./TagsList"
+import DeletePostButton from "./menus/DeletePostButton"
+import TagsList from "./lists/TagsList"
 
-export default function PostCard({ post: { id, title, tags, content, posterId } }: Props) {
+export default function PostCard({
+  post: { id, title, tags, content, posterId },
+  ...props
+}: Props & CardProps) {
   const isCompact = useIsCompact()
 
   return (
-    <Card elevation={2}>
+    <Card elevation={2} {...props}>
       <Grid container direction="row" alignItems="center" spacing={1}>
         <Grid item xs={9} sm={10} md={10} container direction="column" gap={1}>
           <Stack direction="row" alignItems="center" spacing={1}>
-            <DeletePostButton postId={id} posterId={posterId} />
+            <DeletePostButton postId={id} />
 
             <Grid item maxWidth={0.9}>
               <Typography variant="h4" noWrap textOverflow="ellipsis">

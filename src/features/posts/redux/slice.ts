@@ -2,22 +2,17 @@ import { createSlice } from "@reduxjs/toolkit"
 
 import { initialState } from "./state"
 
-import handleToggleNewestFirst from "./actions/handleToggleNewestFirst"
-import handleAddCreatedPost from "./actions/handleAddCreatedPost"
-import handleAddPosts from "./actions/handleAddPosts"
-import handleRemovePost from "./actions/handleRemovePost"
-import handleAddStudentPosts from "./actions/handleAddStudentPosts"
+import handleRemovePost from "./reducers/handleRemovePost"
+import handleAddPosts from "./reducers/handleAddPosts"
 
 const posts = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    toggleNewestFirst: handleToggleNewestFirst,
-    addCreatedPost: handleAddCreatedPost,
     addPosts: handleAddPosts,
-    removePost: handleRemovePost,
-    addStudentPosts: handleAddStudentPosts
+    removePost: handleRemovePost
   }
 })
 
 export default posts
+export const { addPosts, removePost } = posts.actions
