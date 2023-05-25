@@ -7,25 +7,40 @@ import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
 import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
 import readProfile from "../../profiles/redux/actions/readProfile"
 
-export default function SearchBar() {
-  const { t } = useTranslation()
-
+export default function SearchBar(): ReactElement {
+  const [t] = useTranslation()
+  const [searchId, setSearchId] = useState<number | undefined>(undefined)
+  const [profileByNameQuery, setProfileByNameQuery] = useState<string | undefined>(undefined)
   const dispatch = useAppDispatch()
 
   const [searchQuery, setSearchQuery] = useState("")
   const [profileByIdQuery, setProfileByIdQuery] = useState<number | undefined>(undefined)
 
   useEffect(() => {
-    setProfileByIdQuery(isNaN(parseInt(searchQuery)) ? undefined : parseInt(searchQuery))
+    if (+searchQuery ? true : false) {
+      setProfileByIdQuery(isNaN(parseInt(searchQuery)) ? undefined : parseInt(searchQuery))
+    } else if (searchQuery) {
+      setProfileByNameQuery(searchQuery ? searchQuery : undefined)
+    }
   }, [searchQuery])
 
   useEffect(() => {
     if (profileByIdQuery !== undefined) dispatch(readProfile(profileByIdQuery))
   }, [profileByIdQuery])
 
-  const profileById = useAppSelector(({ profiles }) =>
-    profileByIdQuery === undefined ? undefined : profiles[profileByIdQuery]
-  )
+  const profileById = useAppSelector(({ profiles }) => {
+    if (profileByIdQuery === undefined && searchId !== undefined) {
+      return profiles[searchId]
+    } else if (profileByIdQuery !== undefined && searchId === undefined) {
+      return profiles[profileByIdQuery]
+    } else {
+      return undefined
+    }
+  })
+
+  useEffect(() => {
+    profileByNameQuery !== undefined && dispatch(readProfile(profileByNameQuery)).then(result => setSearchId(result.payload))
+  }, [profileByNameQuery])
 
   const options = (): SearchResult[] => {
     return profileById !== undefined ? [{ id: "profileById", value: profileById }] : []
@@ -56,9 +71,9 @@ export default function SearchBar() {
       case "profileById":
         return (
           <LinkMenuItem
-            href={`/profile/${profileByIdQuery}`}
-            dismiss={() => setSearchQuery("")}
-            key={profileByIdQuery}
+            href={`/profile/${option.value.studentsId}`}
+            dismiss={clear}
+            key={searchId}
           >
             {option.value.name}
           </LinkMenuItem>
@@ -85,9 +100,4 @@ export default function SearchBar() {
       filterOptions={(x) => x} // necessary to show async search results
     />
   )
-}
-
-interface SearchResult {
-  id: string
-  value: any
 }
