@@ -1,15 +1,15 @@
 import { Stack } from "@mui/material"
 import { useTranslation } from "react-i18next"
 
-import { AsyncButton, Label, RequiredTextField } from "../../../components"
-import { useAppDispatch, useBinding } from "../../../lib/hooks"
+import { AsyncButton, Label, RequiredTextField } from "../../../../components"
+import { useBinding } from "../../../../lib/hooks"
 
-import { createPost } from "../redux"
+import { useCreatePost } from "../../redux"
 import TagsSelect from "./TagsSelect"
 
 export default function CreatePostMenu({ dismiss }: Props) {
   const [t] = useTranslation()
-  const dispatch = useAppDispatch()
+  const createPost = useCreatePost()
 
   const $title = useBinding<string | "invalid" | undefined>(undefined)
   const $tags = useBinding<string[]>([])
@@ -29,9 +29,7 @@ export default function CreatePostMenu({ dismiss }: Props) {
       return false
     }
 
-    await dispatch(
-      createPost({ title: $title.get.trim(), tags: $tags.get, content: $content.get.trim() })
-    )
+    await createPost({ title: $title.get.trim(), tags: $tags.get, content: $content.get.trim() })
 
     $title.set(undefined)
     $tags.set([])

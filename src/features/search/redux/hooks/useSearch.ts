@@ -28,8 +28,7 @@ export default function useSearch(): {
   useEffect(() => {
     if (query === undefined || results !== undefined) return
 
-    if (!isNaN(parseInt(query)) && results === undefined)
-      dispatch(readProfile(parseInt(query)))
+    if (!isNaN(parseInt(query)) && results === undefined) dispatch(readProfile(parseInt(query)))
 
     dispatch(readProfileByName(query))
     dispatch(readProfileByInterest(query))

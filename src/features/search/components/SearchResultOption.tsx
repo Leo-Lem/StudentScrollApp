@@ -16,7 +16,7 @@ export default function SearchResultOption({ result, onDismiss }: Props) {
     case "post":
       return (
         <LinkMenuItem
-          href={`/post/${result.value.title}`}
+          href={`/posts/${result.value.id}`}
           dismiss={() => onDismiss(result)}
           key={result.id + result.value.title.toString()}
         >

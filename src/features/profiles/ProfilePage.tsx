@@ -5,7 +5,7 @@ import { LoadingSpinner } from "../../components"
 import { useIdParam, useIsCompact } from "../../lib/hooks"
 
 import StartChatButton from "../chats/components/StartChatButton"
-import StudentPostsList from "../posts/components/list/StudentPostsList"
+import StudentPostsList from "../posts/components/lists/StudentPostsList"
 import EditableProfileDetails from "./components/EditableProfileDetails"
 import ProfileDetails from "./components/ProfileDetails"
 import { useProfile } from "./redux"
