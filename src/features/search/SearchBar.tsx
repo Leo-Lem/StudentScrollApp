@@ -40,7 +40,8 @@ export default function SearchBar(): ReactElement {
   })
 
   useEffect(() => {
-    profileByNameQuery !== undefined && dispatch(readProfile(profileByNameQuery)).then(result => setSearchId(result.payload))
+    profileByNameQuery !== undefined &&
+      dispatch(readProfile(profileByNameQuery)).then((result) => setSearchId(result.payload))
   }, [profileByNameQuery])
 
   const options = (): SearchResult[] => {
@@ -71,11 +72,7 @@ export default function SearchBar(): ReactElement {
     switch (option.id) {
       case "profileById":
         return (
-          <LinkMenuItem
-            href={`/profile/${option.value.studentsId}`}
-            dismiss={clear}
-            key={searchId}
-          >
+          <LinkMenuItem href={`/profile/${option.value.studentsId}`} dismiss={clear} key={searchId}>
             {option.value.name}
           </LinkMenuItem>
         )
