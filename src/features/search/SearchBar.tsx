@@ -44,7 +44,15 @@ export default function SearchBar() {
           </LinkMenuItem>
         )
       case "post":
-        return <></>
+        return (
+          <LinkMenuItem
+            href={`/post/${option.value.title}`}
+            dismiss={() => {}}
+            key={option.id + option.value.title.toString()}
+          >
+            {option.value.title}
+          </LinkMenuItem>
+        )
     }
   }
 

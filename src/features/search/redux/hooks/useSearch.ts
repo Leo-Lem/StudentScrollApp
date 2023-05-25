@@ -4,6 +4,8 @@ import SearchResult from "../../types/SearchResult"
 import readProfile from "../../../profiles/redux/actions/readProfile"
 import readProfileByName from "../actions/readProfileByName"
 import readProfileByInterest from "../actions/readProfileByInterest"
+import readPostByTitle from "../actions/readPostByTitle"
+import readPostByTags from "../actions/readPostByTags"
 
 export default function useSearch(): {
   results: SearchResult[] | undefined
@@ -26,6 +28,9 @@ export default function useSearch(): {
 
       await dispatch(readProfileByName(q))
       await dispatch(readProfileByInterest(q))
+
+      await dispatch(readPostByTitle(q))
+      await dispatch(readPostByTags(q))
     }
   }
 }
