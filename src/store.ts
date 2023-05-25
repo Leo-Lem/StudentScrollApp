@@ -6,6 +6,7 @@ import { postsReducer } from "./features/posts"
 import { profileReducer } from "./features/profiles"
 import { chatsReducer } from "./features/chats"
 import { nearbyReducer } from "./features/nearby"
+import { searchReducer } from "./features/search"
 
 const store = configureStore({
   reducer: {
@@ -14,7 +15,8 @@ const store = configureStore({
     posts: postsReducer,
     chats: chatsReducer,
     profiles: profileReducer,
-    nearby: nearbyReducer
+    nearby: nearbyReducer,
+    search: searchReducer
   }
 })
 

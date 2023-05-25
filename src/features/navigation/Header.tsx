@@ -2,7 +2,7 @@ import { AppBar, Box, Button, Divider, Stack, Toolbar } from "@mui/material"
 
 import { Logo } from "../../components"
 
-import SearchBar from "../search/components/SearchBar"
+import SearchBar from "../search/SearchBar"
 import AccountMenu from "./components/AccountMenu"
 import HeaderNavigationButtons from "./components/NavigationButtons"
 import NavigationMenu from "./components/NavigationMenu"

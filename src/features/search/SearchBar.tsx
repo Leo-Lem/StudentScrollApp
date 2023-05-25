@@ -2,13 +2,14 @@ import { Autocomplete, TextField } from "@mui/material"
 import { ReactNode, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { useAppDispatch, useAppSelector } from "../../../lib/hooks"
+import { useAppDispatch, useAppSelector } from "../../lib/hooks"
 
-import LinkMenuItem from "../../../components/buttons/LinkMenuItem"
-import readProfile from "../../profiles/redux/actions/readProfile"
+import LinkMenuItem from "../../components/buttons/LinkMenuItem"
+import readProfile from "../profiles/redux/actions/readProfile"
 
 export default function SearchBar(): ReactElement {
   const [t] = useTranslation()
+
   const [searchId, setSearchId] = useState<number | undefined>(undefined)
   const [profileByNameQuery, setProfileByNameQuery] = useState<string | undefined>(undefined)
   const dispatch = useAppDispatch()
