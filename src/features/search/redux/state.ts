@@ -1,7 +1,7 @@
 import SearchResult from "../types/SearchResult"
 
-type State = SearchResult[]
+export default interface State {
+  [query: string]: SearchResult[]
+}
 
-export default State
-
-export const initialState = [] as State
+export const initialState: State = {}
