@@ -1,7 +1,11 @@
 import { ContentPost } from "../../posts"
 import { Profile } from "../../profiles"
 
-export default interface SearchResult {
-  id: "profileById" | "profileByName" | "profileByInterest" | "postByTitle" | "postByTags"
-  value: Profile | ContentPost
-}
+type SearchResult =
+  | { id: "profileById"; value: Profile }
+  | { id: "profileByName"; value: Profile }
+  | { id: "profileByInterest"; value: Profile }
+  | { id: "postByTitle"; value: ContentPost }
+  | { id: "postByTags"; value: ContentPost }
+
+export default SearchResult

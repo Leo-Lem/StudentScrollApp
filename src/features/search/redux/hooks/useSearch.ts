@@ -19,14 +19,14 @@ export default function useSearch(): {
 
   return {
     results,
-    search: async (query: string) => {
-      setQuery(query)
+    search: async (q: string) => {
+      setQuery(q)
 
-      if (!isNaN(parseInt(query)) && results === undefined)
-        await dispatch(readProfile(parseInt(query)))
+      if (!isNaN(parseInt(q)) && results === undefined)
+        await dispatch(readProfile(parseInt(q)))
 
-      await dispatch(readProfileByName(query))
-      await dispatch(readProfileByInterest(query))
+      await dispatch(readProfileByName(q))
+      await dispatch(readProfileByInterest(q))
     }
   }
 }

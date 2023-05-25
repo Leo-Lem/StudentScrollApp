@@ -11,7 +11,7 @@ export default function mock(server: Server) {
     const lat = parseFloat(queryParams.lat)
     const lng = parseFloat(queryParams.lng)
 
-    if (name) return schema.profiles.findBy({ name }).models.map(respond)
+    if (name) return schema.profiles.where({ name }).models.map(respond)
     else if (!isNaN(lat) && !isNaN(lng)) return schema.profiles.all().models.map(respond)
   })
 

@@ -1,52 +1,15 @@
 import { Autocomplete, TextField } from "@mui/material"
-import { ReactNode, useEffect, useState } from "react"
+import { ReactNode } from "react"
 import { useTranslation } from "react-i18next"
 
-import { useAppDispatch, useAppSelector } from "../../lib/hooks"
-
 import LinkMenuItem from "../../components/buttons/LinkMenuItem"
-import readProfile from "../profiles/redux/actions/readProfile"
+import useSearch from "./redux/hooks/useSearch"
+import SearchResult from "./types/SearchResult"
 
-export default function SearchBar(): ReactElement {
+export default function SearchBar() {
   const [t] = useTranslation()
 
-  const [searchId, setSearchId] = useState<number | undefined>(undefined)
-  const [profileByNameQuery, setProfileByNameQuery] = useState<string | undefined>(undefined)
-  const dispatch = useAppDispatch()
-
-  const [searchQuery, setSearchQuery] = useState("")
-  const [profileByIdQuery, setProfileByIdQuery] = useState<number | undefined>(undefined)
-
-  useEffect(() => {
-    if (+searchQuery ? true : false) {
-      setProfileByIdQuery(isNaN(parseInt(searchQuery)) ? undefined : parseInt(searchQuery))
-    } else if (searchQuery) {
-      setProfileByNameQuery(searchQuery ? searchQuery : undefined)
-    }
-  }, [searchQuery])
-
-  useEffect(() => {
-    if (profileByIdQuery !== undefined) dispatch(readProfile(profileByIdQuery))
-  }, [profileByIdQuery])
-
-  const profileById = useAppSelector(({ profiles }) => {
-    if (profileByIdQuery === undefined && searchId !== undefined) {
-      return profiles[searchId]
-    } else if (profileByIdQuery !== undefined && searchId === undefined) {
-      return profiles[profileByIdQuery]
-    } else {
-      return undefined
-    }
-  })
-
-  useEffect(() => {
-    profileByNameQuery !== undefined &&
-      dispatch(readProfile(profileByNameQuery)).then((result) => setSearchId(result.payload))
-  }, [profileByNameQuery])
-
-  const options = (): SearchResult[] => {
-    return profileById !== undefined ? [{ id: "profileById", value: profileById }] : []
-  }
+  const { results, search } = useSearch()
 
   const groupBy = (option: SearchResult) => {
     switch (option.id) {
@@ -70,9 +33,13 @@ export default function SearchBar(): ReactElement {
 
   const renderOption = (option: SearchResult): ReactNode => {
     switch (option.id) {
-      case "profileById":
+      case "profileById" || "profileByName" || "profileByInterest":
         return (
-          <LinkMenuItem href={`/profile/${option.value.studentsId}`} dismiss={clear} key={searchId}>
+          <LinkMenuItem
+            href={`/profile/${option.value.studentId}`}
+            dismiss={() => {}}
+            key={option.id + option.value.studentId.toString()}
+          >
             {option.value.name}
           </LinkMenuItem>
         )
@@ -84,17 +51,14 @@ export default function SearchBar(): ReactElement {
       freeSolo
       clearOnEscape
       fullWidth
-      inputValue={searchQuery}
-      options={options()}
+      options={results ?? []}
       groupBy={groupBy}
       getOptionLabel={getOptionLabel}
       renderInput={(props) => (
         <TextField {...props} variant="standard" placeholder={t("LABEL_SEARCH") ?? ""} />
       )}
       renderOption={(props, option) => renderOption(option)}
-      onInputChange={(_, value) => {
-        setSearchQuery(value)
-      }}
+      onInputChange={(_, value) => search(value)}
       filterOptions={(x) => x} // necessary to show async search results
     />
   )
