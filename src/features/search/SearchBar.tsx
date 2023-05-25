@@ -13,10 +13,10 @@ export default function SearchBar() {
 
   const groupBy = (option: SearchResult) => {
     switch (option.id) {
-      case "profileById":
+      case "profile":
         return t("SEARCH_PROFILES")
-      default:
-        return t("SEARCH_OTHER")
+      case "post":
+        return t("SEARCH_POSTS")
     }
   }
 
@@ -24,16 +24,16 @@ export default function SearchBar() {
     if (typeof option === "string") return option
 
     switch (option.id) {
-      case "profileById":
+      case "profile":
         return option.value.name
-      default:
-        return ""
+      case "post":
+        return option.value.title
     }
   }
 
   const renderOption = (option: SearchResult): ReactNode => {
     switch (option.id) {
-      case "profileById" || "profileByName" || "profileByInterest":
+      case "profile":
         return (
           <LinkMenuItem
             href={`/profile/${option.value.studentId}`}
@@ -43,6 +43,8 @@ export default function SearchBar() {
             {option.value.name}
           </LinkMenuItem>
         )
+      case "post":
+        return <></>
     }
   }
 

@@ -22,8 +22,7 @@ export default function useSearch(): {
     search: async (q: string) => {
       setQuery(q)
 
-      if (!isNaN(parseInt(q)) && results === undefined)
-        await dispatch(readProfile(parseInt(q)))
+      if (!isNaN(parseInt(q)) && results === undefined) await dispatch(readProfile(parseInt(q)))
 
       await dispatch(readProfileByName(q))
       await dispatch(readProfileByInterest(q))

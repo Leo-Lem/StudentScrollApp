@@ -14,7 +14,7 @@ export default createAsyncThunk(
       for (const profile of result.value) {
         thunkAPI.dispatch(addProfile(profile))
         thunkAPI.dispatch(
-          addSearchResult({ query: interest, result: { id: "profileByInterest", value: profile } })
+          addSearchResult({ query: interest, result: { id: "profile", value: profile } })
         )
       }
     } else console.error(result.error.message)
