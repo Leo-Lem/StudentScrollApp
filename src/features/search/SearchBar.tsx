@@ -1,59 +1,42 @@
 import { Autocomplete, TextField } from "@mui/material"
-import { ReactNode } from "react"
 import { useTranslation } from "react-i18next"
 
-import LinkMenuItem from "../../components/buttons/LinkMenuItem"
+import SearchResultOption from "./components/SearchResultOption"
+import { useSearchHistory } from "./redux"
 import useSearch from "./redux/hooks/useSearch"
 import SearchResult from "./types/SearchResult"
 
 export default function SearchBar() {
   const [t] = useTranslation()
 
-  const { results, search } = useSearch()
+  const { query, results, search } = useSearch()
+  const { history, add: addToHistory } = useSearchHistory()
 
-  const groupBy = (option: SearchResult) => {
-    switch (option.id) {
-      case "profile":
-        return t("SEARCH_PROFILES")
-      case "post":
-        return t("SEARCH_POSTS")
-    }
+  function dismiss(result: SearchResult) {
+    addToHistory(result)
+    search()
   }
 
-  const getOptionLabel = (option: string | SearchResult): string => {
+  function group(result: SearchResult) {
+    if (results === undefined && query === undefined) return t("SEARCH_HISTORY")
+    else
+      switch (result.id) {
+        case "profile":
+          return t("SEARCH_PROFILES")
+        case "post":
+          return t("SEARCH_POSTS")
+      }
+  }
+
+  function label(option: string | SearchResult): string {
     if (typeof option === "string") return option
-
-    switch (option.id) {
-      case "profile":
-        return option.value.name
-      case "post":
-        return option.value.title
-    }
-  }
-
-  const renderOption = (option: SearchResult): ReactNode => {
-    switch (option.id) {
-      case "profile":
-        return (
-          <LinkMenuItem
-            href={`/profile/${option.value.studentId}`}
-            dismiss={() => {}}
-            key={option.id + option.value.studentId.toString()}
-          >
-            {option.value.name}
-          </LinkMenuItem>
-        )
-      case "post":
-        return (
-          <LinkMenuItem
-            href={`/post/${option.value.title}`}
-            dismiss={() => {}}
-            key={option.id + option.value.title.toString()}
-          >
-            {option.value.title}
-          </LinkMenuItem>
-        )
-    }
+    else
+      switch (option.id) {
+        case "profile":
+          return option.value.name
+        case "post":
+          return option.value.title
+      }
   }
 
   return (
@@ -61,13 +44,14 @@ export default function SearchBar() {
       freeSolo
       clearOnEscape
       fullWidth
-      options={results ?? []}
-      groupBy={groupBy}
-      getOptionLabel={getOptionLabel}
+      inputValue={query ?? ""}
+      options={results ?? (query === undefined ? history : [])}
+      groupBy={group}
+      getOptionLabel={label}
       renderInput={(props) => (
         <TextField {...props} variant="standard" placeholder={t("LABEL_SEARCH") ?? ""} />
       )}
-      renderOption={(props, option) => renderOption(option)}
+      renderOption={(_, option) => <SearchResultOption result={option} onDismiss={dismiss} />}
       onInputChange={(_, value) => search(value)}
       filterOptions={(x) => x} // necessary to show async search results
     />

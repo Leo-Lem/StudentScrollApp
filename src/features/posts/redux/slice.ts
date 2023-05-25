@@ -21,4 +21,5 @@ const posts = createSlice({
 })
 
 export default posts
-export const { toggleNewestFirst, addCreatedPost, addPosts, removePost, addStudentPosts } = posts.actions
+export const { toggleNewestFirst, addCreatedPost, addPosts, removePost, addStudentPosts } =
+  posts.actions

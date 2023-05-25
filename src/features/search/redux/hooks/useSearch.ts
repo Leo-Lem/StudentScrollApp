@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../../lib/hooks"
 import SearchResult from "../../types/SearchResult"
 import readProfile from "../../../profiles/redux/actions/readProfile"
@@ -8,8 +8,9 @@ import readPostByTitle from "../actions/readPostByTitle"
 import readPostByTags from "../actions/readPostByTags"
 
 export default function useSearch(): {
+  query: string | undefined
   results: SearchResult[] | undefined
-  search: (query: string) => Promise<void>
+  search: (query?: string) => void
 } {
   const [query, setQuery] = useState<string | undefined>(undefined)
 
@@ -18,19 +19,24 @@ export default function useSearch(): {
   })
 
   const dispatch = useAppDispatch()
-
-  return {
-    results,
-    search: async (q: string) => {
-      setQuery(q)
-
-      if (!isNaN(parseInt(q)) && results === undefined) await dispatch(readProfile(parseInt(q)))
-
-      await dispatch(readProfileByName(q))
-      await dispatch(readProfileByInterest(q))
-
-      await dispatch(readPostByTitle(q))
-      await dispatch(readPostByTags(q))
-    }
+  const search = (q?: string) => {
+    const trimmed = q?.trim()
+    if (trimmed === undefined || trimmed === "") return setQuery(undefined)
+    else setQuery(trimmed)
   }
+
+  useEffect(() => {
+    if (query === undefined || results !== undefined) return
+
+    if (!isNaN(parseInt(query)) && results === undefined)
+      dispatch(readProfile(parseInt(query)))
+
+    dispatch(readProfileByName(query))
+    dispatch(readProfileByInterest(query))
+
+    dispatch(readPostByTitle(query))
+    dispatch(readPostByTags(query))
+  }, [query])
+
+  return { query, results, search }
 }
