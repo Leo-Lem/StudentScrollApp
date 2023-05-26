@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 import { initialState } from "./state"
-import extraReducers from "./actions/actions"
-import handleSetSettings from "./actions/handleSetSettings"
-import handleAddFollow from "./actions/handleAddFollow"
-import handleRemoveFollow from "./actions/handleRemoveFollow"
+import extraReducers from "./reducers"
+import handleSetSettings from "./reducers/handleSetSettings"
+import handleAddFollow from "./reducers/handleAddFollow"
+import handleRemoveFollow from "./reducers/handleRemoveFollow"
 
 const student = createSlice({
   name: "student",

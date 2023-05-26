@@ -14,4 +14,5 @@ export default function routes(this: Server) {
   settings(this)
   chats(this)
   messages(this)
+  this.get("/maps", () => JSON.stringify({ apiKey: "API_KEY" })) // replace with the real api key for trying this out
 }

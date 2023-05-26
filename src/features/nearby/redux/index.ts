@@ -4,3 +4,4 @@ export default nearby.reducer
 
 export { default as useLocation } from "./hooks/useLocation"
 export { default as useNearbyStudents } from "./hooks/useNearbyStudents"
+export { default as useAPIKey } from "./hooks/useAPIKey"

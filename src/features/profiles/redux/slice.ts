@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { initialState } from "./state"
 
-import handleAddProfile from "./actions/handleAddProfile"
-import handleRemoveProfile from "./actions/handleRemoveProfile"
+import handleAddProfile from "./reducers/handleAddProfile"
+import handleRemoveProfile from "./reducers/handleRemoveProfile"
 
 const profiles = createSlice({
   name: "profiles",

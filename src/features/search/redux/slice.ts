@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 import { initialState } from "./state"
-import handleAddSearchResult from "./actions/handleAddSearchResult"
-import extraReducers from "./actions/actions"
-import handleAddToHistory from "./actions/handleAddToHistory"
+import handleAddSearchResult from "./reducers/handleAddSearchResult"
+import handleAddToHistory from "./reducers/handleAddToHistory"
+import extraReducers from "./reducers"
 
 const search = createSlice({
   name: "search",

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import handleSignOut from "./actions/handleSignOut"
-import handleSetAuthenticated from "./actions/handleSetAuthenticated"
-import handleSetFailed from "./actions/handleSetFailed"
+import handleSignOut from "./reducers/handleSignOut"
+import handleSetAuthenticated from "./reducers/handleSetAuthenticated"
+import handleSetFailed from "./reducers/handleSetFailed"
 
 import { initialState } from "./state"
 
