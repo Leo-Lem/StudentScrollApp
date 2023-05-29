@@ -48,10 +48,9 @@ export default function ProfileDetails({ profile }: Props) {
         </Stack>
       </Grid>
 
-      <Grid item xs = {12}>
+      <Grid item xs={12}>
         <TagsList tags={profile.interests} justifyContent="end" />
       </Grid>
-      
 
       <Grid item xs={12}>
         <Typography variant="body1">{profile.bio}</Typography>
