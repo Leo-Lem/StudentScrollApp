@@ -15,26 +15,23 @@ export default function useSearch(): {
   const [query, setQuery] = useState<string | undefined>(undefined)
 
   const results = useAppSelector(({ search }) => {
-    if (query !== undefined) return search[query]
+    if (query !== undefined) return search[query.trim()]
   })
 
   const dispatch = useAppDispatch()
-  const search = (q?: string) => {
-    const trimmed = q?.trim()
-    if (trimmed === undefined || trimmed === "") return setQuery(undefined)
-    else setQuery(trimmed)
-  }
+  const search = (q?: string) => void setQuery(q)
 
   useEffect(() => {
-    if (query === undefined || results !== undefined) return
+    const trimmed = query?.trim()
+    if (trimmed === undefined || results !== undefined || trimmed === "") return
 
-    if (!isNaN(parseInt(query)) && results === undefined) dispatch(readProfile(parseInt(query)))
+    if (!isNaN(parseInt(trimmed)) && results === undefined) dispatch(readProfile(parseInt(trimmed)))
 
-    dispatch(readProfileByName(query))
-    dispatch(readProfileByInterest(query))
+    dispatch(readProfileByName(trimmed))
+    dispatch(readProfileByInterest(trimmed))
 
-    dispatch(readPostByTitle(query))
-    dispatch(readPostByTags(query))
+    dispatch(readPostByTitle(trimmed))
+    dispatch(readPostByTags(trimmed))
   }, [query])
 
   return { query, results, search }

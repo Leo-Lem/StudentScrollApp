@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material"
+import { Grid, Stack, Typography } from "@mui/material"
 
 import { PrimaryAction } from "../../../components"
 import { useIsCompact } from "../../../lib/hooks"
@@ -7,6 +7,7 @@ import Profile from "../types/Profile"
 import ProfileIcon from "./ProfileIcon"
 import FollowButton from "./following/FollowButton"
 import { useStudentId } from "../../student"
+import ShareButton from "../../../components/ShareButton"
 
 export default function ProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()
@@ -37,9 +38,13 @@ export default function ProfileDetails({ profile }: Props) {
       </Grid>
 
       <Grid item xs={12}>
-        <Typography variant="h2" noWrap overflow="scroll" textOverflow="ellipsis">
-          {profile.name}
-        </Typography>
+        <Stack direction="row" gap={1} alignItems="center">
+          <ShareButton title={profile.name} url={`/profile/${profile.studentId}`} />
+
+          <Typography variant="h2" noWrap overflow="scroll" textOverflow="ellipsis">
+            {profile.name}
+          </Typography>
+        </Stack>
       </Grid>
 
       <Grid item xs={12}>

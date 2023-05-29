@@ -6,6 +6,7 @@ import ProfileLink from "../../profiles/components/ProfileLink"
 import type ContentPost from "../types/ContentPost"
 import DeletePostButton from "./menus/DeletePostButton"
 import TagsList from "./lists/TagsList"
+import ShareButton from "../../../components/ShareButton"
 
 export default function PostCard({
   post: { id, title, tags, content, posterId },
@@ -25,6 +26,8 @@ export default function PostCard({
                 {title}
               </Typography>
             </Grid>
+
+            <ShareButton title={title} url={`/posts/${id}`} />
 
             {!isCompact && <TagsList tags={tags} />}
           </Stack>
