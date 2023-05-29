@@ -8,6 +8,7 @@ import ProfileIcon from "./ProfileIcon"
 import FollowButton from "./following/FollowButton"
 import { useStudentId } from "../../student"
 import ShareButton from "../../../components/ShareButton"
+import TagsList from "../../posts/components/lists/TagsList"
 
 export default function ProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()
@@ -46,6 +47,13 @@ export default function ProfileDetails({ profile }: Props) {
           </Typography>
         </Stack>
       </Grid>
+
+      <Grid item xs = {12}>
+
+        <TagsList tags={profile.interests} justifyContent="end" />
+
+      </Grid>
+      
 
       <Grid item xs={12}>
         <Typography variant="body1">{profile.bio}</Typography>
