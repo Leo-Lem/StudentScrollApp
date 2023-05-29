@@ -12,12 +12,19 @@ export default function useDashboardPosts(): DashboardPosts {
   )
 
   let nextPage: number | undefined = 0
+  let isPastFollowedPosts = false
 
   const dispatch = useAppDispatch()
   async function fetchMore() {
     if (nextPage !== undefined) {
-      nextPage = (await dispatch(readPosts({ newestFirst: $newestFirst.get, nextPage })))
+      const next = (await dispatch(readPosts({ newestFirst: $newestFirst.get, nextPage })))
         .payload as number | undefined
+      if (next === undefined) {
+        if (isPastFollowedPosts) nextPage = undefined
+        isPastFollowedPosts = true
+      } else {
+        nextPage = next
+      }
     }
   }
 

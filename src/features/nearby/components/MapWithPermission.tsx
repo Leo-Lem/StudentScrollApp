@@ -37,7 +37,9 @@ export default function MapWithPermission({ center, status, children: markers }:
 
   return (
     <Fragment>
-      <Map center={center ?? { latitude: -36.87, longitude: 174.78 }}>
+      <Map
+        center={{ latitude: center?.latitude ?? -36.87, longitude: center?.longitude ?? 174.78 }}
+      >
         {status === "permitted" && markers}
       </Map>
 

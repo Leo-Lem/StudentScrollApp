@@ -7,7 +7,8 @@ import { Profile } from "../../profiles"
 import ProfileBadge from "../../profiles/components/ProfileBadge"
 
 export default function StudentMarker({ profile, isSelf }: Props) {
-  if (profile.location === undefined) return <></>
+  if (profile.location?.latitude === undefined || profile.location?.longitude === undefined)
+    return <></>
   else
     return (
       <Fragment>
