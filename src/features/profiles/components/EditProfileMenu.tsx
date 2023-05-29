@@ -6,6 +6,8 @@ import { IconType } from "../../../res/icons"
 
 import Profile from "../types/Profile"
 import ProfileIconSelect from "./ProfileIconSelect"
+import { Tag } from "../../../res/tags"
+import TagsSelect from "../../posts/components/menus/TagsSelect"
 
 export default function EditProfileMenu({ $profile, name }: Props) {
   const $newIcon = {
@@ -15,6 +17,10 @@ export default function EditProfileMenu({ $profile, name }: Props) {
   const $newName = {
     get: $profile.get.name,
     set: (newName: string) => $profile.set({ ...$profile.get, name: newName })
+  }
+  const $newInterests = {
+    get: $profile.get.interests,
+    set: (newInterests: Tag[]) => $profile.set({ ...$profile.get, interests: newInterests })
   }
   const $newBio = {
     get: $profile.get.bio,
@@ -26,6 +32,8 @@ export default function EditProfileMenu({ $profile, name }: Props) {
       <ProfileIconSelect $icon={$newIcon} />
 
       <BindingTextField $value={$newName} placeholder={name} fullWidth />
+
+      <TagsSelect $tags={$newInterests} />
 
       <BindingTextField $value={$newBio} multiline minRows={4} fullWidth />
     </Stack>

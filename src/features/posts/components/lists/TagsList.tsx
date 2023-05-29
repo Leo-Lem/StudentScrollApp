@@ -1,4 +1,5 @@
 import { Chip, Grid, GridProps } from "@mui/material"
+import { Tag } from "../../../../res/tags"
 
 export default function TagsList({ tags, ...props }: Props & GridProps) {
   return (
@@ -11,5 +12,5 @@ export default function TagsList({ tags, ...props }: Props & GridProps) {
 }
 
 interface Props {
-  tags: string[]
+  tags: Tag[]
 }

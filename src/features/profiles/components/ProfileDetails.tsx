@@ -49,9 +49,7 @@ export default function ProfileDetails({ profile }: Props) {
       </Grid>
 
       <Grid item xs = {12}>
-
         <TagsList tags={profile.interests} justifyContent="end" />
-
       </Grid>
       
 
