@@ -10,7 +10,13 @@ export default function FollowersList({ studentId }: Props) {
 
   const followers = useProfile(studentId ?? currentStudentId)?.followers
 
-  return <ProfilesList studentIds={followers} label={t("FOLLOWERS")} display="scroll" />
+  return (
+    <ProfilesList
+      studentIds={followers?.filter((follower, index) => followers.indexOf(follower) === index)}
+      label={t("FOLLOWERS")}
+      display="scroll"
+    />
+  )
 }
 
 interface Props {

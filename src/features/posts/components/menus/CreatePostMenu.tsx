@@ -44,7 +44,7 @@ export default function CreatePostMenu({ dismiss }: Props) {
     <Stack spacing={1}>
       <RequiredTextField $value={$title} placeholder={t("POST_TITLE") ?? ""} />
 
-      <TagsSelect $tags={$tags} />
+      <TagsSelect $tags={$tags} title="POST_TAGS" />
 
       <RequiredTextField
         $value={$content}

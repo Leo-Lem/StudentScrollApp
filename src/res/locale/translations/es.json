@@ -43,6 +43,7 @@
     "POST_CONTENT": "¿Qué tienes en mente?",
     "POST_CONTENT_TOO_SHORT": "Por favor, explícate...",
     "POST_TAGS": "Tags",
+    "PROFILE_INTERESTS": "Intereses",
     "SETTINGS_THEME": "Apariencia",
     "THEME_DARK": "Oscuro",
     "THEME_LIGHT": "Luminoso",

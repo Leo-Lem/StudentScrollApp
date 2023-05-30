@@ -42,6 +42,7 @@
     "POST_CONTENT": "有什么想分享的?",
     "POST_CONTENT_TOO_SHORT": "不符合最短字数限制",
     "POST_TAGS": "标签",
+    "PROFILE_INTERESTS": "兴趣",
     "SETTINGS_THEME": "主题",
     "THEME_DARK": "黑暗",
     "THEME_LIGHT": "明亮",

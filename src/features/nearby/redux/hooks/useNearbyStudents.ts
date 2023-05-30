@@ -10,8 +10,10 @@ export default function useNearbyStudents(): Profile[] | undefined {
   const nearbyStudents = useAppSelector((state) =>
     state.profiles.filter(
       (profile) =>
-        location !== undefined &&
-        profile.location !== undefined &&
+        location?.latitude !== undefined &&
+        location?.longitude !== undefined &&
+        profile.location?.latitude !== undefined &&
+        profile.location?.longitude !== undefined &&
         profile.location.latitude < location.latitude + 0.1 &&
         profile.location.latitude > location.latitude - 0.1 &&
         profile.location.longitude < location.longitude + 0.1 &&

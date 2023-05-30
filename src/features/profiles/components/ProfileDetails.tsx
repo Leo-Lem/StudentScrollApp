@@ -14,11 +14,13 @@ export default function ProfileDetails({ profile }: Props) {
   const isCompact = useIsCompact()
   const isSelf = profile.studentId === useStudentId()
 
+  const justify = isCompact ? "center" : "end"
+
   return (
     <Grid
       container
-      justifyContent={isCompact ? "center" : "end"}
-      textAlign={isCompact ? "center" : "end"}
+      justifyContent={justify}
+      textAlign={justify}
       spacing={1}
       position="relative"
       padding={1}
@@ -39,7 +41,7 @@ export default function ProfileDetails({ profile }: Props) {
       </Grid>
 
       <Grid item xs={12}>
-        <Stack direction="row" gap={1} alignItems="center">
+        <Stack direction="row" gap={1} alignItems="center" justifyContent={justify}>
           <ShareButton title={profile.name} url={`/profile/${profile.studentId}`} />
 
           <Typography variant="h2" noWrap overflow="scroll" textOverflow="ellipsis">
@@ -49,7 +51,7 @@ export default function ProfileDetails({ profile }: Props) {
       </Grid>
 
       <Grid item xs={12}>
-        <TagsList tags={profile.interests} justifyContent="end" />
+        <TagsList tags={profile.interests} justifyContent={justify} />
       </Grid>
 
       <Grid item xs={12}>

@@ -29,11 +29,18 @@ export default function EditableProfileDetails({ profile }: Props) {
     if (!$isEditing.get && profile !== undefined && newProfile !== undefined) {
       const newName =
         newProfile.name !== "" && newProfile.name !== profile.name ? newProfile.name : undefined
+      const newInterests =
+        newProfile.interests !== profile.interests ? newProfile.interests : undefined
       const newBio = newProfile.bio !== profile.bio ? newProfile.bio : undefined
       const newIcon = newProfile.icon !== profile.icon ? newProfile.icon : undefined
 
-      if (newName !== undefined || newBio !== undefined || newIcon !== undefined)
-        void update(newName, newBio, newIcon)
+      if (
+        newName !== undefined ||
+        newBio !== undefined ||
+        newInterests !== undefined ||
+        newIcon !== undefined
+      )
+        void update(newName, newBio, newInterests, newIcon)
     }
   }, [$isEditing.get])
 

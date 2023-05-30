@@ -43,6 +43,7 @@
     "POST_CONTENT": "What's on your mind?",
     "POST_CONTENT_TOO_SHORT": "Please elaborate…",
     "POST_TAGS": "Tags",
+    "PROFILE_INTERESTS": "Interests",
     "SETTINGS_THEME": "Theme",
     "THEME_DARK": "Dark",
     "THEME_LIGHT": "Light",

@@ -1,12 +1,15 @@
 import { Box, Chip, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
+import { useTranslation } from "react-i18next"
 
 import { Binding } from "../../../../lib/hooks"
 import { Tag, tags } from "../../../../res/tags"
 
-export default function TagsSelect({ $tags: $selection }: Props) {
+export default function TagsSelect({ $tags: $selection, title }: Props) {
+  const [t] = useTranslation()
+
   return (
     <FormControl fullWidth>
-      <InputLabel>Tags</InputLabel>
+      <InputLabel>{t(title)}</InputLabel>
       <Select
         multiple
         value={$selection.get}
@@ -33,4 +36,5 @@ export default function TagsSelect({ $tags: $selection }: Props) {
 
 interface Props {
   $tags: Binding<Tag[]>
+  title: string
 }

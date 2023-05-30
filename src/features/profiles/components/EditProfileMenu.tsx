@@ -33,7 +33,7 @@ export default function EditProfileMenu({ $profile, name }: Props) {
 
       <BindingTextField $value={$newName} placeholder={name} fullWidth />
 
-      <TagsSelect $tags={$newInterests} />
+      <TagsSelect $tags={$newInterests} title="PROFILE_INTERESTS" />
 
       <BindingTextField $value={$newBio} multiline minRows={4} fullWidth />
     </Stack>
